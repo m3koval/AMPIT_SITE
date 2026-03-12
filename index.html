@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMP IT LLC — Your IT Just Runs.</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #00f060;
+    --green-glow: rgba(0, 240, 96, 0.18);
+    --bg: #0a0c0a;
+    --bg-card: #131715;
+    --bg-card-hover: #181f19;
+    --border: rgba(0,240,96,0.12);
+    --border-strong: rgba(0,240,96,0.3);
+    --text: #e8f0e8;
+    --text-muted: #7a9280;
+    --text-dim: #4a6050;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 60px;
+    background: rgba(10,12,10,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+
+  .nav-wordmark {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--text);
+    letter-spacing: 0.04em;
+  }
+
+  .nav-wordmark .g { color: var(--green); }
+
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--green); }
+
+  .nav-cta {
+    background: var(--green); color: #050a06;
+    padding: 10px 22px;
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.82rem;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    border: none; cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .nav-cta:hover { background: #10ff72; transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    position: relative; min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 60px 80px;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,240,96,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,240,96,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .hero-glow {
+    position: absolute; top: 10%; right: 5%;
+    width: 600px; height: 600px;
+    background: radial-gradient(ellipse, rgba(0,240,96,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 780px; }
+
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace; font-size: 0.72rem;
+    color: var(--green); letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 28px;
+    display: flex; align-items: center; gap: 12px;
+    animation: slideIn 0.8s ease both 0.2s;
+  }
+
+  .hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--green); }
+
+  h1 {
+    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    line-height: 1.05; letter-spacing: -0.01em;
+    margin-bottom: 32px;
+    animation: slideIn 0.8s ease both 0.35s;
+  }
+
+  h1 .accent { color: var(--green); }
+
+  h1 .sub-line {
+    color: var(--text-dim); font-weight: 400; font-size: 0.55em;
+    display: block; font-family: 'Space Mono', monospace;
+    letter-spacing: 0.04em; margin-top: 12px; line-height: 1.4;
+  }
+
+  .hero-sub {
+    font-size: 1.2rem; color: var(--text-muted);
+    max-width: 520px; line-height: 1.8; margin-bottom: 48px;
+    font-weight: 400;
+    animation: slideIn 0.8s ease both 0.5s;
+  }
+
+  .hero-actions {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    animation: slideIn 0.8s ease both 0.65s;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn-primary {
+    background: var(--green); color: #050a06;
+    padding: 16px 36px;
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    border: none; cursor: pointer; text-decoration: none; display: inline-block;
+    transition: all 0.2s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+
+  .btn-primary:hover { background: #10ff72; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,240,96,0.3); }
+
+  .btn-outline {
+    background: transparent; color: var(--text-muted);
+    padding: 15px 36px;
+    font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.9rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    border: 1px solid var(--border-strong);
+    cursor: pointer; text-decoration: none; display: inline-block;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--green); color: var(--green); }
+
+  .hero-visual {
+    position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+    z-index: 2;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(-50%) translateY(0); }
+    50%       { transform: translateY(-50%) translateY(-20px); }
+  }
+
+  .hero-logo-wrap {
+    position: relative; width: 320px; height: 320px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .ring {
+    position: absolute; border-radius: 50%; border: 1px solid var(--border);
+    animation: spin 20s linear infinite;
+  }
+
+  .ring:nth-child(1) { width: 300px; height: 300px; }
+  .ring:nth-child(2) { width: 240px; height: 240px; border-style: dashed; animation-direction: reverse; animation-duration: 14s; }
+  .ring:nth-child(3) { width: 180px; height: 180px; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .hero-logo-svg {
+    width: 140px; height: 140px; position: relative; z-index: 2;
+    animation: glow 3s ease-in-out infinite;
+  }
+
+  @keyframes glow {
+    0%, 100% { filter: drop-shadow(0 0 30px rgba(0,240,96,0.5)); }
+    50%       { filter: drop-shadow(0 0 60px rgba(0,240,96,0.8)); }
+  }
+
+  /* TICKER */
+  .ticker-wrap { background: var(--green); overflow: hidden; white-space: nowrap; padding: 12px 0; }
+
+  .ticker { display: inline-block; animation: tick 30s linear infinite; }
+
+  .ticker-item {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.78rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: #050a06; padding: 0 40px;
+  }
+
+  .ticker-item::after { content: '◆'; margin-left: 40px; opacity: 0.4; }
+
+  @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* LAYOUT */
+  section { position: relative; z-index: 1; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+
+  .section-label {
+    font-family: 'Space Mono', monospace; font-size: 0.68rem;
+    color: var(--green); letter-spacing: 0.14em; text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .section-label::before { content: ''; width: 24px; height: 1px; background: var(--green); }
+
+  h2 {
+    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.15; letter-spacing: -0.01em;
+  }
+
+  /* POSITIONING */
+  .positioning { padding: 100px 0; border-bottom: 1px solid var(--border); }
+
+  .positioning-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center; margin-top: 60px;
+  }
+
+  .positioning-left h2 { margin-bottom: 24px; }
+  .positioning-left h2 span { color: var(--green); }
+  .positioning-left p { color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin-bottom: 16px; }
+
+  .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+
+  .stat { border-left: 2px solid var(--green); padding-left: 16px; }
+
+  .stat-num { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 2rem; color: var(--green); line-height: 1; }
+
+  .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; font-family: 'Space Mono', monospace; }
+
+  .positioning-right { display: flex; flex-direction: column; gap: 16px; }
+
+  .serve-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px;
+    transition: all 0.25s;
+  }
+
+  .serve-card:hover { border-color: var(--border-strong); background: var(--bg-card-hover); transform: translateX(6px); }
+
+  .serve-icon {
+    width: 36px; height: 36px;
+    background: var(--green-glow); border: 1px solid var(--border-strong);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 1rem;
+  }
+
+  .serve-card-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
+
+  .serve-card-pitch { font-size: 0.8rem; color: var(--text-muted); font-style: italic; line-height: 1.5; }
+
+  /* SERVICES */
+  .services { padding: 100px 0; border-bottom: 1px solid var(--border); }
+
+  .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
+
+  .services-header h2 span { color: var(--green); }
+
+  .services-header p { max-width: 320px; color: var(--text-muted); font-size: 0.9rem; text-align: right; line-height: 1.7; }
+
+  .plans-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; background: var(--border); margin-bottom: 48px;
+  }
+
+  .plan { background: var(--bg-card); padding: 40px 32px; position: relative; transition: background 0.25s; }
+
+  .plan:hover { background: var(--bg-card-hover); }
+
+  .plan.featured { background: #0c1a0e; border: 2px solid var(--green); margin: -2px; z-index: 2; }
+
+  .plan-badge {
+    position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+    background: var(--green); color: #050a06;
+    font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 0.65rem;
+    letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 14px;
+  }
+
+  .plan-icon { font-size: 1.5rem; margin-bottom: 20px; }
+
+  .plan-name { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.5rem; margin-bottom: 4px; letter-spacing: 0; }
+
+  .featured .plan-name { color: var(--green); }
+
+  .plan-tagline { font-size: 0.82rem; color: var(--text-muted); font-family: 'Space Mono', monospace; margin-bottom: 24px; line-height: 1.5; letter-spacing: 0; }
+
+  .plan-price { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+
+  .plan-price .amount { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 2.4rem; color: var(--text); }
+
+  .featured .plan-price .amount { color: var(--green); }
+
+  .plan-price .per { font-size: 0.78rem; color: var(--text-muted); font-family: 'Space Mono', monospace; display: block; margin-top: 4px; }
+
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+
+  .plan-features li { font-size: 0.88rem; color: var(--text-muted); display: flex; gap: 10px; line-height: 1.6; }
+
+  .plan-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+
+  .plan-cta {
+    display: block; text-align: center; padding: 12px;
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.8rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; border: 1px solid var(--border-strong); color: var(--text-muted);
+    transition: all 0.2s;
+  }
+
+  .featured .plan-cta { background: var(--green); color: #050a06; border-color: var(--green); }
+
+  .plan-cta:hover { border-color: var(--green); color: var(--green); }
+  .featured .plan-cta:hover { background: #10ff72; }
+
+  .starter-section {
+    background: var(--bg-card); border: 1px solid var(--border);
+    padding: 40px 48px;
+    display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;
+  }
+
+  .starter-section h3 { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 8px; }
+
+  .starter-section h3 span { color: var(--green); }
+
+  .starter-section p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; }
+
+  .starter-items { display: flex; gap: 24px; flex-wrap: wrap; }
+
+  .starter-item { text-align: center; min-width: 120px; }
+
+  .starter-item .price { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.4rem; color: var(--green); display: block; }
+
+  .starter-item .label { font-size: 0.72rem; color: var(--text-muted); font-family: 'Space Mono', monospace; display: block; margin-top: 4px; }
+
+  /* WHY */
+  .why { padding: 100px 0; border-bottom: 1px solid var(--border); }
+
+  .why-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; background: var(--border); margin-top: 60px;
+  }
+
+  .why-card { background: var(--bg-card); padding: 36px 32px; transition: background 0.25s; }
+
+  .why-card:hover { background: var(--bg-card-hover); }
+
+  .why-num {
+    font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 3rem;
+    color: var(--border-strong); line-height: 1; margin-bottom: 20px;
+    transition: color 0.25s;
+  }
+
+  .why-card:hover .why-num { color: var(--green); }
+
+  .why-card h3 { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 12px; letter-spacing: 0; }
+
+  .why-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.75; }
+
+  /* INDUSTRIES */
+  .industries { padding: 80px 0; border-bottom: 1px solid var(--border); }
+
+  .industries-header { margin-bottom: 48px; }
+  .industries-header h2 span { color: var(--green); }
+
+  .industry-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+  .industry-item {
+    border: 1px solid var(--border); padding: 20px; text-align: center;
+    transition: all 0.2s;
+  }
+
+  .industry-item:hover { border-color: var(--border-strong); background: var(--bg-card); }
+
+  .industry-item .emoji { font-size: 1.5rem; display: block; margin-bottom: 8px; }
+
+  .industry-item .name { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.04em; }
+
+  /* CTA */
+  .cta-section { padding: 120px 0; text-align: center; position: relative; overflow: hidden; }
+
+  .cta-section::before {
+    content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 700px; height: 400px;
+    background: radial-gradient(ellipse, rgba(0,240,96,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-section .section-label { justify-content: center; }
+  .cta-section .section-label::before { display: none; }
+  .cta-section h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 20px; position: relative; z-index: 1; }
+  .cta-section h2 span { color: var(--green); }
+  .cta-section > .container > p { color: var(--text-muted); font-size: 1rem; margin-bottom: 48px; position: relative; z-index: 1; }
+
+  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+
+  .contact-info {
+    margin-top: 48px; display: flex; gap: 48px; justify-content: center;
+    flex-wrap: wrap; position: relative; z-index: 1;
+  }
+
+  .contact-item { text-align: center; }
+
+  .ci-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+
+  .ci-value { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.9rem; color: var(--text-muted); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+
+  .footer-brand { display: flex; align-items: center; gap: 12px; }
+
+  .footer-wordmark { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1rem; color: var(--text); display: block; }
+
+  .footer-wordmark .g { color: var(--green); }
+
+  .footer-meta { font-size: 0.72rem; color: var(--text-dim); font-family: 'Space Mono', monospace; display: block; margin-top: 2px; }
+
+  .footer-links { display: flex; gap: 32px; list-style: none; }
+
+  .footer-links a { font-size: 0.75rem; color: var(--text-dim); text-decoration: none; font-family: 'Space Mono', monospace; transition: color 0.2s; }
+
+  .footer-links a:hover { color: var(--green); }
+
+  /* SCROLL ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .d1 { transition-delay: 0.1s; }
+  .d2 { transition-delay: 0.2s; }
+  .d3 { transition-delay: 0.3s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-visual { display: none; }
+    .container { padding: 0 24px; }
+    .positioning-grid, .plans-grid, .why-grid { grid-template-columns: 1fr; gap: 2px; }
+    .industry-list { grid-template-columns: repeat(2, 1fr); }
+    .services-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .services-header p { text-align: left; }
+    .starter-section { grid-template-columns: 1fr; }
+    footer { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
+    .cta-section { padding: 80px 0; }
+    .stat-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <svg width="34" height="32" viewBox="0 0 252 231" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M161.532 109.574L201.942 157.822L188.656 180.754L126.476 170.031L64.2794 180.757L51 157.834L91.4207 109.574L113.034 51H139.918L161.532 109.574ZM66.9185 158.821L71.2594 166.307L116.371 140.374L112.03 132.888L66.9185 158.821ZM136.296 140.374L181.408 166.307L185.749 158.821L140.637 132.888L136.296 140.374ZM122.314 115.833H130.996V63.9666H122.314V115.833Z" fill="#00f060"/>
+    </svg>
+    <span class="nav-wordmark"><span class="g">AMP</span> IT</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#industries">Who We Serve</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get Started</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Charlotte, NC · Managed IT for Professional Firms</div>
+    <h1>
+      Your IT<br>
+      <span class="accent">Just Runs.</span>
+      <span class="sub-line">// Flat rate. Zero surprises. Always on.</span>
+    </h1>
+    <p class="hero-sub">We're invisible, reliable infrastructure — not a vendor you have to manage. One invoice, one call, IT that works.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book a Free Assessment</a>
+      <a href="#services" class="btn-outline">See Service Plans</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-logo-wrap">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <svg class="hero-logo-svg" viewBox="0 0 252 231" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M161.532 109.574L201.942 157.822L188.656 180.754L126.476 170.031L64.2794 180.757L51 157.834L91.4207 109.574L113.034 51H139.918L161.532 109.574ZM66.9185 158.821L71.2594 166.307L116.371 140.374L112.03 132.888L66.9185 158.821ZM136.296 140.374L181.408 166.307L185.749 158.821L140.637 132.888L136.296 140.374ZM122.314 115.833H130.996V63.9666H122.314V115.833Z" fill="#00f060"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">Managed IT</span><span class="ticker-item">Cybersecurity</span><span class="ticker-item">Google Workspace</span><span class="ticker-item">Microsoft 365</span><span class="ticker-item">Endpoint Protection</span><span class="ticker-item">Email Security</span><span class="ticker-item">Dark Web Monitoring</span><span class="ticker-item">AI Productivity</span><span class="ticker-item">Business Phone</span><span class="ticker-item">Charlotte Metro</span><span class="ticker-item">Managed IT</span><span class="ticker-item">Cybersecurity</span><span class="ticker-item">Google Workspace</span><span class="ticker-item">Microsoft 365</span><span class="ticker-item">Endpoint Protection</span><span class="ticker-item">Email Security</span><span class="ticker-item">Dark Web Monitoring</span><span class="ticker-item">AI Productivity</span><span class="ticker-item">Business Phone</span><span class="ticker-item">Charlotte Metro</span>
+  </div>
+</div>
+
+<section class="positioning">
+  <div class="container">
+    <div class="section-label">What We Do</div>
+    <div class="positioning-grid">
+      <div class="positioning-left fade-up">
+        <h2>Outcomes, not <span>overhead.</span></h2>
+        <p>We don't sell IT as a tool you have to understand. We sell the result — technology that works, security that holds, and a team that picks up the phone.</p>
+        <p>For Charlotte-area professional services firms, that means one flat monthly rate with no surprises, no break-fix nickel-and-diming, and a partner who treats your business like an owner.</p>
+        <div class="stat-row">
+          <div class="stat"><div class="stat-num">1-Hr</div><div class="stat-label">Emergency Response SLA</div></div>
+          <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Threat Monitoring (Best Tier)</div></div>
+          <div class="stat"><div class="stat-num">Flat</div><div class="stat-label">Monthly Rate — No Surprises</div></div>
+          <div class="stat"><div class="stat-num">On-Site</div><div class="stat-label">Charlotte Metro Coverage</div></div>
+        </div>
+      </div>
+      <div class="positioning-right fade-up d2">
+        <div class="serve-card">
+          <div class="serve-icon">⚖️</div>
+          <div>
+            <div class="serve-card-title">Law Firms & CPAs</div>
+            <div class="serve-card-pitch">"Your client data stays private. We can document that for your malpractice carrier."</div>
+          </div>
+        </div>
+        <div class="serve-card">
+          <div class="serve-icon">🏦</div>
+          <div>
+            <div class="serve-card-title">Insurance & Financial Advisors</div>
+            <div class="serve-card-pitch">"AI governance documentation for compliance. Private AI that never touches a public model."</div>
+          </div>
+        </div>
+        <div class="serve-card">
+          <div class="serve-icon">🏠</div>
+          <div>
+            <div class="serve-card-title">Real Estate & General SMBs</div>
+            <div class="serve-card-pitch">"One invoice, one call, IT that doesn't break."</div>
+          </div>
+        </div>
+        <div class="serve-card">
+          <div class="serve-icon">🔧</div>
+          <div>
+            <div class="serve-card-title">Contractors & Tradespeople</div>
+            <div class="serve-card-pitch">"Make sure your email comes from your business — not a personal Gmail."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-header fade-up">
+      <div>
+        <div class="section-label">Service Plans</div>
+        <h2>Simple pricing.<br><span>No surprises.</span></h2>
+      </div>
+      <p>All plans include licensing management — Google Workspace, Microsoft 365, security tools, and backup — all on one invoice. 12-month agreement standard.</p>
+    </div>
+    <div class="plans-grid fade-up">
+      <div class="plan">
+        <div class="plan-icon">▲</div>
+        <div class="plan-name">Essential</div>
+        <div class="plan-tagline">Protect your business from day one</div>
+        <div class="plan-price">
+          <span class="amount">$319</span>
+          <span class="per">/user/month · 5 user minimum</span>
+        </div>
+        <ul class="plan-features">
+          <li>Remote monitoring & management — OS & software patching</li>
+          <li>24/7 managed threat detection & response</li>
+          <li>Advanced email security & phishing protection</li>
+          <li>Automated backup — endpoints & cloud data</li>
+          <li>Helpdesk — Tier 1/2 remote support</li>
+          <li>User onboarding & offboarding</li>
+          <li>MFA enforcement + mobile device support</li>
+          <li>Monthly health report</li>
+          <li>Google Workspace & Microsoft 365 administration</li>
+        </ul>
+        <a href="#contact" class="plan-cta">Get Essential</a>
+      </div>
+      <div class="plan featured">
+        <div class="plan-badge">Most Popular</div>
+        <div class="plan-icon">◆</div>
+        <div class="plan-name">Better</div>
+        <div class="plan-tagline">Prove you're protected, always</div>
+        <div class="plan-price">
+          <span class="amount">$445</span>
+          <span class="per">/user/month · Ideal 10–40 users</span>
+        </div>
+        <ul class="plan-features">
+          <li>Everything in Essential, plus:</li>
+          <li>Backup verification & restore testing (monthly)</li>
+          <li>Web & DNS content filtering</li>
+          <li>Dark web monitoring (domain + exec emails)</li>
+          <li>Proactive maintenance windows</li>
+          <li>Quarterly Business Reviews</li>
+        </ul>
+        <a href="#contact" class="plan-cta">Get Better</a>
+      </div>
+      <div class="plan">
+        <div class="plan-icon">★</div>
+        <div class="plan-name">Best</div>
+        <div class="plan-tagline">Strategic IT, white-glove service</div>
+        <div class="plan-price">
+          <span class="amount">$464–499</span>
+          <span class="per">/user/month · Ideal 15–50 users</span>
+        </div>
+        <ul class="plan-features">
+          <li>Everything in Better, plus:</li>
+          <li>Virtual CIO — strategic IT planning & roadmapping</li>
+          <li>P1: 1-hr response / P2: 4-hr resolution SLA</li>
+          <li>Dedicated account manager</li>
+          <li>Vendor management</li>
+          <li>Disaster recovery planning + annual tabletop</li>
+          <li>Cybersecurity risk assessments</li>
+          <li>Compliance planning</li>
+          <li>After-hours emergency coverage included</li>
+        </ul>
+        <a href="#contact" class="plan-cta">Get Best</a>
+      </div>
+    </div>
+    <div class="starter-section fade-up">
+      <div>
+        <h3>Small Business <span>Starter Track</span></h3>
+        <p>Just getting started? We set up professional business email, a local Charlotte phone number, and the IT foundation to grow into managed services as your team scales. Built for contractors, tradespeople, and new businesses with 1–3 employees.</p>
+      </div>
+      <div class="starter-items">
+        <div class="starter-item"><span class="price">$300–500</span><span class="label">Email Setup (one-time)</span></div>
+        <div class="starter-item"><span class="price">$25–40</span><span class="label">/user/mo management</span></div>
+        <div class="starter-item"><span class="price">$20–35</span><span class="label">/user/mo business phone</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why" id="why">
+  <div class="container">
+    <div class="section-label fade-up">Why AMP IT</div>
+    <h2 class="fade-up">We sell outcomes,<br>not <span style="color:var(--green)">complexity.</span></h2>
+    <div class="why-grid">
+      <div class="why-card fade-up"><div class="why-num">01</div><h3>Flat, Predictable Rate</h3><p>One invoice covers everything — licensing, security, helpdesk, and backups. No break-fix billing. You always know what IT costs.</p></div>
+      <div class="why-card fade-up d1"><div class="why-num">02</div><h3>Real Security at Every Tier</h3><p>Managed threat detection, email phishing protection, and automated backups are all in our Essential tier — not upsells. If it can put a business out of business, it's essential.</p></div>
+      <div class="why-card fade-up d2"><div class="why-num">03</div><h3>A-Player Team</h3><p>We hire experienced engineers and pay them well — because the person answering your ticket needs to actually know what they're doing. You'll notice the difference.</p></div>
+      <div class="why-card fade-up"><div class="why-num">04</div><h3>AI Governance Ready</h3><p>Private AI tools deployed with proper data governance. Your client privileged information never touches a public model — documented for your malpractice carrier.</p></div>
+      <div class="why-card fade-up d1"><div class="why-num">05</div><h3>Charlotte-Local, On-Site Capable</h3><p>When you need someone physically there, we're not outsourcing to a sub — we show up. Remote or in person, you get the same team every time.</p></div>
+      <div class="why-card fade-up d2"><div class="why-num">06</div><h3>Grows With Your Business</h3><p>Whether you're a new business getting your first professional email or a 50-person firm needing full compliance planning, we have a track built for exactly where you are.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="industries" id="industries">
+  <div class="container">
+    <div class="industries-header fade-up">
+      <div class="section-label">Who We Serve</div>
+      <h2>Built for Charlotte's <span style="color:var(--green)">professional services</span> market.</h2>
+    </div>
+    <div class="industry-list">
+      <div class="industry-item fade-up"><span class="emoji">⚖️</span><span class="name">Law Firms</span></div>
+      <div class="industry-item fade-up d1"><span class="emoji">📊</span><span class="name">CPA Firms</span></div>
+      <div class="industry-item fade-up d2"><span class="emoji">🛡️</span><span class="name">Insurance Agencies</span></div>
+      <div class="industry-item fade-up d3"><span class="emoji">📈</span><span class="name">Financial Advisors</span></div>
+      <div class="industry-item fade-up"><span class="emoji">🏠</span><span class="name">Real Estate</span></div>
+      <div class="industry-item fade-up d1"><span class="emoji">🔧</span><span class="name">Contractors & Trades</span></div>
+      <div class="industry-item fade-up d2"><span class="emoji">🏢</span><span class="name">General SMBs</span></div>
+      <div class="industry-item fade-up d3"><span class="emoji">🌐</span><span class="name">New Businesses</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="container">
+    <div class="section-label">Get Started</div>
+    <h2>Ready for IT that<br><span>just works?</span></h2>
+    <p>Book a free IT Environment Assessment — no commitment. We'll show you exactly what's exposed and what it takes to fix it.</p>
+    <div class="cta-actions">
+      <a href="mailto:hello@ampit.com" class="btn-primary">Book Free Assessment</a>
+      <a href="tel:+17045550000" class="btn-outline">Call Us</a>
+    </div>
+    <div class="contact-info">
+      <div class="contact-item"><span class="ci-label">Email</span><span class="ci-value">hello@ampit.com</span></div>
+      <div class="contact-item"><span class="ci-label">Service Area</span><span class="ci-value">Charlotte Metro & Surrounding Area</span></div>
+      <div class="contact-item"><span class="ci-label">Emergency Line</span><span class="ci-value">Available 24/7 for critical issues</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <svg width="30" height="28" viewBox="0 0 252 231" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M161.532 109.574L201.942 157.822L188.656 180.754L126.476 170.031L64.2794 180.757L51 157.834L91.4207 109.574L113.034 51H139.918L161.532 109.574ZM66.9185 158.821L71.2594 166.307L116.371 140.374L112.03 132.888L66.9185 158.821ZM136.296 140.374L181.408 166.307L185.749 158.821L140.637 132.888L136.296 140.374ZM122.314 115.833H130.996V63.9666H122.314V115.833Z" fill="#00f060"/>
+    </svg>
+    <div>
+      <span class="footer-wordmark"><span class="g">AMP</span> IT LLC</span>
+      <span class="footer-meta">Part of AMP Dynamics · Charlotte, NC</span>
+    </div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#industries">Who We Serve</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <span class="footer-meta">© 2026 AMP IT LLC. All rights reserved.</span>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+    links.forEach(a => { a.style.color = a.getAttribute('href') === `#${cur}` ? 'var(--green)' : ''; });
+  });
+</script>
+</body>
+</html>
