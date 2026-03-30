@@ -3,8 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AMP IT LLC — Your IT Just Runs.</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<title>AMP IT — Your IT Just Runs. | Charlotte IT Solutions</title>
+<meta http-equiv="x-dns-prefetch-control" content="on">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 252 231' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='252' height='231' fill='%230a0c0a'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M161.532 109.574L201.942 157.822L188.656 180.754L126.476 170.031L64.2794 180.757L51 157.834L91.4207 109.574L113.034 51H139.918L161.532 109.574ZM66.9185 158.821L71.2594 166.307L116.371 140.374L112.03 132.888L66.9185 158.821ZM136.296 140.374L181.408 166.307L185.749 158.821L140.637 132.888L136.296 140.374ZM122.314 115.833H130.996V63.9666H122.314V115.833Z' fill='%2300f060'/%3E%3C/svg%3E">
+<meta name="description" content="We're invisible, reliable infrastructure — not a vendor you have to manage. One invoice, one call, IT that works. Serving Charlotte-area businesses. Book a free assessment.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="AMP IT LLC — Your IT Just Runs.">
+<meta property="og:description" content="Flat-rate managed IT for Charlotte-area professional firms. 24/7 threat monitoring, email security, and helpdesk — all on one invoice.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ampitsolutions.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Space+Mono:wght@400&family=Inter:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Space+Mono:wght@400&family=Inter:wght@400;500&display=swap"></noscript>
 <style>
   :root {
     --green: #00f060;
@@ -35,10 +48,10 @@
     content: '';
     position: fixed;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4t5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c8TV1mAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvEOwtAAAFVklEQVR4XpWWB67c2BUFb3g557T/hRo9/WUMZHlgr4Bg8Z4qQgQJlHI4A8SzFVrapvmTF9O7dmYRFZ60YiBhJRCgh1FYhiLAmdvX0CzTOpNE77ME0Zty/nWWzchDtiqrmQDeuv3powQ5ta2eN0FY0InkqDD73lT9c9lEzwUNqgFHs9VQce3TVClFCQrSTfOiYkVJQBmpbq2L6iZavPnAPcoU0dSw0SUTqz/GtrGuXfbyyBniKykOWQWGqwwma1y3YJonKRfFfnmEQa/AlQs0kFPONMT5ltHmZVJmQ2PqxNelC3Y0ElUJ10KFBCQ7FsI6PAgxFMPE0JHJgsKoRwXSCpgNj01BSVqN7xL/ViqkYUDy8VkZvDrYXgjPEhtcW8E3f9nECGNE0rBj5EK1bYK7cSh1cZ5O2uZZUaVT1C7AjbhHf0HxRuCIqQGmQEYB44dkb5hhJjTNrfJIHOVMfJBhVS4bHw==");
     pointer-events: none;
     z-index: 0;
-    opacity: 0.4;
+    opacity: 0.03;
   }
 
   nav {
@@ -90,7 +103,10 @@
   /* HERO */
   .hero {
     position: relative; min-height: 100vh;
-    display: flex; align-items: center;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 40px;
     padding: 120px 60px 80px;
     overflow: hidden;
   }
@@ -112,7 +128,7 @@
     pointer-events: none;
   }
 
-  .hero-content { position: relative; z-index: 2; max-width: 780px; }
+  .hero-content { position: relative; z-index: 2; max-width: 640px; min-width: 0; }
 
   .hero-eyebrow {
     font-family: 'Space Mono', monospace; font-size: 0.72rem;
@@ -172,7 +188,7 @@
   .btn-outline {
     background: transparent; color: var(--text-muted);
     padding: 15px 36px;
-    font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.9rem;
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem;
     letter-spacing: 0.06em; text-transform: uppercase;
     border: 1px solid var(--border-strong);
     cursor: pointer; text-decoration: none; display: inline-block;
@@ -182,46 +198,70 @@
   .btn-outline:hover { border-color: var(--green); color: var(--green); }
 
   .hero-visual {
-    position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+    position: relative;
     z-index: 2;
-    animation: float 6s ease-in-out infinite;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    animation: float 7s ease-in-out infinite;
+    will-change: transform;
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(-50%) translateY(0); }
-    50%       { transform: translateY(-50%) translateY(-20px); }
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-24px); }
   }
 
   .hero-logo-wrap {
-    position: relative; width: 320px; height: 320px;
+    position: relative; width: 520px; height: 520px;
     display: flex; align-items: center; justify-content: center;
   }
 
   .ring {
-    position: absolute; border-radius: 50%; border: 1px solid var(--border);
+    position: absolute; border-radius: 50%;
+    border: 1px solid var(--border);
     animation: spin 20s linear infinite;
+    will-change: transform;
   }
 
-  .ring:nth-child(1) { width: 300px; height: 300px; }
-  .ring:nth-child(2) { width: 240px; height: 240px; border-style: dashed; animation-direction: reverse; animation-duration: 14s; }
-  .ring:nth-child(3) { width: 180px; height: 180px; }
+  .ring:nth-child(1) { width: 480px; height: 480px; border-color: rgba(0,240,96,0.1); }
+  .ring:nth-child(2) { width: 390px; height: 390px; border-style: dashed; border-color: rgba(0,240,96,0.15); animation-direction: reverse; animation-duration: 14s; }
+  .ring:nth-child(3) { width: 300px; height: 300px; border-color: rgba(0,240,96,0.08); animation-duration: 30s; }
+
+  /* Orbiting dots */
+  .ring:nth-child(1)::before,
+  .ring:nth-child(1)::after {
+    content: ''; position: absolute;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 12px rgba(0,240,96,0.8);
+  }
+  .ring:nth-child(1)::before { top: -4px; left: 50%; transform: translateX(-50%); }
+  .ring:nth-child(1)::after  { bottom: -4px; left: 50%; transform: translateX(-50%); }
+
+  .ring:nth-child(2)::before {
+    content: ''; position: absolute;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green); opacity: 0.6;
+    right: -3px; top: 50%; transform: translateY(-50%);
+    box-shadow: 0 0 8px rgba(0,240,96,0.6);
+  }
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
   .hero-logo-svg {
-    width: 140px; height: 140px; position: relative; z-index: 2;
+    width: 220px; height: 220px; position: relative; z-index: 2;
     animation: glow 3s ease-in-out infinite;
   }
 
   @keyframes glow {
-    0%, 100% { filter: drop-shadow(0 0 30px rgba(0,240,96,0.5)); }
-    50%       { filter: drop-shadow(0 0 60px rgba(0,240,96,0.8)); }
+    0%, 100% { filter: drop-shadow(0 0 40px rgba(0,240,96,0.5)) drop-shadow(0 0 80px rgba(0,240,96,0.2)); }
+    50%       { filter: drop-shadow(0 0 70px rgba(0,240,96,0.9)) drop-shadow(0 0 120px rgba(0,240,96,0.4)); }
   }
 
   /* TICKER */
   .ticker-wrap { background: var(--green); overflow: hidden; white-space: nowrap; padding: 12px 0; }
 
-  .ticker { display: inline-block; animation: tick 30s linear infinite; }
+  .ticker { display: inline-block; animation: tick 30s linear infinite; will-change: transform; }
 
   .ticker-item {
     display: inline-block;
@@ -447,7 +487,7 @@
 
   .ci-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 4px; }
 
-  .ci-value { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.9rem; color: var(--text-muted); }
+  .ci-value { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text-muted); }
 
   /* FOOTER */
   footer {
@@ -472,37 +512,105 @@
   .footer-links a:hover { color: var(--green); }
 
   /* SCROLL ANIMATIONS */
-  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .js-loaded .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .js-loaded .fade-up.visible { opacity: 1; transform: translateY(0); }
   .d1 { transition-delay: 0.1s; }
   .d2 { transition-delay: 0.2s; }
   .d3 { transition-delay: 0.3s; }
 
-  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .hero { padding: 120px 40px 80px; gap: 20px; }
+    .hero-logo-wrap { width: 420px; height: 420px; }
+    .hero-logo-svg { width: 180px; height: 180px; }
+    .ring:nth-child(1) { width: 390px; height: 390px; }
+    .ring:nth-child(2) { width: 310px; height: 310px; }
+    .ring:nth-child(3) { width: 240px; height: 240px; }
+  }
+
   @media (max-width: 900px) {
-    nav { padding: 16px 24px; }
+    nav { padding: 16px 20px; }
     .nav-links { display: none; }
-    .hero { padding: 100px 24px 60px; }
-    .hero-visual { display: none; }
-    .container { padding: 0 24px; }
-    .positioning-grid, .plans-grid, .why-grid { grid-template-columns: 1fr; gap: 2px; }
+    .nav-cta { padding: 8px 16px; font-size: 0.75rem; }
+
+    /* Hero: stack to single column, logo below text */
+    .hero {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      padding: 100px 24px 60px;
+      text-align: center;
+      min-height: auto;
+      gap: 48px;
+    }
+    .hero-content { max-width: 100%; }
+    .hero-eyebrow { justify-content: center; }
+    .hero-actions { justify-content: center; }
+    .hero-glow { display: none; }
+
+    .hero-visual { animation: none; }
+    .hero-logo-wrap { width: 280px; height: 280px; }
+    .hero-logo-svg { width: 120px; height: 120px; }
+    .ring:nth-child(1) { width: 260px; height: 260px; }
+    .ring:nth-child(2) { width: 210px; height: 210px; }
+    .ring:nth-child(3) { width: 160px; height: 160px; }
+    #heroCanvas { width: 280px !important; height: 280px !important; }
+
+    .container { padding: 0 20px; }
+    .positioning-grid { grid-template-columns: 1fr; gap: 40px; }
+    .plans-grid { grid-template-columns: 1fr; gap: 12px; background: transparent; }
+    .why-grid { grid-template-columns: 1fr; gap: 2px; }
     .industry-list { grid-template-columns: repeat(2, 1fr); }
     .services-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .services-header p { text-align: left; }
-    .starter-section { grid-template-columns: 1fr; }
-    footer { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
-    .cta-section { padding: 80px 0; }
+    .services-header p { text-align: left; max-width: 100%; }
+    .starter-section { grid-template-columns: 1fr; gap: 24px; }
+    .starter-items { gap: 16px; }
+    footer { flex-direction: column; align-items: flex-start; padding: 32px 20px; gap: 24px; }
+    .footer-links { gap: 20px; flex-wrap: wrap; }
+    .cta-section { padding: 60px 0; }
     .stat-row { grid-template-columns: 1fr 1fr; }
+    .serve-card:hover { transform: none; }
+    h1 { font-size: clamp(2.4rem, 8vw, 3.5rem); }
+    h2 { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+    .hero-sub { font-size: 1rem; }
+    .cta-section h2 { font-size: clamp(2rem, 7vw, 3rem); }
+    .plan.featured { margin: 0; border: 2px solid var(--green); }
+    .plan { border: 1px solid var(--border); }
+  }
+
+  @media (max-width: 480px) {
+    nav { padding: 14px 16px; }
+    .hero { padding: 90px 16px 48px; }
+    .container { padding: 0 16px; }
+    .hero-logo-wrap { width: 220px; height: 220px; }
+    .hero-logo-svg { width: 95px; height: 95px; }
+    .ring:nth-child(1) { width: 205px; height: 205px; }
+    .ring:nth-child(2) { width: 165px; height: 165px; }
+    .ring:nth-child(3) { width: 125px; height: 125px; }
+    #heroCanvas { width: 220px !important; height: 220px !important; }
+    .industry-list { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .btn-primary, .btn-outline { padding: 13px 24px; font-size: 0.82rem; }
+    .hero-actions { flex-direction: column; align-items: center; gap: 12px; }
+    .stat-row { grid-template-columns: 1fr 1fr; gap: 16px; }
+    .starter-items { flex-direction: column; gap: 16px; }
+    .contact-info { flex-direction: column; gap: 20px; }
+    footer { padding: 28px 16px; }
+    .footer-links { gap: 16px; }
+    .plan { padding: 28px 20px; }
+    .assess-right { padding: 24px 16px; }
   }
 </style>
 </head>
 <body>
 
+<!-- SVG symbol defined once, reused everywhere via <use> -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="amp-logo" viewBox="0 0 252 231">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M161.532 109.574L201.942 157.822L188.656 180.754L126.476 170.031L64.2794 180.757L51 157.834L91.4207 109.574L113.034 51H139.918L161.532 109.574ZM66.9185 158.821L71.2594 166.307L116.371 140.374L112.03 132.888L66.9185 158.821ZM136.296 140.374L181.408 166.307L185.749 158.821L140.637 132.888L136.296 140.374ZM122.314 115.833H130.996V63.9666H122.314V115.833Z" fill="#00f060"/>
+  </symbol>
+</svg>
+
 <nav>
   <a href="#" class="nav-logo">
-    <svg width="34" height="32" viewBox="0 0 252 231" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M161.532 109.574L201.942 157.822L188.656 180.754L126.476 170.031L64.2794 180.757L51 157.834L91.4207 109.574L113.034 51H139.918L161.532 109.574ZM66.9185 158.821L71.2594 166.307L116.371 140.374L112.03 132.888L66.9185 158.821ZM136.296 140.374L181.408 166.307L185.749 158.821L140.637 132.888L136.296 140.374ZM122.314 115.833H130.996V63.9666H122.314V115.833Z" fill="#00f060"/>
-    </svg>
+    <svg width="34" height="32"><use href="#amp-logo"/></svg>
     <span class="nav-wordmark"><span class="g">AMP</span> IT</span>
   </a>
   <ul class="nav-links">
@@ -525,18 +633,17 @@
     </h1>
     <p class="hero-sub">We're invisible, reliable infrastructure — not a vendor you have to manage. One invoice, one call, IT that works.</p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Book a Free Assessment</a>
+      <a href="assessment.html" class="btn-primary">Book a Free Assessment</a>
       <a href="#services" class="btn-outline">See Service Plans</a>
     </div>
   </div>
   <div class="hero-visual">
     <div class="hero-logo-wrap">
+      <canvas id="heroCanvas" width="520" height="520" style="position:absolute;inset:0;z-index:1;opacity:0.5;"></canvas>
       <div class="ring"></div>
       <div class="ring"></div>
       <div class="ring"></div>
-      <svg class="hero-logo-svg" viewBox="0 0 252 231" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M161.532 109.574L201.942 157.822L188.656 180.754L126.476 170.031L64.2794 180.757L51 157.834L91.4207 109.574L113.034 51H139.918L161.532 109.574ZM66.9185 158.821L71.2594 166.307L116.371 140.374L112.03 132.888L66.9185 158.821ZM136.296 140.374L181.408 166.307L185.749 158.821L140.637 132.888L136.296 140.374ZM122.314 115.833H130.996V63.9666H122.314V115.833Z" fill="#00f060"/>
-      </svg>
+      <svg class="hero-logo-svg" viewBox="0 0 252 231"><use href="#amp-logo"/></svg>
     </div>
   </div>
 </section>
@@ -722,11 +829,12 @@
     <h2>Ready for IT that<br><span>just works?</span></h2>
     <p>Book a free IT Environment Assessment — no commitment. We'll show you exactly what's exposed and what it takes to fix it.</p>
     <div class="cta-actions">
-      <a href="mailto:info@ampitsolutions.com" class="btn-primary">Book Free Assessment</a>
+      <a href="assessment.html" class="btn-primary">Book Free Assessment</a>
       <a href="tel:+19803772733" class="btn-outline">Call Us</a>
     </div>
     <div class="contact-info">
-      <div class="contact-item"><span class="ci-label">Email</span><span class="ci-value">info@ampitsolutions.com</span></div>
+      <div class="contact-item"><span class="ci-label">Email</span><span class="ci-value">assessments@ampitsolutions.com</span></div>
+      <div class="contact-item"><span class="ci-label">Phone</span><span class="ci-value"><a href="tel:+19803772733" style="color:var(--text-muted);text-decoration:none;">(980) 377-2733</a></span></div>
       <div class="contact-item"><span class="ci-label">Service Area</span><span class="ci-value">Charlotte Metro & Surrounding Area</span></div>
       <div class="contact-item"><span class="ci-label">Emergency Line</span><span class="ci-value">Available 24/7 for critical issues</span></div>
     </div>
@@ -735,9 +843,7 @@
 
 <footer>
   <div class="footer-brand">
-    <svg width="30" height="28" viewBox="0 0 252 231" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M161.532 109.574L201.942 157.822L188.656 180.754L126.476 170.031L64.2794 180.757L51 157.834L91.4207 109.574L113.034 51H139.918L161.532 109.574ZM66.9185 158.821L71.2594 166.307L116.371 140.374L112.03 132.888L66.9185 158.821ZM136.296 140.374L181.408 166.307L185.749 158.821L140.637 132.888L136.296 140.374ZM122.314 115.833H130.996V63.9666H122.314V115.833Z" fill="#00f060"/>
-    </svg>
+    <svg width="30" height="28"><use href="#amp-logo"/></svg>
     <div>
       <span class="footer-wordmark"><span class="g">AMP</span> IT LLC</span>
       <span class="footer-meta">Part of AMP Dynamics · Charlotte, NC</span>
@@ -753,6 +859,64 @@
 </footer>
 
 <script>
+  // Hero canvas particles — deferred until idle
+  const startCanvas = () => {
+  const canvas = document.getElementById('heroCanvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+
+    function initParticles() {
+      const w = canvas.offsetWidth || 520;
+      const h = canvas.offsetHeight || 520;
+      canvas.width = w;
+      canvas.height = h;
+      const cx = w / 2, cy = h / 2;
+      const maxR = w * 0.46;
+      const minR = w * 0.22;
+      return { cx, cy, maxR, minR };
+    }
+
+    let dim = initParticles();
+    const particles = Array.from({length: 28}, () => ({
+      angle: Math.random() * Math.PI * 2,
+      radiusFrac: 0.22 + Math.random() * 0.24,
+      speed: (0.002 + Math.random() * 0.004) * (Math.random() > 0.5 ? 1 : -1),
+      size: 1 + Math.random() * 2.5,
+      opacity: 0.2 + Math.random() * 0.6
+    }));
+
+    function drawParticles() {
+      const { cx, cy } = dim;
+      const w = canvas.width;
+      ctx.clearRect(0, 0, w, canvas.height);
+      particles.forEach(p => {
+        p.angle += p.speed;
+        const radius = p.radiusFrac * w;
+        const x = cx + Math.cos(p.angle) * radius;
+        const y = cy + Math.sin(p.angle) * radius;
+        ctx.beginPath();
+        ctx.arc(x, y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 240, 96, ${p.opacity})`;
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = 'rgba(0, 240, 96, 0.8)';
+        ctx.fill();
+      });
+      requestAnimationFrame(drawParticles);
+    }
+
+    window.addEventListener('resize', () => { dim = initParticles(); });
+    drawParticles();
+  }
+  };
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(startCanvas, { timeout: 2000 });
+  } else {
+    setTimeout(startCanvas, 300);
+  }
+
+  // Mark JS as loaded — defer non-critical work
+  document.documentElement.classList.add('js-loaded');
+
   const obs = new IntersectionObserver(
     entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
     { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
@@ -760,12 +924,17 @@
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
   const sections = document.querySelectorAll('section[id]');
-  const links = document.querySelectorAll('.nav-links a');
+  const navLinks = document.querySelectorAll('.nav-links a');
   window.addEventListener('scroll', () => {
-    let cur = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
-    links.forEach(a => { a.style.color = a.getAttribute('href') === `#${cur}` ? 'var(--green)' : ''; });
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--green)' : '';
+    });
   });
 </script>
+
 </body>
 </html>
