@@ -598,6 +598,7 @@
     .assess-right { padding: 24px 16px; }
   }
 </style>
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
@@ -833,7 +834,7 @@
       <a href="tel:+19803772733" class="btn-outline">Call Us</a>
     </div>
     <div class="contact-info">
-      <div class="contact-item"><span class="ci-label">Email</span><span class="ci-value">assessments@ampitsolutions.com</span></div>
+      <div class="contact-item"><span class="ci-label">Email</span><span class="ci-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb9a88889e8888969e958f88bb9a968b928f8894978e8f92949588d5989496">[email&#160;protected]</a></span></div>
       <div class="contact-item"><span class="ci-label">Phone</span><span class="ci-value"><a href="tel:+19803772733" style="color:var(--text-muted);text-decoration:none;">(980) 377-2733</a></span></div>
       <div class="contact-item"><span class="ci-label">Service Area</span><span class="ci-value">Charlotte Metro & Surrounding Area</span></div>
       <div class="contact-item"><span class="ci-label">Emergency Line</span><span class="ci-value">Available 24/7 for critical issues</span></div>
@@ -858,7 +859,7 @@
   <span class="footer-meta">© 2026 AMP IT LLC. All rights reserved.</span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Hero canvas particles — deferred until idle
   const startCanvas = () => {
   const canvas = document.getElementById('heroCanvas');
@@ -927,14 +928,4 @@
   const navLinks = document.querySelectorAll('.nav-links a');
   window.addEventListener('scroll', () => {
     let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 120) current = s.id;
-    });
-    navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--green)' : '';
-    });
-  });
-</script>
-
-</body>
-</html>
+    sections
