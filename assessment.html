@@ -203,7 +203,40 @@
 
 <script>
   // Paste your Google Apps Script Web App URL here after deploying
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyW9bo4JAN93zFOHX9-L2s-OZgKSjdqUmx8iVbX2TjA0lShXQoIz7UIR_9gPFsJB_Lofw/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwosNVVFdnNUw03GcnM-VQhpCsTBXUNwxAIk2BmwVhLfxERjLzbV_QGWGGcgtjknQLWUg/exec";
+
+  // Real-time email validation feedback
+  document.getElementById("f-email").addEventListener("blur", function() {
+    const email = this.value.trim();
+    const emailRegex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+    const msg = this.parentElement.querySelector(".email-error");
+    if (email && !emailRegex.test(email)) {
+      this.classList.add("error");
+      if (!msg) {
+        const err = document.createElement("span");
+        err.className = "email-error";
+        err.style.cssText = "color:#ff5555;font-size:0.68rem;font-family:'Space Mono',monospace;margin-top:4px;display:block;";
+        err.textContent = "Please enter a valid email address";
+        this.parentElement.appendChild(err);
+      }
+    } else {
+      this.classList.remove("error");
+      if (msg) msg.remove();
+    }
+  });
+
+  // Auto-format phone number as (XXX) XXX-XXXX
+  document.getElementById("f-phone").addEventListener("input", function(e) {
+    let val = e.target.value.replace(/\D/g, "").slice(0, 10);
+    if (val.length >= 7) {
+      val = `(${val.slice(0,3)}) ${val.slice(3,6)}-${val.slice(6)}`;
+    } else if (val.length >= 4) {
+      val = `(${val.slice(0,3)}) ${val.slice(3)}`;
+    } else if (val.length >= 1) {
+      val = `(${val}`;
+    }
+    e.target.value = val;
+  });
 
   document.getElementById("assessForm").addEventListener("submit", async function(e) {
     e.preventDefault();
@@ -217,11 +250,35 @@
     const pain     = document.getElementById("f-pain").value.trim();
 
     let valid = true;
+
+    // Required field check
     [["f-name", name], ["f-company", company], ["f-email", email], ["f-size", size]].forEach(([id, val]) => {
       const el = document.getElementById(id);
       if (!val) { el.classList.add("error"); valid = false; }
       else el.classList.remove("error");
     });
+
+    // Email format validation
+    const emailEl = document.getElementById("f-email");
+    const emailRegex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+    if (email && !emailRegex.test(email)) {
+      emailEl.classList.add("error");
+      // Show inline error message
+      let msg = emailEl.parentElement.querySelector(".email-error");
+      if (!msg) {
+        msg = document.createElement("span");
+        msg.className = "email-error";
+        msg.style.cssText = "color:#ff5555;font-size:0.68rem;font-family:'Space Mono',monospace;margin-top:4px;display:block;";
+        emailEl.parentElement.appendChild(msg);
+      }
+      msg.textContent = "Please enter a valid email address";
+      valid = false;
+    } else {
+      emailEl.classList.remove("error");
+      const msg = emailEl.parentElement.querySelector(".email-error");
+      if (msg) msg.remove();
+    }
+
     if (!valid) return;
 
     const btn = document.querySelector(".submit-btn");
