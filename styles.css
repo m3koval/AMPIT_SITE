@@ -1,0 +1,90 @@
+:root {
+  --green: #00f060;
+  --green-glow: rgba(0, 240, 96, 0.18);
+  --bg: #0a0c0a;
+  --bg-card: #131715;
+  --bg-card-hover: #181f19;
+  --border: rgba(0,240,96,0.12);
+  --border-strong: rgba(0,240,96,0.3);
+  --text: #e8f0e8;
+  --text-muted: #7a9280;
+  --text-dim: #4a6050;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('noise.png');
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.03;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 60px;
+  background: rgba(10,12,10,0.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+
+.nav-wordmark {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--text);
+  letter-spacing: 0.04em;
+}
+
+.nav-wordmark .g { color: var(--green); }
+
+.nav-links { display: flex; gap: 36px; list-style: none; }
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.06em;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--green); }
+
+.nav-cta {
+  background: var(--green); color: #050a06;
+  padding: 10px 22px;
+  font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.82rem;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  border: none; cursor: pointer; text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.nav-cta:hover { background: #10ff72; transform: translateY(-1px); }
+
+.nav-back {
+  font-family: 'Space Mono', monospace; font-size: 0.75rem;
+  color: var(--text-muted); text-decoration: none;
+  letter-spacing: 0.06em; transition: color 0.2s;
+  display: flex; align-items: center; gap: 8px;
+}
+.nav-back::before { content: '←'; }
+.nav-back:hover { color: var(--green); }

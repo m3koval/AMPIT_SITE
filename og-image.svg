@@ -1,0 +1,31 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+  <rect width="1200" height="630" fill="#0a0c0a"/>
+  <!-- grid lines -->
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(0,240,96,0.04)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <!-- glow -->
+  <radialGradient id="glow" cx="75%" cy="40%" r="50%">
+    <stop offset="0%" stop-color="#00f060" stop-opacity="0.12"/>
+    <stop offset="100%" stop-color="#00f060" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <!-- left border accent -->
+  <rect x="80" y="80" width="2" height="470" fill="#00f060" opacity="0.3"/>
+  <!-- logo mark -->
+  <g transform="translate(116, 108) scale(0.7)">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M161.532 109.574L201.942 157.822L188.656 180.754L126.476 170.031L64.2794 180.757L51 157.834L91.4207 109.574L113.034 51H139.918L161.532 109.574ZM66.9185 158.821L71.2594 166.307L116.371 140.374L112.03 132.888L66.9185 158.821ZM136.296 140.374L181.408 166.307L185.749 158.821L140.637 132.888L136.296 140.374ZM122.314 115.833H130.996V63.9666H122.314V115.833Z" fill="#00f060"/>
+  </g>
+  <!-- eyebrow -->
+  <text x="116" y="290" font-family="monospace" font-size="22" fill="#00f060" letter-spacing="4" opacity="0.9">CHARLOTTE, NC · MANAGED IT</text>
+  <!-- headline -->
+  <text x="116" y="370" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" fill="#e8f0e8" letter-spacing="-2">Your IT</text>
+  <text x="116" y="460" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" fill="#00f060" letter-spacing="-2">Just Runs.</text>
+  <!-- subtext -->
+  <text x="116" y="520" font-family="Arial, sans-serif" font-size="26" fill="#7a9280">Flat-rate managed IT for Charlotte-area professional firms.</text>
+  <!-- domain -->
+  <text x="116" y="572" font-family="monospace" font-size="20" fill="#4a6050" letter-spacing="2">ampitsolutions.com</text>
+</svg>
