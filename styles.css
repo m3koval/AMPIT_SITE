@@ -8,7 +8,7 @@
   --border-strong: rgba(0,240,96,0.3);
   --text: #e8f0e8;
   --text-muted: #7a9280;
-  --text-dim: #4a6050;
+  --text-dim: #6b8274;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

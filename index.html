@@ -364,7 +364,7 @@
 
   .why-num {
     font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 3rem;
-    color: var(--border-strong); line-height: 1; margin-bottom: 20px;
+    color: var(--text-dim); line-height: 1; margin-bottom: 20px;
     transition: color 0.25s;
   }
 
@@ -1249,4 +1249,14 @@
   const navLinks = document.querySelectorAll('.nav-links a');
   window.addEventListener('scroll', () => {
     let current = '';
-    sections
+    sections.forEach(s => {
+      if (s.getBoundingClientRect().top <= 120) current = s.getAttribute('id');
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+
+</script>
+</body>
+</html>
