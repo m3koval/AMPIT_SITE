@@ -619,14 +619,15 @@
 
   .trust-item {
     display: flex; align-items: center; gap: 10px;
-    opacity: 0.65; transition: opacity 0.2s;
+    transition: opacity 0.2s;
   }
-
-  .trust-item:hover { opacity: 1; }
 
   .trust-item-icon {
     width: 28px; height: 28px; flex-shrink: 0;
+    opacity: 0.65; transition: opacity 0.2s;
   }
+
+  .trust-item:hover .trust-item-icon { opacity: 1; }
 
   .trust-item-text {
     font-family: 'Outfit', sans-serif; font-weight: 700;
@@ -640,7 +641,6 @@
 
   .trust-local {
     display: flex; align-items: center; gap: 10px;
-    opacity: 0.65;
   }
 
   .trust-local-dot {
