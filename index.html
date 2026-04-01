@@ -26,8 +26,9 @@
 <meta name="twitter:image" content="https://ampitsolutions.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Space+Mono:wght@400&family=Inter:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Space+Mono:wght@400&family=Inter:wght@400;500&display=swap"></noscript>
+<link rel="preload" as="style" href="styles.css">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Inter:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Inter:wght@400;500&display=swap"></noscript>
 <link rel="stylesheet" href="styles.css">
 <style>
 
@@ -62,7 +63,7 @@
   .hero-content { position: relative; z-index: 2; max-width: 640px; min-width: 0; }
 
   .hero-eyebrow {
-    font-family: 'Space Mono', monospace; font-size: 0.72rem;
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem;
     color: var(--green); letter-spacing: 0.12em; text-transform: uppercase;
     margin-bottom: 28px;
     display: flex; align-items: center; gap: 12px;
@@ -83,7 +84,7 @@
 
   h1 .sub-line {
     color: var(--text-dim); font-weight: 400; font-size: 0.55em;
-    display: block; font-family: 'Space Mono', monospace;
+    display: block; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
     letter-spacing: 0.04em; margin-top: 12px; line-height: 1.4;
   }
 
@@ -211,7 +212,7 @@
   .container { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
 
   .section-label {
-    font-family: 'Space Mono', monospace; font-size: 0.68rem;
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.68rem;
     color: var(--green); letter-spacing: 0.14em; text-transform: uppercase;
     margin-bottom: 16px;
     display: flex; align-items: center; gap: 10px;
@@ -243,7 +244,7 @@
 
   .stat-num { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 2rem; color: var(--green); line-height: 1; }
 
-  .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; font-family: 'Space Mono', monospace; }
+  .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; }
 
   .positioning-right { display: flex; flex-direction: column; gap: 16px; }
 
@@ -299,7 +300,7 @@
 
   .featured .plan-name { color: var(--green); }
 
-  .plan-tagline { font-size: 0.82rem; color: var(--text-muted); font-family: 'Space Mono', monospace; margin-bottom: 24px; line-height: 1.5; letter-spacing: 0; }
+  .plan-tagline { font-size: 0.82rem; color: var(--text-muted); font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; margin-bottom: 24px; line-height: 1.5; letter-spacing: 0; }
 
   .plan-price { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
 
@@ -307,7 +308,7 @@
 
   .featured .plan-price .amount { color: var(--green); }
 
-  .plan-price .per { font-size: 0.78rem; color: var(--text-muted); font-family: 'Space Mono', monospace; display: block; margin-top: 4px; }
+  .plan-price .per { font-size: 0.78rem; color: var(--text-muted); font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; display: block; margin-top: 4px; }
 
   .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
 
@@ -346,7 +347,7 @@
 
   .starter-item .price { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.4rem; color: var(--green); display: block; }
 
-  .starter-item .label { font-size: 0.72rem; color: var(--text-muted); font-family: 'Space Mono', monospace; display: block; margin-top: 4px; }
+  .starter-item .label { font-size: 0.72rem; color: var(--text-muted); font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; display: block; margin-top: 4px; }
 
   /* WHY */
   .why { padding: 100px 0; border-bottom: 1px solid var(--border); }
@@ -417,7 +418,7 @@
 
   .contact-item { text-align: center; }
 
-  .ci-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+  .ci-label { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 4px; }
 
   .ci-value { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text-muted); }
 
@@ -435,11 +436,11 @@
 
   .footer-wordmark .g { color: var(--green); }
 
-  .footer-meta { font-size: 0.72rem; color: var(--text-dim); font-family: 'Space Mono', monospace; display: block; margin-top: 2px; }
+  .footer-meta { font-size: 0.72rem; color: var(--text-dim); font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; display: block; margin-top: 2px; }
 
   .footer-links { display: flex; gap: 32px; list-style: none; }
 
-  .footer-links a { font-size: 0.75rem; color: var(--text-dim); text-decoration: none; font-family: 'Space Mono', monospace; transition: color 0.2s; }
+  .footer-links a { font-size: 0.75rem; color: var(--text-dim); text-decoration: none; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; transition: color 0.2s; }
 
   .footer-links a:hover { color: var(--green); }
 
@@ -606,7 +607,7 @@
   }
 
   .trust-label {
-    font-family: 'Space Mono', monospace; font-size: 0.62rem;
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.62rem;
     color: var(--text-dim); letter-spacing: 0.16em; text-transform: uppercase;
     flex-shrink: 0;
   }
@@ -632,7 +633,7 @@
   }
 
   .trust-item-sub {
-    font-family: 'Space Mono', monospace; font-size: 0.6rem;
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.6rem;
     color: var(--text-dim); display: block; margin-top: 1px; letter-spacing: 0.06em;
   }
 
@@ -649,7 +650,7 @@
   }
 
   .trust-local-text {
-    font-family: 'Space Mono', monospace; font-size: 0.68rem;
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.68rem;
     color: var(--text-muted); letter-spacing: 0.06em;
   }
 
@@ -898,7 +899,7 @@
         <div class="plan-name">Best</div>
         <div class="plan-tagline">Strategic IT, white-glove service</div>
         <div class="plan-price">
-          <span class="amount">$464–499</span>
+          <span class="amount">$499</span>
           <span class="per">/user/month · Ideal 15–50 users</span>
         </div>
         <ul class="plan-features">

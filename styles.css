@@ -62,7 +62,7 @@ nav {
   color: var(--text-muted);
   text-decoration: none;
   font-size: 0.85rem;
-  font-family: 'Space Mono', monospace;
+  font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
   letter-spacing: 0.06em;
   transition: color 0.2s;
 }
@@ -81,7 +81,7 @@ nav {
 .nav-cta:hover { background: #10ff72; transform: translateY(-1px); }
 
 .nav-back {
-  font-family: 'Space Mono', monospace; font-size: 0.75rem;
+  font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.75rem;
   color: var(--text-muted); text-decoration: none;
   letter-spacing: 0.06em; transition: color 0.2s;
   display: flex; align-items: center; gap: 8px;

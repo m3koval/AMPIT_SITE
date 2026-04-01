@@ -22,8 +22,9 @@
 <meta name="twitter:image" content="https://ampitsolutions.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Space+Mono:wght@400&family=Inter:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Space+Mono:wght@400&family=Inter:wght@400;500&display=swap"></noscript>
+<link rel="preload" as="style" href="styles.css">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Inter:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Inter:wght@400;500&display=swap"></noscript>
 <link rel="stylesheet" href="styles.css">
 <style>
 
@@ -32,7 +33,7 @@
   .left-panel { padding: 80px 60px 80px 80px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--border); position: sticky; top: 81px; height: calc(100vh - 81px); overflow: hidden; }
   .left-panel::after { content: ''; position: absolute; bottom: -100px; left: -100px; width: 500px; height: 500px; background: radial-gradient(ellipse, rgba(0,240,96,0.06) 0%, transparent 70%); pointer-events: none; }
 
-  .eyebrow { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--green); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; animation: fadeUp 0.7s ease both 0.1s; will-change: transform, opacity; }
+  .eyebrow { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.68rem; color: var(--green); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; animation: fadeUp 0.7s ease both 0.1s; will-change: transform, opacity; }
   .eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--green); }
   .left-panel h1 { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: clamp(2rem, 3.2vw, 2.8rem); line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 20px; animation: fadeUp 0.7s ease both 0.2s; }
   .left-panel h1 span { color: var(--green); }
@@ -43,11 +44,11 @@
 
   .right-panel { padding: 60px 80px 60px 60px; display: flex; align-items: center; overflow-y: auto; }
   .form-card { width: 100%; max-width: 500px; background: var(--bg-card); border: 1px solid var(--border); padding: 48px 40px; animation: fadeUp 0.7s ease both 0.2s; }
-  .form-tag { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 32px; display: block; }
+  .form-tag { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 32px; display: block; }
 
   .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .field { display: flex; flex-direction: column; gap: 7px; margin-bottom: 18px; }
-  .field label { font-family: 'Space Mono', monospace; font-size: 0.63rem; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; }
+  .field label { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.63rem; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; }
   .field label .opt { color: var(--text-dim); font-weight: 400; }
   .field input, .field select, .field textarea { background: var(--bg); border: 1px solid var(--border); color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.88rem; padding: 11px 14px; outline: none; width: 100%; transition: border-color 0.2s; appearance: none; -webkit-appearance: none; }
   .field input::placeholder, .field textarea::placeholder { color: var(--text-dim); }
@@ -70,7 +71,7 @@
   .submit-btn { width: 100%; margin-top: 28px; background: var(--green); color: #050a06; padding: 15px 32px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.88rem; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; transition: all 0.2s; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px)); }
   .submit-btn:hover { background: #10ff72; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,240,96,0.25); }
   .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
-  .form-note { font-size: 0.67rem; color: var(--text-dim); font-family: 'Space Mono', monospace; text-align: center; margin-top: 14px; line-height: 1.6; }
+  .form-note { font-size: 0.67rem; color: var(--text-dim); font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; text-align: center; margin-top: 14px; line-height: 1.6; }
 
   .success-state { display: none; text-align: center; padding: 20px; }
   .success-state.visible { display: block; }
@@ -78,7 +79,7 @@
   .success-state h2 { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.8rem; margin-bottom: 12px; }
   .success-state h2 span { color: var(--green); }
   .success-state p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; margin-bottom: 32px; }
-  .back-link { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--text-muted); text-decoration: none; border: 1px solid var(--border); padding: 12px 24px; letter-spacing: 0.06em; transition: all 0.2s; }
+  .back-link { display: inline-block; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.75rem; color: var(--text-muted); text-decoration: none; border: 1px solid var(--border); padding: 12px 24px; letter-spacing: 0.06em; transition: all 0.2s; }
   .back-link:hover { color: var(--green); border-color: var(--border-strong); }
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
