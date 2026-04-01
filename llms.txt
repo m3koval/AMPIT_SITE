@@ -1,0 +1,84 @@
+# AMP IT LLC
+
+> Flat-rate managed IT for Charlotte-area professional firms. One invoice, one call, IT that just runs.
+
+AMP IT LLC is a Charlotte, NC-based managed service provider (MSP) offering flat-rate, all-inclusive IT support to law firms, CPA practices, financial advisory firms, and other professional service businesses in the greater Charlotte area. Founded 2026.
+
+## What We Do
+
+- **Managed IT Services (MSP)** — 24/7 remote monitoring and management (RMM), automated patch management, endpoint protection, and proactive maintenance under a single flat monthly fee. No per-user pricing.
+- **Cybersecurity** — Threat monitoring, email security (anti-phishing, anti-spam), endpoint detection and response (EDR), dark web credential monitoring, vulnerability management, firewall management, and incident response.
+- **Cloud & Microsoft 365** — Setup, administration, and ongoing management of Microsoft 365, Teams, SharePoint, and Azure environments. Microsoft Partner.
+- **Google Workspace** — Google Workspace administration and support. Google Partner.
+- **Helpdesk Support** — Unlimited remote and on-site support for end users across all covered devices.
+- **Backup & Disaster Recovery** — Automated backup verification, disaster recovery planning, and business continuity documentation.
+- **Multi-Factor Authentication (MFA) & Zero Trust** — MFA deployment, conditional access policies, and zero trust architecture implementation.
+- **Shadow AI Risk Management** — Detection and governance of unauthorized AI tool usage (e.g., ChatGPT, Claude, Gemini used outside approved channels) that may expose confidential client data to FINRA, state bar, HIPAA, or cyber liability carrier violations.
+- **AI Governance** — Policy frameworks and technical controls for generative AI usage within professional service firms.
+
+## Who We Serve
+
+Professional firms in the Charlotte, NC metropolitan area, including:
+- Law firms and legal practices (ABA technology ethics compliance)
+- CPA and accounting firms
+- Financial advisors and registered investment advisors (RIAs) — FINRA compliance
+- Healthcare-adjacent professional offices — HIPAA compliance
+- General small and mid-size businesses (typically 5–75 employees)
+
+AMP IT is a local, on-site-capable provider — not a national remote-only MSP.
+
+## Pricing
+
+Flat-rate plans. One monthly fee per business — no per-user, no per-device, no surprise invoices.
+
+- **Essential** — $299/mo
+  - 24/7 remote monitoring and management
+  - Automated patch management
+  - Email security (anti-phishing, anti-spam)
+  - Business-hours helpdesk support
+  - Basic endpoint protection
+
+- **Better** — $399/mo
+  - Everything in Essential
+  - Endpoint Detection and Response (EDR)
+  - Dark web credential monitoring
+  - Advanced email threat protection
+  - Expanded helpdesk hours
+
+- **Best** — $499/mo
+  - Everything in Better
+  - Advanced threat response and remediation
+  - Compliance reporting (FINRA, state bar, cyber liability)
+  - Shadow AI monitoring and governance
+  - Priority SLA
+  - On-site support included
+
+## Contact
+
+- **Website:** https://www.ampitsolutions.com
+- **Email:** hello@ampitsolutions.com
+- **Phone:** +1 (980) 377-2733
+- **Address:** 919 Berryhill Rd Suite 100A, Charlotte, NC 28208
+- **LinkedIn:** https://www.linkedin.com/company/ampitservices
+
+## Service Area
+
+Greater Charlotte, NC metro — including Uptown, SouthPark, Ballantyne, Concord, Gastonia, and surrounding communities within ~50 miles of Charlotte.
+
+## Credentials & Partnerships
+
+- Microsoft Partner
+- Google Partner
+
+## Compliance Context
+
+AMP IT helps regulated professional firms maintain technology compliance posture relevant to:
+- FINRA cybersecurity rules and examination expectations
+- State bar association technology ethics guidelines (ABA Model Rules)
+- HIPAA security rule (for healthcare-adjacent clients)
+- Cyber liability insurance carrier requirements (MFA enforcement, EDR, backup verification, incident response plans)
+- Generative AI / Shadow AI governance for firms subject to client confidentiality obligations
+
+## Keywords / Classification
+
+Managed Service Provider (MSP), IT Outsourcing, Co-Managed IT, Charlotte IT Support, Charlotte Cybersecurity, Charlotte Managed Services, Law Firm IT, CPA IT Support, Financial Advisor IT, RIA Technology Compliance, Small Business IT Support, Microsoft 365 MSP, Remote Monitoring and Management, Flat Rate IT, All-Inclusive IT Support.

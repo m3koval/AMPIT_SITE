@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ampitsolutions.com/sitemap.xml
+Sitemap: https://www.ampitsolutions.com/sitemap.xml
