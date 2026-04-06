@@ -13,19 +13,23 @@
     <stop offset="100%" stop-color="#00f060" stop-opacity="0"/>
   </radialGradient>
   <rect width="1200" height="630" fill="url(#glow)"/>
-  <!-- left border accent -->
-  <rect x="80" y="80" width="2" height="470" fill="#00f060" opacity="0.3"/>
-  <!-- logo mark -->
-  <g transform="translate(116, 108) scale(0.7)">
+  <!-- large watermark logo — right side, vertically centered -->
+  <g transform="translate(597, -10) scale(2.8)" opacity="0.08">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M161.532 109.574L201.942 157.822L188.656 180.754L126.476 170.031L64.2794 180.757L51 157.834L91.4207 109.574L113.034 51H139.918L161.532 109.574ZM66.9185 158.821L71.2594 166.307L116.371 140.374L112.03 132.888L66.9185 158.821ZM136.296 140.374L181.408 166.307L185.749 158.821L140.637 132.888L136.296 140.374ZM122.314 115.833H130.996V63.9666H122.314V115.833Z" fill="#00f060"/>
+  </g>
+  <!-- left accent bar -->
+  <rect x="80" y="55" width="3" height="520" fill="#00f060" opacity="0.25"/>
+  <!-- logo mark — top left -->
+  <g transform="translate(104, 55) scale(0.68)">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M161.532 109.574L201.942 157.822L188.656 180.754L126.476 170.031L64.2794 180.757L51 157.834L91.4207 109.574L113.034 51H139.918L161.532 109.574ZM66.9185 158.821L71.2594 166.307L116.371 140.374L112.03 132.888L66.9185 158.821ZM136.296 140.374L181.408 166.307L185.749 158.821L140.637 132.888L136.296 140.374ZM122.314 115.833H130.996V63.9666H122.314V115.833Z" fill="#00f060"/>
   </g>
   <!-- eyebrow -->
-  <text x="116" y="290" font-family="monospace" font-size="22" fill="#00f060" letter-spacing="4" opacity="0.9">CHARLOTTE, NC · MANAGED IT</text>
+  <text x="104" y="210" font-family="monospace" font-size="19" fill="#00f060" letter-spacing="5" opacity="0.85">CHARLOTTE, NC · MANAGED IT</text>
   <!-- headline -->
-  <text x="116" y="370" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" fill="#e8f0e8" letter-spacing="-2">Your IT</text>
-  <text x="116" y="460" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" fill="#00f060" letter-spacing="-2">Just Runs.</text>
-  <!-- subtext -->
-  <text x="116" y="520" font-family="Arial, sans-serif" font-size="26" fill="#7a9280">Flat-rate managed IT for Charlotte-area professional firms.</text>
+  <text x="104" y="328" font-family="Arial Black, sans-serif" font-size="112" font-weight="900" fill="#e8f0e8" letter-spacing="-3">Your IT</text>
+  <text x="104" y="450" font-family="Arial Black, sans-serif" font-size="112" font-weight="900" fill="#00f060" letter-spacing="-3">Just Runs.</text>
+  <!-- subtext — sharper copy -->
+  <text x="104" y="504" font-family="Arial, sans-serif" font-size="24" fill="#7a9280">Managed IT for any business with a screen</text>
   <!-- domain -->
-  <text x="116" y="572" font-family="monospace" font-size="20" fill="#4a6050" letter-spacing="2">ampitsolutions.com</text>
+  <text x="104" y="562" font-family="monospace" font-size="19" fill="#4a6050" letter-spacing="3">ampitsolutions.com</text>
 </svg>
