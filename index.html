@@ -804,6 +804,14 @@
     "sameAs": ["https://www.linkedin.com/company/ampitservices"]
   }
   </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18009085486"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18009085486');
+  </script>
 </head>
 <body>
 
@@ -1259,6 +1267,18 @@
       a.classList.toggle('active', a.getAttribute('href') === '#' + current);
     });
   });
+
+  // Google Ads conversion — phone call click (mobile only, where tap-to-call actually dials)
+  var isMobile = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  if (isMobile) {
+    document.querySelectorAll('a[href^="tel:"]').forEach(function(el) {
+      el.addEventListener('click', function() {
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion', { send_to: 'AW-18009085486' });
+        }
+      });
+    });
+  }
 
 </script>
 </body>
