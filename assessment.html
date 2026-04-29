@@ -87,6 +87,22 @@
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
+  /* SUCCESS STATE — next steps */
+  .next-steps { list-style: none; margin: 16px 0 24px; text-align: left; display: flex; flex-direction: column; gap: 10px; counter-reset: step; }
+  .next-steps li { font-size: 0.88rem; color: var(--text-muted); display: flex; gap: 12px; line-height: 1.6; counter-increment: step; }
+  .next-steps li::before { content: counter(step) "."; color: var(--green); font-family: 'Outfit', sans-serif; font-weight: 700; flex-shrink: 0; }
+  .success-contact { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 28px; }
+  .success-contact a { color: var(--green); text-decoration: none; }
+  .success-contact a:hover { text-decoration: underline; }
+
+  /* FOOTER */
+  .assess-footer { border-top: 1px solid var(--border); padding: 28px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; position: relative; z-index: 1; }
+  .assess-footer-copy { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.05em; }
+  .assess-footer-links { display: flex; gap: 24px; }
+  .assess-footer-links a { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; color: var(--text-dim); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; }
+  .assess-footer-links a:hover { color: var(--green); }
+  @media (max-width: 480px) { .assess-footer { padding: 28px 16px; } }
+
   @media (max-width: 900px) {
     nav { padding: 16px 24px; }
     main { grid-template-columns: 1fr; }
@@ -128,12 +144,12 @@
   </symbol>
 </svg>
 
-<nav>
-  <a href="index.html" class="nav-logo">
-    <svg width="34" height="32"><use href="#amp-logo"/></svg>
+<nav aria-label="Assessment navigation">
+  <a href="/" class="nav-logo" aria-label="AMP IT home">
+    <svg width="34" height="32" aria-hidden="true"><use href="#amp-logo"/></svg>
     <span class="nav-wordmark"><span class="g">AMP</span> IT</span>
   </a>
-  <a href="index.html" class="nav-back">Back to home</a>
+  <a href="/" class="nav-back">Back to home</a>
 </nav>
 
 <main>
@@ -144,7 +160,7 @@
     <ul class="promise-list">
       <li>No sales pressure — just a straight assessment</li>
       <li>Response within one business day</li>
-      <li>Assessment fee credited 100% if you sign within 60 days</li>
+      <li>Free — no fee, no obligation, no commitment required</li>
       <li>Charlotte-local team, available on-site</li>
     </ul>
   </div>
@@ -158,21 +174,21 @@
           <div class="field-row">
             <div class="field">
               <label for="f-name">Your Name <span class="req">*</span></label>
-              <input type="text" id="f-name" placeholder="Jane Smith" required>
+              <input type="text" id="f-name" placeholder="Jane Smith" required autocomplete="name">
             </div>
             <div class="field">
               <label for="f-company">Company <span class="req">*</span></label>
-              <input type="text" id="f-company" placeholder="Smith Law PLLC" required>
+              <input type="text" id="f-company" placeholder="Smith Law PLLC" required autocomplete="organization">
             </div>
           </div>
           <div class="field-row">
             <div class="field">
               <label for="f-email">Email <span class="req">*</span></label>
-              <input type="email" id="f-email" placeholder="jane@smithlaw.com" required>
+              <input type="email" id="f-email" placeholder="jane@smithlaw.com" required autocomplete="email">
             </div>
             <div class="field">
               <label for="f-phone">Phone <span class="opt">(optional)</span></label>
-              <input type="tel" id="f-phone" placeholder="(704) 555-0000">
+              <input type="tel" id="f-phone" placeholder="(704) 555-0000" autocomplete="tel">
             </div>
           </div>
           <hr class="fdivider">
@@ -207,8 +223,14 @@
       <div class="success-state" id="successState">
         <div class="success-icon">✓</div>
         <h2>You're <span>all set.</span></h2>
-        <p>We received your request and will be in touch within one business day with a straight read on your environment.</p>
-        <a href="index.html" class="back-link">← Back to AMP IT</a>
+        <p>We received your request. Here's what happens next:</p>
+        <ol class="next-steps">
+          <li>We review your environment based on what you shared</li>
+          <li>We call you within one business day — no scripts, straight talk</li>
+          <li>You get a plain-English breakdown of what's exposed and what it takes to fix it</li>
+        </ol>
+        <p class="success-contact">Questions in the meantime? Call us at <a href="tel:+19803772733">(980) 377-2733</a></p>
+        <a href="/" class="back-link">← Back to AMP IT</a>
       </div>
     </div>
   </div>
@@ -373,12 +395,12 @@
   });
 </script>
 
-<footer style="border-top: 1px solid var(--border); padding: 28px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; position: relative; z-index: 1;">
-  <span style="font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.05em;">© 2026 AMP IT LLC. All rights reserved.</span>
-  <div style="display: flex; gap: 24px;">
-    <a href="/privacy.html" style="font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; color: var(--text-dim); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s;" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--text-dim)'">Privacy</a>
-    <a href="/terms.html" style="font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; color: var(--text-dim); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s;" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--text-dim)'">Terms</a>
-    <a href="/" style="font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; color: var(--text-dim); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s;" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--text-dim)'">Back to Home</a>
+<footer class="assess-footer">
+  <span class="assess-footer-copy">© 2026 AMP IT LLC. All rights reserved.</span>
+  <div class="assess-footer-links">
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/">Back to Home</a>
   </div>
 </footer>
 
