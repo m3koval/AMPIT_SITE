@@ -30,70 +30,88 @@
 
   main { position: relative; z-index: 1; min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 81px; }
 
-  .left-panel { padding: 80px 60px 80px 80px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--border); position: sticky; top: 81px; height: calc(100vh - 81px); overflow: hidden; }
+  /* LEFT PANEL */
+  .left-panel { padding: 72px 56px 72px 72px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--border); position: sticky; top: 81px; height: calc(100vh - 81px); overflow: hidden; }
   .left-panel::after { content: ''; position: absolute; bottom: -100px; left: -100px; width: 500px; height: 500px; background: radial-gradient(ellipse, rgba(0,240,96,0.06) 0%, transparent 70%); pointer-events: none; }
-
-  .eyebrow { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.68rem; color: var(--green); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; animation: fadeUp 0.7s ease both 0.1s; will-change: transform, opacity; }
+  .eyebrow { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.68rem; color: var(--green); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; animation: fadeUp 0.6s ease both 0.1s; }
   .eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--green); }
-  .left-panel h1 { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: clamp(2rem, 3.2vw, 2.8rem); line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 20px; animation: fadeUp 0.7s ease both 0.2s; }
+  .left-panel h1 { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 2.6vw, 2.4rem); line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 16px; animation: fadeUp 0.6s ease both 0.2s; }
   .left-panel h1 span { color: var(--green); }
-  .left-panel .sub { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 48px; max-width: 380px; animation: fadeUp 0.7s ease both 0.3s; }
-  .promise-list { list-style: none; display: flex; flex-direction: column; gap: 14px; animation: fadeUp 0.7s ease both 0.4s; }
-  .promise-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+  .left-panel .sub { color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; margin-bottom: 36px; max-width: 340px; animation: fadeUp 0.6s ease both 0.3s; }
+  .promise-list { list-style: none; display: flex; flex-direction: column; gap: 12px; animation: fadeUp 0.6s ease both 0.4s; }
+  .promise-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; }
   .promise-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+  .step-tracker { margin-top: auto; padding-top: 36px; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.08em; animation: fadeUp 0.6s ease both 0.5s; }
+  .step-tracker em { color: var(--green); font-style: normal; }
 
-  .right-panel { padding: 60px 80px 60px 60px; display: flex; align-items: center; overflow-y: auto; }
-  .form-card { width: 100%; max-width: 500px; background: var(--bg-card); border: 1px solid var(--border); padding: 48px 40px; animation: fadeUp 0.7s ease both 0.2s; }
-  .form-tag { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 32px; display: block; }
+  /* RIGHT PANEL */
+  .right-panel { padding: 56px 72px 72px 56px; display: flex; align-items: flex-start; overflow-y: auto; }
+  .quiz-card { width: 100%; max-width: 520px; animation: fadeUp 0.6s ease both 0.2s; }
 
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .field { display: flex; flex-direction: column; gap: 7px; margin-bottom: 18px; }
-  .field label { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.63rem; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; }
-  .field label .opt { color: var(--text-dim); font-weight: 400; }
-  .field label .req { color: #ff5555; margin-left: 2px; }
-  .field input, .field select, .field textarea { background: var(--bg); border: 1px solid var(--border); color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.88rem; padding: 11px 14px; outline: none; width: 100%; transition: border-color 0.2s; appearance: none; -webkit-appearance: none; }
+  /* PROGRESS BAR */
+  .prog-bar { height: 3px; background: var(--border); margin-bottom: 36px; border-radius: 2px; overflow: hidden; }
+  .prog-fill { height: 100%; background: var(--green); border-radius: 2px; transition: width 0.45s ease; width: 0%; }
+
+  /* STEPS */
+  .quiz-step { display: none; }
+  .quiz-step.active { display: block; animation: stepIn 0.22s ease both; }
+  @keyframes stepIn { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: translateX(0); } }
+  .step-tag { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.63rem; color: var(--text-dim); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 16px; display: block; }
+  .step-q { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.22rem; line-height: 1.3; color: var(--text); margin-bottom: 6px; }
+  .step-hint { font-size: 0.76rem; color: var(--text-dim); margin-bottom: 20px; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; }
+
+  /* OPTION CARDS */
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .opt { display: flex; align-items: flex-start; gap: 14px; padding: 13px 18px; background: var(--bg); border: 1px solid var(--border); cursor: pointer; transition: border-color 0.15s, background 0.15s, color 0.15s; width: 100%; text-align: left; font-size: 0.86rem; color: var(--text-muted); font-family: 'Inter', sans-serif; line-height: 1.45; }
+  .opt:hover { border-color: var(--border-strong); color: var(--text); }
+  .opt.sel { border-color: var(--green); color: var(--text); background: rgba(0,240,96,0.03); }
+  .opt-dot { width: 14px; height: 14px; border: 1px solid var(--border-strong); border-radius: 50%; flex-shrink: 0; margin-top: 2px; transition: all 0.15s; }
+  .opt.sel .opt-dot { background: var(--green); border-color: var(--green); box-shadow: 0 0 6px rgba(0,240,96,0.4); }
+  .opt.multi .opt-dot { border-radius: 2px; }
+  .opt-sub { display: block; font-size: 0.74rem; color: var(--text-dim); margin-top: 1px; }
+
+  /* STEP NAV */
+  .step-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; }
+  .btn-back { background: transparent; border: 1px solid var(--border); color: var(--text-dim); padding: 11px 22px; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.82rem; letter-spacing: 0.03em; cursor: pointer; transition: all 0.2s; }
+  .btn-back:hover { border-color: var(--border-strong); color: var(--text); }
+  .btn-back.invisible { visibility: hidden; pointer-events: none; }
+  .btn-next { background: var(--green); color: #050a06; padding: 13px 32px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.87rem; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; transition: all 0.2s; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
+  .btn-next:hover:not(:disabled) { background: #10ff72; transform: translateY(-2px); }
+  .btn-next:disabled { opacity: 0.38; cursor: not-allowed; }
+
+  /* STEP 6 CONTACT FIELDS */
+  .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+  .field label { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.62rem; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; }
+  .field .opt-tag { color: var(--text-dim); font-weight: 400; }
+  .field .req-tag { color: #ff5555; margin-left: 2px; }
+  .field input, .field textarea { background: var(--bg); border: 1px solid var(--border); color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.87rem; padding: 11px 14px; outline: none; width: 100%; transition: border-color 0.2s; }
   .field input::placeholder, .field textarea::placeholder { color: var(--text-dim); }
-  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--border-strong); }
-  .field input.error, .field select.error { border-color: #ff5555; }
-  .field-error-msg { color: #ff5555; font-size: 0.68rem; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; margin-top: 4px; display: block; }
-  .radio-group-error .radio-opt label { border-color: #ff5555; }
-  .field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2300f060' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
-  .field select option { background: #131715; color: var(--text); }
+  .field input:focus, .field textarea:focus { border-color: var(--border-strong); }
+  .field input.err { border-color: #ff5555; }
+  .ferr { color: #ff5555; font-size: 0.67rem; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; margin-top: 2px; display: none; }
+  .ferr.show { display: block; }
   .field textarea { resize: none; line-height: 1.6; }
+  .form-note { font-size: 0.66rem; color: var(--text-dim); font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; text-align: center; margin-top: 12px; line-height: 1.6; }
 
-  .fdivider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+  /* STEP 7 RECOMMENDATION */
+  .rec-card { background: var(--bg-card); border: 1px solid var(--border); padding: 24px 28px; margin-bottom: 24px; }
+  .rec-badge { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.63rem; color: var(--green); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .rec-badge::before { content: ''; width: 18px; height: 1px; background: var(--green); }
+  .rec-heading { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--text); margin-bottom: 14px; line-height: 1.2; }
+  .rec-heading span { color: var(--green); }
+  .rec-why { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .rec-why li { display: flex; gap: 10px; font-size: 0.83rem; color: var(--text-muted); line-height: 1.5; }
+  .rec-why li::before { content: '→'; color: var(--green); flex-shrink: 0; font-size: 0.78rem; margin-top: 1px; }
 
-  .radio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .radio-opt { position: relative; }
-  .radio-opt input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
-  .radio-opt label { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--bg); border: 1px solid var(--border); cursor: pointer; transition: all 0.18s; font-size: 0.83rem; color: var(--text-muted); font-family: 'Inter', sans-serif; }
-  .radio-opt label::before { content: ''; width: 12px; height: 12px; flex-shrink: 0; border: 1px solid var(--border-strong); border-radius: 50%; transition: all 0.18s; }
-  .radio-opt input[type="radio"]:checked + label { border-color: var(--green); color: var(--text); }
-  .radio-opt input[type="radio"]:checked + label::before { background: var(--green); border-color: var(--green); box-shadow: 0 0 6px rgba(0,240,96,0.5); }
+  /* CAL.COM */
+  .cal-wrap { border: 1px solid var(--border); overflow: hidden; margin-bottom: 16px; background: #0d1410; }
+  #calInline { min-height: 620px; width: 100%; }
 
-  .submit-btn { width: 100%; margin-top: 28px; background: var(--green); color: #050a06; padding: 15px 32px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.88rem; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; transition: all 0.2s; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px)); }
-  .submit-btn:hover { background: #10ff72; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,240,96,0.25); }
-  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
-  .form-note { font-size: 0.67rem; color: var(--text-dim); font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; text-align: center; margin-top: 14px; line-height: 1.6; }
-
-  .success-state { display: none; text-align: center; padding: 20px; }
-  .success-state.visible { display: block; }
-  .success-icon { width: 60px; height: 60px; border: 2px solid var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin: 0 auto 24px; box-shadow: 0 0 40px rgba(0,240,96,0.2); }
-  .success-state h2 { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.8rem; margin-bottom: 12px; }
-  .success-state h2 span { color: var(--green); }
-  .success-state p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; margin-bottom: 32px; }
-  .back-link { display: inline-block; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.75rem; color: var(--text-muted); text-decoration: none; border: 1px solid var(--border); padding: 12px 24px; letter-spacing: 0.06em; transition: all 0.2s; }
-  .back-link:hover { color: var(--green); border-color: var(--border-strong); }
-
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-  /* SUCCESS STATE — next steps */
-  .next-steps { list-style: none; margin: 16px 0 24px; text-align: left; display: flex; flex-direction: column; gap: 10px; counter-reset: step; }
-  .next-steps li { font-size: 0.88rem; color: var(--text-muted); display: flex; gap: 12px; line-height: 1.6; counter-increment: step; }
-  .next-steps li::before { content: counter(step) "."; color: var(--green); font-family: 'Outfit', sans-serif; font-weight: 700; flex-shrink: 0; }
-  .success-contact { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 28px; }
-  .success-contact a { color: var(--green); text-decoration: none; }
-  .success-contact a:hover { text-decoration: underline; }
+  .alt-opt { text-align: center; }
+  .alt-opt p { font-size: 0.77rem; color: var(--text-dim); font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; }
+  .alt-opt a { color: var(--text-muted); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; transition: color 0.2s; }
+  .alt-opt a:hover { color: var(--green); }
 
   /* FOOTER */
   .assess-footer { border-top: 1px solid var(--border); padding: 28px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; position: relative; z-index: 1; }
@@ -101,40 +119,48 @@
   .assess-footer-links { display: flex; gap: 24px; }
   .assess-footer-links a { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; color: var(--text-dim); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; }
   .assess-footer-links a:hover { color: var(--green); }
-  @media (max-width: 480px) { .assess-footer { padding: 28px 16px; } }
 
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* MOBILE */
   @media (max-width: 900px) {
     nav { padding: 16px 24px; }
     main { grid-template-columns: 1fr; }
-    .left-panel { position: static; height: auto; padding: 60px 24px 40px; border-right: none; border-bottom: 1px solid var(--border); }
-    .left-panel .sub { margin-bottom: 28px; }
-    .right-panel { padding: 40px 24px 60px; }
-    .form-card { padding: 32px 24px; }
-    .field-row { grid-template-columns: 1fr; }
-    .radio-grid { grid-template-columns: 1fr; }
+    .left-panel { position: static; height: auto; padding: 44px 24px 28px; border-right: none; border-bottom: 1px solid var(--border); }
+    .left-panel .sub { margin-bottom: 0; max-width: 100%; }
+    .promise-list { display: none; }
+    .step-tracker { display: none; }
+    .right-panel { padding: 32px 24px 56px; }
+    .frow { grid-template-columns: 1fr; gap: 0; }
+    #calInline { min-height: 560px; }
+    .assess-footer { padding: 24px 20px; }
   }
   @media (max-width: 480px) {
     nav { padding: 14px 16px; }
-    .form-card { padding: 24px 16px; }
+    .left-panel { padding: 32px 16px 20px; }
+    .right-panel { padding: 24px 16px 48px; }
+    .rec-card { padding: 18px 20px; }
+    .assess-footer { padding: 20px 16px; }
   }
 </style>
-  <script defer src="/_vercel/insights/script.js"></script>
-  <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Ii init Di qi Sr Bi Zi Pi capture calculateEventProperties Yi register register_once register_for_session unregister unregister_for_session Xi getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Ji identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Wi Vi createPersonProfile setInternalOrTestUser Gi Fi Ki opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing $i debug Tr Ui getPageViewId captureTraceFeedback captureTraceMetric Ri".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('phc_ozciDbGuUvtaSnY5tuChmpgR2LaSaQdFwE2DMPY4gAJK', {
-        api_host: 'https://us.i.posthog.com',
-        defaults: '2026-01-30',
-        person_profiles: 'identified_only',
-    })
-  </script>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18009085486"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-18009085486');
-  </script>
+
+<!-- Cal.com embed -->
+<script>
+(function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, [L, api]);}else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+Cal("init", {origin:"https://cal.com"});
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Ii init Di qi Sr Bi Zi Pi capture calculateEventProperties Yi register register_once register_for_session unregister unregister_for_session Xi getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Ji identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Wi Vi createPersonProfile setInternalOrTestUser Gi Fi Ki opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing $i debug Tr Ui getPageViewId captureTraceFeedback captureTraceMetric Ri".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_ozciDbGuUvtaSnY5tuChmpgR2LaSaQdFwE2DMPY4gAJK', { api_host: 'https://us.i.posthog.com', defaults: '2026-01-30', person_profiles: 'identified_only' });
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18009085486"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18009085486');
+</script>
 </head>
 <body>
 
@@ -155,245 +181,173 @@
 <main>
   <div class="left-panel">
     <div class="eyebrow">Free IT Environment Assessment</div>
-    <h1>Let's see what<br>you're <span>working with.</span></h1>
-    <p class="sub">60 seconds. No commitment. We'll review your environment and follow up with exactly what's exposed and what it takes to fix it.</p>
+    <h1 id="lpHeading">Let's see what you're <span>working with.</span></h1>
+    <p class="sub" id="lpSub">A few quick questions to point you in the right direction.</p>
     <ul class="promise-list">
       <li>No sales pressure — just a straight assessment</li>
       <li>Response within one business day</li>
-      <li>Free — no fee, no obligation, no commitment required</li>
+      <li>Free — no fee, no obligation, no commitment</li>
       <li>Charlotte-local team, available on-site</li>
     </ul>
+    <div class="step-tracker">Step <em id="stepNum">1</em> of 7</div>
   </div>
 
   <div class="right-panel">
-    <div class="form-card">
-      <span class="form-tag">// assessment request</span>
+    <div class="quiz-card">
 
-      <div id="formWrap">
-        <form id="assessForm" novalidate>
-          <div class="field-row">
-            <div class="field">
-              <label for="f-name">Your Name <span class="req">*</span></label>
-              <input type="text" id="f-name" placeholder="Jane Smith" required autocomplete="name">
-            </div>
-            <div class="field">
-              <label for="f-company">Company <span class="req">*</span></label>
-              <input type="text" id="f-company" placeholder="Smith Law PLLC" required autocomplete="organization">
-            </div>
-          </div>
-          <div class="field-row">
-            <div class="field">
-              <label for="f-email">Email <span class="req">*</span></label>
-              <input type="email" id="f-email" placeholder="jane@smithlaw.com" required autocomplete="email">
-            </div>
-            <div class="field">
-              <label for="f-phone">Phone <span class="opt">(optional)</span></label>
-              <input type="tel" id="f-phone" placeholder="(704) 555-0000" autocomplete="tel">
-            </div>
-          </div>
-          <hr class="fdivider">
-          <div class="field">
-            <label for="f-size">How many employees / users? <span class="req">*</span></label>
-            <select id="f-size" required>
-              <option value="" disabled selected>Select range</option>
-              <option>1–5 users</option>
-              <option>6–15 users</option>
-              <option>16–40 users</option>
-              <option>40+ users</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Current platform <span class="req">*</span></label>
-            <div class="radio-grid">
-              <div class="radio-opt"><input type="radio" id="r-gws" name="platform" value="Google Workspace"><label for="r-gws">Google Workspace</label></div>
-              <div class="radio-opt"><input type="radio" id="r-m365" name="platform" value="Microsoft 365"><label for="r-m365">Microsoft 365</label></div>
-              <div class="radio-opt"><input type="radio" id="r-neither" name="platform" value="Neither"><label for="r-neither">Neither</label></div>
-              <div class="radio-opt"><input type="radio" id="r-notsure" name="platform" value="Not sure"><label for="r-notsure">Not sure</label></div>
-            </div>
-          </div>
-          <div class="field">
-            <label for="f-pain">Biggest IT frustration <span class="opt">(optional)</span></label>
-            <textarea id="f-pain" rows="3" placeholder="e.g. Slow helpdesk, no idea if we're backed up, employees using personal Gmail..."></textarea>
-          </div>
-          <button type="submit" class="submit-btn">Request Free Assessment →</button>
-          <p class="form-note">Sent securely to our team · No spam, ever</p>
-        </form>
+      <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+
+      <!-- STEP 1: SIZE -->
+      <div class="quiz-step active" id="step-1">
+        <span class="step-tag">// 01 of 07</span>
+        <p class="step-q">How many people are in your company?</p>
+        <div class="options">
+          <button class="opt" data-key="size" data-val="1-5"><span class="opt-dot"></span>1–5 people</button>
+          <button class="opt" data-key="size" data-val="6-15"><span class="opt-dot"></span>6–15 people</button>
+          <button class="opt" data-key="size" data-val="16-40"><span class="opt-dot"></span>16–40 people</button>
+          <button class="opt" data-key="size" data-val="41+"><span class="opt-dot"></span>41+ people</button>
+        </div>
+        <div class="step-nav">
+          <button class="btn-back invisible">← Back</button>
+          <button class="btn-next" id="next-1" disabled>Continue →</button>
+        </div>
       </div>
 
-      <div class="success-state" id="successState">
-        <div class="success-icon">✓</div>
-        <h2>You're <span>all set.</span></h2>
-        <p>We received your request. Here's what happens next:</p>
-        <ol class="next-steps">
-          <li>We review your environment based on what you shared</li>
-          <li>We call you within one business day — no scripts, straight talk</li>
-          <li>You get a plain-English breakdown of what's exposed and what it takes to fix it</li>
-        </ol>
-        <p class="success-contact">Questions in the meantime? Call us at <a href="tel:+19803772733">(980) 377-2733</a></p>
-        <a href="/" class="back-link">← Back to AMP IT</a>
+      <!-- STEP 2: IT SETUP -->
+      <div class="quiz-step" id="step-2">
+        <span class="step-tag">// 02 of 07</span>
+        <p class="step-q">How is IT handled today?</p>
+        <div class="options">
+          <button class="opt" data-key="setup" data-val="self"><span class="opt-dot"></span>We figure it out ourselves</button>
+          <button class="opt" data-key="setup" data-val="internal"><span class="opt-dot"></span>We have an internal IT person</button>
+          <button class="opt" data-key="setup" data-val="outsourced"><span class="opt-dot"></span>We use an outside IT provider</button>
+          <button class="opt" data-key="setup" data-val="none"><span class="opt-dot"></span>Nothing formal in place</button>
+        </div>
+        <div class="step-nav">
+          <button class="btn-back">← Back</button>
+          <button class="btn-next" id="next-2" disabled>Continue →</button>
+        </div>
       </div>
-    </div>
-  </div>
+
+      <!-- STEP 3: CONCERN -->
+      <div class="quiz-step" id="step-3">
+        <span class="step-tag">// 03 of 07</span>
+        <p class="step-q">What's your biggest concern right now?</p>
+        <div class="options">
+          <button class="opt" data-key="concern" data-val="ai">
+            <span class="opt-dot"></span>
+            <div>AI tools — unsanctioned use by staff, or want to adopt AI securely</div>
+          </button>
+          <button class="opt" data-key="concern" data-val="security"><span class="opt-dot"></span>Security or ransomware risk</button>
+          <button class="opt" data-key="concern" data-val="support"><span class="opt-dot"></span>Slow or unreliable support when things break</button>
+          <button class="opt" data-key="concern" data-val="backup"><span class="opt-dot"></span>Backup and disaster recovery</button>
+          <button class="opt" data-key="concern" data-val="onboarding"><span class="opt-dot"></span>Staff onboarding and offboarding</button>
+          <button class="opt" data-key="concern" data-val="compliance">
+            <span class="opt-dot"></span>
+            <div>Compliance requirements<span class="opt-sub">HIPAA, SOC 2, legal, finance</span></div>
+          </button>
+          <button class="opt" data-key="concern" data-val="exploring"><span class="opt-dot"></span>Just starting to think about IT support</button>
+        </div>
+        <div class="step-nav">
+          <button class="btn-back">← Back</button>
+          <button class="btn-next" id="next-3" disabled>Continue →</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: ENVIRONMENT -->
+      <div class="quiz-step" id="step-4">
+        <span class="step-tag">// 04 of 07</span>
+        <p class="step-q">What does your environment look like?</p>
+        <p class="step-hint">Select all that apply — skip if you're not sure</p>
+        <div class="options">
+          <button class="opt multi" data-val="m365"><span class="opt-dot"></span>Microsoft 365</button>
+          <button class="opt multi" data-val="gws"><span class="opt-dot"></span>Google Workspace</button>
+          <button class="opt multi" data-val="servers"><span class="opt-dot"></span>On-site servers or NAS</button>
+          <button class="opt multi" data-val="remote"><span class="opt-dot"></span>Remote or hybrid staff</button>
+          <button class="opt multi" data-val="multisite"><span class="opt-dot"></span>Multiple office locations</button>
+          <button class="opt multi" data-val="regulated">
+            <span class="opt-dot"></span>
+            <div>Regulated data<span class="opt-sub">healthcare, legal, financial</span></div>
+          </button>
+        </div>
+        <div class="step-nav">
+          <button class="btn-back">← Back</button>
+          <button class="btn-next" id="next-4">Continue →</button>
+        </div>
+      </div>
+
+      <!-- STEP 5: URGENCY -->
+      <div class="quiz-step" id="step-5">
+        <span class="step-tag">// 05 of 07</span>
+        <p class="step-q">How urgent is this?</p>
+        <div class="options">
+          <button class="opt" data-key="urgency" data-val="exploring"><span class="opt-dot"></span>Just exploring for now</button>
+          <button class="opt" data-key="urgency" data-val="quarter"><span class="opt-dot"></span>Planning for this quarter</button>
+          <button class="opt" data-key="urgency" data-val="active"><span class="opt-dot"></span>We have an active issue right now</button>
+        </div>
+        <div class="step-nav">
+          <button class="btn-back">← Back</button>
+          <button class="btn-next" id="next-5" disabled>Continue →</button>
+        </div>
+      </div>
+
+      <!-- STEP 6: CONTACT -->
+      <div class="quiz-step" id="step-6">
+        <span class="step-tag">// 06 of 07</span>
+        <p class="step-q">Last step — how do we reach you?</p>
+        <div class="frow">
+          <div class="field">
+            <label for="f-name">Name <span class="req-tag">*</span></label>
+            <input type="text" id="f-name" placeholder="Jane Smith" autocomplete="name">
+            <span class="ferr" id="err-name">Please enter your name</span>
+          </div>
+          <div class="field">
+            <label for="f-company">Company <span class="req-tag">*</span></label>
+            <input type="text" id="f-company" placeholder="Smith Law PLLC" autocomplete="organization">
+            <span class="ferr" id="err-company">Please enter your company</span>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="field">
+            <label for="f-email">Email <span class="req-tag">*</span></label>
+            <input type="email" id="f-email" placeholder="jane@smithlaw.com" autocomplete="email">
+            <span class="ferr" id="err-email">Please enter a valid email</span>
+          </div>
+          <div class="field">
+            <label for="f-phone">Phone <span class="opt-tag">(optional)</span></label>
+            <input type="tel" id="f-phone" placeholder="(704) 555-0000" autocomplete="tel">
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-note">Anything urgent we should know? <span class="opt-tag">(optional)</span></label>
+          <textarea id="f-note" rows="3" placeholder="Active issue, specific concern, anything on your mind..."></textarea>
+        </div>
+        <div class="step-nav">
+          <button class="btn-back">← Back</button>
+          <button class="btn-next" id="next-6">See My Recommendation →</button>
+        </div>
+        <p class="form-note">Sent securely · No spam · We'll follow up within one business day</p>
+      </div>
+
+      <!-- STEP 7: RECOMMENDATION + CAL.COM -->
+      <div class="quiz-step" id="step-7">
+        <span class="step-tag">// 07 of 07 — your next step</span>
+        <div class="rec-card">
+          <div class="rec-badge">Our recommendation</div>
+          <div class="rec-heading" id="recHeading"></div>
+          <ul class="rec-why" id="recWhy"></ul>
+        </div>
+        <div class="cal-wrap">
+          <div id="calInline"></div>
+        </div>
+        <div class="alt-opt">
+          <p id="altText"></p>
+        </div>
+      </div>
+
+    </div><!-- /quiz-card -->
+  </div><!-- /right-panel -->
 </main>
-
-<script>
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyjjKaAsRcCc9mAGy7G3ecnRJxQR2J2KbesdUm7atMB6Ak7OTfyJcl8jCRqNzd2HcbOGA/exec";
-  const emailRegex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
-
-  // ── Error helpers ──────────────────────────────────────────
-  function showError(id, msg) {
-    const el = document.getElementById(id);
-    el.classList.add("error");
-    let span = el.parentElement.querySelector(".field-error-msg");
-    if (!span) {
-      span = document.createElement("span");
-      span.className = "field-error-msg";
-      el.parentElement.appendChild(span);
-    }
-    span.textContent = msg;
-  }
-
-  function clearError(id) {
-    const el = document.getElementById(id);
-    el.classList.remove("error");
-    const span = el.parentElement.querySelector(".field-error-msg");
-    if (span) span.remove();
-  }
-
-  function showRadioError(name, msg) {
-    const group = document.querySelector(`input[name="${name}"]`).closest(".field");
-    group.classList.add("radio-group-error");
-    let span = group.querySelector(".field-error-msg");
-    if (!span) {
-      span = document.createElement("span");
-      span.className = "field-error-msg";
-      group.appendChild(span);
-    }
-    span.textContent = msg;
-  }
-
-  function clearRadioError(name) {
-    const group = document.querySelector(`input[name="${name}"]`).closest(".field");
-    group.classList.remove("radio-group-error");
-    const span = group.querySelector(".field-error-msg");
-    if (span) span.remove();
-  }
-
-  // ── Live clear on interaction ──────────────────────────────
-  ["f-name", "f-company"].forEach(id =>
-    document.getElementById(id).addEventListener("input", () => clearError(id))
-  );
-  document.getElementById("f-email").addEventListener("input", () => clearError("f-email"));
-  document.getElementById("f-size").addEventListener("change", () => clearError("f-size"));
-  document.querySelectorAll("input[name='platform']").forEach(r =>
-    r.addEventListener("change", () => clearRadioError("platform"))
-  );
-
-  // ── Real-time email format check on blur ──────────────────
-  document.getElementById("f-email").addEventListener("blur", function() {
-    const val = this.value.trim();
-    if (val && !emailRegex.test(val)) {
-      showError("f-email", "Please enter a valid email address");
-    } else if (val) {
-      clearError("f-email");
-    }
-  });
-
-  // ── Phone auto-format ─────────────────────────────────────
-  document.getElementById("f-phone").addEventListener("input", function(e) {
-    let val = e.target.value.replace(/\D/g, "").slice(0, 10);
-    if (val.length >= 7)      val = `(${val.slice(0,3)}) ${val.slice(3,6)}-${val.slice(6)}`;
-    else if (val.length >= 4) val = `(${val.slice(0,3)}) ${val.slice(3)}`;
-    else if (val.length >= 1) val = `(${val}`;
-    e.target.value = val;
-  });
-
-  // ── Submit ────────────────────────────────────────────────
-  document.getElementById("assessForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
-
-    const name     = document.getElementById("f-name").value.trim();
-    const company  = document.getElementById("f-company").value.trim();
-    const email    = document.getElementById("f-email").value.trim();
-    const phone    = document.getElementById("f-phone").value.trim();
-    const size     = document.getElementById("f-size").value;
-    const platform = document.querySelector("input[name=platform]:checked");
-    const pain     = document.getElementById("f-pain").value.trim();
-
-    let valid = true;
-    let firstError = null;
-
-    // Required text/select fields
-    const required = [
-      ["f-name",    name,    "Please enter your name"],
-      ["f-company", company, "Please enter your company name"],
-      ["f-email",   email,   "Please enter your email address"],
-      ["f-size",    size,    "Please select your team size"],
-    ];
-    required.forEach(([id, val, msg]) => {
-      if (!val) {
-        showError(id, msg);
-        if (!firstError) firstError = document.getElementById(id);
-        valid = false;
-      } else {
-        clearError(id);
-      }
-    });
-
-    // Email format
-    if (email && !emailRegex.test(email)) {
-      showError("f-email", "Please enter a valid email address");
-      if (!firstError) firstError = document.getElementById("f-email");
-      valid = false;
-    }
-
-    // Platform radio (required)
-    if (!platform) {
-      showRadioError("platform", "Please select your current platform");
-      if (!firstError) firstError = document.querySelector("input[name='platform']").closest(".field");
-      valid = false;
-    } else {
-      clearRadioError("platform");
-    }
-
-    if (!valid) {
-      firstError.scrollIntoView({ behavior: "smooth", block: "center" });
-      return;
-    }
-
-    const btn = document.querySelector(".submit-btn");
-    btn.textContent = "Sending...";
-    btn.disabled = true;
-
-    try {
-      await fetch(SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          origin:   window.location.origin,
-          name, company, email,
-          phone:    phone    || "",
-          size,
-          platform: platform ? platform.value : "",
-          pain:     pain     || ""
-        })
-      });
-
-      document.getElementById("formWrap").style.display = "none";
-      document.getElementById("successState").classList.add("visible");
-      // Google Ads conversion — assessment form submitted
-      if (typeof gtag === "function") {
-        gtag('event', 'conversion', { send_to: 'AW-18009085486/ZIP4CKuYzJscEK6ss4tD' });
-      }
-
-    } catch (err) {
-      btn.textContent = "Request Free Assessment →";
-      btn.disabled = false;
-      alert("Something went wrong — please email us at hello@ampitsolutions.com");
-    }
-  });
-</script>
 
 <footer class="assess-footer">
   <span class="assess-footer-copy">© 2026 AMP IT LLC. All rights reserved.</span>
@@ -404,5 +358,246 @@
   </div>
 </footer>
 
+<script>
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyjjKaAsRcCc9mAGy7G3ecnRJxQR2J2KbesdUm7atMB6Ak7OTfyJcl8jCRqNzd2HcbOGA/exec";
+  const EMAIL_RX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+  const TOTAL = 7;
+
+  // ── State ─────────────────────────────────────────────────────
+  const ans = {
+    size: null, setup: null, concern: null,
+    env: new Set(),
+    urgency: null,
+    name: '', company: '', email: '', phone: '', note: ''
+  };
+  let current = 1;
+  let calCurrentSlug = null;
+  let isAuditRec = false;
+
+  // ── Left panel copy per step ───────────────────────────────────
+  const lpCopy = {
+    1: { h: "Let's see what you're <span>working with.</span>", s: "A few quick questions to point you in the right direction." },
+    2: { h: "Let's see what you're <span>working with.</span>", s: "Understanding your current setup helps us know where to start." },
+    3: { h: "What's <span>on your radar?</span>", s: "We'll focus the conversation on what's actually keeping you up at night." },
+    4: { h: "Your <span>environment.</span>", s: "This helps us understand what we're walking into before we talk." },
+    5: { h: "How <span>urgent?</span>", s: "We'll match our response to where you're at." },
+    6: { h: "Almost <span>done.</span>", s: "We'll reach out personally — no auto-responders, no drip campaigns." },
+    7: { h: "Here's your <span>next step.</span>", s: "Based on your answers, here's the best way to get started." }
+  };
+
+  // ── Navigation ────────────────────────────────────────────────
+  function goTo(step) {
+    document.getElementById('step-' + current).classList.remove('active');
+    document.getElementById('step-' + step).classList.add('active');
+    current = step;
+    updateProgress(step);
+    updateLP(step);
+    document.querySelector('.right-panel').scrollTo({ top: 0, behavior: 'smooth' });
+    if (step === 7) buildRec();
+  }
+
+  function updateProgress(step) {
+    const pct = ((step - 1) / (TOTAL - 1)) * 100;
+    document.getElementById('progFill').style.width = pct + '%';
+    document.getElementById('stepNum').textContent = step;
+  }
+
+  function updateLP(step) {
+    const d = lpCopy[step] || lpCopy[1];
+    document.getElementById('lpHeading').innerHTML = d.h;
+    document.getElementById('lpSub').textContent = d.s;
+  }
+
+  // ── Single-select options ──────────────────────────────────────
+  document.querySelectorAll('.opt:not(.multi)').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const key = this.dataset.key;
+      this.closest('.options').querySelectorAll('.opt').forEach(b => b.classList.remove('sel'));
+      this.classList.add('sel');
+      ans[key] = this.dataset.val;
+      const nb = document.getElementById('next-' + current);
+      if (nb) nb.disabled = false;
+    });
+  });
+
+  // ── Multi-select options (step 4) ─────────────────────────────
+  document.querySelectorAll('.opt.multi').forEach(btn => {
+    btn.addEventListener('click', function () {
+      this.classList.toggle('sel');
+      if (this.classList.contains('sel')) ans.env.add(this.dataset.val);
+      else ans.env.delete(this.dataset.val);
+    });
+  });
+
+  // ── Back buttons ──────────────────────────────────────────────
+  document.querySelectorAll('.btn-back:not(.invisible)').forEach(btn => {
+    btn.addEventListener('click', () => { if (current > 1) goTo(current - 1); });
+  });
+
+  // ── Next buttons (steps 1–5) ──────────────────────────────────
+  [1, 2, 3, 4, 5].forEach(n => {
+    const btn = document.getElementById('next-' + n);
+    if (btn) btn.addEventListener('click', () => goTo(n + 1));
+  });
+
+  // ── Step 6 submit ─────────────────────────────────────────────
+  document.getElementById('next-6').addEventListener('click', async function () {
+    const name    = document.getElementById('f-name').value.trim();
+    const company = document.getElementById('f-company').value.trim();
+    const email   = document.getElementById('f-email').value.trim();
+    const phone   = document.getElementById('f-phone').value.trim();
+    const note    = document.getElementById('f-note').value.trim();
+
+    let valid = true;
+
+    function fcheck(id, errId, test) {
+      const el = document.getElementById(id);
+      const er = document.getElementById(errId);
+      if (!test) { el.classList.add('err'); er.classList.add('show'); valid = false; }
+      else { el.classList.remove('err'); er.classList.remove('show'); }
+    }
+
+    fcheck('f-name',    'err-name',    name.length > 0);
+    fcheck('f-company', 'err-company', company.length > 0);
+    fcheck('f-email',   'err-email',   email.length > 0 && EMAIL_RX.test(email));
+
+    if (!valid) return;
+
+    ans.name = name; ans.company = company; ans.email = email; ans.phone = phone; ans.note = note;
+
+    this.textContent = 'Loading...';
+    this.disabled = true;
+
+    const payload = {
+      origin: window.location.origin,
+      name, company, email,
+      phone:       phone || '',
+      size:        ans.size || '',
+      setup:       ans.setup || '',
+      concern:     ans.concern || '',
+      environment: Array.from(ans.env).join(', '),
+      urgency:     ans.urgency || '',
+      note:        note || '',
+      recommendation: getScore() >= 4 ? 'onsite-audit' : 'intro-call'
+    };
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) { /* no-cors always throws — ignore */ }
+
+    if (typeof gtag === 'function') {
+      gtag('event', 'conversion', { send_to: 'AW-18009085486/ZIP4CKuYzJscEK6ss4tD' });
+    }
+
+    goTo(7);
+  });
+
+  // ── Live error clear ──────────────────────────────────────────
+  ['f-name', 'f-company', 'f-email'].forEach(id => {
+    document.getElementById(id).addEventListener('input', function () {
+      this.classList.remove('err');
+      const er = document.getElementById('err-' + id.replace('f-', ''));
+      if (er) er.classList.remove('show');
+    });
+  });
+
+  // ── Phone format ──────────────────────────────────────────────
+  document.getElementById('f-phone').addEventListener('input', function (e) {
+    let v = e.target.value.replace(/\D/g, '').slice(0, 10);
+    if (v.length >= 7)      v = `(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`;
+    else if (v.length >= 4) v = `(${v.slice(0,3)}) ${v.slice(3)}`;
+    else if (v.length >= 1) v = `(${v}`;
+    e.target.value = v;
+  });
+
+  // ── Scoring ───────────────────────────────────────────────────
+  function getScore() {
+    let s = 0;
+    if (ans.size === '16-40') s += 2;
+    if (ans.size === '41+')   s += 3;
+    if (ans.urgency === 'active') s += 3;
+    if (ans.concern === 'security' || ans.concern === 'compliance') s += 2;
+    if (ans.env.has('servers'))   s += 1;
+    if (ans.env.has('multisite')) s += 1;
+    if (ans.env.has('regulated')) s += 1;
+    return s;
+  }
+
+  // ── Recommendation reasons ────────────────────────────────────
+  function getReasons(audit) {
+    const r = [];
+    if (audit) {
+      if (ans.urgency === 'active') r.push('You have an active issue — we want to see it firsthand');
+      if (ans.size === '41+')   r.push('At your size, an on-site review is the fastest path to real answers');
+      else if (ans.size === '16-40') r.push('Your environment is large enough that a site visit gives us the most accurate picture');
+      if (ans.env.has('servers'))   r.push('On-site servers need to be assessed in person');
+      if (ans.env.has('multisite')) r.push('Multiple locations are easier to evaluate with a visit');
+      if (ans.concern === 'security')   r.push('Security risk is best assessed by seeing your environment directly');
+      if (ans.concern === 'compliance') r.push('Compliance requirements need a thorough firsthand review');
+      if (r.length < 2) r.push('A firsthand look gives us the most complete picture of your setup');
+    } else {
+      if (ans.concern === 'ai')      r.push('AI adoption planning starts with a conversation about your current stack and goals');
+      if (ans.concern === 'support') r.push('A quick call is the fastest way to understand your support needs and gaps');
+      if (ans.urgency === 'quarter') r.push("You're planning ahead — a call helps us scope exactly what you need");
+      if (ans.size === '1-5' || ans.size === '6-15') r.push('For your team size, a 15-minute call is usually all it takes to get started');
+      if (r.length < 2) r.push('No prep needed — just 15 minutes of straight talk to see if we\'re a good fit');
+      if (r.length < 3) r.push('We\'ll cover your situation, walk through options, and set clear next steps');
+    }
+    return r.slice(0, 3);
+  }
+
+  // ── Build recommendation screen ───────────────────────────────
+  function buildRec() {
+    isAuditRec = getScore() >= 4;
+    renderRec();
+  }
+
+  function renderRec() {
+    const slug     = isAuditRec ? 'onsite-audit' : 'intro-call';
+    const altSlug  = isAuditRec ? 'intro-call'   : 'onsite-audit';
+    const label    = isAuditRec ? 'On-Site IT Audit' : '15-Minute Intro Call';
+    const altLabel = isAuditRec ? '15-minute intro call' : 'on-site audit visit';
+
+    document.getElementById('recHeading').innerHTML = `We recommend a <span>${label}</span>`;
+
+    const ul = document.getElementById('recWhy');
+    ul.innerHTML = getReasons(isAuditRec).map(r => `<li>${r}</li>`).join('');
+
+    const altP = document.getElementById('altText');
+    altP.innerHTML = `Looking for something different? <a id="altSwitch">Book a ${altLabel} instead →</a>`;
+    document.getElementById('altSwitch').addEventListener('click', () => {
+      isAuditRec = !isAuditRec;
+      renderRec();
+    });
+
+    loadCal(slug);
+  }
+
+  // ── Cal.com inline embed ──────────────────────────────────────
+  function loadCal(slug) {
+    if (calCurrentSlug === slug) return;
+    calCurrentSlug = slug;
+    document.getElementById('calInline').innerHTML = '';
+
+    Cal("inline", {
+      elementOrSelector: "#calInline",
+      calLink: `ampit/${slug}`,
+      config: { layout: "month_view" }
+    });
+    Cal("ui", {
+      theme: "dark",
+      styles: { branding: { brandColor: "#00f060" } },
+      hideEventTypeDetails: true,
+      layout: "month_view"
+    });
+  }
+
+  // ── Init ──────────────────────────────────────────────────────
+  updateProgress(1);
+</script>
 </body>
 </html>

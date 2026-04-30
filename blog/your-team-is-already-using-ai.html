@@ -189,6 +189,29 @@
   }
   .ruling-box p { margin-bottom: 0; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
 
+  /* BUTTONS */
+  .btn-primary {
+    background: var(--green); color: #050a06;
+    padding: 16px 36px;
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    border: none; cursor: pointer; text-decoration: none; display: inline-block;
+    transition: all 0.2s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .btn-primary:hover { background: #10ff72; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,240,96,0.3); }
+
+  .btn-outline {
+    background: transparent; color: var(--text-muted);
+    padding: 15px 36px;
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    border: 1px solid var(--border-strong);
+    cursor: pointer; text-decoration: none; display: inline-block;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--green); color: var(--green); }
+
   /* ARTICLE CTA */
   .article-cta {
     margin-top: 80px; padding-top: 56px;
