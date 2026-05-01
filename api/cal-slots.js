@@ -12,28 +12,40 @@ module.exports = async function handler(req, res) {
   }
 
   const params = new URLSearchParams({
-    apiKey,
     eventTypeId: eventId,
-    startTime:   from + 'T00:00:00.000Z',
-    endTime:     to   + 'T23:59:59.000Z',
+    start:       from,
+    end:         to,
     timeZone:    'America/New_York'
   });
 
   try {
-    const url = `https://api.cal.com/v1/slots?${params}`;
-    const calRes = await fetch(url);
-    const data   = await calRes.json();
+    const url = `https://api.cal.com/v2/slots?${params}`;
+    const calRes = await fetch(url, {
+      headers: {
+        'cal-api-version': '2024-09-04',
+        'Authorization':   `Bearer ${apiKey}`
+      }
+    });
+    const data = await calRes.json();
 
     // Debug mode: return raw Cal.com response
     if (req.query.debug === '1') {
-      return res.status(calRes.status).json({ _debug: true, _status: calRes.status, _url: url.replace(apiKey, 'REDACTED'), _raw: data });
+      return res.status(calRes.status).json({
+        _debug: true, _status: calRes.status,
+        _url: url.replace(apiKey, 'REDACTED'), _raw: data
+      });
     }
 
-    const slots  = data.slots || {};
+    // v2 response: { status: "success", data: { "2026-05-01": ["ISO","ISO",...] } }
+    const slots = (data.status === 'success' && data.data) ? data.data : {};
 
     const normalized = {};
     for (const [date, times] of Object.entries(slots)) {
-      normalized[date] = times.map(t => (typeof t === 'string' ? t : t.time));
+      if (Array.isArray(times)) {
+        normalized[date] = times.map(t =>
+          typeof t === 'string' ? t : (t.time || t.start || '')
+        );
+      }
     }
 
     res.setHeader('Cache-Control', 'no-store');

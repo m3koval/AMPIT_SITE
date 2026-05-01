@@ -1,6 +1,6 @@
 // POST /api/cal-book
 // Body: { type, start, name, email, phone, address, note }
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -18,19 +18,22 @@ export default async function handler(req, res) {
 
   const isAudit = type === 'onsite-audit';
 
+  // v2 location format
+  const location = isAudit && address
+    ? { type: 'attendeeAddress', address }
+    : { type: 'integration', integration: 'google-meet' };
+
   const payload = {
     eventTypeId: Number(eventId),
     start,
-    responses: {
+    attendee: {
       name,
       email,
-      ...(note ? { notes: note } : {}),
-      location: isAudit && address
-        ? { value: 'attendeeInPerson', optionValue: address }
-        : { value: 'integrations:google:meet', optionValue: '' }
+      timeZone: 'America/New_York',
+      language: 'en'
     },
-    timeZone: 'America/New_York',
-    language: 'en',
+    location,
+    ...(note ? { bookingFieldsResponses: { notes: note } } : {}),
     metadata: {
       ...(phone   ? { phone }   : {}),
       ...(address ? { address } : {})
@@ -38,14 +41,18 @@ export default async function handler(req, res) {
   };
 
   try {
-    const calRes = await fetch(`https://api.cal.com/v1/bookings?apiKey=${apiKey}`, {
+    const calRes = await fetch('https://api.cal.com/v2/bookings', {
       method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(payload)
+      headers: {
+        'Content-Type':    'application/json',
+        'cal-api-version': '2026-02-25',
+        'Authorization':   `Bearer ${apiKey}`
+      },
+      body: JSON.stringify(payload)
     });
     const data = await calRes.json();
     return res.status(calRes.status).json(data);
   } catch (err) {
-    return res.status(502).json({ error: 'Booking request failed' });
+    return res.status(502).json({ error: 'Booking request failed', detail: err.message });
   }
-}
+};
