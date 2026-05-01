@@ -139,6 +139,15 @@
   .back-link { display: inline-block; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.75rem; color: var(--text-muted); text-decoration: none; border: 1px solid var(--border); padding: 12px 24px; letter-spacing: 0.06em; transition: all 0.2s; }
   .back-link:hover { color: var(--green); border-color: var(--border-strong); }
 
+  /* GOOGLE PLACES AUTOCOMPLETE — dark theme override */
+  .pac-container { background: #0d1410; border: 1px solid var(--border-strong); border-top: none; box-shadow: 0 12px 32px rgba(0,0,0,0.6); font-family: 'Inter', sans-serif; border-radius: 0; margin-top: -1px; }
+  .pac-item { border-top: 1px solid var(--border); padding: 9px 14px; cursor: pointer; color: var(--text-muted); font-size: 0.84rem; display: flex; align-items: center; gap: 8px; }
+  .pac-item:hover, .pac-item-selected { background: rgba(0,240,96,0.06); }
+  .pac-item-query { color: var(--text); font-size: 0.84rem; }
+  .pac-icon { display: none; }
+  .pac-matched { color: var(--green); font-weight: 600; }
+  .pac-logo::after { display: none; }
+
   /* FOOTER */
   .assess-footer { border-top: 1px solid var(--border); padding: 28px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; position: relative; z-index: 1; }
   .assess-footer-copy { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.05em; }
@@ -424,9 +433,13 @@ Cal("init", {origin:"https://cal.com"});
 </footer>
 
 <script>
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyjjKaAsRcCc9mAGy7G3ecnRJxQR2J2KbesdUm7atMB6Ak7OTfyJcl8jCRqNzd2HcbOGA/exec";
-  const EMAIL_RX  = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
-  const TOTAL     = 8;
+  const SCRIPT_URL        = "https://script.google.com/macros/s/AKfycbyjjKaAsRcCc9mAGy7G3ecnRJxQR2J2KbesdUm7atMB6Ak7OTfyJcl8jCRqNzd2HcbOGA/exec";
+  const EMAIL_RX          = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+  const TOTAL             = 8;
+  // ── Google Places API key ─────────────────────────────────────
+  // Get one free at: console.cloud.google.com → APIs & Services → Credentials
+  // Enable "Places API (New)" · Restrict key to ampitsolutions.com
+  const GOOGLE_PLACES_KEY = 'AIzaSyCVcTFSwb73i8DjqRgZ72Jldffzj2yFXT0';
 
   // ── State ─────────────────────────────────────────────────────
   const ans = {
@@ -450,6 +463,37 @@ Cal("init", {origin:"https://cal.com"});
     8: { h: "Pick a <span>time.</span>", s: "Your info is already filled in — just choose a slot that works." }
   };
 
+  // ── Google Places loader ──────────────────────────────────────
+  let placesLoaded = false;
+  function initPlacesAutocomplete() {
+    const input = document.getElementById('f-address');
+    if (!input || placesLoaded || !GOOGLE_PLACES_KEY) return;
+    if (!window.google || !window.google.maps || !window.google.maps.places) return;
+    placesLoaded = true;
+    const ac = new google.maps.places.Autocomplete(input, {
+      types: ['address'],
+      componentRestrictions: { country: 'us' },
+      fields: ['formatted_address']
+    });
+    ac.addListener('place_changed', function () {
+      const place = ac.getPlace();
+      if (place && place.formatted_address) {
+        input.value = place.formatted_address;
+        input.classList.remove('err');
+        document.getElementById('err-address').classList.remove('show');
+      }
+    });
+  }
+  function loadPlacesAPI() {
+    if (!GOOGLE_PLACES_KEY || document.getElementById('gmaps-script')) return;
+    window.initPlacesAutocomplete = initPlacesAutocomplete;
+    const s = document.createElement('script');
+    s.id  = 'gmaps-script';
+    s.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_PLACES_KEY}&libraries=places&callback=initPlacesAutocomplete`;
+    s.async = true; s.defer = true;
+    document.head.appendChild(s);
+  }
+
   // ── Navigation ────────────────────────────────────────────────
   function goTo(step) {
     document.getElementById('step-' + current).classList.remove('active');
@@ -464,6 +508,8 @@ Cal("init", {origin:"https://cal.com"});
       // Show address field only for on-site audit
       document.getElementById('addressField').style.display =
         ans.path === 'onsite-audit' ? 'flex' : 'none';
+      // Load Google Places autocomplete the first time step 7 appears
+      loadPlacesAPI();
     }
     if (step === 8) buildCalStep();
   }
