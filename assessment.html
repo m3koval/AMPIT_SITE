@@ -261,12 +261,10 @@
       <li>Charlotte-local team, available on-site</li>
     </ul>
     <div class="lp-booking-details" id="lpBookingDetails" style="display:none">
-      <div class="lp-booking-label">// Booking for</div>
       <div class="lp-booking-row" id="lpBName"></div>
       <div class="lp-booking-row" id="lpBEmail"></div>
       <div class="lp-booking-row" id="lpBPhone" style="display:none"></div>
       <div class="lp-booking-row" id="lpBAddress" style="display:none"></div>
-      <p class="lp-booking-note">All fields are pre-filled — just pick a slot and tap Confirm.</p>
     </div>
     <div class="step-tracker">Step <em id="stepNum">1</em> of 8</div>
   </div>
@@ -474,10 +472,6 @@
           </div>
         </div>
 
-        <div class="no-book">
-          <p>Not ready to pick a time? <strong>We already have your details.</strong><br>We'll reach out within one business day — no scripts, straight talk.</p>
-          <a href="tel:+19803772733">Or call us now: (980) 377-2733</a>
-        </div>
         <div class="booking-success" id="bookingSuccess">
           <div class="success-icon">✓</div>
           <h2>You're <span>all set.</span></h2>
@@ -822,7 +816,6 @@
   function showBookingSuccess() {
     const isAudit = ans.path === 'onsite-audit';
     document.getElementById('customCal').style.display   = 'none';
-    document.querySelector('.no-book').style.display     = 'none';
     document.querySelector('#step-8 .step-tag').style.display = 'none';
     document.getElementById('calHeading').style.display  = 'none';
     document.getElementById('calSub').style.display      = 'none';

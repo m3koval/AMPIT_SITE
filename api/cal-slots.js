@@ -1,12 +1,6 @@
-export const config = { runtime: 'edge' };
-
 // GET /api/cal-slots?type=intro-call&from=YYYY-MM-DD&to=YYYY-MM-DD
-// Returns available slots grouped by date: { "2026-05-04": ["ISO", ...], ... }
-export default async function handler(req) {
-  const { searchParams } = new URL(req.url);
-  const type = searchParams.get('type'); // 'intro-call' | 'onsite-audit'
-  const from = searchParams.get('from'); // YYYY-MM-DD
-  const to   = searchParams.get('to');   // YYYY-MM-DD
+export default async function handler(req, res) {
+  const { type, from, to } = req.query;
 
   const apiKey  = process.env.CAL_API_KEY;
   const eventId = type === 'onsite-audit'
@@ -14,9 +8,7 @@ export default async function handler(req) {
     : process.env.CAL_EVENT_INTRO;
 
   if (!apiKey || !eventId) {
-    return new Response(JSON.stringify({ error: 'Cal.com not configured' }), {
-      status: 500, headers: { 'Content-Type': 'application/json' }
-    });
+    return res.status(500).json({ error: 'Cal.com not configured' });
   }
 
   const url = new URL('https://api.cal.com/v1/slots');
@@ -27,22 +19,19 @@ export default async function handler(req) {
   url.searchParams.set('timeZone',    'America/New_York');
 
   try {
-    const res  = await fetch(url.toString());
-    const data = await res.json();
+    const calRes = await fetch(url.toString());
+    const data   = await calRes.json();
+    const slots  = data.slots || {};
 
-    // Normalize: each slot is either { time: "ISO" } or "ISO" — return just the ISO strings
-    const slots = data.slots || {};
+    // Normalize: slots may be { time: "ISO" } objects or plain strings
     const normalized = {};
     for (const [date, times] of Object.entries(slots)) {
       normalized[date] = times.map(t => (typeof t === 'string' ? t : t.time));
     }
 
-    return new Response(JSON.stringify(normalized), {
-      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
-    });
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(200).json(normalized);
   } catch (err) {
-    return new Response(JSON.stringify({ error: 'Failed to fetch slots' }), {
-      status: 502, headers: { 'Content-Type': 'application/json' }
-    });
+    return res.status(502).json({ error: 'Failed to fetch slots' });
   }
 }
