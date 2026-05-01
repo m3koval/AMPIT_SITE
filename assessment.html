@@ -651,17 +651,23 @@ Cal("init", {origin:"https://cal.com"});
 
     // Load Cal.com
     if (!calLoaded) {
+      // Build config — pre-fill contact info and, for on-site, inject address
+      // into Cal.com's attendee location field so it shows in the "Where" line
+      // of the confirmation email rather than the raw placeholder.
+      const calConfig = {
+        layout: "month_view",
+        name:  ans.name  || undefined,
+        email: ans.email || undefined,
+        notes: ans.note  || undefined,
+      };
+      if (isAudit && ans.address) {
+        // Pre-fills the Cal.com "Attendee's Address" location field
+        calConfig.location = JSON.stringify({ value: "attendeeInPerson", optionValue: ans.address });
+      }
       Cal("inline", {
         elementOrSelector: "#calInline",
         calLink: `ampit/${ans.path}`,
-        config: {
-          layout: "month_view",
-          name:  ans.name  || undefined,
-          email: ans.email || undefined,
-          notes: isAudit && ans.address
-            ? `Office address: ${ans.address}${ans.note ? '\n\n' + ans.note : ''}`
-            : (ans.note || undefined)
-        }
+        config: calConfig
       });
       Cal("ui", {
         theme: "dark",
