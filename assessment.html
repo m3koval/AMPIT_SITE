@@ -104,14 +104,47 @@
   .rec-why li { display: flex; gap: 10px; font-size: 0.83rem; color: var(--text-muted); line-height: 1.5; }
   .rec-why li::before { content: '→'; color: var(--green); flex-shrink: 0; font-size: 0.78rem; margin-top: 1px; }
 
+  /* ANSWER SUMMARY TAGS */
+  .rec-profile { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+  .rec-tag { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.63rem; color: var(--text-dim); background: var(--bg); border: 1px solid var(--border); padding: 4px 10px; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* AI BLOG TIE-IN */
+  .rec-blog-cta { border: 1px solid var(--border); border-left: 3px solid var(--green); background: var(--bg-card); padding: 14px 18px; margin-bottom: 24px; display: none; }
+  .rec-blog-cta.show { display: block; }
+  .rec-blog-label { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.62rem; color: var(--green); letter-spacing: 0.12em; text-transform: uppercase; display: block; margin-bottom: 6px; }
+  .rec-blog-link { font-size: 0.84rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; line-height: 1.5; }
+  .rec-blog-link:hover { color: var(--green); }
+
   /* CAL.COM */
   .cal-wrap { border: 1px solid var(--border); overflow: hidden; margin-bottom: 16px; background: #0d1410; }
   #calInline { min-height: 620px; width: 100%; }
 
-  .alt-opt { text-align: center; }
+  .alt-opt { text-align: center; margin-bottom: 4px; }
   .alt-opt p { font-size: 0.77rem; color: var(--text-dim); font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; }
   .alt-opt a { color: var(--text-muted); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; transition: color 0.2s; }
   .alt-opt a:hover { color: var(--green); }
+
+  /* NOT READY FALLBACK */
+  .no-book { text-align: center; border-top: 1px solid var(--border); margin-top: 20px; padding-top: 20px; }
+  .no-book p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.7; margin-bottom: 8px; }
+  .no-book p strong { color: var(--text-muted); font-weight: 600; }
+  .no-book a { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.74rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .no-book a:hover { color: var(--green); }
+
+  /* BOOKING SUCCESS */
+  .booking-success { display: none; text-align: center; padding: 20px 0; animation: fadeUp 0.5s ease both; }
+  .booking-success.show { display: block; }
+  .success-icon { width: 56px; height: 56px; border: 2px solid var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: var(--green); margin: 0 auto 24px; box-shadow: 0 0 32px rgba(0,240,96,0.2); }
+  .booking-success h2 { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.8rem; margin-bottom: 12px; }
+  .booking-success h2 span { color: var(--green); }
+  .booking-success > p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; margin-bottom: 24px; }
+  .next-steps { list-style: none; text-align: left; display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; counter-reset: step; }
+  .next-steps li { font-size: 0.88rem; color: var(--text-muted); display: flex; gap: 12px; line-height: 1.6; counter-increment: step; }
+  .next-steps li::before { content: counter(step) "."; color: var(--green); font-family: 'Outfit', sans-serif; font-weight: 700; flex-shrink: 0; }
+  .success-contact { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 28px; }
+  .success-contact a { color: var(--green); text-decoration: none; }
+  .back-link { display: inline-block; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.75rem; color: var(--text-muted); text-decoration: none; border: 1px solid var(--border); padding: 12px 24px; letter-spacing: 0.06em; transition: all 0.2s; }
+  .back-link:hover { color: var(--green); border-color: var(--border-strong); }
 
   /* FOOTER */
   .assess-footer { border-top: 1px solid var(--border); padding: 28px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; position: relative; z-index: 1; }
@@ -332,16 +365,37 @@ Cal("init", {origin:"https://cal.com"});
       <!-- STEP 7: RECOMMENDATION + CAL.COM -->
       <div class="quiz-step" id="step-7">
         <span class="step-tag">// 07 of 07 — your next step</span>
+        <div class="rec-profile" id="recProfile"></div>
         <div class="rec-card">
           <div class="rec-badge">Our recommendation</div>
           <div class="rec-heading" id="recHeading"></div>
           <ul class="rec-why" id="recWhy"></ul>
+        </div>
+        <div class="rec-blog-cta" id="recBlogCta">
+          <span class="rec-blog-label">// Related reading</span>
+          <a class="rec-blog-link" href="/blog/your-team-is-already-using-ai.html" target="_blank" rel="noopener">
+            Your Team Is Already Using AI. Here's What Nobody Told Them. →
+          </a>
         </div>
         <div class="cal-wrap">
           <div id="calInline"></div>
         </div>
         <div class="alt-opt">
           <p id="altText"></p>
+        </div>
+        <div class="no-book">
+          <p>Not ready to pick a time? <strong>We already have your details.</strong><br>We'll reach out within one business day — no scripts, straight talk.</p>
+          <a href="tel:+19803772733">Or call us now: (980) 377-2733</a>
+        </div>
+
+        <!-- BOOKING SUCCESS STATE (shown after Cal.com confirms) -->
+        <div class="booking-success" id="bookingSuccess">
+          <div class="success-icon">✓</div>
+          <h2>You're <span>all set.</span></h2>
+          <p id="successSubhead"></p>
+          <ol class="next-steps" id="successSteps"></ol>
+          <p class="success-contact">Questions in the meantime? <a href="tel:+19803772733">(980) 377-2733</a></p>
+          <a href="/" class="back-link">← Back to AMP IT</a>
         </div>
       </div>
 
@@ -558,15 +612,30 @@ Cal("init", {origin:"https://cal.com"});
 
   function renderRec() {
     const slug     = isAuditRec ? 'onsite-audit' : 'intro-call';
-    const altSlug  = isAuditRec ? 'intro-call'   : 'onsite-audit';
     const label    = isAuditRec ? 'On-Site IT Audit' : '15-Minute Intro Call';
     const altLabel = isAuditRec ? '15-minute intro call' : 'on-site audit visit';
 
-    document.getElementById('recHeading').innerHTML = `We recommend a <span>${label}</span>`;
+    // Profile tags
+    const sizeMap    = { '1-5':'1–5 people', '6-15':'6–15 people', '16-40':'16–40 people', '41+':'41+ people' };
+    const concernMap = { 'ai':'AI adoption', 'security':'Security risk', 'support':'IT support', 'backup':'Backup & recovery', 'onboarding':'Staff offboarding', 'compliance':'Compliance', 'exploring':'Early exploration' };
+    const urgencyMap = { 'exploring':'Exploring options', 'quarter':'Planning this quarter', 'active':'Active issue' };
+    const tags = [
+      sizeMap[ans.size],
+      concernMap[ans.concern],
+      urgencyMap[ans.urgency]
+    ].filter(Boolean);
+    document.getElementById('recProfile').innerHTML = tags.map(t => `<span class="rec-tag">${t}</span>`).join('');
 
+    // Heading + reasons
+    document.getElementById('recHeading').innerHTML = `We recommend a <span>${label}</span>`;
     const ul = document.getElementById('recWhy');
     ul.innerHTML = getReasons(isAuditRec).map(r => `<li>${r}</li>`).join('');
 
+    // Blog tie-in for AI concern
+    const blogCta = document.getElementById('recBlogCta');
+    blogCta.classList.toggle('show', ans.concern === 'ai');
+
+    // Switch option
     const altP = document.getElementById('altText');
     altP.innerHTML = `Looking for something different? <a id="altSwitch">Book a ${altLabel} instead →</a>`;
     document.getElementById('altSwitch').addEventListener('click', () => {
@@ -586,7 +655,11 @@ Cal("init", {origin:"https://cal.com"});
     Cal("inline", {
       elementOrSelector: "#calInline",
       calLink: `ampit/${slug}`,
-      config: { layout: "month_view" }
+      config: {
+        layout: "month_view",
+        name:  ans.name  || undefined,
+        email: ans.email || undefined
+      }
     });
     Cal("ui", {
       theme: "dark",
@@ -595,6 +668,55 @@ Cal("init", {origin:"https://cal.com"});
       layout: "month_view"
     });
   }
+
+  // ── Booking success handler ───────────────────────────────────
+  Cal("on", {
+    action: "bookingSuccessful",
+    callback: function () {
+      const audit = calCurrentSlug === 'onsite-audit';
+
+      // Hide everything except the success state
+      ['recProfile','recCard','recBlogCta','cal-wrap','alt-opt','no-book'].forEach(function(id) {
+        const el = document.getElementById(id) || document.querySelector('.' + id);
+        if (el) el.style.display = 'none';
+      });
+      document.querySelector('.rec-card').style.display  = 'none';
+      document.querySelector('.cal-wrap').style.display  = 'none';
+      document.querySelector('.alt-opt').style.display   = 'none';
+      document.querySelector('.no-book').style.display   = 'none';
+      document.querySelector('.rec-profile').style.display = 'none';
+      document.querySelector('.rec-blog-cta').style.display = 'none';
+      document.querySelector('.step-tag').style.display  = 'none';
+
+      // Populate success copy
+      document.getElementById('successSubhead').textContent = audit
+        ? "Your on-site audit visit is booked. Here's what to expect:"
+        : "Your intro call is confirmed. Here's what to expect:";
+
+      const steps = audit ? [
+        "Check your email — you'll get a calendar invite with the visit details",
+        "We'll review what you shared and research your environment before we arrive",
+        "We'll walk through what we find on-site and give you a plain-English breakdown with next steps"
+      ] : [
+        "Check your email — you'll get a calendar invite with the meeting link",
+        "We'll review what you shared before we talk — no prep needed on your end",
+        "We'll cover your situation, walk through your options, and give you straight answers"
+      ];
+
+      document.getElementById('successSteps').innerHTML =
+        steps.map(s => `<li>${s}</li>`).join('');
+
+      // Show success
+      document.getElementById('bookingSuccess').classList.add('show');
+
+      // Update left panel
+      document.getElementById('lpHeading').innerHTML = "You're <span>all set.</span>";
+      document.getElementById('lpSub').textContent   = "We'll see you soon.";
+
+      // Scroll to top of right panel
+      document.querySelector('.right-panel').scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
 
   // ── Init ──────────────────────────────────────────────────────
   updateProgress(1);
