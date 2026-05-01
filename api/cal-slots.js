@@ -1,5 +1,5 @@
 // GET /api/cal-slots?type=intro-call&from=YYYY-MM-DD&to=YYYY-MM-DD
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   const { type, from, to } = req.query;
 
   const apiKey  = process.env.CAL_API_KEY;
@@ -8,22 +8,29 @@ export default async function handler(req, res) {
     : process.env.CAL_EVENT_INTRO;
 
   if (!apiKey || !eventId) {
-    return res.status(500).json({ error: 'Cal.com not configured' });
+    return res.status(500).json({ error: 'Cal.com not configured', type, hasKey: !!apiKey, hasEvent: !!eventId });
   }
 
-  const url = new URL('https://api.cal.com/v1/slots');
-  url.searchParams.set('apiKey',      apiKey);
-  url.searchParams.set('eventTypeId', eventId);
-  url.searchParams.set('startTime',   from + 'T00:00:00.000Z');
-  url.searchParams.set('endTime',     to   + 'T23:59:59.000Z');
-  url.searchParams.set('timeZone',    'America/New_York');
+  const params = new URLSearchParams({
+    apiKey,
+    eventTypeId: eventId,
+    startTime:   from + 'T00:00:00.000Z',
+    endTime:     to   + 'T23:59:59.000Z',
+    timeZone:    'America/New_York'
+  });
 
   try {
-    const calRes = await fetch(url.toString());
+    const url = `https://api.cal.com/v1/slots?${params}`;
+    const calRes = await fetch(url);
     const data   = await calRes.json();
+
+    // Debug mode: return raw Cal.com response
+    if (req.query.debug === '1') {
+      return res.status(calRes.status).json({ _debug: true, _status: calRes.status, _url: url.replace(apiKey, 'REDACTED'), _raw: data });
+    }
+
     const slots  = data.slots || {};
 
-    // Normalize: slots may be { time: "ISO" } objects or plain strings
     const normalized = {};
     for (const [date, times] of Object.entries(slots)) {
       normalized[date] = times.map(t => (typeof t === 'string' ? t : t.time));
@@ -32,6 +39,6 @@ export default async function handler(req, res) {
     res.setHeader('Cache-Control', 'no-store');
     return res.status(200).json(normalized);
   } catch (err) {
-    return res.status(502).json({ error: 'Failed to fetch slots' });
+    return res.status(502).json({ error: 'Failed to fetch slots', detail: err.message });
   }
-}
+};
