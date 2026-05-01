@@ -676,9 +676,14 @@ Cal("init", {origin:"https://cal.com"});
           layout: "month_view",
           name:  ans.name  || undefined,
           email: ans.email || undefined,
-          notes: isAudit && ans.address
-            ? `Office address: ${ans.address}${ans.note ? '\n\n' + ans.note : ''}`
-            : (ans.note || undefined)
+          notes: ans.note  || undefined,
+          // Pre-fill the Cal.com attendee address field so it appears in the
+          // "Where" line of the calendar invite and confirmation email.
+          // The confirmation form will appear but is fully pre-filled —
+          // user just clicks Confirm once.
+          ...(isAudit && ans.address ? {
+            location: JSON.stringify({ value: "attendeeInPerson", optionValue: ans.address })
+          } : {})
         }
       });
       Cal("ui", {
