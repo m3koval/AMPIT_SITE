@@ -105,13 +105,44 @@
   .field textarea { resize: none; line-height: 1.6; }
   .form-note { font-size: 0.66rem; color: var(--text-dim); font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; text-align: center; margin-top: 12px; line-height: 1.6; }
 
-  /* STEP 8 — CAL.COM */
+  /* STEP 8 — HEADING */
   .cal-heading { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--text); margin-bottom: 6px; }
   .cal-heading span { color: var(--green); }
   .cal-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6; }
-  .cal-wrap { border: 1px solid var(--border); overflow: hidden; margin-bottom: 16px; background: #0d1410; }
-  #calInline { min-height: 620px; width: 100%; }
-  .no-book { text-align: center; border-top: 1px solid var(--border); margin-top: 20px; padding-top: 20px; }
+
+  /* CUSTOM CALENDAR */
+  .custom-cal { position: relative; border: 1px solid var(--border); padding: 20px 18px; margin-bottom: 20px; }
+  .ccal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .ccal-nav-btn { background: transparent; border: 1px solid var(--border); color: var(--text-muted); width: 30px; height: 30px; cursor: pointer; font-size: 0.9rem; transition: all 0.15s; }
+  .ccal-nav-btn:hover:not(:disabled) { border-color: var(--green); color: var(--green); }
+  .ccal-nav-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+  .ccal-month-label { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--text); }
+  .ccal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+  .ccal-day-hdr { text-align: center; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.58rem; color: var(--text-dim); padding: 5px 0 8px; letter-spacing: 0.06em; }
+  .ccal-day { text-align: center; padding: 7px 2px; font-size: 0.84rem; color: var(--text-dim); transition: all 0.12s; min-height: 34px; display: flex; align-items: center; justify-content: center; }
+  .ccal-day.avail { color: var(--text); cursor: pointer; border: 1px solid var(--border); background: rgba(255,255,255,0.02); }
+  .ccal-day.avail:hover { border-color: var(--green); color: var(--green); background: rgba(0,240,96,0.05); }
+  .ccal-day.sel { background: var(--green) !important; color: #050a06 !important; border-color: var(--green) !important; font-weight: 700; }
+  .ccal-day.today.avail { border-color: var(--border-strong); }
+  .ccal-day.empty, .ccal-day.unavail { opacity: 0.18; }
+  .ccal-times { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); animation: stepIn 0.18s ease both; }
+  .ccal-times-head { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.65rem; color: var(--green); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; }
+  .ccal-slots { display: flex; flex-wrap: wrap; gap: 8px; }
+  .ccal-slot { background: var(--bg); border: 1px solid var(--border); color: var(--text-muted); padding: 9px 16px; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.84rem; cursor: pointer; transition: all 0.15s; }
+  .ccal-slot:hover { border-color: var(--border-strong); color: var(--text); }
+  .ccal-slot.sel { background: var(--green); color: #050a06; border-color: var(--green); }
+  .ccal-confirm { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); animation: stepIn 0.18s ease both; }
+  .ccal-confirm-box { border: 1px solid var(--green); background: rgba(0,240,96,0.03); padding: 18px 20px; margin-bottom: 14px; }
+  .ccal-confirm-when { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 8px; }
+  .ccal-confirm-who { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.7rem; color: var(--text-muted); line-height: 1.8; }
+  .ccal-change-btn { background: transparent; border: none; color: var(--text-dim); font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; cursor: pointer; padding: 10px 0 0; display: block; transition: color 0.15s; letter-spacing: 0.04em; }
+  .ccal-change-btn:hover { color: var(--green); }
+  .ccal-error { color: #ff5555; font-size: 0.72rem; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; margin-top: 10px; line-height: 1.6; }
+  .ccal-loading { position: absolute; inset: 0; background: rgba(5,10,6,0.75); display: flex; align-items: center; justify-content: center; }
+  .ccal-spinner { width: 22px; height: 22px; border: 2px solid var(--border); border-top-color: var(--green); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .no-book { text-align: center; border-top: 1px solid var(--border); margin-top: 4px; padding-top: 20px; }
   .no-book p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.7; margin-bottom: 8px; }
   .no-book p strong { color: var(--text-muted); font-weight: 600; }
   .no-book a { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.74rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
@@ -179,7 +210,6 @@
     .step-tracker { display: none; }
     .right-panel { padding: 32px 24px 56px; }
     .frow { grid-template-columns: 1fr; gap: 0; }
-    #calInline { min-height: 560px; }
     .assess-footer { padding: 24px 20px; }
   }
   @media (max-width: 480px) {
@@ -190,11 +220,6 @@
   }
 </style>
 
-<!-- Cal.com embed -->
-<script>
-(function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, [L, api]);}else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-Cal("init", {origin:"https://cal.com"});
-</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script>
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Ii init Di qi Sr Bi Zi Pi capture calculateEventProperties Yi register register_once register_for_session unregister unregister_for_session Xi getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Ji identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Wi Vi createPersonProfile setInternalOrTestUser Gi Fi Ki opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing $i debug Tr Ui getPageViewId captureTraceFeedback captureTraceMetric Ri".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -411,21 +436,44 @@ Cal("init", {origin:"https://cal.com"});
         <p class="form-note">Sent securely · No spam · We'll follow up within one business day</p>
       </div>
 
-      <!-- STEP 8: CAL.COM PICK TIME -->
+      <!-- STEP 8: PICK A TIME -->
       <div class="quiz-step" id="step-8">
         <span class="step-tag">// 08 of 08 — pick a time</span>
         <p class="cal-heading" id="calHeading"></p>
         <p class="cal-sub" id="calSub"></p>
-        <div class="booking-summary" id="bookingSummary"></div>
         <div class="blog-cta" id="blogCta">
           <span class="blog-cta-label">// Related reading</span>
           <a class="blog-cta-link" href="/blog/your-team-is-already-using-ai.html" target="_blank" rel="noopener">
             Your Team Is Already Using AI. Here's What Nobody Told Them. →
           </a>
         </div>
-        <div class="cal-wrap">
-          <div id="calInline"></div>
+
+        <!-- Custom calendar -->
+        <div class="custom-cal" id="customCal">
+          <div class="ccal-nav">
+            <button class="ccal-nav-btn" id="ccalPrev">←</button>
+            <span class="ccal-month-label" id="ccalMonthLabel"></span>
+            <button class="ccal-nav-btn" id="ccalNext">→</button>
+          </div>
+          <div class="ccal-grid" id="ccalGrid"></div>
+          <div class="ccal-times" id="ccalTimes" style="display:none">
+            <div class="ccal-times-head" id="ccalTimesHead"></div>
+            <div class="ccal-slots" id="ccalSlots"></div>
+          </div>
+          <div class="ccal-confirm" id="ccalConfirm" style="display:none">
+            <div class="ccal-confirm-box">
+              <div class="ccal-confirm-when" id="ccalConfirmWhen"></div>
+              <div class="ccal-confirm-who"  id="ccalConfirmWho"></div>
+            </div>
+            <button class="btn-next" id="ccalConfirmBtn">Confirm Booking →</button>
+            <button class="ccal-change-btn" id="ccalChangeBtn">← Change time</button>
+            <p class="ccal-error" id="ccalError" style="display:none"></p>
+          </div>
+          <div class="ccal-loading" id="ccalLoading" style="display:none">
+            <div class="ccal-spinner"></div>
+          </div>
         </div>
+
         <div class="no-book">
           <p>Not ready to pick a time? <strong>We already have your details.</strong><br>We'll reach out within one business day — no scripts, straight talk.</p>
           <a href="tel:+19803772733">Or call us now: (980) 377-2733</a>
@@ -470,7 +518,6 @@ Cal("init", {origin:"https://cal.com"});
     name: '', company: '', email: '', phone: '', address: '', note: ''
   };
   let current = 1;
-  let calLoaded = false;
 
   // ── Left panel copy ───────────────────────────────────────────
   const lpCopy = {
@@ -657,99 +704,200 @@ Cal("init", {origin:"https://cal.com"});
   });
 
   // ── Build step 8 ─────────────────────────────────────────────
-  function buildCalStep() {
+  // ── Custom calendar ───────────────────────────────────────────
+  const ccal = {
+    year: new Date().getFullYear(), month: new Date().getMonth(),
+    slots: {}, selDate: null, selTime: null, selDisplay: ''
+  };
+
+  async function ccalLoad(year, month) {
+    const key = `${year}-${String(month+1).padStart(2,'0')}`;
+    if (ccal.slots[key] !== undefined) return;
+    ccal.slots[key] = null; // mark loading
+    document.getElementById('ccalLoading').style.display = 'flex';
+    const last = new Date(year, month+1, 0).getDate();
+    const from = `${key}-01`;
+    const to   = `${key}-${String(last).padStart(2,'0')}`;
+    try {
+      const res  = await fetch(`/api/cal-slots?type=${ans.path}&from=${from}&to=${to}`);
+      ccal.slots[key] = await res.json();
+    } catch(e) { ccal.slots[key] = {}; }
+    document.getElementById('ccalLoading').style.display = 'none';
+  }
+
+  function ccalRender() {
+    const { year, month, selDate } = ccal;
+    const key       = `${year}-${String(month+1).padStart(2,'0')}`;
+    const mSlots    = ccal.slots[key];
+    const today     = new Date(); today.setHours(0,0,0,0);
+    const firstDow  = new Date(year, month, 1).getDay();
+    const daysInMo  = new Date(year, month+1, 0).getDate();
+    const hdrs      = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const now       = new Date();
+
+    document.getElementById('ccalMonthLabel').textContent =
+      new Date(year, month).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    document.getElementById('ccalPrev').disabled =
+      year === now.getFullYear() && month === now.getMonth();
+
+    let html = hdrs.map(d => `<div class="ccal-day-hdr">${d}</div>`).join('');
+    for (let i = 0; i < firstDow; i++) html += `<div class="ccal-day empty"></div>`;
+    for (let d = 1; d <= daysInMo; d++) {
+      const ds  = `${key}-${String(d).padStart(2,'0')}`;
+      const dt  = new Date(year, month, d);
+      const past = dt < today;
+      const has  = mSlots && mSlots[ds] && mSlots[ds].length > 0;
+      let cls    = 'ccal-day';
+      cls += (past || !has || !mSlots) ? ' unavail' : ' avail';
+      if (ds === selDate) cls += ' sel';
+      if (dt.toDateString() === today.toDateString()) cls += ' today';
+      const click = (!past && has) ? `onclick="ccalPickDate('${ds}')"` : '';
+      html += `<div class="${cls}" ${click}>${d}</div>`;
+    }
+    document.getElementById('ccalGrid').innerHTML = html;
+  }
+
+  function ccalPickDate(ds) {
+    ccal.selDate = ds; ccal.selTime = null; ccal.selDisplay = '';
+    ccalRender();
+    const key   = ds.slice(0,7);
+    const times = (ccal.slots[key] || {})[ds] || [];
+    const label = new Date(ds + 'T12:00:00').toLocaleDateString('en-US',
+      { weekday: 'long', month: 'long', day: 'numeric' });
+    document.getElementById('ccalTimesHead').textContent = label;
+    document.getElementById('ccalSlots').innerHTML = times.map(iso => {
+      const disp = new Date(iso).toLocaleTimeString('en-US',
+        { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' });
+      return `<button class="ccal-slot" onclick="ccalPickTime('${iso}','${disp}',this)">${disp}</button>`;
+    }).join('');
+    document.getElementById('ccalTimes').style.display   = 'block';
+    document.getElementById('ccalConfirm').style.display = 'none';
+  }
+
+  function ccalPickTime(iso, disp, btn) {
+    ccal.selTime = iso; ccal.selDisplay = disp;
+    document.querySelectorAll('.ccal-slot').forEach(b => b.classList.remove('sel'));
+    btn.classList.add('sel');
+    const dateLabel = new Date(ccal.selDate + 'T12:00:00').toLocaleDateString('en-US',
+      { weekday: 'long', month: 'long', day: 'numeric' });
     const isAudit = ans.path === 'onsite-audit';
-    const label   = isAudit ? 'On-Site IT Audit' : '15-Minute Intro Call';
+    document.getElementById('ccalConfirmWhen').textContent = `${dateLabel} · ${disp}`;
+    document.getElementById('ccalConfirmWho').innerHTML =
+      `${ans.name} · ${ans.email}` +
+      (ans.phone ? ` · ${ans.phone}` : '') +
+      (isAudit && ans.address ? `<br>${ans.address}` : '');
+    document.getElementById('ccalError').style.display   = 'none';
+    document.getElementById('ccalConfirm').style.display = 'block';
+  }
 
-    document.getElementById('calHeading').innerHTML =
-      `You chose: <span>${label}</span>`;
-    document.getElementById('calSub').textContent = isAudit
-      ? "Pick a slot — your details are pre-filled. One tap to confirm."
-      : "Pick a slot — your details are pre-filled. One tap to confirm.";
-
-    // Populate left-panel booking details
-    document.getElementById('lpBName').innerHTML    = `<strong>Name</strong>${ans.name}`;
-    document.getElementById('lpBEmail').innerHTML   = `<strong>Email</strong>${ans.email}`;
-    if (ans.phone) {
-      document.getElementById('lpBPhone').innerHTML = `<strong>Phone</strong>${ans.phone}`;
-      document.getElementById('lpBPhone').style.display = 'block';
-    }
-    if (isAudit && ans.address) {
-      document.getElementById('lpBAddress').innerHTML = `<strong>Address</strong>${ans.address}`;
-      document.getElementById('lpBAddress').style.display = 'block';
-    }
-    document.getElementById('lpBookingDetails').style.display = 'block';
-    // Hide right-panel summary (left panel now carries this)
-    document.getElementById('bookingSummary').style.display = 'none';
-
-    // Blog tie-in for AI concern
-    document.getElementById('blogCta').classList.toggle('show', ans.concern === 'ai');
-
-    // Load Cal.com
-    if (!calLoaded) {
-      // Build config — pre-fill contact info and, for on-site, inject address
-      // into Cal.com's attendee location field so it shows in the "Where" line
-      // of the confirmation email rather than the raw placeholder.
-      Cal("inline", {
-        elementOrSelector: "#calInline",
-        calLink: `ampit/${ans.path}`,
-        config: {
-          layout: "month_view",
-          name:  ans.name  || undefined,
-          email: ans.email || undefined,
-          notes: ans.note  || undefined,
-          // Pre-fill the Cal.com attendee address field so it appears in the
-          // "Where" line of the calendar invite and confirmation email.
-          // The confirmation form will appear but is fully pre-filled —
-          // user just clicks Confirm once.
-          ...(isAudit && ans.address ? {
-            location: JSON.stringify({ value: "attendeeInPerson", optionValue: ans.address })
-          } : {})
-        }
+  async function ccalConfirm() {
+    const btn = document.getElementById('ccalConfirmBtn');
+    btn.disabled = true; btn.textContent = 'Booking...';
+    document.getElementById('ccalError').style.display = 'none';
+    try {
+      const res  = await fetch('/api/cal-book', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: ans.path, start: ccal.selTime,
+          name: ans.name, email: ans.email,
+          phone: ans.phone || '', address: ans.address || '', note: ans.note || ''
+        })
       });
-      Cal("ui", {
-        theme: "dark",
-        styles: { branding: { brandColor: "#00f060" } },
-        hideEventTypeDetails: true,
-        layout: "month_view"
-      });
-      calLoaded = true;
+      const data = await res.json();
+      if (res.ok && (data.uid || data.id)) {
+        if (typeof gtag !== 'undefined')
+          gtag('event', 'conversion', { send_to: 'AW-18009085486/ZIP4CKuYzJscEK6ss4tD' });
+        showBookingSuccess();
+      } else {
+        throw new Error(data.message || 'Booking failed');
+      }
+    } catch(e) {
+      btn.disabled = false; btn.textContent = 'Confirm Booking →';
+      const err = document.getElementById('ccalError');
+      err.textContent = 'Something went wrong — please try again or call (980) 377-2733';
+      err.style.display = 'block';
     }
   }
 
-  // ── Booking success ───────────────────────────────────────────
-  Cal("on", {
-    action: "bookingSuccessful",
-    callback: function () {
-      const isAudit = ans.path === 'onsite-audit';
+  function showBookingSuccess() {
+    const isAudit = ans.path === 'onsite-audit';
+    document.getElementById('customCal').style.display   = 'none';
+    document.querySelector('.no-book').style.display     = 'none';
+    document.querySelector('#step-8 .step-tag').style.display = 'none';
+    document.getElementById('calHeading').style.display  = 'none';
+    document.getElementById('calSub').style.display      = 'none';
+    document.getElementById('blogCta').style.display     = 'none';
+    document.getElementById('successSubhead').textContent = isAudit
+      ? "Your on-site audit visit is booked. Here's what to expect:"
+      : "Your intro call is confirmed. Here's what to expect:";
+    document.getElementById('successSteps').innerHTML = (isAudit ? [
+      "Check your email — you'll get a calendar invite with the visit details",
+      "We'll review what you shared and research your environment before we arrive",
+      "We'll walk through what we find and give you a plain-English breakdown with clear next steps"
+    ] : [
+      "Check your email — you'll get a calendar invite with the meeting link",
+      "We'll review what you shared before we talk — no prep needed on your end",
+      "We'll cover your situation, walk through your options, and give you straight answers"
+    ]).map(s => `<li>${s}</li>`).join('');
+    document.getElementById('bookingSuccess').classList.add('show');
+    document.getElementById('lpHeading').innerHTML = "You're <span>all set.</span>";
+    document.getElementById('lpSub').textContent   = "We'll see you soon.";
+    document.getElementById('lpBookingDetails').style.display = 'none';
+    document.querySelector('.right-panel').scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
-      document.querySelector('.cal-wrap').style.display  = 'none';
-      document.querySelector('.no-book').style.display   = 'none';
-      document.querySelector('#step-8 .step-tag').style.display = 'none';
-      document.getElementById('calHeading').style.display = 'none';
-      document.getElementById('calSub').style.display     = 'none';
-      document.getElementById('blogCta').style.display    = 'none';
+  function buildCalStep() {
+    const isAudit = ans.path === 'onsite-audit';
+    const label   = isAudit ? 'On-Site IT Audit' : '15-Minute Intro Call';
+    document.getElementById('calHeading').innerHTML = `You chose: <span>${label}</span>`;
+    document.getElementById('calSub').textContent   = 'Select a date and time below.';
+    document.getElementById('blogCta').classList.toggle('show', ans.concern === 'ai');
 
-      document.getElementById('successSubhead').textContent = isAudit
-        ? "Your on-site audit visit is booked. Here's what to expect:"
-        : "Your intro call is confirmed. Here's what to expect:";
-
-      document.getElementById('successSteps').innerHTML = (isAudit ? [
-        "Check your email — you'll get a calendar invite with the visit details",
-        "We'll review what you shared and research your environment before we arrive",
-        "We'll walk through what we find and give you a plain-English breakdown with clear next steps"
-      ] : [
-        "Check your email — you'll get a calendar invite with the meeting link",
-        "We'll review what you shared before we talk — no prep needed on your end",
-        "We'll cover your situation, walk through your options, and give you straight answers"
-      ]).map(s => `<li>${s}</li>`).join('');
-
-      document.getElementById('bookingSuccess').classList.add('show');
-      document.getElementById('lpHeading').innerHTML = "You're <span>all set.</span>";
-      document.getElementById('lpSub').textContent   = "We'll see you soon.";
-      document.querySelector('.right-panel').scrollTo({ top: 0, behavior: 'smooth' });
+    // Left panel booking details
+    document.getElementById('lpBName').innerHTML  = `<strong>Name</strong>${ans.name}`;
+    document.getElementById('lpBEmail').innerHTML = `<strong>Email</strong>${ans.email}`;
+    if (ans.phone) {
+      document.getElementById('lpBPhone').innerHTML     = `<strong>Phone</strong>${ans.phone}`;
+      document.getElementById('lpBPhone').style.display = 'block';
     }
-  });
+    if (isAudit && ans.address) {
+      document.getElementById('lpBAddress').innerHTML     = `<strong>Address</strong>${ans.address}`;
+      document.getElementById('lpBAddress').style.display = 'block';
+    }
+    document.getElementById('lpBookingDetails').style.display = 'block';
+
+    // Init custom calendar
+    ccal.year = new Date().getFullYear(); ccal.month = new Date().getMonth();
+    ccal.selDate = null; ccal.selTime = null; ccal.slots = {};
+    document.getElementById('ccalTimes').style.display   = 'none';
+    document.getElementById('ccalConfirm').style.display = 'none';
+    document.getElementById('ccalError').style.display   = 'none';
+    document.getElementById('customCal').style.display   = 'block';
+
+    document.getElementById('ccalConfirmBtn').onclick = ccalConfirm;
+    document.getElementById('ccalChangeBtn').onclick  = function() {
+      ccal.selTime = null;
+      document.getElementById('ccalConfirm').style.display = 'none';
+      document.querySelectorAll('.ccal-slot').forEach(b => b.classList.remove('sel'));
+    };
+    document.getElementById('ccalPrev').onclick = async function() {
+      if (ccal.month === 0) { ccal.month = 11; ccal.year--; } else ccal.month--;
+      ccal.selDate = null;
+      document.getElementById('ccalTimes').style.display   = 'none';
+      document.getElementById('ccalConfirm').style.display = 'none';
+      ccalRender(); await ccalLoad(ccal.year, ccal.month); ccalRender();
+    };
+    document.getElementById('ccalNext').onclick = async function() {
+      if (ccal.month === 11) { ccal.month = 0; ccal.year++; } else ccal.month++;
+      ccal.selDate = null;
+      document.getElementById('ccalTimes').style.display   = 'none';
+      document.getElementById('ccalConfirm').style.display = 'none';
+      ccalRender(); await ccalLoad(ccal.year, ccal.month); ccalRender();
+    };
+
+    ccalRender();
+    ccalLoad(ccal.year, ccal.month).then(() => ccalRender());
+  }
 
   // ── Init ──────────────────────────────────────────────────────
   updateProgress(1);
