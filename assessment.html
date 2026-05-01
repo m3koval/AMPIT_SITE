@@ -260,12 +260,6 @@
       <li>Free — no fee, no obligation, no commitment</li>
       <li>Charlotte-local team, available on-site</li>
     </ul>
-    <div class="lp-booking-details" id="lpBookingDetails" style="display:none">
-      <div class="lp-booking-row" id="lpBName"></div>
-      <div class="lp-booking-row" id="lpBEmail"></div>
-      <div class="lp-booking-row" id="lpBPhone" style="display:none"></div>
-      <div class="lp-booking-row" id="lpBAddress" style="display:none"></div>
-    </div>
     <div class="step-tracker">Step <em id="stepNum">1</em> of 8</div>
   </div>
 
@@ -792,18 +786,22 @@
       const res  = await fetch('/api/cal-book', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          type: ans.path, start: ccal.selTime,
+          type: ans.path,
+          start: new Date(ccal.selTime).toISOString(), // ensure UTC ISO
           name: ans.name, email: ans.email,
           phone: ans.phone || '', address: ans.address || '', note: ans.note || ''
         })
       });
       const data = await res.json();
-      if (res.ok && (data.uid || data.id)) {
+      // Cal.com v2 wraps response: { status: "success", data: { uid, id, ... } }
+      const booking = data.data || data;
+      if (res.ok && data.status === 'success' && (booking.uid || booking.id)) {
         if (typeof gtag !== 'undefined')
           gtag('event', 'conversion', { send_to: 'AW-18009085486/ZIP4CKuYzJscEK6ss4tD' });
         showBookingSuccess();
       } else {
-        throw new Error(data.message || 'Booking failed');
+        const msg = data.error?.message || data.message || data.status || 'Booking failed';
+        throw new Error(msg);
       }
     } catch(e) {
       btn.disabled = false; btn.textContent = 'Confirm Booking →';
@@ -835,7 +833,6 @@
     document.getElementById('bookingSuccess').classList.add('show');
     document.getElementById('lpHeading').innerHTML = "You're <span>all set.</span>";
     document.getElementById('lpSub').textContent   = "We'll see you soon.";
-    document.getElementById('lpBookingDetails').style.display = 'none';
     document.querySelector('.right-panel').scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -846,18 +843,6 @@
     document.getElementById('calSub').textContent   = 'Select a date and time below.';
     document.getElementById('blogCta').classList.toggle('show', ans.concern === 'ai');
 
-    // Left panel booking details
-    document.getElementById('lpBName').innerHTML  = `<strong>Name</strong>${ans.name}`;
-    document.getElementById('lpBEmail').innerHTML = `<strong>Email</strong>${ans.email}`;
-    if (ans.phone) {
-      document.getElementById('lpBPhone').innerHTML     = `<strong>Phone</strong>${ans.phone}`;
-      document.getElementById('lpBPhone').style.display = 'block';
-    }
-    if (isAudit && ans.address) {
-      document.getElementById('lpBAddress').innerHTML     = `<strong>Address</strong>${ans.address}`;
-      document.getElementById('lpBAddress').style.display = 'block';
-    }
-    document.getElementById('lpBookingDetails').style.display = 'block';
 
     // Init custom calendar
     ccal.year = new Date().getFullYear(); ccal.month = new Date().getMonth();

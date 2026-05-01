@@ -19,8 +19,7 @@ module.exports = async function handler(req, res) {
   });
 
   try {
-    const url = `https://api.cal.com/v2/slots?${params}`;
-    const calRes = await fetch(url, {
+    const calRes = await fetch(`https://api.cal.com/v2/slots?${params}`, {
       headers: {
         'cal-api-version': '2024-09-04',
         'Authorization':   `Bearer ${apiKey}`
@@ -28,16 +27,8 @@ module.exports = async function handler(req, res) {
     });
     const data = await calRes.json();
 
-    // Debug mode: return raw Cal.com response
-    if (req.query.debug === '1') {
-      return res.status(calRes.status).json({
-        _debug: true, _status: calRes.status,
-        _url: url.replace(apiKey, 'REDACTED'), _raw: data
-      });
-    }
-
     // v2 response: { status: "success", data: { "2026-05-01": ["ISO","ISO",...] } }
-    const slots = (data.status === 'success' && data.data) ? data.data : {};
+    const slots = data.data || {};
 
     const normalized = {};
     for (const [date, times] of Object.entries(slots)) {
