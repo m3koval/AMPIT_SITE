@@ -139,6 +139,13 @@
   .back-link { display: inline-block; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.75rem; color: var(--text-muted); text-decoration: none; border: 1px solid var(--border); padding: 12px 24px; letter-spacing: 0.06em; transition: all 0.2s; }
   .back-link:hover { color: var(--green); border-color: var(--border-strong); }
 
+  /* LEFT PANEL BOOKING DETAILS — step 8 */
+  .lp-booking-details { margin-top: 28px; border-top: 1px solid var(--border); padding-top: 20px; animation: fadeUp 0.4s ease both; }
+  .lp-booking-label { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.62rem; color: var(--green); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px; }
+  .lp-booking-row { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+  .lp-booking-row strong { color: var(--text); font-weight: 500; font-size: 0.72rem; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; letter-spacing: 0.06em; display: inline-block; width: 52px; color: var(--text-dim); }
+  .lp-booking-note { font-size: 0.72rem; color: var(--text-dim); line-height: 1.6; margin-top: 14px; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; border-left: 2px solid var(--green); padding-left: 10px; }
+
   /* BOOKING SUMMARY — step 8 */
   .booking-summary { display: flex; flex-wrap: wrap; gap: 6px 18px; background: rgba(0,240,96,0.04); border: 1px solid var(--border); border-left: 3px solid var(--green); padding: 12px 16px; margin-bottom: 18px; }
   .booking-summary-item { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.02em; }
@@ -228,6 +235,14 @@ Cal("init", {origin:"https://cal.com"});
       <li>Free — no fee, no obligation, no commitment</li>
       <li>Charlotte-local team, available on-site</li>
     </ul>
+    <div class="lp-booking-details" id="lpBookingDetails" style="display:none">
+      <div class="lp-booking-label">// Booking for</div>
+      <div class="lp-booking-row" id="lpBName"></div>
+      <div class="lp-booking-row" id="lpBEmail"></div>
+      <div class="lp-booking-row" id="lpBPhone" style="display:none"></div>
+      <div class="lp-booking-row" id="lpBAddress" style="display:none"></div>
+      <p class="lp-booking-note">All fields are pre-filled — just pick a slot and tap Confirm.</p>
+    </div>
     <div class="step-tracker">Step <em id="stepNum">1</em> of 8</div>
   </div>
 
@@ -649,17 +664,23 @@ Cal("init", {origin:"https://cal.com"});
     document.getElementById('calHeading').innerHTML =
       `You chose: <span>${label}</span>`;
     document.getElementById('calSub').textContent = isAudit
-      ? "Pick a date and time below. We'll come to you — Charlotte area. Same day may be available."
-      : "Pick a date and time below. We'll send a Google Meet link with the invite.";
+      ? "Pick a slot — your details are pre-filled. One tap to confirm."
+      : "Pick a slot — your details are pre-filled. One tap to confirm.";
 
-    // Booking summary — shows collected info so user can verify before picking a time
-    const summaryItems = [
-      `<span class="booking-summary-item"><strong>Name</strong>${ans.name}</span>`,
-      `<span class="booking-summary-item"><strong>Email</strong>${ans.email}</span>`,
-      ans.phone ? `<span class="booking-summary-item"><strong>Phone</strong>${ans.phone}</span>` : '',
-      isAudit && ans.address ? `<span class="booking-summary-item"><strong>Address</strong>${ans.address}</span>` : ''
-    ].filter(Boolean).join('');
-    document.getElementById('bookingSummary').innerHTML = summaryItems;
+    // Populate left-panel booking details
+    document.getElementById('lpBName').innerHTML    = `<strong>Name</strong>${ans.name}`;
+    document.getElementById('lpBEmail').innerHTML   = `<strong>Email</strong>${ans.email}`;
+    if (ans.phone) {
+      document.getElementById('lpBPhone').innerHTML = `<strong>Phone</strong>${ans.phone}`;
+      document.getElementById('lpBPhone').style.display = 'block';
+    }
+    if (isAudit && ans.address) {
+      document.getElementById('lpBAddress').innerHTML = `<strong>Address</strong>${ans.address}`;
+      document.getElementById('lpBAddress').style.display = 'block';
+    }
+    document.getElementById('lpBookingDetails').style.display = 'block';
+    // Hide right-panel summary (left panel now carries this)
+    document.getElementById('bookingSummary').style.display = 'none';
 
     // Blog tie-in for AI concern
     document.getElementById('blogCta').classList.toggle('show', ans.concern === 'ai');
