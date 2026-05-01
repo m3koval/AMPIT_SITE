@@ -654,20 +654,24 @@ Cal("init", {origin:"https://cal.com"});
       // Build config — pre-fill contact info and, for on-site, inject address
       // into Cal.com's attendee location field so it shows in the "Where" line
       // of the confirmation email rather than the raw placeholder.
-      const calConfig = {
-        layout: "month_view",
-        name:  ans.name  || undefined,
-        email: ans.email || undefined,
-        notes: ans.note  || undefined,
-      };
-      if (isAudit && ans.address) {
-        // Pre-fills the Cal.com "Attendee's Address" location field
-        calConfig.location = JSON.stringify({ value: "attendeeInPerson", optionValue: ans.address });
-      }
       Cal("inline", {
         elementOrSelector: "#calInline",
         calLink: `ampit/${ans.path}`,
-        config: calConfig
+        config: {
+          layout: "month_view",
+          name:  ans.name  || undefined,
+          email: ans.email || undefined,
+          notes: ans.note  || undefined,
+          // Pass address into Cal.com's location field so it appears in the
+          // calendar invite "Where" field and confirmation emails.
+          // Remove the "In Person (Attendee Address)" location type from the
+          // Cal.com event — that's what triggers the confirmation form.
+          // With that removed and name+email pre-filled, Cal.com should skip
+          // the form entirely while still using this location value.
+          ...(isAudit && ans.address ? {
+            location: JSON.stringify({ value: "attendeeInPerson", optionValue: ans.address })
+          } : {})
+        }
       });
       Cal("ui", {
         theme: "dark",
