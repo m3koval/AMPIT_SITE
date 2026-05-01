@@ -139,6 +139,11 @@
   .back-link { display: inline-block; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.75rem; color: var(--text-muted); text-decoration: none; border: 1px solid var(--border); padding: 12px 24px; letter-spacing: 0.06em; transition: all 0.2s; }
   .back-link:hover { color: var(--green); border-color: var(--border-strong); }
 
+  /* BOOKING SUMMARY — step 8 */
+  .booking-summary { display: flex; flex-wrap: wrap; gap: 6px 18px; background: rgba(0,240,96,0.04); border: 1px solid var(--border); border-left: 3px solid var(--green); padding: 12px 16px; margin-bottom: 18px; }
+  .booking-summary-item { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.02em; }
+  .booking-summary-item strong { color: var(--green); font-weight: 600; margin-right: 4px; }
+
   /* GOOGLE PLACES AUTOCOMPLETE — dark theme override */
   .pac-container { background: #0d1410; border: 1px solid var(--border-strong); border-top: none; box-shadow: 0 12px 32px rgba(0,0,0,0.6); font-family: 'Inter', sans-serif; border-radius: 0; margin-top: -1px; }
   .pac-item { border-top: 1px solid var(--border); padding: 9px 14px; cursor: pointer; color: var(--text-muted); font-size: 0.84rem; display: flex; align-items: center; gap: 8px; }
@@ -396,6 +401,7 @@ Cal("init", {origin:"https://cal.com"});
         <span class="step-tag">// 08 of 08 — pick a time</span>
         <p class="cal-heading" id="calHeading"></p>
         <p class="cal-sub" id="calSub"></p>
+        <div class="booking-summary" id="bookingSummary"></div>
         <div class="blog-cta" id="blogCta">
           <span class="blog-cta-label">// Related reading</span>
           <a class="blog-cta-link" href="/blog/your-team-is-already-using-ai.html" target="_blank" rel="noopener">
@@ -646,6 +652,15 @@ Cal("init", {origin:"https://cal.com"});
       ? "Pick a date and time below. We'll come to you — Charlotte area. Same day may be available."
       : "Pick a date and time below. We'll send a Google Meet link with the invite.";
 
+    // Booking summary — shows collected info so user can verify before picking a time
+    const summaryItems = [
+      `<span class="booking-summary-item"><strong>Name</strong>${ans.name}</span>`,
+      `<span class="booking-summary-item"><strong>Email</strong>${ans.email}</span>`,
+      ans.phone ? `<span class="booking-summary-item"><strong>Phone</strong>${ans.phone}</span>` : '',
+      isAudit && ans.address ? `<span class="booking-summary-item"><strong>Address</strong>${ans.address}</span>` : ''
+    ].filter(Boolean).join('');
+    document.getElementById('bookingSummary').innerHTML = summaryItems;
+
     // Blog tie-in for AI concern
     document.getElementById('blogCta').classList.toggle('show', ans.concern === 'ai');
 
@@ -661,16 +676,9 @@ Cal("init", {origin:"https://cal.com"});
           layout: "month_view",
           name:  ans.name  || undefined,
           email: ans.email || undefined,
-          notes: ans.note  || undefined,
-          // Pass address into Cal.com's location field so it appears in the
-          // calendar invite "Where" field and confirmation emails.
-          // Remove the "In Person (Attendee Address)" location type from the
-          // Cal.com event — that's what triggers the confirmation form.
-          // With that removed and name+email pre-filled, Cal.com should skip
-          // the form entirely while still using this location value.
-          ...(isAudit && ans.address ? {
-            location: JSON.stringify({ value: "attendeeInPerson", optionValue: ans.address })
-          } : {})
+          notes: isAudit && ans.address
+            ? `Office address: ${ans.address}${ans.note ? '\n\n' + ans.note : ''}`
+            : (ans.note || undefined)
         }
       });
       Cal("ui", {
