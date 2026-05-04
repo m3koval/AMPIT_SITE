@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Team Is Already Using AI. Here's What Nobody Told Them. — AMP IT</title>
+<title>AI Chats Aren't Protected by Attorney-Client Privilege — AMP IT Solutions</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<meta name="description" content="A federal court ruling confirmed AI conversations carry no legal confidentiality protection. Here's what Charlotte business owners need to know about shadow AI risk inside their firms.">
+<meta name="description" content="A federal court ruled AI chat logs have no attorney-client privilege and can be handed to prosecutors. Here's what every Charlotte business needs to know about shadow AI risk.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.ampitsolutions.com/blog/your-team-is-already-using-ai.html">
-<meta property="og:title" content="Your Team Is Already Using AI. Here's What Nobody Told Them.">
-<meta property="og:description" content="A federal court just confirmed AI conversations carry no legal confidentiality protection. Here's what that means for Charlotte law firms, CPAs, and small businesses.">
+<meta property="og:title" content="AI Chats Aren't Protected by Attorney-Client Privilege">
+<meta property="og:description" content="A federal court just ruled on it. Here's what every Charlotte business — law firms, CPAs, financial advisors — needs to know about AI confidentiality and shadow AI risk.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.ampitsolutions.com/blog/your-team-is-already-using-ai.html">
 <meta property="og:image" content="https://www.ampitsolutions.com/og-image.png">
@@ -19,8 +19,8 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Your Team Is Already Using AI. Here's What Nobody Told Them.">
-<meta name="twitter:description" content="A federal court ruling confirmed AI conversations carry no legal confidentiality protection. What Charlotte business owners need to know.">
+<meta name="twitter:title" content="AI Chats Aren't Protected by Attorney-Client Privilege">
+<meta name="twitter:description" content="A federal court just ruled on it. Here's what Charlotte business owners — law firms, CPAs, financial advisors — need to know.">
 <meta name="twitter:image" content="https://www.ampitsolutions.com/og-image.png">
 <link rel="preload" as="font" type="font/woff2" href="/fonts/outfit-latin.woff2" crossorigin>
 <link rel="preload" as="style" href="/styles.css">
@@ -29,18 +29,18 @@
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Your Team Is Already Using AI. Here's What Nobody Told Them.",
-  "description": "A federal court ruling confirmed AI conversations carry no legal confidentiality protection. Here's what Charlotte business owners need to know about shadow AI risk.",
+  "headline": "AI Chats Aren't Protected by Attorney-Client Privilege",
+  "description": "A federal court ruled AI chat logs carry no attorney-client privilege and can be handed to prosecutors. Here's what Charlotte businesses need to know.",
   "datePublished": "2026-04-29",
-  "dateModified": "2026-04-29",
+  "dateModified": "2026-05-04",
   "author": {
     "@type": "Organization",
-    "name": "AMP IT",
+    "name": "AMP IT Solutions",
     "url": "https://www.ampitsolutions.com"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "AMP IT",
+    "name": "AMP IT Solutions",
     "url": "https://www.ampitsolutions.com",
     "logo": {
       "@type": "ImageObject",
@@ -80,7 +80,12 @@
     font-family: 'Outfit', sans-serif; font-weight: 800;
     font-size: clamp(2rem, 4.5vw, 3.2rem);
     line-height: 1.1; letter-spacing: -0.02em;
-    margin-bottom: 28px; color: var(--text);
+    margin-bottom: 16px; color: var(--text);
+  }
+
+  .article-subtitle {
+    font-size: 1.05rem; color: var(--text-dim); margin-bottom: 28px;
+    line-height: 1.6; font-style: italic;
   }
 
   .article-meta {
@@ -107,6 +112,12 @@
     font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
     font-size: 0.75rem; color: var(--green); font-weight: 400;
     margin-right: 12px; letter-spacing: 0.05em;
+  }
+
+  .article-body h3 {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: 1rem; color: var(--text); margin: 28px 0 10px;
+    letter-spacing: 0.01em;
   }
 
   .article-body strong { color: var(--text); font-weight: 700; }
@@ -142,7 +153,7 @@
 
   .plan-row {
     background: var(--bg-card); padding: 20px 24px;
-    display: grid; grid-template-columns: 160px 1fr;
+    display: grid; grid-template-columns: 200px 1fr;
     gap: 20px; align-items: start;
     transition: background 0.2s;
   }
@@ -164,7 +175,6 @@
 
   .plan-row.safe { border-left: 2px solid var(--green); }
   .plan-row.risk { border-left: 2px solid rgba(255,85,85,0.6); }
-  .plan-row.risk .plan-row-name { color: var(--text); }
 
   /* CALLOUT BOX */
   .callout {
@@ -188,6 +198,40 @@
     letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 10px;
   }
   .ruling-box p { margin-bottom: 0; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+  .ruling-box p + p { margin-top: 12px; }
+
+  /* PRIVILEGE REASON BLOCKS */
+  .privilege-list {
+    display: flex; flex-direction: column; gap: 2px;
+    background: var(--border); margin: 32px 0;
+  }
+  .privilege-item {
+    background: var(--bg-card); padding: 20px 24px;
+    display: grid; grid-template-columns: 32px 1fr;
+    gap: 16px; transition: background 0.2s;
+  }
+  .privilege-item:hover { background: var(--bg-card-hover); }
+  .privilege-num {
+    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-size: 1.1rem; color: var(--green); line-height: 1.4;
+  }
+  .privilege-text h3 {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: 0.9rem; color: var(--text); margin: 0 0 8px; letter-spacing: 0;
+  }
+  .privilege-text p {
+    font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 0;
+  }
+
+  /* FAQ */
+  .faq-list { display: flex; flex-direction: column; gap: 2px; background: var(--border); margin: 32px 0; }
+  .faq-item { background: var(--bg-card); padding: 22px 24px; transition: background 0.2s; }
+  .faq-item:hover { background: var(--bg-card-hover); }
+  .faq-q {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: 0.95rem; color: var(--text); margin-bottom: 10px; line-height: 1.4;
+  }
+  .faq-a { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; margin: 0; }
 
   /* BUTTONS */
   .btn-primary {
@@ -233,6 +277,7 @@
     letter-spacing: -0.01em;
   }
   .article-cta h2 span { color: var(--green); }
+  .article-cta h2::before { display: none; }
 
   .article-cta p {
     color: var(--text-muted); font-size: 1rem;
@@ -248,6 +293,15 @@
   }
   .cta-contact a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
   .cta-contact a:hover { color: var(--green); }
+
+  /* DISCLAIMER */
+  .article-disclaimer {
+    margin-top: 48px; padding: 20px 24px;
+    border: 1px solid var(--border); background: var(--bg-card);
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.67rem; color: var(--text-dim); line-height: 1.7;
+    letter-spacing: 0.02em;
+  }
 
   /* FOOTER */
   .blog-footer {
@@ -270,6 +324,8 @@
   @media (max-width: 600px) {
     .article-wrap { padding: 48px 20px 80px; }
     .plan-row { grid-template-columns: 1fr; gap: 8px; }
+    .privilege-item { grid-template-columns: 1fr; }
+    .privilege-num { font-size: 0.85rem; }
     .blog-footer { padding: 28px 20px; flex-direction: column; align-items: flex-start; }
   }
 </style>
@@ -300,7 +356,7 @@
 </svg>
 
 <nav aria-label="Blog navigation">
-  <a href="/" class="nav-logo" aria-label="AMP IT home">
+  <a href="/" class="nav-logo" aria-label="AMP IT Solutions home">
     <svg width="34" height="32" aria-hidden="true"><use href="#amp-logo"/></svg>
     <span class="nav-wordmark"><span class="g">AMP</span> IT</span>
   </a>
@@ -310,116 +366,172 @@
 <main>
   <article class="article-wrap">
 
-    <div class="article-eyebrow">AI Risk · April 2026</div>
+    <div class="article-eyebrow">AI Risk · May 2026</div>
 
-    <h1 class="article-title">Your Team Is Already Using AI. Here's What Nobody Told Them.</h1>
+    <h1 class="article-title">AI Chats Aren't Protected by Attorney-Client Privilege</h1>
+    <p class="article-subtitle">A federal court just ruled on it. Here's what every Charlotte business needs to know.</p>
 
     <div class="article-meta">
-      <span>By AMP IT · Charlotte, NC</span>
-      <span>April 29, 2026</span>
-      <span>8 min read</span>
+      <span>By AMP IT Solutions · Charlotte, NC</span>
+      <span>May 4, 2026</span>
+      <span>10 min read</span>
     </div>
 
     <div class="article-body">
 
-      <p>A federal court just handed down a ruling that every business owner in Charlotte needs to hear — not because it's legal drama, but because it quietly describes what's probably happening inside your company right now.</p>
+      <p>In February 2026, Judge Jed Rakoff of the U.S. District Court for the Southern District of New York issued the first federal ruling of its kind: AI chat logs are not protected by attorney-client privilege and can be handed directly to prosecutors.</p>
 
       <div class="ruling-box">
-        <div class="ruling-label">Federal Ruling · 2026</div>
-        <p>In <em>United States v. Heppner</em> (2026), a judge ruled that conversations with AI assistants like Claude and ChatGPT carry <strong>no legal confidentiality protection</strong>. The platform can be compelled to hand those conversations over. The reasoning? The terms of service you — or your employees — clicked through and almost certainly never read say they can.</p>
+        <div class="ruling-label">Federal Ruling · United States v. Heppner · No. 25-cr-00503-JSR</div>
+        <p>The case involved a defendant who used Claude by Anthropic to research his legal defense after receiving a federal grand jury subpoena. The FBI seized his devices. The government requested the AI-generated documents. His lawyers claimed privilege. The court said no.</p>
+        <p>Judge Rakoff called it a question of "first impression nationwide." Courts had not ruled on this before. Now they have — and the answer has implications far beyond one criminal case.</p>
       </div>
 
-      <p>That ruling isn't an outlier. It's a warning shot.</p>
+      <h2>Why AI Chats Don't Qualify for Attorney-Client Privilege</h2>
 
-      <h2>The "Pro Plan" Trap</h2>
+      <p>Attorney-client privilege has three requirements. The court found AI chats fail all three.</p>
 
-      <p>Here's what most small business owners assume: <em>"We pay for the good version, so we're protected."</em></p>
-      <p>That assumption is wrong — and it's one we're seeing play out across law firms, CPA practices, and financial advisory offices right here in Charlotte.</p>
+      <div class="privilege-list">
+        <div class="privilege-item">
+          <div class="privilege-num">1.</div>
+          <div class="privilege-text">
+            <h3>There was no attorney involved.</h3>
+            <p>Claude is not a lawyer. It holds no law license, owes no duty of loyalty, and cannot form an attorney-client relationship. The court noted that all recognized privileges require "a trusting human relationship" — and that relationship cannot exist between a user and an AI platform.</p>
+          </div>
+        </div>
+        <div class="privilege-item">
+          <div class="privilege-num">2.</div>
+          <div class="privilege-text">
+            <h3>There was no confidentiality.</h3>
+            <p>Anthropic's privacy policy — the one users consent to when they sign up — states that the platform collects user inputs and outputs, uses that data to train its models, and reserves the right to disclose data to third parties, including government regulatory authorities. The court found there was no reasonable expectation of confidentiality.</p>
+          </div>
+        </div>
+        <div class="privilege-item">
+          <div class="privilege-num">3.</div>
+          <div class="privilege-text">
+            <h3>It was not for the purpose of obtaining legal advice.</h3>
+            <p>The defendant used Claude on his own initiative, not at his attorney's direction. What matters for privilege is who directed the communication — not who the user intended to share results with later.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p>The bottom line: sharing privileged information with a consumer AI platform is treated the same as sharing it with any other third party. That privilege is waived.</p>
+      </div>
+
+      <h2>This Is Not Just a Legal Problem. It Is a Business Problem.</h2>
+
+      <p>You do not have to be under federal investigation for this to matter. Right now, someone on your team is probably:</p>
+
+      <ul>
+        <li>Pasting a client proposal into ChatGPT to clean it up</li>
+        <li>Asking Claude to summarize a vendor contract or NDA</li>
+        <li>Using Google Gemini to draft a termination letter or job offer</li>
+        <li>Running financials through Microsoft Copilot without realizing it is connected to a personal account</li>
+        <li>Dropping meeting notes into Notion AI or Grammarly without thinking twice</li>
+      </ul>
+
+      <p>None of that feels dangerous. And most of it is not — if it is happening on the right platform, under the right terms. If it is happening on a personal or consumer-tier account, that information is sitting on a server retained for years, potentially reviewed by humans, and — as a federal court just confirmed — potentially handed to the other side.</p>
+
+      <div class="callout">
+        <p>For a law firm, that is a state bar ethics violation waiting to happen. For a CPA or financial advisor, that is a FINRA or HIPAA exposure. For any business, it is a competitive intelligence risk you never agreed to.</p>
+      </div>
+
+      <h2>The Pro Plan Does Not Fix This</h2>
+
+      <p>Here is the assumption most business owners make: <em>"We pay for the good version, so we are protected."</em> That assumption is wrong — and the Heppner ruling confirms it.</p>
 
       <div class="plan-comparison">
         <div class="plan-row risk">
-          <div class="plan-row-name">ChatGPT Plus <span class="price">$20/month</span></div>
-          <div class="plan-row-detail">Conversations used for training by default. You have to manually opt out — and that doesn't fix the legal exposure anyway.</div>
-        </div>
-        <div class="plan-row risk">
           <div class="plan-row-name">Claude Pro <span class="price">$20/month</span></div>
-          <div class="plan-row-detail">Same story. After a policy change in late 2025, consumer plans — Free, Pro, and Max — are all treated the same when it comes to data training and legal disclosure.</div>
+          <div class="plan-row-detail">Consumer tier terms of service. Opting out of AI training does not remove Anthropic's right to disclose your data to authorities under legal process — which is exactly what the Heppner court relied on.</div>
         </div>
         <div class="plan-row risk">
-          <div class="plan-row-name">Gemini Advanced <span class="price">$20/month</span></div>
-          <div class="plan-row-detail">Identical situation. And Gemini goes one step further: it now connects to your Gmail by default for US users. Your email history. In the AI. Without a conversation.</div>
+          <div class="plan-row-name">ChatGPT Plus / Pro <span class="price">$20–$200/month</span></div>
+          <div class="plan-row-detail">OpenAI's privacy policy contains the same provisions. Data can be disclosed in response to legal process regardless of your subscription level.</div>
+        </div>
+        <div class="plan-row risk">
+          <div class="plan-row-name">Google Gemini Advanced <span class="price">Consumer plan</span></div>
+          <div class="plan-row-detail">Same story — and Gemini goes further. It now integrates with Gmail, Google Drive, and Google Calendar by default for US users. Your emails, files, and meetings are accessible to the AI without most people realizing it.</div>
+        </div>
+        <div class="plan-row risk">
+          <div class="plan-row-name">Microsoft Copilot <span class="price">Free / Personal</span></div>
+          <div class="plan-row-detail">The free and personal versions operate under Microsoft's consumer privacy terms — not the commercial data protection agreements that come with a business license. They are not the same product.</div>
         </div>
       </div>
 
-      <p>Paying more for a consumer AI plan buys you features. It does not buy you privacy. It does not buy you a contract. And it does not protect you when a subpoena shows up.</p>
+      <p>A consumer AI subscription buys you features. It does not buy you a contract. It does not buy you confidentiality. And it will not protect you when a subpoena arrives.</p>
 
-      <h2>What Your Employees Are Actually Doing Right Now</h2>
+      <h2>Where the Real Protection Lives</h2>
 
-      <p>Let's make this concrete. Right now, someone on your team is probably:</p>
-
-      <ul>
-        <li>Pasting a client proposal into ChatGPT to "clean it up"</li>
-        <li>Asking Claude to summarize a vendor contract or NDA</li>
-        <li>Using Gemini to draft a termination letter or job offer</li>
-        <li>Running client financials through AI to prep for a meeting</li>
-      </ul>
-
-      <p>None of that feels dangerous. And most of it isn't — if it's happening on the right platform, with the right account, under the right terms.</p>
-
-      <div class="callout">
-        <p>If it's happening through a personal Gmail or a consumer subscription? That information is sitting on a server. It can be retained for up to five years. It can be reviewed by humans. And as a federal court just confirmed, it can be handed over.</p>
-        <p>For a law firm, that's a state bar issue. For a CPA or financial advisor, that's a FINRA or HIPAA issue. For any business, it's a competitive intelligence risk you didn't sign up for.</p>
-      </div>
-
-      <h2>There Is a Line — It's Just Not Where Most People Think It Is</h2>
-
-      <p>The protection does exist. It lives in business and enterprise plans — not consumer subscriptions.</p>
+      <p>The protection does exist. It lives in business and enterprise agreements — not consumer plans. The difference the Heppner court examined was exactly this: is there a signed contract with enforceable data commitments?</p>
 
       <div class="plan-comparison">
         <div class="plan-row safe">
-          <div class="plan-row-name">Microsoft 365 + Copilot <span class="price">Business / Enterprise</span></div>
-          <div class="plan-row-detail">Your data stays in your Microsoft tenant. Not used to train models. Covered under Microsoft's commercial data protection commitments — the same framework your email and files already live in. If you're already paying for M365, this is closer than you think.</div>
+          <div class="plan-row-name">Microsoft 365 Copilot <span class="price">Business / Enterprise</span></div>
+          <div class="plan-row-detail">Your data stays inside your Microsoft tenant. Not used to train models. Covered under Microsoft's commercial data protection commitments — the same framework your email and files already operate under. If your team uses Microsoft 365 today, this may already be closer than you think.</div>
         </div>
         <div class="plan-row safe">
           <div class="plan-row-name">Google Workspace + Gemini <span class="price">Business / Enterprise</span></div>
-          <div class="plan-row-detail">Enterprise-grade data protections. Submissions not used for training, not reviewed by humans, protected under Google's commercial terms — not the consumer privacy policy your personal Gmail account lives under.</div>
+          <div class="plan-row-detail">Enterprise-grade data protections. Not used for training. Not reviewed by humans. Governed by Google's commercial terms — not the consumer privacy policy your personal Gmail lives under.</div>
         </div>
         <div class="plan-row safe">
           <div class="plan-row-name">Claude for Work / Enterprise <span class="price">Business tier</span></div>
-          <div class="plan-row-detail">Explicitly excluded from Anthropic's consumer training policy and the legal disclosure exposure that comes with it.</div>
+          <div class="plan-row-detail">Explicitly excluded from Anthropic's consumer privacy policy and the legal disclosure rights the Heppner court relied on.</div>
+        </div>
+        <div class="plan-row safe">
+          <div class="plan-row-name">ChatGPT Enterprise / Team <span class="price">Business tier</span></div>
+          <div class="plan-row-detail">Data is not used for model training and is covered under OpenAI's commercial data agreements — not the consumer terms that apply to Plus and Pro.</div>
         </div>
       </div>
 
-      <p>The difference between consumer and business tier isn't just features — it's a contract with actual data commitments. Not a checkbox. Not a toggle buried in settings. A signed agreement.</p>
+      <h2>What This Means If You Are a Law Firm, CPA, or Financial Advisor</h2>
 
-      <h2>What This Means If You're a Law Firm, CPA, or Financial Advisor</h2>
+      <p>You already operate under obligations most businesses do not have. State bar ethics rules, FINRA recordkeeping requirements, HIPAA — all of them assume your client data stays where you put it.</p>
 
-      <p>You already operate under obligations that most businesses don't. State bar ethics rules, FINRA recordkeeping, HIPAA — all of them assume your client data stays where you put it.</p>
-      <p>Shadow AI — employees using personal or consumer AI tools without your knowledge — doesn't care about your obligations. It just does what it's told.</p>
+      <p>Shadow AI — employees using personal accounts for ChatGPT, Claude, Gemini, or other tools outside of company-managed systems — does not care about your obligations. It just does what it is told.</p>
 
       <div class="callout">
-        <p>You don't need to ban AI. Your competitors are using it and getting faster, and if you're not, you're falling behind. What you need is to make sure the tools being used inside your business are operating under terms that actually protect you and your clients.</p>
+        <p>You do not need to ban AI. Your competitors are using it and moving faster. What you need is to make sure your team is using it on the right side of that line.</p>
       </div>
 
-      <h2>What to Do About It</h2>
-
-      <p>Three things, in order:</p>
+      <h2>Four Things to Do Right Now</h2>
 
       <ol>
-        <li><strong>Find out what your team is actually using.</strong> Most business owners are surprised. It's rarely nothing.</li>
-        <li><strong>Decide which tools are approved</strong> — and make sure they're on business-tier accounts with proper data agreements in place.</li>
-        <li><strong>Get a policy in writing.</strong> Even a simple one. "Use approved tools only. Here's the list." That conversation protects you.</li>
+        <li><strong>Find out what your team is actually using.</strong> Most business owners are surprised by the answer. Shadow AI — personal accounts for ChatGPT, Claude, Gemini, Grammarly, Notion AI, and others — is far more common than most companies realize.</li>
+        <li><strong>Establish an approved AI stack.</strong> Decide which tools are permitted, on which accounts, under which licensing tier. A personal ChatGPT account and a ChatGPT Enterprise account are not the same product. Same name. Very different legal standing.</li>
+        <li><strong>Put a written policy in place.</strong> Even a simple one. "Approved AI tools only. Here is the list. Here is why." That document protects your business and gives your team clear direction.</li>
+        <li><strong>Get your licensing right.</strong> If your team already uses Microsoft 365, Copilot may be available under business-grade protections you are not yet using. If you use Google Workspace, Gemini's enterprise protections are built in — but only if the account is configured and managed correctly. The tool may not be the problem. The setup might be.</li>
       </ol>
 
-      <p>Most small businesses in Charlotte haven't done any of this — not because they don't care, but because it moved fast and nobody handed them a playbook.</p>
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <p class="faq-q">Does this ruling affect businesses, or just criminal defendants?</p>
+          <p class="faq-a">The Heppner ruling came from a criminal case, but the reasoning applies broadly — including civil litigation, regulatory investigations, and internal compliance reviews. If sensitive business information goes into a consumer AI, it may be discoverable in any legal proceeding.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">What if employees opt out of AI training?</p>
+          <p class="faq-a">Opting out of model training is a separate setting from legal disclosure rights. Anthropic, OpenAI, and Google all reserve the right to disclose user data in response to legal process regardless of training preferences. Opting out of training does not create confidentiality.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">Does an enterprise plan fully protect us?</p>
+          <p class="faq-a">Enterprise agreements significantly reduce the risk. They establish contractual data protections and exclude your data from training. They do not make you immune to subpoenas — no contract does — but they establish a reasonable expectation of confidentiality that consumer plans explicitly do not.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">What is shadow AI?</p>
+          <p class="faq-a">Shadow AI refers to employees using AI tools — often personal accounts for ChatGPT, Claude, Gemini, Grammarly, or others — outside of company-approved, company-managed systems. It is one of the fastest-growing IT security and compliance risks for small businesses right now.</p>
+        </div>
+      </div>
 
     </div>
 
     <!-- CTA -->
     <div class="article-cta">
-      <div class="cta-eyebrow">That's Exactly What We Do</div>
+      <div class="cta-eyebrow">This Is What AMP IT Solutions Does</div>
       <h2>Get your AI stack <span>right — once.</span></h2>
-      <p>At AMP IT, we help 5–50 person businesses in Charlotte get their technology working the right way — and that increasingly means getting AI right. We look at what your team is actually using, where the risks are, and how to get you on a setup that's productive and protected.</p>
+      <p>We help small businesses in Charlotte — law firms, CPA practices, financial advisors, and professional services companies — get their technology working the right way. That increasingly means getting AI right. We find out what your team is actually using, identify where the gaps are, and get you onto a setup that is productive and protected.</p>
       <div class="cta-buttons">
         <a href="/assessment.html" class="btn-primary">Book a Free Assessment</a>
         <a href="tel:+19803772733" class="btn-outline">Call Us</a>
@@ -427,9 +539,13 @@
       <div class="cta-contact">
         <a href="tel:+19803772733">📞 (980) 377-2733</a>
         <a href="mailto:hello@ampitsolutions.com">📩 hello@ampitsolutions.com</a>
-        <span>📍 919 Berryhill Rd Suite 100A, Charlotte, NC 28208</span>
-        <span style="margin-top:4px; color: var(--text-dim);">Microsoft Partner · Google Partner · On-Site Available</span>
+        <a href="/assessment.html">🌐 ampitsolutions.com/assessment — Free assessment. No pressure. Just clarity.</a>
+        <span style="margin-top:4px; color: var(--text-dim);">Microsoft Partner · Google Partner · On-Site Available · 919 Berryhill Rd Suite 100A, Charlotte, NC 28208</span>
       </div>
+    </div>
+
+    <div class="article-disclaimer">
+      This post is for informational purposes only and does not constitute legal advice. For guidance specific to your situation, consult a licensed attorney.
     </div>
 
   </article>
