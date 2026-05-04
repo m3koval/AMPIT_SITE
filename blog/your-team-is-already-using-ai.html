@@ -83,7 +83,6 @@
     margin-bottom: 20px; color: var(--text);
   }
 
-  /* Law firm name tags */
   .firm-tags {
     display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 36px;
   }
@@ -145,7 +144,7 @@
     font-weight: 800; font-size: 1rem; flex-shrink: 0; min-width: 20px;
   }
 
-  /* RULING BOX — red, for adverse rulings */
+  /* RULING BOX */
   .ruling-box {
     background: rgba(255,85,85,0.04);
     border: 1px solid rgba(255,85,85,0.2);
@@ -160,20 +159,6 @@
   .ruling-box p { margin-bottom: 0; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
   .ruling-box p + p { margin-top: 12px; }
 
-  /* SPLIT BOX — amber, for unsettled/split rulings */
-  .split-box {
-    background: rgba(255, 185, 0, 0.04);
-    border: 1px solid rgba(255, 185, 0, 0.22);
-    border-left: 3px solid rgba(255, 185, 0, 0.5);
-    padding: 24px 28px; margin: 24px 0;
-  }
-  .split-box .split-label {
-    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
-    font-size: 0.62rem; color: rgba(255, 185, 0, 0.75);
-    letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 10px;
-  }
-  .split-box p { margin-bottom: 0; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
-
   /* PLAN COMPARISON */
   .plan-comparison {
     display: flex; flex-direction: column; gap: 2px;
@@ -182,8 +167,7 @@
   .plan-row {
     background: var(--bg-card); padding: 20px 24px;
     display: grid; grid-template-columns: 200px 1fr;
-    gap: 20px; align-items: start;
-    transition: background 0.2s;
+    gap: 20px; align-items: start; transition: background 0.2s;
   }
   .plan-row:hover { background: var(--bg-card-hover); }
   .plan-row-name {
@@ -199,15 +183,6 @@
   .plan-row.safe { border-left: 2px solid var(--green); }
   .plan-row.risk { border-left: 2px solid rgba(255,85,85,0.6); }
 
-  /* CALLOUT — green, for key takeaways */
-  .callout {
-    background: var(--bg-card); border: 1px solid var(--border-strong);
-    border-left: 3px solid var(--green);
-    padding: 24px 28px; margin: 32px 0;
-  }
-  .callout p { margin-bottom: 0; font-size: 0.95rem; }
-  .callout p + p { margin-top: 12px; }
-
   /* FAQ */
   .faq-list { display: flex; flex-direction: column; gap: 2px; background: var(--border); margin: 32px 0; }
   .faq-item { background: var(--bg-card); padding: 22px 24px; transition: background 0.2s; }
@@ -218,58 +193,24 @@
   }
   .faq-a { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; margin: 0; }
 
-  /* BUTTONS */
-  .btn-primary {
-    background: var(--green); color: #050a06;
-    padding: 16px 36px;
-    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    border: none; cursor: pointer; text-decoration: none; display: inline-block;
-    transition: all 0.2s;
-    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  /* ARTICLE CONTACT BLOCK */
+  .article-contact {
+    display: flex; flex-direction: column; gap: 10px;
+    margin: 36px 0 0; padding: 24px 28px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-left: 3px solid var(--green);
   }
-  .btn-primary:hover { background: #10ff72; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,240,96,0.3); }
-
-  .btn-outline {
-    background: transparent; color: var(--text-muted);
-    padding: 15px 36px;
-    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    border: 1px solid var(--border-strong);
-    cursor: pointer; text-decoration: none; display: inline-block;
-    transition: all 0.2s;
-  }
-  .btn-outline:hover { border-color: var(--green); color: var(--green); }
-
-  /* ARTICLE CTA */
-  .article-cta { margin-top: 80px; padding-top: 56px; border-top: 1px solid var(--border); }
-  .article-cta .cta-eyebrow {
+  .article-contact a {
     font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
-    font-size: 0.68rem; color: var(--green); letter-spacing: 0.14em;
-    text-transform: uppercase; margin-bottom: 16px;
-    display: flex; align-items: center; gap: 10px;
+    font-size: 0.82rem; color: var(--text-muted); text-decoration: none;
+    letter-spacing: 0.03em; transition: color 0.2s;
   }
-  .article-cta .cta-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--green); }
-  .article-cta h2 {
-    font-family: 'Outfit', sans-serif; font-weight: 800;
-    font-size: clamp(1.6rem, 3vw, 2.4rem);
-    line-height: 1.15; margin-bottom: 16px; color: var(--text);
-    letter-spacing: -0.01em;
-  }
-  .article-cta h2::before { display: none; }
-  .article-cta h2 span { color: var(--green); }
-  .article-cta p {
-    color: var(--text-muted); font-size: 1rem;
-    line-height: 1.8; margin-bottom: 36px; max-width: 560px;
-  }
-  .cta-buttons { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
-  .cta-contact {
-    display: flex; flex-direction: column; gap: 8px;
+  .article-contact a:hover { color: var(--green); }
+  .article-contact .contact-footer {
     font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
-    font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.04em;
+    font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.04em;
+    margin-top: 4px;
   }
-  .cta-contact a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-  .cta-contact a:hover { color: var(--green); }
 
   /* DISCLAIMER */
   .article-disclaimer {
@@ -376,18 +317,9 @@
 
       <p>The ruling came down February 17. By April, new cases were already citing it.</p>
 
-      <p>In <em>Morgan v. V2X, Inc.</em> and <em>Jeffries v. Harcros Chemicals, Inc.</em>, courts began issuing protective orders specifically about which AI tools companies can use during active litigation. Judges are no longer just ruling on AI after the fact. They are setting rules before discovery even starts.</p>
+      <p>In <em>Morgan v. V2X, Inc.</em> and <em>Jeffries v. Harcros Chemicals, Inc.</em>, courts began issuing protective orders specifically about which AI tools companies can use in active litigation. Judges are no longer just ruling on AI after the fact. They are setting rules before discovery even starts.</p>
 
-      <p>There is also a split worth knowing about.</p>
-
-      <div class="split-box">
-        <div class="split-label">Conflicting Ruling · Warner v. Gilbarco, Inc. · E.D. Mich. · Feb. 10, 2026</div>
-        <p>A different federal judge ruled that a plaintiff's use of ChatGPT was protected as attorney work product. Same month. Different outcome. The law is not settled — which means your employees are working in a gray zone right now with no guaranteed protection on either side.</p>
-      </div>
-
-      <p>A split is not protection. It is a coin flip.</p>
-
-      <p>Two cases, same month, opposite results. Operating in that gray zone with sensitive client data is not a strategy — it is just hope that you draw the right judge.</p>
+      <p>There is also a split worth knowing about. In <em>Warner v. Gilbarco, Inc.</em> (E.D. Mich., Feb. 10, 2026), a different federal judge ruled that a plaintiff's use of ChatGPT was protected work product. Same month. Different outcome. The law is not settled — which means your employees are working in a gray zone right now with no guaranteed protection on either side.</p>
 
       <h2>What Your Team Is Probably Doing Right Now</h2>
 
@@ -401,18 +333,11 @@
         <li>Dropping meeting notes into Grammarly or Notion AI without a second thought</li>
       </ul>
 
-      <p>None of it feels like a legal risk.</p>
+      <p>None of it feels like a legal risk. Most of it is not — on the right platform, with the right agreement in place.</p>
 
-      <p>Your paralegal summarized a deposition in ChatGPT on Tuesday. Your associate asked Claude to pull case law on Friday. You did not know. They did not think twice. They were just trying to get their work done faster.</p>
+      <p>On a personal or consumer account, that information sits on a server, can be retained for years, can be reviewed by humans, and — as multiple courts have now confirmed — can be handed to the other side.</p>
 
-      <p>That information is sitting on a server right now. Retained. Reviewable. And under federal precedent confirmed this year, it can be handed to opposing counsel.</p>
-
-      <p>That is not a hypothetical. That is last week.</p>
-
-      <div class="callout">
-        <p>On the right platform, under the right agreement, none of this is a problem. On a personal or consumer account — the kind most employees are using right now, without anyone asking — it is.</p>
-        <p>For a law firm, that is a state bar problem waiting to surface. For a CPA or financial advisor, that is FINRA or HIPAA exposure. For any business, it is your strategy, your pricing, your client relationships sitting on a server you do not control.</p>
-      </div>
+      <p>For a law firm, that is a state bar problem. For a CPA or financial advisor, that is FINRA or HIPAA exposure. For any business, it is your strategy, your pricing, your client relationships sitting somewhere you did not intend.</p>
 
       <h2>The Pro Plan Does Not Fix It</h2>
 
@@ -423,7 +348,7 @@
       <div class="plan-comparison">
         <div class="plan-row risk">
           <div class="plan-row-name">Claude Pro <span class="price">$20/month</span></div>
-          <div class="plan-row-detail">Consumer tier terms. Opting out of model training is a separate setting from legal disclosure. Anthropic still reserves the right to share data with government authorities — which is exactly what the Heppner court relied on.</div>
+          <div class="plan-row-detail">Consumer tier terms. Opting out of model training is a separate setting from legal disclosure. Anthropic still reserves the right to share data with government authorities.</div>
         </div>
         <div class="plan-row risk">
           <div class="plan-row-name">ChatGPT Plus / Pro <span class="price">$20–$200/month</span></div>
@@ -435,7 +360,7 @@
         </div>
         <div class="plan-row risk">
           <div class="plan-row-name">Microsoft Copilot <span class="price">Free / Personal</span></div>
-          <div class="plan-row-detail">Runs under consumer privacy terms, not the commercial data protection agreements that come with a business license. They are not the same product.</div>
+          <div class="plan-row-detail">Runs under consumer privacy terms, not the commercial data protection agreements that come with a business license.</div>
         </div>
       </div>
 
@@ -443,7 +368,7 @@
 
       <h2>Where the Protection Actually Lives</h2>
 
-      <p>Business and enterprise agreements are a different product entirely — not just a higher tier of the same thing. The difference is a signed contract with real, enforceable data commitments. That is exactly what Judge Rakoff looked for — and did not find — in the Heppner case.</p>
+      <p>Business and enterprise agreements are a different product entirely — not just a higher tier of the same thing.</p>
 
       <div class="plan-comparison">
         <div class="plan-row safe">
@@ -460,9 +385,11 @@
         </div>
         <div class="plan-row safe">
           <div class="plan-row-name">ChatGPT Enterprise / Team <span class="price">Business tier</span></div>
-          <div class="plan-row-detail">Data is not used for model training and sits under OpenAI's commercial agreements — not the consumer terms that apply to Plus and Pro.</div>
+          <div class="plan-row-detail">Data is not used for model training and sits under OpenAI's commercial agreements.</div>
         </div>
       </div>
+
+      <p>The difference is a signed contract with real, enforceable data commitments. That is exactly what Judge Rakoff looked for — and did not find — in the Heppner case.</p>
 
       <h2>If You Run a Law Firm, CPA Practice, or Financial Advisory</h2>
 
@@ -470,12 +397,7 @@
 
       <p>Shadow AI — employees using personal accounts for ChatGPT, Claude, Gemini, Grammarly, or other tools outside your managed systems — does not know your obligations exist. It processes whatever it is given.</p>
 
-      <p>And right now, in most small firms and practices in Charlotte, it is being given a lot.</p>
-
-      <div class="callout">
-        <p>Your competitors are using AI. The ones doing it right are using it under terms that actually protect them.</p>
-        <p>That is the bar.</p>
-      </div>
+      <p>Your competitors are using AI. The ones doing it right are using it under terms that actually protect them. That is the bar.</p>
 
       <h2>Four Things to Do Right Now</h2>
 
@@ -490,40 +412,44 @@
 
       <div class="faq-list">
         <div class="faq-item">
-          <p class="faq-q">Does this apply to businesses, or just criminal defendants?</p>
-          <p class="faq-a">Ballard Spahr, K&amp;L Gates, White &amp; Case, and others have confirmed the reasoning applies broadly — civil litigation, regulatory investigations, internal compliance reviews. Consumer AI and sensitive business information is a combination with real discovery risk in any legal proceeding.</p>
+          <p class="faq-q">Does this apply to businesses, or just criminal cases?</p>
+          <p class="faq-a">Ballard Spahr, K&amp;L Gates, White &amp; Case, and others have all confirmed the reasoning applies broadly — civil litigation, regulatory investigations, internal compliance reviews. Consumer AI and sensitive business information is a combination with real discovery risk.</p>
         </div>
         <div class="faq-item">
           <p class="faq-q">The courts seem split. Does that mean we are safe?</p>
-          <p class="faq-a">A split means unpredictable outcomes. Two cases, same month, opposite results. Operating in that gray zone with sensitive client data is not a strategy. The Heppner reasoning — that consumer AI platforms have no confidentiality obligations — is the stronger and more widely cited position.</p>
+          <p class="faq-a">A split means unpredictable outcomes. Two cases, same month, opposite results. Operating in that gray zone with sensitive client data is not a strategy.</p>
         </div>
         <div class="faq-item">
           <p class="faq-q">What if employees opt out of AI training?</p>
-          <p class="faq-a">Opting out of training is a different setting from legal disclosure rights. Anthropic, OpenAI, and Google all reserve the right to share data in response to legal process regardless of training preferences. Opting out of training does not create confidentiality.</p>
+          <p class="faq-a">Opting out of training is a different setting from legal disclosure rights. All three platforms reserve the right to share data in response to legal process regardless of training preferences.</p>
         </div>
         <div class="faq-item">
           <p class="faq-q">What is shadow AI?</p>
-          <p class="faq-a">Employees using personal accounts for ChatGPT, Claude, Gemini, Grammarly, or other tools outside company-managed systems. One of the fastest-growing compliance risks for small businesses right now — and the one most business owners discover only after something goes wrong.</p>
+          <p class="faq-a">Employees using personal accounts for ChatGPT, Claude, Gemini, Grammarly, or other tools outside company-managed systems. One of the fastest-growing compliance risks for small businesses right now.</p>
         </div>
       </div>
 
-    </div>
+      <h2>What AMP IT Solutions Can Do</h2>
 
-    <!-- CTA -->
-    <div class="article-cta">
-      <div class="cta-eyebrow">That Is What We Do at AMP IT Solutions</div>
-      <h2>Get your AI stack <span>right — once.</span></h2>
-      <p>We help small businesses in Charlotte — law firms, CPA practices, financial advisors, and professional services companies — get this right. We find out what your team is actually using, identify where the gaps are, and get you set up on tools that are productive and protected.</p>
-      <div class="cta-buttons">
-        <a href="/assessment.html" class="btn-primary">Book a Free Assessment</a>
-        <a href="tel:+19803772733" class="btn-outline">Call Us</a>
-      </div>
-      <div class="cta-contact">
+      <p>Let's be honest about something. No IT company can stop someone from opening ChatGPT on their personal phone and typing in their client's case. That decision happens outside any system we manage. The Heppner defendant made that choice on his own. No policy, no enterprise license, and no MSP reaches that moment.</p>
+
+      <p>What we can do is educate your team and put guardrails in place.</p>
+
+      <p>That means helping your business understand the risk clearly — not in technical terms, but in plain language that actually changes behavior. It means blocking non-approved AI tools on company-managed devices and networks so that unauthorized tools simply do not work on work machines. It means making sure the only AI your team can access through company systems are approved tools operating under contractual data protections — not consumer privacy policies. It means putting a written policy in place that names those approved tools and explains why everything else is off limits.</p>
+
+      <p>None of that is a guarantee. People make their own decisions. But it closes the doors we can reach, creates accountability, and makes sure your team understands the risk before something goes wrong rather than after.</p>
+
+      <p>That is what we do at AMP IT Solutions. We work with law firms, CPA practices, financial advisors, and small businesses across Charlotte to put the right education and guardrails in place around AI. Not promises. Just practical steps that reduce your exposure and keep your business on solid ground.</p>
+
+      <p>If you want to understand where your business stands today, <a href="/assessment.html" style="color: var(--green); text-decoration: none; border-bottom: 1px solid rgba(0,240,96,0.3); transition: border-color 0.2s;">start with a free assessment</a>. No pressure. No pitch. Just an honest look at what is happening and what makes sense to do about it.</p>
+
+      <div class="article-contact">
         <a href="tel:+19803772733">📞 (980) 377-2733</a>
         <a href="mailto:hello@ampitsolutions.com">📩 hello@ampitsolutions.com</a>
-        <a href="/assessment.html">🌐 ampitsolutions.com/assessment — Free assessment. No pressure. Just clarity.</a>
-        <span style="margin-top:4px; color: var(--text-dim);">Microsoft Partner · Google Partner · On-Site Available · 919 Berryhill Rd Suite 100A, Charlotte, NC 28208</span>
+        <a href="/assessment.html">🌐 ampitsolutions.com/assessment</a>
+        <span class="contact-footer">Microsoft Partner · Google Partner · On-Site Available · 919 Berryhill Rd Suite 100A, Charlotte, NC 28208</span>
       </div>
+
     </div>
 
     <div class="article-disclaimer">
