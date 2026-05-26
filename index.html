@@ -786,14 +786,25 @@
   .poll-label::before, .poll-label::after { content: ''; width: 24px; height: 1px; background: var(--green); }
   .poll-question { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.2; margin-bottom: 8px; }
   .poll-sub { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 40px; line-height: 1.6; }
-  .poll-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
-  .poll-choice { background: var(--bg-card); border: 1px solid var(--border); padding: 28px 20px; cursor: pointer; transition: all 0.2s; text-align: center; position: relative; overflow: hidden; }
-  .poll-choice:hover:not(:disabled) { border-color: var(--green); background: var(--bg-card-hover); transform: translateY(-2px); }
+  .poll-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+  .poll-choice {
+    background: var(--bg-card); border: 1px solid var(--border-strong);
+    padding: 36px 28px; cursor: pointer; transition: all 0.25s; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .poll-choice:hover:not(:disabled) {
+    border-color: var(--green); background: var(--bg-card-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0,240,96,0.15);
+  }
   .poll-choice:disabled { cursor: default; }
-  .poll-choice-emoji { font-size: 2rem; margin-bottom: 12px; display: block; line-height: 1; }
-  .poll-choice-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
-  .poll-choice-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
-  .poll-choice.selected { border-color: var(--green); background: rgba(0,240,96,0.06); }
+  .poll-choice-emoji { font-size: 2.6rem; margin-bottom: 16px; display: block; line-height: 1; }
+  .poll-choice-title {
+    font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.15rem;
+    margin-bottom: 10px; color: var(--text);
+  }
+  .poll-choice-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.65; max-width: 240px; margin: 0 auto; }
+  .poll-choice.selected { border-color: var(--green); background: rgba(0,240,96,0.07); box-shadow: 0 0 0 1px var(--green) inset; }
   .poll-choice.winner { border-color: var(--green); }
 
   .poll-results { display: none; }
