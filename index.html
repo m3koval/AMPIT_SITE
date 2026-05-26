@@ -252,10 +252,10 @@
   .serve-card {
     background: var(--bg-card); border: 1px solid var(--border);
     padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px;
-    transition: all 0.25s;
+    transition: all 0.25s; text-decoration: none; color: inherit;
   }
 
-  .serve-card:hover { border-color: var(--border-strong); background: var(--bg-card-hover); transform: translateX(6px); }
+  .serve-card:hover { border-color: var(--green); background: var(--bg-card-hover); transform: translateX(6px); }
 
   .serve-icon {
     width: 36px; height: 36px;
@@ -267,6 +267,9 @@
   .serve-card-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
 
   .serve-card-pitch { font-size: 0.8rem; color: var(--text-muted); font-style: italic; line-height: 1.5; }
+
+  .serve-card-explore { display: inline-block; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.65rem; color: var(--green); letter-spacing: 0.08em; margin-top: 8px; opacity: 0; transition: opacity 0.2s; }
+  .serve-card:hover .serve-card-explore { opacity: 1; }
 
   /* SERVICES */
   .services { padding: 100px 0; border-bottom: 1px solid var(--border); }
@@ -411,16 +414,26 @@
   .industry-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 
   .industry-item {
-    border: 1px solid var(--border); padding: 20px; text-align: center;
-    transition: all 0.2s;
+    border: 1px solid var(--border); padding: 28px 20px; text-align: center;
+    transition: all 0.2s; text-decoration: none; color: inherit; display: block;
   }
 
-  .industry-item:hover { border-color: var(--border-strong); background: var(--bg-card); }
+  .industry-item:hover { border-color: var(--green); background: var(--bg-card); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
 
-  .industry-item .icon { display: block; margin: 0 auto 12px; color: var(--text-muted); transition: color 0.2s; }
+  .industry-item .icon { display: block; margin: 0 auto 14px; color: var(--text-muted); transition: color 0.2s; }
   .industry-item:hover .icon { color: var(--green); }
 
-  .industry-item .name { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.04em; }
+  .industry-item .name { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.88rem; letter-spacing: 0.04em; margin-bottom: 10px; display: block; }
+
+  .industry-item .pitch { display: block; font-size: 0.76rem; color: var(--text-dim); line-height: 1.6; transition: color 0.2s; }
+  .industry-item:hover .pitch { color: var(--text-muted); }
+
+  .industry-item .explore { display: block; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.65rem; color: var(--green); letter-spacing: 0.1em; margin-top: 14px; opacity: 0; transition: opacity 0.2s; }
+  .industry-item:hover .explore { opacity: 1; }
+
+  /* body inline links */
+  .body-link { display: inline-flex; align-items: center; gap: 5px; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.68rem; color: var(--green); letter-spacing: 0.08em; text-decoration: none; margin-top: 14px; opacity: 0.8; transition: opacity 0.15s, gap 0.15s; }
+  .body-link:hover { opacity: 1; gap: 9px; }
 
   /* CTA */
   .cta-section { padding: 120px 0; text-align: center; position: relative; overflow: hidden; }
@@ -730,8 +743,50 @@
   }
   .nav-mobile-menu a:hover { color: var(--green); padding-left: 32px; }
 
+  .has-dropdown { position: relative; }
+  .has-dropdown > a { display: flex; align-items: center; gap: 4px; }
+  .has-dropdown > a::after { content: '▾'; font-size: 0.55rem; opacity: 0.5; }
+  .dropdown { display: none; position: absolute; top: calc(100% + 16px); left: -12px; background: rgba(10,12,10,0.97); border: 1px solid var(--border); list-style: none; min-width: 210px; padding: 8px 0; backdrop-filter: blur(20px); z-index: 200; box-shadow: 0 16px 40px rgba(0,0,0,0.5); }
+  .has-dropdown:hover .dropdown, .has-dropdown:focus-within .dropdown { display: block; }
+  .dropdown li a { display: block; padding: 9px 18px; color: var(--text-muted); font-size: 0.78rem; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; letter-spacing: 0.05em; text-decoration: none; transition: all 0.15s; }
+  .dropdown li a:hover { color: var(--green); padding-left: 24px; }
+
+  /* POLL SECTION */
+  .poll-section { padding: 72px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+  .poll-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 300px; background: radial-gradient(ellipse, rgba(0,240,96,0.04) 0%, transparent 70%); pointer-events: none; }
+  .poll-inner { max-width: 680px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+  .poll-label { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.68rem; color: var(--green); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .poll-label::before, .poll-label::after { content: ''; width: 24px; height: 1px; background: var(--green); }
+  .poll-question { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.2; margin-bottom: 8px; }
+  .poll-sub { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 40px; line-height: 1.6; }
+  .poll-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+  .poll-choice { background: var(--bg-card); border: 1px solid var(--border); padding: 28px 20px; cursor: pointer; transition: all 0.2s; text-align: center; position: relative; overflow: hidden; }
+  .poll-choice:hover:not(:disabled) { border-color: var(--green); background: var(--bg-card-hover); transform: translateY(-2px); }
+  .poll-choice:disabled { cursor: default; }
+  .poll-choice-emoji { font-size: 2rem; margin-bottom: 12px; display: block; line-height: 1; }
+  .poll-choice-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
+  .poll-choice-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+  .poll-choice.selected { border-color: var(--green); background: rgba(0,240,96,0.06); }
+  .poll-choice.winner { border-color: var(--green); }
+
+  .poll-results { display: none; }
+  .poll-results.show { display: block; animation: fadeUp 0.5s ease both; }
+  .poll-bar-row { margin-bottom: 14px; }
+  .poll-bar-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .poll-bar-name { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem; }
+  .poll-bar-pct { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.82rem; color: var(--green); }
+  .poll-bar-track { height: 6px; background: var(--border); position: relative; }
+  .poll-bar-fill { height: 100%; background: var(--green); width: 0; transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+  .poll-bar-fill.alt { background: var(--border-strong); }
+  .poll-total { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.08em; margin-top: 20px; }
+  .poll-voted-msg { font-size: 0.82rem; color: var(--text-muted); margin-top: 12px; }
+  .poll-voted-msg span { color: var(--green); }
+
   @media (max-width: 900px) {
     .nav-hamburger { display: flex; }
+  }
+  @media (max-width: 600px) {
+    .poll-choices { grid-template-columns: 1fr; gap: 8px; }
   }
 </style>
   <script defer src="/_vercel/insights/script.js"></script>
@@ -923,23 +978,23 @@
     <span class="nav-wordmark"><span class="g">AMP</span> IT</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#why">Why Us</a></li>
-    <li><a href="#industries">Who We Serve</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li class="has-dropdown"><a href="/pricing/managed-it/">Pricing</a><ul class="dropdown"><li><a href="/pricing/managed-it/">Managed IT Plans</a></li><li><a href="/pricing/starting-a-business/">Starting a Business</a></li></ul></li>
+    <li class="has-dropdown"><a href="/industries/law-firms/">Industries</a><ul class="dropdown"><li><a href="/industries/law-firms/">Law Firms</a></li><li><a href="/industries/finance-cpa/">Finance &amp; CPA</a></li><li><a href="/industries/insurance/">Insurance Agencies</a></li><li><a href="/industries/other-industries/">Other Industries</a></li></ul></li>
+    <li><a href="/cybersecurity/">Cybersecurity</a></li>
+    <li><a href="/ai-governance/">AI Governance</a></li>
     <li><a href="/blog/your-team-is-already-using-ai">Blog</a></li>
   </ul>
-  <a href="assessment.html" class="nav-cta">Get Started</a>
+  <a href="/assessment" class="nav-cta">Get Started</a>
   <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
 </nav>
 <div class="nav-mobile-menu" id="navMobileMenu" aria-hidden="true">
   <ul>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#why">Why Us</a></li>
-    <li><a href="#industries">Who We Serve</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="/pricing/managed-it/">Managed IT Pricing</a></li><li><a href="/pricing/starting-a-business/">Starting a Business</a></li>
+    <li><a href="/industries/law-firms/">Law Firms</a></li><li><a href="/industries/finance-cpa/">Finance &amp; CPA</a></li>
+    <li><a href="/industries/insurance/">Insurance Agencies</a></li><li><a href="/industries/other-industries/">Other Industries</a></li>
+    <li><a href="/cybersecurity/">Cybersecurity</a></li><li><a href="/ai-governance/">AI Governance</a></li>
     <li><a href="/blog/your-team-is-already-using-ai">Blog</a></li>
   </ul>
 </div>
@@ -956,7 +1011,7 @@
     </h1>
     <p class="hero-sub">Managed IT for law firms, financial service firms, and growing businesses across Charlotte. One flat invoice. One number to call. A team that actually picks up.</p>
     <div class="hero-actions">
-      <a href="assessment.html" class="btn-primary">Book a Free Assessment</a>
+      <a href="/assessment" class="btn-primary">Book a Free Assessment</a>
       <a href="tel:+19803772733" class="btn-outline">Call Us</a>
     </div>
   </div>
@@ -1038,34 +1093,38 @@
         </div>
       </div>
       <div class="positioning-right fade-up d2">
-        <div class="serve-card">
+        <a href="/industries/law-firms/" class="serve-card">
           <div class="serve-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="3" y1="7" x2="21" y2="7"/><path d="M5 7L2 14a3 3 0 006 0L5 7z"/><path d="M19 7l3 7a3 3 0 01-6 0l3-7z"/></svg></div>
           <div>
-            <div class="serve-card-title">Law Firms & CPAs</div>
+            <div class="serve-card-title">Law Firms</div>
             <div class="serve-card-pitch">"Your client data stays private. We can document that for your malpractice carrier."</div>
+            <span class="serve-card-explore">Explore managed IT for law firms →</span>
           </div>
-        </div>
-        <div class="serve-card">
+        </a>
+        <a href="/industries/finance-cpa/" class="serve-card">
+          <div class="serve-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+          <div>
+            <div class="serve-card-title">Financial Advisors & CPA Firms</div>
+            <div class="serve-card-pitch">"FINRA/SEC readiness, Safeguards Rule compliance, and AI governance — documented for your auditors."</div>
+            <span class="serve-card-explore">Explore managed IT for finance & CPA →</span>
+          </div>
+        </a>
+        <a href="/industries/insurance/" class="serve-card">
           <div class="serve-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 4.97-3.5 9.64-8 10.93C7.5 21.64 4 16.97 4 12V6l8-4z"/></svg></div>
           <div>
-            <div class="serve-card-title">Insurance & Financial Advisors</div>
-            <div class="serve-card-pitch">"AI governance documentation for compliance. Private AI that never touches a public model."</div>
+            <div class="serve-card-title">Insurance Agencies</div>
+            <div class="serve-card-pitch">"Carrier cybersecurity requirements are rising. We provide the documentation that satisfies your underwriters."</div>
+            <span class="serve-card-explore">Explore managed IT for insurance agencies →</span>
           </div>
-        </div>
-        <div class="serve-card">
+        </a>
+        <a href="/industries/other-industries/" class="serve-card">
           <div class="serve-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
           <div>
-            <div class="serve-card-title">Real Estate & General SMBs</div>
-            <div class="serve-card-pitch">"One invoice, one call, IT that doesn't break."</div>
+            <div class="serve-card-title">Real Estate, Contractors & SMBs</div>
+            <div class="serve-card-pitch">"One invoice, one call, IT that doesn't break. For any Charlotte business with a screen."</div>
+            <span class="serve-card-explore">Explore IT for other industries →</span>
           </div>
-        </div>
-        <div class="serve-card">
-          <div class="serve-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
-          <div>
-            <div class="serve-card-title">Contractors & Tradespeople</div>
-            <div class="serve-card-pitch">"Make sure your email comes from your business — not a personal Gmail."</div>
-          </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>
@@ -1078,6 +1137,7 @@
         <div class="section-label">Service Plans</div>
         <h2>Simple pricing.<br><span>No surprises.</span></h2>
         <div class="pricing-subline">// <span>Unlike most MSPs</span> — our rates are published. No 'call for a quote.'</div>
+        <a href="/pricing/managed-it/" class="body-link" style="margin-top:10px;">Full pricing breakdown &amp; plan comparison →</a>
       </div>
       <ul class="pricing-includes">
         <li>Google Workspace &amp; Microsoft 365</li>
@@ -1110,6 +1170,7 @@
       <div>
         <h3>Small Business <span>Starter Track</span></h3>
         <p>Just getting started? We set up professional business email, a local Charlotte phone number, and the IT foundation to grow into managed services as your team scales. Built for contractors, tradespeople, and new businesses with 1–3 employees.</p>
+        <a href="/pricing/starting-a-business/" class="body-link">See everything included in the Starter Track →</a>
       </div>
       <div class="starter-items">
         <div class="starter-item"><span class="price">$300–500</span><span class="label">Email Setup (one-time)</span></div>
@@ -1138,7 +1199,7 @@
           <li>Monthly health report</li>
           <li>Google Workspace & Microsoft 365 administration</li>
         </ul>
-        <a href="assessment.html" class="plan-cta">Get Essential</a>
+        <a href="/assessment" class="plan-cta">Get Essential</a>
       </div>
       <div class="plan featured">
         <div class="plan-badge">Most Popular</div>
@@ -1157,7 +1218,7 @@
           <li>Proactive maintenance windows</li>
           <li>Quarterly Business Reviews</li>
         </ul>
-        <a href="assessment.html" class="plan-cta">Get Better</a>
+        <a href="/assessment" class="plan-cta">Get Better</a>
       </div>
       <div class="plan">
         <div class="plan-icon">★</div>
@@ -1178,7 +1239,7 @@
           <li>Compliance planning</li>
           <li>After-hours emergency coverage included</li>
         </ul>
-        <a href="assessment.html" class="plan-cta">Get Best</a>
+        <a href="/assessment" class="plan-cta">Get Best</a>
       </div>
     </div>
     <p class="anchor-statement">A single security incident costs the average SMB $120,000. <strong>Our Best plan can cost less than one engineer's fully-loaded salary</strong> — and you get <span class="green">an entire team plus the tools they'd need.</span></p>
@@ -1191,11 +1252,52 @@
     <h2 class="fade-up">We partner with you,<br>not <span style="color:var(--green)">complicate things.</span></h2>
     <div class="why-grid">
       <div class="why-card fade-up"><div class="why-num">01</div><h3>Flat, Predictable Rate</h3><p>One invoice covers everything — licensing, security, helpdesk, and backups. No break-fix billing. You always know what IT costs.</p></div>
-      <div class="why-card fade-up d1"><div class="why-num">02</div><h3>Real Security at Every Tier</h3><p>Managed threat detection, email phishing protection, and automated backups are all in our Essential tier — not upsells. If it can put a business out of business, it's essential.</p></div>
+      <div class="why-card fade-up d1"><div class="why-num">02</div><h3>Real Security at Every Tier</h3><p>Managed threat detection, email phishing protection, and automated backups are all in our Essential tier — not upsells. If it can put a business out of business, it's essential.</p><a href="/cybersecurity/" class="body-link">Explore our full security stack →</a></div>
       <div class="why-card fade-up d2"><div class="why-num">03</div><h3>A-Player Team</h3><p>We hire experienced engineers and pay them well — because the person answering your ticket needs to actually know what they're doing. You'll notice the difference.</p></div>
-      <div class="why-card fade-up"><div class="why-num">04</div><h3>AI Governance Ready</h3><p>Private AI tools deployed with proper data governance. Your client privileged information never touches a public model — documented for your malpractice carrier.</p></div>
+      <div class="why-card fade-up"><div class="why-num">04</div><h3>AI Governance Ready</h3><p>Private AI tools deployed with proper data governance. Your client privileged information never touches a public model — documented for your malpractice carrier.</p><a href="/ai-governance/" class="body-link">Explore our AI Governance program →</a></div>
       <div class="why-card fade-up d1"><div class="why-num">05</div><h3>Charlotte-Local, On-Site Capable</h3><p>When you need someone physically there, we're not outsourcing to a sub — we show up. Remote or in person, you get the same team every time.</p></div>
       <div class="why-card fade-up d2"><div class="why-num">06</div><h3>Grows With Your Business</h3><p>Whether you're a new business getting your first professional email or a 50-person firm needing full compliance planning, we have a track built for exactly where you are.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK POLL -->
+<section class="poll-section">
+  <div class="poll-inner fade-up">
+    <div class="poll-label">Quick Poll</div>
+    <h2 class="poll-question">When something breaks at work,<br>how do you want IT support?</h2>
+    <p class="poll-sub">Genuinely curious — it helps us understand how Charlotte businesses think about this.</p>
+
+    <div class="poll-choices" id="pollChoices">
+      <button class="poll-choice" data-choice="human" id="choiceHuman">
+        <span class="poll-choice-emoji">🧑</span>
+        <div class="poll-choice-title">Talk to a real human</div>
+        <div class="poll-choice-desc">Call or chat with a technician who actually knows your setup</div>
+      </button>
+      <button class="poll-choice" data-choice="ai" id="choiceAi">
+        <span class="poll-choice-emoji">🤖</span>
+        <div class="poll-choice-title">AI chat / self-service</div>
+        <div class="poll-choice-desc">Troubleshoot with an AI assistant on my own schedule</div>
+      </button>
+    </div>
+
+    <div class="poll-results" id="pollResults">
+      <div class="poll-bar-row">
+        <div class="poll-bar-label">
+          <span class="poll-bar-name">🧑 Real human</span>
+          <span class="poll-bar-pct" id="pctHuman">0%</span>
+        </div>
+        <div class="poll-bar-track"><div class="poll-bar-fill" id="barHuman"></div></div>
+      </div>
+      <div class="poll-bar-row">
+        <div class="poll-bar-label">
+          <span class="poll-bar-name">🤖 AI self-service</span>
+          <span class="poll-bar-pct" id="pctAi">0%</span>
+        </div>
+        <div class="poll-bar-track"><div class="poll-bar-fill alt" id="barAi"></div></div>
+      </div>
+      <div class="poll-total" id="pollTotal"></div>
+      <div class="poll-voted-msg" id="pollVotedMsg"></div>
     </div>
   </div>
 </section>
@@ -1209,7 +1311,8 @@
         <p>When employees use public AI tools — ChatGPT, Copilot, Gemini — without oversight, confidential client data can leave your business silently. No breach notification. No audit trail. No way to know it happened.</p>
         <p>For law firms, CPAs, financial advisors, and insurance agencies, that exposure isn't just a security risk — it's a liability, a compliance failure, and a malpractice issue.</p>
         <p>Managed IT isn't just about keeping computers running. It's about knowing what's happening across your environment — including how AI is being used — before it becomes a problem.</p>
-        <a href="assessment.html" class="btn-primary ai-cta">Book a Free Assessment</a>
+        <a href="/assessment" class="btn-primary ai-cta">Book a Free Assessment</a>
+        <a href="/ai-governance/" class="body-link" style="margin-top:16px;">Explore our full AI Governance program →</a>
       </div>
       <div class="shadow-ai-right fade-up d2">
         <div class="ai-risk-card">
@@ -1252,38 +1355,33 @@
       <h2>Built for Charlotte's <span style="color:var(--green)">professional services</span> market.</h2>
     </div>
     <div class="industry-list">
-      <div class="industry-item fade-up">
+      <a href="/industries/law-firms/" class="industry-item fade-up">
         <svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="3" y1="7" x2="21" y2="7"/><path d="M5 7L2 14a3 3 0 006 0L5 7z"/><path d="M19 7l3 7a3 3 0 01-6 0l3-7z"/></svg>
         <span class="name">Law Firms</span>
-      </div>
-      <div class="industry-item fade-up d1">
+        <span class="pitch">Client privilege protection, malpractice carrier documentation, and private AI for legal practices.</span>
+        <span class="explore">Explore →</span>
+      </a>
+      <a href="/industries/finance-cpa/" class="industry-item fade-up d1">
         <svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="21" x2="21" y2="21"/><rect x="3" y="13" width="4" height="8"/><rect x="10" y="8" width="4" height="13"/><rect x="17" y="4" width="4" height="17"/></svg>
-        <span class="name">CPA Firms</span>
-      </div>
-      <div class="industry-item fade-up d2">
+        <span class="name">Finance & CPA</span>
+        <span class="pitch">FINRA/SEC readiness, IRS Safeguards Rule compliance, and AI governance documentation for financial firms.</span>
+        <span class="explore">Explore →</span>
+      </a>
+      <a href="/industries/insurance/" class="industry-item fade-up d2">
         <svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 4.97-3.5 9.64-8 10.93C7.5 21.64 4 16.97 4 12V6l8-4z"/></svg>
         <span class="name">Insurance Agencies</span>
-      </div>
-      <div class="industry-item fade-up d3">
-        <svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-        <span class="name">Financial Advisors</span>
-      </div>
-      <div class="industry-item fade-up">
-        <svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        <span class="name">Real Estate</span>
-      </div>
-      <div class="industry-item fade-up d1">
-        <svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
-        <span class="name">Contractors & Trades</span>
-      </div>
-      <div class="industry-item fade-up d2">
+        <span class="pitch">Carrier-required security controls, E&amp;O documentation, and MFA enforcement for insurance professionals.</span>
+        <span class="explore">Explore →</span>
+      </a>
+      <a href="/industries/other-industries/" class="industry-item fade-up d3">
         <svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
-        <span class="name">General SMBs</span>
-      </div>
-      <div class="industry-item fade-up d3">
-        <svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/><line x1="9" y1="12" x2="4" y2="17"/></svg>
-        <span class="name">New Businesses</span>
-      </div>
+        <span class="name">Other Industries</span>
+        <span class="pitch">Real estate, contractors, trades, general SMBs — any Charlotte business that needs IT that simply works.</span>
+        <span class="explore">Explore →</span>
+      </a>
+    </div>
+    <div style="margin-top:20px;text-align:center;">
+      <a href="/pricing/starting-a-business/" class="body-link" style="justify-content:center;">Just starting a business in Charlotte? → See our Starter Track</a>
     </div>
   </div>
 </section>
@@ -1294,7 +1392,7 @@
     <h2>Ready for IT that<br><span>just works?</span></h2>
     <p>Book a free IT Environment Assessment — no commitment. We'll show you exactly what's exposed and what it takes to fix it.</p>
     <div class="cta-actions">
-      <a href="assessment.html" class="btn-primary">Book a Free Assessment</a>
+      <a href="/assessment" class="btn-primary">Book a Free Assessment</a>
       <a href="tel:+19803772733" class="btn-outline">Call Us</a>
     </div>
     <div class="contact-info">
@@ -1317,11 +1415,12 @@
     </div>
   </div>
   <ul class="footer-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#why">Why Us</a></li>
-    <li><a href="#industries">Who We Serve</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="/pricing/managed-it/">Pricing</a></li>
+    <li><a href="/industries/law-firms/">Industries</a></li>
+    <li><a href="/cybersecurity/">Cybersecurity</a></li>
+    <li><a href="/ai-governance/">AI Governance</a></li>
     <li><a href="/blog/your-team-is-already-using-ai">Blog</a></li>
+    <li><a href="/assessment">Assessment</a></li>
     <li><a href="/privacy">Privacy</a></li>
     <li><a href="/terms">Terms</a></li>
     <li><a href="https://www.linkedin.com/company/ampitservices" target="_blank" rel="noopener">LinkedIn</a></li>
@@ -1398,18 +1497,6 @@
   );
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if (s.getBoundingClientRect().top <= 120) current = s.getAttribute('id');
-    });
-    navLinks.forEach(a => {
-      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-    });
-  });
-
   // Mobile nav toggle
   const hamburger = document.getElementById('navHamburger');
   const mobileMenu = document.getElementById('navMobileMenu');
@@ -1431,6 +1518,89 @@
       });
     });
   }
+
+  // ── POLL ─────────────────────────────────────────────────────────────────
+  (function() {
+    var VOTED_KEY = 'ampit_poll_voted';
+    var choicesEl = document.getElementById('pollChoices');
+    var resultsEl = document.getElementById('pollResults');
+    var pctHuman  = document.getElementById('pctHuman');
+    var pctAi     = document.getElementById('pctAi');
+    var barHuman  = document.getElementById('barHuman');
+    var barAi     = document.getElementById('barAi');
+    var totalEl   = document.getElementById('pollTotal');
+    var msgEl     = document.getElementById('pollVotedMsg');
+
+    function fmtTotal(n) {
+      return n === 1 ? '1 vote so far' : n + ' votes so far';
+    }
+
+    function showResults(data, voted) {
+      var h = (data.human || 0);
+      var a = (data.ai    || 0);
+      var total = h + a;
+      var hPct  = total ? Math.round((h / total) * 100) : 50;
+      var aPct  = total ? Math.round((a / total) * 100) : 50;
+
+      pctHuman.textContent = hPct + '%';
+      pctAi.textContent    = aPct + '%';
+      totalEl.textContent  = fmtTotal(total);
+
+      // Disable buttons, mark selected
+      var btns = choicesEl.querySelectorAll('.poll-choice');
+      btns.forEach(function(b) {
+        b.disabled = true;
+        if (voted && b.dataset.choice === voted) b.classList.add('selected');
+        if (h >= a && b.dataset.choice === 'human') b.classList.add('winner');
+        if (a > h  && b.dataset.choice === 'ai')    b.classList.add('winner');
+      });
+
+      if (voted) {
+        msgEl.innerHTML = 'Your vote: <span>' + (voted === 'human' ? '🧑 Real human' : '🤖 AI self-service') + '</span>';
+      } else {
+        msgEl.textContent = '';
+      }
+
+      resultsEl.classList.add('show');
+      // Animate bars after a short delay so transition fires
+      setTimeout(function() {
+        barHuman.style.width = hPct + '%';
+        barAi.style.width    = aPct + '%';
+      }, 60);
+    }
+
+    // On load: fetch current counts (show if already voted)
+    var alreadyVoted = localStorage.getItem(VOTED_KEY);
+    fetch('/api/poll')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (alreadyVoted) showResults(data, alreadyVoted);
+        // If not voted yet, just load counts silently — shown after voting
+      })
+      .catch(function() {}); // fail silently — poll is non-critical
+
+    // Vote handler
+    choicesEl.querySelectorAll('.poll-choice').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (localStorage.getItem(VOTED_KEY)) return;
+        var choice = btn.dataset.choice;
+        localStorage.setItem(VOTED_KEY, choice);
+
+        fetch('/api/poll', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ choice: choice })
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) { showResults(data, choice); })
+        .catch(function() {
+          // API unavailable — show placeholder bars so UX doesn't break
+          showResults({ human: 1, ai: 1 }, choice);
+        });
+      });
+    });
+  })();
+  // ─────────────────────────────────────────────────────────────────────────
 
   // Google Ads conversion — phone call click (mobile only, where tap-to-call actually dials)
   var isMobile = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent);

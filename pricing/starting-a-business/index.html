@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT Setup for New Businesses in Charlotte NC | AMP IT</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="description" content="Professional business email, local Charlotte phone number, and IT foundation for new businesses. Built for contractors, tradespeople, and 1–3 person teams starting out in Charlotte NC.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.ampitsolutions.com/pricing/starting-a-business/">
+<meta property="og:title" content="IT Setup for New Businesses in Charlotte NC | AMP IT">
+<meta property="og:description" content="Stop using personal Gmail for business. Professional email setup, local phone number, and IT foundation for new Charlotte businesses.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.ampitsolutions.com/pricing/starting-a-business/">
+<meta property="og:image" content="https://www.ampitsolutions.com/og-image.png">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="IT Setup for New Businesses Charlotte NC | AMP IT">
+<meta name="twitter:description" content="Professional business email setup and IT foundation for new Charlotte businesses. Built for 1–3 person teams.">
+<meta name="twitter:image" content="https://www.ampitsolutions.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Small Business Starter Track",
+  "description": "Professional business email setup, local Charlotte phone number, and IT foundation for contractors, tradespeople, and new businesses with 1–3 employees in Charlotte NC.",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "AMP IT LLC",
+    "url": "https://www.ampitsolutions.com",
+    "telephone": "+19803772733",
+    "address": { "@type": "PostalAddress", "addressLocality": "Charlotte", "addressRegion": "NC", "addressCountry": "US" }
+  },
+  "areaServed": { "@type": "City", "name": "Charlotte", "addressRegion": "NC" },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Starter Track",
+    "itemListElement": [
+      { "@type": "Offer", "name": "Email Setup", "price": "300", "priceCurrency": "USD", "description": "Professional business email setup (one-time)" },
+      { "@type": "Offer", "name": "IT Management", "price": "25", "priceCurrency": "USD", "description": "Per user/month IT management" },
+      { "@type": "Offer", "name": "Business Phone", "price": "20", "priceCurrency": "USD", "description": "Per user/month local Charlotte business phone" }
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Do I need Google Workspace or Microsoft 365?", "acceptedAnswer": { "@type": "Answer", "text": "For most new businesses, Google Workspace is the right choice — it's more intuitive, easier to manage, and works well for small teams. We set it up properly with your custom domain so your email reads as you@yourbusiness.com, not a personal Gmail address." } },
+    { "@type": "Question", "name": "How much does business email setup cost in Charlotte?", "acceptedAnswer": { "@type": "Answer", "text": "Our one-time setup fee is $300–500 depending on complexity. This includes domain configuration, workspace setup, email security basics, and training so you know how to use it. Ongoing management runs $25–40/user/month." } },
+    { "@type": "Question", "name": "Can I get a local Charlotte phone number for my business?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We set up a local Charlotte business phone number through a cloud phone system — it rings your cell, keeps your personal number private, and looks professional to clients. Cost is $20–35/user/month." } },
+    { "@type": "Question", "name": "What happens when my business grows past 3 employees?", "acceptedAnswer": { "@type": "Answer", "text": "When you're ready for full managed IT — typically around 5+ employees — we transition you to one of our managed plans. You're already on our stack, so the upgrade is seamless." } }
+  ]
+}
+</script>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/outfit-latin.woff2" crossorigin>
+<link rel="preload" as="style" href="/styles.css">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  /* PAGE HERO */
+  .page-hero {
+    padding: 160px 60px 100px;
+    max-width: 1200px; margin: 0 auto;
+    position: relative;
+  }
+  .page-hero::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,240,96,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,240,96,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+  .page-hero-glow {
+    position: absolute; top: 0; right: 0;
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(0,240,96,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .eyebrow {
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.68rem; color: var(--green);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+    animation: fadeUp 0.6s ease both 0.1s;
+  }
+  .eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--green); }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+  .page-hero h1 {
+    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+    line-height: 1.05; letter-spacing: -0.01em;
+    margin-bottom: 12px; position: relative; z-index: 1;
+    animation: fadeUp 0.6s ease both 0.2s;
+  }
+  .page-hero h1 span { color: var(--green); }
+  .page-hero .subline {
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.82rem; color: var(--text-dim);
+    letter-spacing: 0.04em; margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both 0.28s;
+  }
+  .page-hero p {
+    font-size: 1.1rem; color: var(--text-muted);
+    max-width: 640px; line-height: 1.8; margin-bottom: 40px;
+    position: relative; z-index: 1;
+    animation: fadeUp 0.6s ease both 0.35s;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeUp 0.6s ease both 0.45s; }
+
+  /* SHARED */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+  section { position: relative; z-index: 1; }
+  .section-label {
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.68rem; color: var(--green);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before { content: ''; width: 24px; height: 1px; background: var(--green); }
+  h2 { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; letter-spacing: -0.01em; }
+  h2 span { color: var(--green); }
+  .btn-primary {
+    background: var(--green); color: #050a06; padding: 16px 36px;
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .btn-primary:hover { background: #10ff72; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,240,96,0.3); }
+  .btn-outline {
+    background: transparent; color: var(--text-muted); padding: 15px 36px;
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    border: 1px solid var(--border-strong); cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--green); color: var(--green); }
+
+  /* PROBLEM SECTION */
+  .problem-section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 48px; }
+  .problem-copy h3 { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.6rem; line-height: 1.2; margin-bottom: 20px; }
+  .problem-copy h3 span { color: var(--green); }
+  .problem-copy p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 14px; }
+  .problem-costs { display: flex; flex-direction: column; gap: 2px; background: var(--border); }
+  .cost-item { background: var(--bg-card); padding: 20px 24px; display: flex; align-items: center; gap: 16px; transition: background 0.2s; }
+  .cost-item:hover { background: var(--bg-card-hover); }
+  .cost-icon { width: 36px; height: 36px; background: var(--green-glow); border: 1px solid var(--border-strong); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cost-icon svg { color: var(--green); }
+  .cost-text-label { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem; margin-bottom: 2px; }
+  .cost-text-sub { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
+
+  /* WHAT YOU GET */
+  .what-section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+  .what-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); margin-top: 48px; }
+  .what-card { background: var(--bg-card); padding: 40px 32px; transition: background 0.25s; }
+  .what-card:hover { background: var(--bg-card-hover); }
+  .what-num { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 3rem; color: var(--text-dim); line-height: 1; margin-bottom: 20px; transition: color 0.25s; }
+  .what-card:hover .what-num { color: var(--green); }
+  .what-card h3 { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 12px; }
+  .what-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; }
+
+  /* PRICING SECTION */
+  .pricing-section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+  .starter-pricing-block {
+    background: var(--bg-card); border: 1px solid var(--border);
+    padding: 56px; margin-top: 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .starter-left h3 { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.4rem; margin-bottom: 16px; }
+  .starter-left h3 span { color: var(--green); }
+  .starter-left p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; margin-bottom: 12px; }
+  .starter-left .note { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; color: var(--text-dim); line-height: 1.5; }
+  .starter-prices { display: grid; grid-template-columns: 1fr; gap: 2px; background: var(--border); }
+  .starter-price-item { background: var(--bg-card); padding: 24px 28px; transition: background 0.2s; }
+  .starter-price-item:hover { background: var(--bg-card-hover); }
+  .starter-price-amount { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 2rem; color: var(--green); line-height: 1; margin-bottom: 6px; }
+  .starter-price-label { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.08em; }
+
+  /* STEPS */
+  .steps-section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+  .steps-list { margin-top: 48px; display: flex; flex-direction: column; gap: 2px; background: var(--border); }
+  .step { background: var(--bg-card); padding: 32px 40px; display: flex; gap: 32px; align-items: flex-start; transition: background 0.2s; }
+  .step:hover { background: var(--bg-card-hover); }
+  .step-num { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 2.5rem; color: var(--green); line-height: 1; flex-shrink: 0; width: 48px; }
+  .step-content h3 { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; }
+  .step-content p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+
+  /* GROWTH PATH */
+  .growth-section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+  .growth-path {
+    background: var(--bg-card); border: 1px solid var(--border-strong);
+    padding: 48px; margin-top: 48px;
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 32px; align-items: center;
+  }
+  .growth-stage { padding: 24px; }
+  .growth-stage-label { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
+  .growth-stage-name { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.5rem; margin-bottom: 8px; }
+  .growth-stage-name span { color: var(--green); }
+  .growth-stage-detail { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+  .growth-arrow { font-size: 2rem; color: var(--green); opacity: 0.6; text-align: center; }
+  .growth-note { margin-top: 28px; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.75rem; color: var(--text-dim); line-height: 1.6; text-align: center; }
+  .growth-note span { color: var(--green); }
+
+  /* FAQ */
+  .faq-section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+  .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 2px; background: var(--border); }
+  .faq-item { background: var(--bg-card); padding: 28px 36px; }
+  .faq-item h3 { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 12px; }
+  .faq-item p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.75; }
+
+  /* CTA */
+  .cta-section { padding: 120px 0; text-align: center; position: relative; overflow: hidden; }
+  .cta-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 700px; height: 400px; background: radial-gradient(ellipse, rgba(0,240,96,0.08) 0%, transparent 70%); pointer-events: none; }
+  .cta-section .section-label { justify-content: center; }
+  .cta-section .section-label::before { display: none; }
+  .cta-section h2 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px; position: relative; z-index: 1; }
+  .cta-section > .container > p { color: var(--text-muted); font-size: 1rem; margin-bottom: 48px; position: relative; z-index: 1; max-width: 540px; margin-left: auto; margin-right: auto; }
+  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; margin-bottom: 48px; }
+  .contact-info { display: flex; gap: 48px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+  .contact-item { text-align: center; }
+  .ci-label { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+  .ci-value { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text-muted); }
+
+  /* DROPDOWN NAV */
+  .has-dropdown { position: relative; }
+  .has-dropdown > a { display: flex; align-items: center; gap: 4px; }
+  .has-dropdown > a::after { content: '▾'; font-size: 0.55rem; opacity: 0.5; }
+  .dropdown { display: none; position: absolute; top: calc(100% + 16px); left: -12px; background: rgba(10,12,10,0.97); border: 1px solid var(--border); list-style: none; min-width: 210px; padding: 8px 0; backdrop-filter: blur(20px); z-index: 200; box-shadow: 0 16px 40px rgba(0,0,0,0.5); }
+  .has-dropdown:hover .dropdown, .has-dropdown:focus-within .dropdown { display: block; }
+  .dropdown li a { display: block; padding: 9px 18px; color: var(--text-muted); font-size: 0.78rem; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; letter-spacing: 0.05em; text-decoration: none; transition: all 0.15s; }
+  .dropdown li a:hover { color: var(--green); padding-left: 24px; }
+
+  /* ANIMATIONS */
+  .js-loaded .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .js-loaded .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 16px 20px; } .nav-links { display: none; }
+    .page-hero { padding: 120px 20px 60px; }
+    .container { padding: 0 20px; }
+    .problem-grid { grid-template-columns: 1fr; gap: 40px; }
+    .what-grid { grid-template-columns: 1fr; gap: 2px; }
+    .starter-pricing-block { grid-template-columns: 1fr; gap: 40px; padding: 32px; }
+    .growth-path { grid-template-columns: 1fr; gap: 24px; }
+    .growth-arrow { transform: rotate(90deg); }
+    .contact-info { flex-direction: column; gap: 20px; }
+    h2 { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+    footer { flex-direction: column; align-items: flex-start; padding: 32px 20px; gap: 24px; }
+    .footer-links { gap: 20px; flex-wrap: wrap; }
+  }
+  @media (max-width: 480px) {
+    .page-hero { padding: 110px 16px 48px; }
+    .container { padding: 0 16px; }
+    .hero-actions { flex-direction: column; }
+    .step { padding: 24px 20px; gap: 20px; }
+    footer { padding: 28px 16px; }
+  }
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18009085486"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18009085486');</script>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','2176447043191960');fbq('track','PageView');</script>
+</head>
+<body>
+
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="amp-logo" viewBox="0 0 252 231">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M161.532 109.574L201.942 157.822L188.656 180.754L126.476 170.031L64.2794 180.757L51 157.834L91.4207 109.574L113.034 51H139.918L161.532 109.574ZM66.9185 158.821L71.2594 166.307L116.371 140.374L112.03 132.888L66.9185 158.821ZM136.296 140.374L181.408 166.307L185.749 158.821L140.637 132.888L136.296 140.374ZM122.314 115.833H130.996V63.9666H122.314V115.833Z" fill="#00f060"/>
+  </symbol>
+</svg>
+
+<nav aria-label="Main navigation">
+  <a href="/" class="nav-logo" aria-label="AMP IT home">
+    <svg width="34" height="32" aria-hidden="true"><use href="#amp-logo"/></svg>
+    <span class="nav-wordmark"><span class="g">AMP</span> IT</span>
+  </a>
+  <ul class="nav-links">
+    <li class="has-dropdown">
+      <a href="/pricing/managed-it/">Pricing</a>
+      <ul class="dropdown">
+        <li><a href="/pricing/managed-it/">Managed IT Plans</a></li>
+        <li><a href="/pricing/starting-a-business/">Starting a Business</a></li>
+      </ul>
+    </li>
+    <li class="has-dropdown">
+      <a href="/industries/law-firms/">Industries</a>
+      <ul class="dropdown">
+        <li><a href="/industries/law-firms/">Law Firms</a></li>
+        <li><a href="/industries/finance-cpa/">Finance &amp; CPA</a></li>
+        <li><a href="/industries/insurance/">Insurance Agencies</a></li>
+        <li><a href="/industries/other-industries/">Other Industries</a></li>
+      </ul>
+    </li>
+    <li><a href="/cybersecurity/">Cybersecurity</a></li>
+    <li><a href="/ai-governance/">AI Governance</a></li>
+    <li><a href="/blog/your-team-is-already-using-ai">Blog</a></li>
+  </ul>
+  <a href="/assessment" class="nav-cta">Get Started</a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="navMobileMenu" aria-hidden="true">
+  <ul>
+    <li><a href="/pricing/managed-it/">Managed IT Pricing</a></li>
+    <li><a href="/pricing/starting-a-business/">Starting a Business</a></li>
+    <li><a href="/industries/law-firms/">Law Firms</a></li>
+    <li><a href="/industries/finance-cpa/">Finance &amp; CPA</a></li>
+    <li><a href="/industries/insurance/">Insurance Agencies</a></li>
+    <li><a href="/industries/other-industries/">Other Industries</a></li>
+    <li><a href="/cybersecurity/">Cybersecurity</a></li>
+    <li><a href="/ai-governance/">AI Governance</a></li>
+    <li><a href="/blog/your-team-is-already-using-ai">Blog</a></li>
+  </ul>
+</div>
+
+<main>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="eyebrow">Starting a Business</div>
+  <h1>Look established<br><span>from day one.</span></h1>
+  <div class="subline">// Professional email · Local phone number · IT foundation built to grow</div>
+  <p>Still using your personal Gmail or cell number for business? That's quietly costing you credibility with every client interaction. We set up the IT foundation that makes you look — and operate — like the real business you are.</p>
+  <div class="hero-actions">
+    <a href="/assessment" class="btn-primary">Get Set Up</a>
+    <a href="tel:+19803772733" class="btn-outline">Call Us</a>
+  </div>
+</div>
+
+<!-- THE PROBLEM -->
+<section class="problem-section">
+  <div class="container">
+    <div class="problem-grid">
+      <div class="problem-copy fade-up">
+        <div class="section-label">The Problem</div>
+        <h3>Personal Gmail is<br><span>costing you clients.</span></h3>
+        <p>When a potential client gets an email from a Gmail address, it signals one thing: this business isn't quite established yet. Whether or not that's true, perception is reality — and in professional services, your email is your first impression.</p>
+        <p>Beyond the credibility hit, mixing personal and business communication creates real problems: data you can't control, no ability to set up auto-replies or vacation rules properly, and no separation when something goes wrong.</p>
+        <p>It's not just email either. A personal cell number with no voicemail, no hold music, and no way to separate business calls from personal ones signals the same thing. And when you're trying to close a contract with a law firm or a general contractor, these details matter.</p>
+      </div>
+      <div class="problem-costs fade-up d1">
+        <div class="cost-item">
+          <div class="cost-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="cost-text-label">No professional email</div>
+            <div class="cost-text-sub">Clients see johndoe83@gmail.com instead of john@yourbusiness.com</div>
+          </div>
+        </div>
+        <div class="cost-item">
+          <div class="cost-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.02 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="cost-text-label">Personal number for business</div>
+            <div class="cost-text-sub">No separation, no voicemail, no hold queue, no business identity</div>
+          </div>
+        </div>
+        <div class="cost-item">
+          <div class="cost-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+          <div>
+            <div class="cost-text-label">No control over your data</div>
+            <div class="cost-text-sub">If you leave Google or something breaks, you have no admin access</div>
+          </div>
+        </div>
+        <div class="cost-item">
+          <div class="cost-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div>
+            <div class="cost-text-label">No room to grow</div>
+            <div class="cost-text-sub">Migrating later is painful — set it up right from the start</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="what-section">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">What You Get</div>
+      <h2>Three things every new<br><span>Charlotte business needs.</span></h2>
+    </div>
+    <div class="what-grid">
+      <div class="what-card fade-up">
+        <div class="what-num">01</div>
+        <h3>Professional Business Email</h3>
+        <p>Your email at your domain — you@yourbusiness.com. We set up Google Workspace or Microsoft 365, configure email security, and make sure it delivers properly. No spam issues, no setup headaches.</p>
+      </div>
+      <div class="what-card fade-up d1">
+        <div class="what-num">02</div>
+        <h3>Local Charlotte Phone Number</h3>
+        <p>A real 704 or 980 number for your business that rings your cell, keeps your personal number private, and gives you the ability to set up voicemail, call routing, and business hours. Clients call a business, not a person.</p>
+      </div>
+      <div class="what-card fade-up d2">
+        <div class="what-num">03</div>
+        <h3>IT Foundation to Grow</h3>
+        <p>We document your setup, configure it to scale, and give you admin access you actually understand. When you hit 5+ employees and need managed IT, you're already on a foundation that supports it — no costly migration needed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">Starter Track Pricing</div>
+      <h2>Simple, transparent<br><span>startup pricing.</span></h2>
+    </div>
+    <div class="starter-pricing-block fade-up">
+      <div class="starter-left">
+        <h3>Small Business <span>Starter Track</span></h3>
+        <p>Built for contractors, tradespeople, and new businesses with 1–3 employees. We set up your professional business email, local Charlotte phone number, and the IT foundation to grow into managed services as your team scales.</p>
+        <p>No long-term contract required at this tier. You pay for setup once, then a flat monthly rate as long as you need us. When you're ready for a full managed IT plan, we upgrade you seamlessly.</p>
+        <div class="note">// Charlotte-local team · On-site available in the metro area · No offshore support</div>
+      </div>
+      <div class="starter-prices">
+        <div class="starter-price-item">
+          <div class="starter-price-amount">$300–500</div>
+          <div class="starter-price-label">Email Setup (one-time)</div>
+        </div>
+        <div class="starter-price-item">
+          <div class="starter-price-amount">$25–40</div>
+          <div class="starter-price-label">/user/mo management</div>
+        </div>
+        <div class="starter-price-item">
+          <div class="starter-price-amount">$20–35</div>
+          <div class="starter-price-label">/user/mo business phone</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="steps-section">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">How It Works</div>
+      <h2>Up and running in<br><span>days, not weeks.</span></h2>
+    </div>
+    <div class="steps-list">
+      <div class="step fade-up">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Free 30-Minute Consult</h3>
+          <p>We talk about what you need, what you have, and what makes sense for your business. No sales pitch — just a straight conversation about what setup looks like for a business at your stage.</p>
+        </div>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>We Handle the Setup</h3>
+          <p>Domain configuration, workspace provisioning, email security, phone system setup — we do all of it. You don't need to figure out DNS records or MX entries. We set it up right and document everything so you're never dependent on us to understand your own system.</p>
+        </div>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>You're Live — and Ready to Grow</h3>
+          <p>Professional email at your domain, a local Charlotte number ringing your phone, and an IT setup that's documented and scalable. We stay on as your IT contact for ongoing questions, and when your team grows, your managed IT transition is seamless.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GROWTH PATH -->
+<section class="growth-section">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">When You Grow</div>
+      <h2>Your path from <span>starter to managed.</span></h2>
+    </div>
+    <div class="growth-path fade-up">
+      <div class="growth-stage">
+        <div class="growth-stage-label">Where you start</div>
+        <div class="growth-stage-name">Starter <span>Track</span></div>
+        <div class="growth-stage-detail">1–3 employees · Professional email + phone + IT foundation · $45–75/user/month total · No long-term contract</div>
+      </div>
+      <div class="growth-arrow">→</div>
+      <div class="growth-stage">
+        <div class="growth-stage-label">Where you grow into</div>
+        <div class="growth-stage-name">Essential <span>Plan</span></div>
+        <div class="growth-stage-detail">5+ employees · Full managed IT, security, helpdesk · $319/user/month · 12-month agreement · No migration needed — you're already on our stack</div>
+      </div>
+    </div>
+    <div class="growth-note">Most Starter Track clients transition to managed IT within <span>12–18 months</span> as their team grows. We make it seamless.</div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">FAQ</div>
+      <h2>Questions about<br><span>getting started.</span></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item fade-up">
+        <h3>Do I need Google Workspace or Microsoft 365?</h3>
+        <p>For most new businesses, Google Workspace is the right choice — it's intuitive, easier to manage for a small team, and the collaboration tools are excellent. Microsoft 365 is the better fit if you're in a regulated industry (law, finance) or if your clients are heavy Microsoft shops. We'll advise you on the right call during the consult.</p>
+      </div>
+      <div class="faq-item fade-up">
+        <h3>How much does business email setup cost in Charlotte?</h3>
+        <p>Our one-time setup fee is $300–500 depending on complexity. This includes domain configuration, workspace setup, email security basics, spam filtering, and a walkthrough so you understand your own system. Ongoing management runs $25–40/user/month.</p>
+      </div>
+      <div class="faq-item fade-up">
+        <h3>Can I get a local Charlotte phone number for my business?</h3>
+        <p>Yes. We provision a local 704 or 980 number through a cloud phone system. It rings your existing cell, keeps your personal number completely private, and gives you professional voicemail and call handling. Cost is $20–35/user/month.</p>
+      </div>
+      <div class="faq-item fade-up">
+        <h3>Do I need a contract?</h3>
+        <p>No long-term contract at the Starter Track level. You pay the one-time setup fee, then a flat monthly rate for management and phone. You can cancel the monthly services with 30 days notice. When you upgrade to managed IT, that's when the 12-month agreement comes into play.</p>
+      </div>
+      <div class="faq-item fade-up">
+        <h3>What happens when my business grows past 3 employees?</h3>
+        <p>When you're ready for full managed IT — typically around 5+ employees — we transition you to one of our managed plans seamlessly. Because you're already on our platform and we have your environment documented, there's no painful migration. We upgrade your plan and add the services you need.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="section-label">Get Started</div>
+    <h2>Ready to look like the<br><span>business you're building?</span></h2>
+    <p>Book a free 30-minute consult. We'll figure out exactly what setup makes sense for your business — no commitment, no pitch.</p>
+    <div class="cta-actions">
+      <a href="/assessment" class="btn-primary">Book a Free Consult</a>
+      <a href="tel:+19803772733" class="btn-outline">Call Us</a>
+    </div>
+    <div class="contact-info">
+      <div class="contact-item"><span class="ci-label">Email</span><span class="ci-value"><a href="mailto:hello@ampitsolutions.com" style="color:var(--text-muted);text-decoration:none;">hello@ampitsolutions.com</a></span></div>
+      <div class="contact-item"><span class="ci-label">Phone</span><span class="ci-value"><a href="tel:+19803772733" style="color:var(--text-muted);text-decoration:none;">(980) 377-2733</a></span></div>
+      <div class="contact-item"><span class="ci-label">Service Area</span><span class="ci-value">Charlotte Metro &amp; Surrounding</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-brand">
+    <svg width="30" height="28"><use href="#amp-logo"/></svg>
+    <div>
+      <span class="footer-wordmark"><span class="g">AMP</span> IT LLC</span>
+      <span class="footer-meta">Part of AMP Dynamics · Charlotte, NC</span>
+    </div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="/pricing/managed-it/">Pricing</a></li>
+    <li><a href="/industries/law-firms/">Industries</a></li>
+    <li><a href="/cybersecurity/">Cybersecurity</a></li>
+    <li><a href="/ai-governance/">AI Governance</a></li>
+    <li><a href="/blog/your-team-is-already-using-ai">Blog</a></li>
+    <li><a href="/assessment">Assessment</a></li>
+    <li><a href="/privacy">Privacy</a></li>
+    <li><a href="/terms">Terms</a></li>
+    <li><a href="https://www.linkedin.com/company/ampitservices" target="_blank" rel="noopener">LinkedIn</a></li>
+  </ul>
+  <span class="footer-meta">© 2026 AMP IT LLC. All rights reserved.</span>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js-loaded');
+  const obs = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  const hamburger = document.getElementById('navHamburger');
+  const mobileMenu = document.getElementById('navMobileMenu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      mobileMenu.setAttribute('aria-hidden', !isOpen);
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+      });
+    });
+  }
+  var isMobile = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  if (isMobile) {
+    document.querySelectorAll('a[href^="tel:"]').forEach(function(el) {
+      el.addEventListener('click', function() {
+        if (typeof gtag === 'function') { gtag('event', 'conversion', { send_to: 'AW-18009085486/ZIP4CKuYzJscEK6ss4tD' }); }
+      });
+    });
+  }
+</script>
+</body>
+</html>

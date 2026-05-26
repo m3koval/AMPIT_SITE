@@ -232,6 +232,14 @@
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
+  /* POST-BOOKING PREP QUIZ */
+  .prep-quiz { margin-top: 28px; border-top: 1px solid var(--border); padding-top: 24px; animation: fadeUp 0.5s ease both; }
+  .prep-quiz-head { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 6px; }
+  .prep-quiz-sub { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 20px; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; line-height: 1.6; letter-spacing: 0.02em; }
+  .prep-q-label { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--text); margin-bottom: 12px; }
+  .prep-skip { background: transparent; border: none; color: var(--text-dim); font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; cursor: pointer; padding: 16px 0 4px; display: block; transition: color 0.15s; letter-spacing: 0.04em; width: 100%; text-align: center; }
+  .prep-skip:hover { color: var(--green); }
+
   /* RESPONSIVE */
   @media (max-width: 900px) {
     nav { padding: 16px 24px; }
@@ -300,16 +308,16 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
 
 <main>
   <div class="left-panel">
-    <div class="eyebrow">Free IT Environment Assessment</div>
-    <h1 id="lpHeading">Let's see what you're <span>working with.</span></h1>
-    <p class="sub" id="lpSub">A few quick questions to help us prepare before we connect.</p>
+    <div class="eyebrow">Free IT Assessment</div>
+    <h1 id="lpHeading">Let's get you <span>on the calendar.</span></h1>
+    <p class="sub" id="lpSub">Pick a format — takes 60 seconds to book.</p>
     <ul class="promise-list">
-      <li>No sales pressure — just a straight assessment</li>
+      <li>No sales pressure — just a straight conversation</li>
       <li>Response within one business day</li>
-      <li>Free — no fee, no obligation, no commitment</li>
+      <li>Free — no fee, no obligation</li>
       <li>Charlotte-local team, available on-site</li>
     </ul>
-    <div class="step-tracker">Step <em id="stepNum">1</em> of 8</div>
+    <div class="step-tracker">Step <em id="stepNum">1</em> of 3</div>
   </div>
 
   <div class="right-panel">
@@ -319,9 +327,9 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
 
       <!-- STEP 1: CHOOSE PATH -->
       <div class="quiz-step active" id="step-1">
-        <span class="step-tag">// 01 of 08</span>
+        <span class="step-tag">// 01 — choose format</span>
         <p class="step-q">How would you like to connect?</p>
-        <p class="step-hint">Pick whichever works — you can always switch later.</p>
+        <p class="step-hint">Pick whichever works — you can always change later.</p>
         <div class="path-grid">
           <button class="path-card" data-slug="intro-call">
             <div class="path-title">15-Minute Intro Call</div>
@@ -330,114 +338,16 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
           </button>
           <button class="path-card" data-slug="onsite-audit">
             <div class="path-title">On-Site IT Audit</div>
-            <div class="path-body">We come to your office and assess your full environment — devices, network, security posture, and backups.</div>
-            <div class="path-meta">60 min · In-person · Charlotte area · Same day available · 24hr notice appreciated</div>
+            <div class="path-body">We come to your office and walk through your full environment — devices, network, security posture, and backups.</div>
+            <div class="path-meta">60 min · In-person · Charlotte area · 24hr notice appreciated</div>
           </button>
-        </div>
-        <div class="step-nav">
-          <button class="btn-back invisible">← Back</button>
-          <button class="btn-next" id="next-1" disabled>Continue →</button>
         </div>
       </div>
 
-      <!-- STEP 2: SIZE -->
+      <!-- STEP 2: CONTACT -->
       <div class="quiz-step" id="step-2">
-        <span class="step-tag">// 02 of 08</span>
-        <p class="step-q">How many people are in your company?</p>
-        <div class="options">
-          <button class="opt" data-key="size" data-val="1-5"><span class="opt-dot"></span>1–5 people</button>
-          <button class="opt" data-key="size" data-val="6-15"><span class="opt-dot"></span>6–15 people</button>
-          <button class="opt" data-key="size" data-val="16-40"><span class="opt-dot"></span>16–40 people</button>
-          <button class="opt" data-key="size" data-val="41+"><span class="opt-dot"></span>41+ people</button>
-        </div>
-        <div class="step-nav">
-          <button class="btn-back">← Back</button>
-          <button class="btn-next" id="next-2" disabled>Continue →</button>
-        </div>
-      </div>
-
-      <!-- STEP 3: IT SETUP -->
-      <div class="quiz-step" id="step-3">
-        <span class="step-tag">// 03 of 08</span>
-        <p class="step-q">How is IT handled today?</p>
-        <div class="options">
-          <button class="opt" data-key="setup" data-val="self"><span class="opt-dot"></span>We figure it out ourselves</button>
-          <button class="opt" data-key="setup" data-val="internal"><span class="opt-dot"></span>We have an internal IT person</button>
-          <button class="opt" data-key="setup" data-val="outsourced"><span class="opt-dot"></span>We use an outside IT provider</button>
-          <button class="opt" data-key="setup" data-val="none"><span class="opt-dot"></span>Nothing formal in place</button>
-        </div>
-        <div class="step-nav">
-          <button class="btn-back">← Back</button>
-          <button class="btn-next" id="next-3" disabled>Continue →</button>
-        </div>
-      </div>
-
-      <!-- STEP 4: CONCERN -->
-      <div class="quiz-step" id="step-4">
-        <span class="step-tag">// 04 of 08</span>
-        <p class="step-q">What's your biggest concern right now?</p>
-        <div class="options">
-          <button class="opt" data-key="concern" data-val="ai">
-            <span class="opt-dot"></span>
-            <div>AI tools — unsanctioned use by staff, or want to adopt AI securely</div>
-          </button>
-          <button class="opt" data-key="concern" data-val="security"><span class="opt-dot"></span>Security or ransomware risk</button>
-          <button class="opt" data-key="concern" data-val="support"><span class="opt-dot"></span>Slow or unreliable support when things break</button>
-          <button class="opt" data-key="concern" data-val="backup"><span class="opt-dot"></span>Backup and disaster recovery</button>
-          <button class="opt" data-key="concern" data-val="onboarding"><span class="opt-dot"></span>Staff onboarding and offboarding</button>
-          <button class="opt" data-key="concern" data-val="compliance">
-            <span class="opt-dot"></span>
-            <div>Compliance requirements<span class="opt-sub">HIPAA, SOC 2, legal, finance</span></div>
-          </button>
-          <button class="opt" data-key="concern" data-val="exploring"><span class="opt-dot"></span>Just starting to think about IT support</button>
-        </div>
-        <div class="step-nav">
-          <button class="btn-back">← Back</button>
-          <button class="btn-next" id="next-4" disabled>Continue →</button>
-        </div>
-      </div>
-
-      <!-- STEP 5: ENVIRONMENT -->
-      <div class="quiz-step" id="step-5">
-        <span class="step-tag">// 05 of 08</span>
-        <p class="step-q">What does your environment look like?</p>
-        <p class="step-hint">Select all that apply — skip if you're not sure</p>
-        <div class="options">
-          <button class="opt multi" data-val="m365"><span class="opt-dot"></span>Microsoft 365</button>
-          <button class="opt multi" data-val="gws"><span class="opt-dot"></span>Google Workspace</button>
-          <button class="opt multi" data-val="servers"><span class="opt-dot"></span>On-site servers or NAS</button>
-          <button class="opt multi" data-val="remote"><span class="opt-dot"></span>Remote or hybrid staff</button>
-          <button class="opt multi" data-val="multisite"><span class="opt-dot"></span>Multiple office locations</button>
-          <button class="opt multi" data-val="regulated">
-            <span class="opt-dot"></span>
-            <div>Regulated data<span class="opt-sub">healthcare, legal, financial</span></div>
-          </button>
-        </div>
-        <div class="step-nav">
-          <button class="btn-back">← Back</button>
-          <button class="btn-next" id="next-5">Continue →</button>
-        </div>
-      </div>
-
-      <!-- STEP 6: URGENCY -->
-      <div class="quiz-step" id="step-6">
-        <span class="step-tag">// 06 of 08</span>
-        <p class="step-q">How urgent is this?</p>
-        <div class="options">
-          <button class="opt" data-key="urgency" data-val="exploring"><span class="opt-dot"></span>Just exploring for now</button>
-          <button class="opt" data-key="urgency" data-val="quarter"><span class="opt-dot"></span>Planning for this quarter</button>
-          <button class="opt" data-key="urgency" data-val="active"><span class="opt-dot"></span>We have an active issue right now</button>
-        </div>
-        <div class="step-nav">
-          <button class="btn-back">← Back</button>
-          <button class="btn-next" id="next-6" disabled>Continue →</button>
-        </div>
-      </div>
-
-      <!-- STEP 7: CONTACT -->
-      <div class="quiz-step" id="step-7">
-        <span class="step-tag">// 07 of 08</span>
-        <p class="step-q">Last step — how do we reach you?</p>
+        <span class="step-tag">// 02 — your info</span>
+        <p class="step-q">Where should we send your confirmation?</p>
         <div class="frow">
           <div class="field">
             <label for="f-name">Name <span class="req-tag">*</span></label>
@@ -466,28 +376,18 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
           <input type="text" id="f-address" placeholder="919 Berryhill Rd, Charlotte, NC" autocomplete="street-address">
           <span class="ferr" id="err-address">Please enter your office address</span>
         </div>
-        <div class="field">
-          <label for="f-note">Anything urgent we should know? <span class="opt-tag">(optional)</span></label>
-          <textarea id="f-note" rows="3" placeholder="Active issue, specific concern, anything on your mind..."></textarea>
-        </div>
         <div class="step-nav">
           <button class="btn-back">← Back</button>
-          <button class="btn-next" id="next-7">Pick a Time →</button>
+          <button class="btn-next" id="next-2">See Available Times →</button>
         </div>
         <p class="form-note">Sent securely · No spam · We'll follow up within one business day</p>
       </div>
 
-      <!-- STEP 8: PICK A TIME -->
-      <div class="quiz-step" id="step-8">
-        <span class="step-tag">// 08 of 08 — pick a time</span>
+      <!-- STEP 3: PICK A TIME -->
+      <div class="quiz-step" id="step-3">
+        <span class="step-tag">// 03 — pick a time</span>
         <p class="cal-heading" id="calHeading"></p>
         <p class="cal-sub" id="calSub"></p>
-        <div class="blog-cta" id="blogCta">
-          <span class="blog-cta-label">// Related reading</span>
-          <a class="blog-cta-link" href="/blog/your-team-is-already-using-ai.html" target="_blank" rel="noopener">
-            Your Team Is Already Using AI. Here's What Nobody Told Them. →
-          </a>
-        </div>
 
         <!-- Custom calendar -->
         <div class="custom-cal" id="customCal">
@@ -515,14 +415,67 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
           </div>
         </div>
 
+        <!-- Booking success -->
         <div class="booking-success" id="bookingSuccess">
           <div class="success-icon">✓</div>
           <h2>You're <span>all set.</span></h2>
           <p id="successSubhead"></p>
           <ol class="next-steps" id="successSteps"></ol>
-          <p class="success-contact">Questions in the meantime? <a href="tel:+19803772733">(980) 377-2733</a></p>
+          <p class="success-contact">Questions? <a href="tel:+19803772733">(980) 377-2733</a></p>
           <a href="/" class="back-link">← Back to AMP IT</a>
         </div>
+
+        <!-- Optional post-booking prep quiz -->
+        <div class="prep-quiz" id="prepQuiz" style="display:none">
+          <div class="prep-quiz-head">Help us prepare — 4 quick questions</div>
+          <div class="prep-quiz-sub">Optional. Lets us tailor the conversation before we meet.</div>
+
+          <div id="pq-1">
+            <div class="prep-q-label">What's your industry?</div>
+            <div class="options">
+              <button class="opt" data-pkey="industry" data-pval="law"><span class="opt-dot"></span>Law firm / legal services</button>
+              <button class="opt" data-pkey="industry" data-pval="finance"><span class="opt-dot"></span>Financial services / accounting / CPA</button>
+              <button class="opt" data-pkey="industry" data-pval="healthcare"><span class="opt-dot"></span>Healthcare / medical</button>
+              <button class="opt" data-pkey="industry" data-pval="realestate"><span class="opt-dot"></span>Real estate / property management</button>
+              <button class="opt" data-pkey="industry" data-pval="other"><span class="opt-dot"></span>Other</button>
+            </div>
+          </div>
+
+          <div id="pq-2" style="display:none">
+            <div class="prep-q-label">How many people in your company?</div>
+            <div class="options">
+              <button class="opt" data-pkey="size" data-pval="1-5"><span class="opt-dot"></span>1–5 people</button>
+              <button class="opt" data-pkey="size" data-pval="6-15"><span class="opt-dot"></span>6–15 people</button>
+              <button class="opt" data-pkey="size" data-pval="16-40"><span class="opt-dot"></span>16–40 people</button>
+              <button class="opt" data-pkey="size" data-pval="41+"><span class="opt-dot"></span>41+ people</button>
+            </div>
+          </div>
+
+          <div id="pq-3" style="display:none">
+            <div class="prep-q-label">How is IT handled today?</div>
+            <div class="options">
+              <button class="opt" data-pkey="setup" data-pval="self"><span class="opt-dot"></span>We figure it out ourselves</button>
+              <button class="opt" data-pkey="setup" data-pval="internal"><span class="opt-dot"></span>Internal IT person</button>
+              <button class="opt" data-pkey="setup" data-pval="outsourced"><span class="opt-dot"></span>Outside IT provider</button>
+              <button class="opt" data-pkey="setup" data-pval="none"><span class="opt-dot"></span>Nothing formal in place</button>
+            </div>
+          </div>
+
+          <div id="pq-4" style="display:none">
+            <div class="prep-q-label">What's your biggest concern?</div>
+            <div class="options">
+              <button class="opt" data-pkey="concern" data-pval="security"><span class="opt-dot"></span>Security or ransomware risk</button>
+              <button class="opt" data-pkey="concern" data-pval="ai"><span class="opt-dot"></span>AI tools — adoption or unsanctioned use by staff</button>
+              <button class="opt" data-pkey="concern" data-pval="support"><span class="opt-dot"></span>Slow or unreliable IT support</button>
+              <button class="opt" data-pkey="concern" data-pval="compliance"><span class="opt-dot"></span>Compliance — HIPAA, SOC 2, legal, finance</button>
+              <button class="opt" data-pkey="concern" data-pval="backup"><span class="opt-dot"></span>Backup and disaster recovery</button>
+              <button class="opt" data-pkey="concern" data-pval="exploring"><span class="opt-dot"></span>Just starting to think about IT</button>
+            </div>
+          </div>
+
+          <button class="prep-skip" id="prepSkip">Skip — I'm all done</button>
+        </div>
+
       </div>
 
     </div><!-- /quiz-card -->
@@ -532,8 +485,8 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
 <footer class="assess-footer">
   <span class="assess-footer-copy">© 2026 AMP IT LLC. All rights reserved.</span>
   <div class="assess-footer-links">
-    <a href="/privacy.html">Privacy</a>
-    <a href="/terms.html">Terms</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
     <a href="/">Back to Home</a>
   </div>
 </footer>
@@ -541,31 +494,23 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
 <script>
   const SCRIPT_URL        = "https://script.google.com/macros/s/AKfycbyjjKaAsRcCc9mAGy7G3ecnRJxQR2J2KbesdUm7atMB6Ak7OTfyJcl8jCRqNzd2HcbOGA/exec";
   const EMAIL_RX          = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
-  const TOTAL             = 8;
-  // ── Google Places API key ─────────────────────────────────────
-  // Get one free at: console.cloud.google.com → APIs & Services → Credentials
-  // Enable "Places API (New)" · Restrict key to ampitsolutions.com
+  const TOTAL             = 3;
   const GOOGLE_PLACES_KEY = 'AIzaSyCVcTFSwb73i8DjqRgZ72Jldffzj2yFXT0';
 
   // ── State ─────────────────────────────────────────────────────
   const ans = {
     path: null,
-    size: null, setup: null, concern: null,
-    env: new Set(), urgency: null,
-    name: '', company: '', email: '', phone: '', address: '', note: ''
+    name: '', company: '', email: '', phone: '', address: ''
   };
+  const prepAns = { industry: null, size: null, setup: null, concern: null };
   let current = 1;
+  let prepStep = 1;
 
   // ── Left panel copy ───────────────────────────────────────────
   const lpCopy = {
-    1: { h: "Let's see what you're <span>working with.</span>", s: "A few quick questions to help us prepare before we connect." },
-    2: { h: "Let's see what you're <span>working with.</span>", s: "A few quick questions to help us prepare before we connect." },
-    3: { h: "Let's see what you're <span>working with.</span>", s: "Understanding your current setup helps us know where to start." },
-    4: { h: "What's <span>on your radar?</span>", s: "We'll focus the conversation on what's actually keeping you up at night." },
-    5: { h: "Your <span>environment.</span>", s: "This helps us understand what we're walking into before we connect." },
-    6: { h: "How <span>urgent?</span>", s: "We'll match our response to where you're at." },
-    7: { h: "Almost <span>done.</span>", s: "We'll reach out personally — no auto-responders, no drip campaigns." },
-    8: { h: "Pick a <span>time.</span>", s: "Your info is already filled in — just choose a slot that works." }
+    1: { h: "Let's get you <span>on the calendar.</span>",  s: "Pick a format — takes 60 seconds to book." },
+    2: { h: "Almost <span>done.</span>",                    s: "We'll reach out personally — no auto-responders, no drip campaigns." },
+    3: { h: "Pick a <span>time.</span>",                    s: "Your info is already filled in — just choose a slot that works." }
   };
 
   // ── Google Places loader ──────────────────────────────────────
@@ -576,9 +521,7 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     if (!window.google || !window.google.maps || !window.google.maps.places) return;
     placesLoaded = true;
     const ac = new google.maps.places.Autocomplete(input, {
-      types: ['address'],
-      componentRestrictions: { country: 'us' },
-      fields: ['formatted_address']
+      types: ['address'], componentRestrictions: { country: 'us' }, fields: ['formatted_address']
     });
     ac.addListener('place_changed', function () {
       const place = ac.getPlace();
@@ -609,14 +552,12 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     document.getElementById('lpHeading').innerHTML = d.h;
     document.getElementById('lpSub').textContent   = d.s;
     document.querySelector('.right-panel').scrollTo({ top: 0, behavior: 'smooth' });
-    if (step === 7) {
-      // Show address field only for on-site audit
+    if (step === 2) {
       document.getElementById('addressField').style.display =
         ans.path === 'onsite-audit' ? 'flex' : 'none';
-      // Load Google Places autocomplete the first time step 7 appears
       loadPlacesAPI();
     }
-    if (step === 8) buildCalStep();
+    if (step === 3) buildCalStep();
   }
 
   function updateProgress(step) {
@@ -624,34 +565,14 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     document.getElementById('stepNum').textContent = step;
   }
 
-  // ── Step 1 — path cards ───────────────────────────────────────
+  // ── Step 1 — path cards (auto-advance) ───────────────────────
   document.querySelectorAll('.path-card').forEach(card => {
     card.addEventListener('click', function () {
       document.querySelectorAll('.path-card').forEach(c => c.classList.remove('sel'));
       this.classList.add('sel');
       ans.path = this.dataset.slug;
-      document.getElementById('next-1').disabled = false;
-    });
-  });
-
-  // ── Single-select quiz options ─────────────────────────────────
-  document.querySelectorAll('.opt:not(.multi)').forEach(btn => {
-    btn.addEventListener('click', function () {
-      const key = this.dataset.key;
-      this.closest('.options').querySelectorAll('.opt').forEach(b => b.classList.remove('sel'));
-      this.classList.add('sel');
-      ans[key] = this.dataset.val;
-      const nb = document.getElementById('next-' + current);
-      if (nb) nb.disabled = false;
-    });
-  });
-
-  // ── Multi-select (step 5) ──────────────────────────────────────
-  document.querySelectorAll('.opt.multi').forEach(btn => {
-    btn.addEventListener('click', function () {
-      this.classList.toggle('sel');
-      if (this.classList.contains('sel')) ans.env.add(this.dataset.val);
-      else ans.env.delete(this.dataset.val);
+      const stepAtClick = current;
+      setTimeout(() => { if (current === stepAtClick) goTo(2); }, 280);
     });
   });
 
@@ -660,20 +581,13 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     btn.addEventListener('click', () => { if (current > 1) goTo(current - 1); });
   });
 
-  // ── Next buttons (steps 1–6) ──────────────────────────────────
-  [1, 2, 3, 4, 5, 6].forEach(n => {
-    const btn = document.getElementById('next-' + n);
-    if (btn) btn.addEventListener('click', () => goTo(n + 1));
-  });
-
-  // ── Step 7 submit ─────────────────────────────────────────────
-  document.getElementById('next-7').addEventListener('click', async function () {
+  // ── Step 2 → 3 (validate contact, then calendar) ─────────────
+  document.getElementById('next-2').addEventListener('click', function () {
     const name    = document.getElementById('f-name').value.trim();
     const company = document.getElementById('f-company').value.trim();
     const email   = document.getElementById('f-email').value.trim();
     const phone   = document.getElementById('f-phone').value.trim();
     const address = document.getElementById('f-address').value.trim();
-    const note    = document.getElementById('f-note').value.trim();
     const needsAddress = ans.path === 'onsite-audit';
     let valid = true;
 
@@ -689,37 +603,9 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     if (needsAddress) fcheck('f-address', 'err-address', address.length > 0);
     if (!valid) return;
 
-    ans.name = name; ans.company = company; ans.email = email;
-    ans.phone = phone; ans.address = address; ans.note = note;
-
-    this.textContent = 'Loading...';
-    this.disabled = true;
-
-    try {
-      await fetch(SCRIPT_URL, {
-        method: 'POST', mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          origin: window.location.origin,
-          path:        ans.path,
-          name, company, email,
-          phone:       phone   || '',
-          address:     address || '',
-          size:        ans.size    || '',
-          setup:       ans.setup   || '',
-          concern:     ans.concern || '',
-          environment: Array.from(ans.env).join(', '),
-          urgency:     ans.urgency || '',
-          note:        note || ''
-        })
-      });
-    } catch (e) { /* no-cors always throws */ }
-
-    if (typeof gtag === 'function') {
-      gtag('event', 'conversion', { send_to: 'AW-18009085486/ZIP4CKuYzJscEK6ss4tD' });
-    }
-
-    goTo(8);
+    ans.name = name; ans.company = company;
+    ans.email = email; ans.phone = phone; ans.address = address;
+    goTo(3);
   });
 
   // ── Live error clear ──────────────────────────────────────────
@@ -740,7 +626,6 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     e.target.value = v;
   });
 
-  // ── Build step 8 ─────────────────────────────────────────────
   // ── Custom calendar ───────────────────────────────────────────
   const ccal = {
     year: new Date().getFullYear(), month: new Date().getMonth(),
@@ -750,7 +635,7 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
   async function ccalLoad(year, month) {
     const key = `${year}-${String(month+1).padStart(2,'0')}`;
     if (ccal.slots[key] !== undefined) return;
-    ccal.slots[key] = null; // mark loading
+    ccal.slots[key] = null;
     document.getElementById('ccalLoading').style.display = 'flex';
     const last = new Date(year, month+1, 0).getDate();
     const from = `${key}-01`;
@@ -764,13 +649,13 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
 
   function ccalRender() {
     const { year, month, selDate } = ccal;
-    const key       = `${year}-${String(month+1).padStart(2,'0')}`;
-    const mSlots    = ccal.slots[key];
-    const today     = new Date(); today.setHours(0,0,0,0);
-    const firstDow  = new Date(year, month, 1).getDay();
-    const daysInMo  = new Date(year, month+1, 0).getDate();
-    const hdrs      = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-    const now       = new Date();
+    const key      = `${year}-${String(month+1).padStart(2,'0')}`;
+    const mSlots   = ccal.slots[key];
+    const today    = new Date(); today.setHours(0,0,0,0);
+    const firstDow = new Date(year, month, 1).getDay();
+    const daysInMo = new Date(year, month+1, 0).getDate();
+    const hdrs     = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const now      = new Date();
 
     document.getElementById('ccalMonthLabel').textContent =
       new Date(year, month).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
@@ -780,8 +665,8 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     let html = hdrs.map(d => `<div class="ccal-day-hdr">${d}</div>`).join('');
     for (let i = 0; i < firstDow; i++) html += `<div class="ccal-day empty"></div>`;
     for (let d = 1; d <= daysInMo; d++) {
-      const ds  = `${key}-${String(d).padStart(2,'0')}`;
-      const dt  = new Date(year, month, d);
+      const ds   = `${key}-${String(d).padStart(2,'0')}`;
+      const dt   = new Date(year, month, d);
       const past = dt < today;
       const has  = mSlots && mSlots[ds] && mSlots[ds].length > 0;
       let cls    = 'ccal-day';
@@ -821,7 +706,7 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     document.getElementById('ccalConfirmWhen').textContent = `${dateLabel} · ${disp}`;
     document.getElementById('ccalConfirmWho').innerHTML =
       `${ans.name} · ${ans.email}` +
-      (ans.phone ? ` · ${ans.phone}` : '') +
+      (ans.phone  ? ` · ${ans.phone}` : '') +
       (isAudit && ans.address ? `<br>${ans.address}` : '');
     document.getElementById('ccalError').style.display   = 'none';
     document.getElementById('ccalConfirm').style.display = 'block';
@@ -836,23 +721,22 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           type: ans.path,
-          start: new Date(ccal.selTime).toISOString(), // ensure UTC ISO
+          start: new Date(ccal.selTime).toISOString(),
           name: ans.name, email: ans.email,
-          phone: ans.phone || '', address: ans.address || '', note: ans.note || ''
+          phone: ans.phone || '', address: ans.address || '', note: ''
         })
       });
-      const data = await res.json();
-      // Cal.com v2 wraps response: { status: "success", data: { uid, id, ... } }
+      const data    = await res.json();
       const booking = data.data || data;
       if (res.ok && data.status === 'success' && (booking.uid || booking.id)) {
         if (typeof gtag !== 'undefined')
           gtag('event', 'conversion', { send_to: 'AW-18009085486/ZIP4CKuYzJscEK6ss4tD' });
         if (typeof fbq !== 'undefined')
           fbq('track', 'Lead');
+        submitToSheets({});
         showBookingSuccess();
       } else {
-        const msg = data.error?.message || data.message || data.status || 'Booking failed';
-        throw new Error(msg);
+        throw new Error(data.error?.message || data.message || 'Booking failed');
       }
     } catch(e) {
       btn.disabled = false; btn.textContent = 'Confirm Booking →';
@@ -862,29 +746,55 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     }
   }
 
+  async function submitToSheets(extra) {
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          origin:   window.location.origin,
+          path:     ans.path,
+          name:     ans.name,
+          company:  ans.company,
+          email:    ans.email,
+          phone:    ans.phone   || '',
+          address:  ans.address || '',
+          industry: extra.industry || '',
+          size:     extra.size     || '',
+          setup:    extra.setup    || '',
+          concern:  extra.concern  || ''
+        })
+      });
+    } catch (e) { /* no-cors */ }
+  }
+
   function showBookingSuccess() {
     const isAudit = ans.path === 'onsite-audit';
-    document.getElementById('customCal').style.display   = 'none';
-    document.querySelector('#step-8 .step-tag').style.display = 'none';
-    document.getElementById('calHeading').style.display  = 'none';
-    document.getElementById('calSub').style.display      = 'none';
-    document.getElementById('blogCta').style.display     = 'none';
+    document.getElementById('customCal').style.display  = 'none';
+    document.querySelector('#step-3 .step-tag').style.display = 'none';
+    document.getElementById('calHeading').style.display = 'none';
+    document.getElementById('calSub').style.display     = 'none';
     document.getElementById('successSubhead').textContent = isAudit
-      ? "Your on-site audit visit is booked. Here's what to expect:"
+      ? "Your on-site audit is booked. Here's what to expect:"
       : "Your intro call is confirmed. Here's what to expect:";
     document.getElementById('successSteps').innerHTML = (isAudit ? [
       "Check your email — you'll get a calendar invite with the visit details",
-      "We'll review what you shared and research your environment before we arrive",
-      "We'll walk through what we find and give you a plain-English breakdown with clear next steps"
+      "We'll research your environment before we arrive",
+      "We'll walk you through what we find with a plain-English breakdown and clear next steps"
     ] : [
       "Check your email — you'll get a calendar invite with the meeting link",
       "We'll review what you shared before we talk — no prep needed on your end",
-      "We'll cover your situation, walk through your options, and give you straight answers"
+      "We'll cover your situation and give you straight answers — no pitch"
     ]).map(s => `<li>${s}</li>`).join('');
     document.getElementById('bookingSuccess').classList.add('show');
     document.getElementById('lpHeading').innerHTML = "You're <span>all set.</span>";
-    document.getElementById('lpSub').textContent   = "We'll see you soon.";
+    document.getElementById('lpSub').textContent   = "One more thing — help us prepare.";
     document.querySelector('.right-panel').scrollTo({ top: 0, behavior: 'smooth' });
+    // Reveal the optional prep quiz after a moment
+    setTimeout(() => {
+      document.getElementById('prepQuiz').style.display = 'block';
+      document.querySelector('.right-panel').scrollTo({ top: 9999, behavior: 'smooth' });
+    }, 1400);
   }
 
   function buildCalStep() {
@@ -892,10 +802,7 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     const label   = isAudit ? 'On-Site IT Audit' : '15-Minute Intro Call';
     document.getElementById('calHeading').innerHTML = `You chose: <span>${label}</span>`;
     document.getElementById('calSub').textContent   = 'Select a date and time below.';
-    document.getElementById('blogCta').classList.toggle('show', ans.concern === 'ai');
 
-
-    // Init custom calendar
     ccal.year = new Date().getFullYear(); ccal.month = new Date().getMonth();
     ccal.selDate = null; ccal.selTime = null; ccal.slots = {};
     document.getElementById('ccalTimes').style.display   = 'none';
@@ -904,19 +811,19 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     document.getElementById('customCal').style.display   = 'block';
 
     document.getElementById('ccalConfirmBtn').onclick = ccalConfirm;
-    document.getElementById('ccalChangeBtn').onclick  = function() {
+    document.getElementById('ccalChangeBtn').onclick  = function () {
       ccal.selTime = null;
       document.getElementById('ccalConfirm').style.display = 'none';
       document.querySelectorAll('.ccal-slot').forEach(b => b.classList.remove('sel'));
     };
-    document.getElementById('ccalPrev').onclick = async function() {
+    document.getElementById('ccalPrev').onclick = async function () {
       if (ccal.month === 0) { ccal.month = 11; ccal.year--; } else ccal.month--;
       ccal.selDate = null;
       document.getElementById('ccalTimes').style.display   = 'none';
       document.getElementById('ccalConfirm').style.display = 'none';
       ccalRender(); await ccalLoad(ccal.year, ccal.month); ccalRender();
     };
-    document.getElementById('ccalNext').onclick = async function() {
+    document.getElementById('ccalNext').onclick = async function () {
       if (ccal.month === 11) { ccal.month = 0; ccal.year++; } else ccal.month++;
       ccal.selDate = null;
       document.getElementById('ccalTimes').style.display   = 'none';
@@ -927,6 +834,37 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     ccalRender();
     ccalLoad(ccal.year, ccal.month).then(() => ccalRender());
   }
+
+  // ── Post-booking prep quiz (auto-advance, optional) ───────────
+  document.querySelectorAll('.prep-quiz .opt').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const key = this.dataset.pkey;
+      this.closest('.options').querySelectorAll('.opt').forEach(b => b.classList.remove('sel'));
+      this.classList.add('sel');
+      prepAns[key] = this.dataset.pval;
+      const thisStep = prepStep;
+      setTimeout(() => {
+        if (prepStep !== thisStep) return;
+        const next = prepStep + 1;
+        if (next <= 4) {
+          document.getElementById('pq-' + prepStep).style.display = 'none';
+          prepStep = next;
+          document.getElementById('pq-' + prepStep).style.display = 'block';
+          document.querySelector('.right-panel').scrollTo({ top: 9999, behavior: 'smooth' });
+        } else {
+          // All 4 answered — submit and wrap up
+          submitToSheets(prepAns);
+          document.getElementById('prepQuiz').style.display = 'none';
+          document.getElementById('lpSub').textContent = "We'll see you soon.";
+        }
+      }, 280);
+    });
+  });
+
+  document.getElementById('prepSkip').addEventListener('click', function () {
+    document.getElementById('prepQuiz').style.display = 'none';
+    document.getElementById('lpSub').textContent = "We'll see you soon.";
+  });
 
   // ── Init ──────────────────────────────────────────────────────
   updateProgress(1);
