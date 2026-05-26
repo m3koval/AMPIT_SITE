@@ -526,18 +526,16 @@
 
     .container { padding: 0 20px; }
     .positioning-grid { grid-template-columns: 1fr; gap: 40px; }
-    .plans-grid { grid-template-columns: 1fr; gap: 12px; background: transparent; }
     .why-grid { grid-template-columns: 1fr; gap: 2px; }
     .industry-list { grid-template-columns: repeat(2, 1fr); }
-    .services-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .services-header p { text-align: left; max-width: 100%; }
-    .starter-section { grid-template-columns: 1fr; gap: 24px; }
-    .starter-items { gap: 16px; }
     footer { flex-direction: column; align-items: flex-start; padding: 32px 20px; gap: 24px; }
     .footer-links { gap: 20px; flex-wrap: wrap; }
     .cta-section { padding: 60px 0; }
     .stat-row { grid-template-columns: 1fr 1fr; }
     .serve-card:hover { transform: none; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .covers-grid { grid-template-columns: repeat(2,1fr); }
+    .pricing-teaser { flex-direction: column; align-items: flex-start; gap: 20px; }
     h1 { font-size: clamp(2.4rem, 8vw, 3.5rem); }
     h2 { font-size: clamp(1.6rem, 6vw, 2.2rem); }
     .hero-sub { font-size: 1rem; }
@@ -750,6 +748,35 @@
   .has-dropdown:hover .dropdown, .has-dropdown:focus-within .dropdown { display: block; }
   .dropdown li a { display: block; padding: 9px 18px; color: var(--text-muted); font-size: 0.78rem; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; letter-spacing: 0.05em; text-decoration: none; transition: all 0.15s; }
   .dropdown li a:hover { color: var(--green); padding-left: 24px; }
+
+  /* HOW IT WORKS */
+  .how-it-works { padding: 100px 0; border-bottom: 1px solid var(--border); }
+  .how-it-works h2 { margin-bottom: 56px; }
+  .steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--border); }
+  .step { background: var(--bg-card); padding: 40px 32px; transition: background 0.2s; position: relative; }
+  .step:hover { background: var(--bg-card-hover); }
+  .step-num { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 3rem; color: var(--green); opacity: 0.25; line-height: 1; margin-bottom: 20px; }
+  .step h3 { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 14px; }
+  .step p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.8; }
+  .step-connector { display: none; }
+
+  /* WHAT WE COVER */
+  .covers-section { padding: 100px 0; border-bottom: 1px solid var(--border); }
+  .covers-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; background: var(--border); margin-top: 48px; margin-bottom: 2px; }
+  .cover-card { background: var(--bg-card); padding: 36px 28px; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: background 0.25s; }
+  .cover-card:hover { background: var(--bg-card-hover); }
+  .cover-icon { width: 44px; height: 44px; background: var(--green-glow); border: 1px solid var(--border-strong); display: flex; align-items: center; justify-content: center; color: var(--green); margin-bottom: 20px; flex-shrink: 0; }
+  .cover-card h3 { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 10px; }
+  .cover-card p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.75; flex: 1; }
+  .cover-link { display: inline-flex; align-items: center; gap: 5px; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.65rem; color: var(--green); letter-spacing: 0.1em; margin-top: 20px; opacity: 0.7; transition: opacity 0.15s, gap 0.15s; }
+  .cover-card:hover .cover-link { opacity: 1; gap: 9px; }
+
+  /* PRICING TEASER */
+  .pricing-teaser { background: var(--bg-card); border: 1px solid var(--border); padding: 28px 36px; display: flex; align-items: center; justify-content: space-between; gap: 24px; transition: border-color 0.2s; margin-top: 2px; }
+  .pricing-teaser:hover { border-color: var(--border-strong); }
+  .pt-label { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.65rem; color: var(--green); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+  .pt-text { font-size: 0.95rem; color: var(--text-muted); }
+  .pt-text strong { color: var(--text); font-family: 'Outfit', sans-serif; font-size: 1.1rem; }
 
   /* POLL SECTION */
   .poll-section { padding: 72px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
@@ -1130,119 +1157,83 @@
   </div>
 </section>
 
-<section class="services" id="services">
+<!-- HOW IT WORKS -->
+<section class="how-it-works" id="services">
   <div class="container">
-    <div class="services-header fade-up">
-      <div>
-        <div class="section-label">Service Plans</div>
-        <h2>Simple pricing.<br><span>No surprises.</span></h2>
-        <div class="pricing-subline">// <span>Unlike most MSPs</span> — our rates are published. No 'call for a quote.'</div>
-        <a href="/pricing/managed-it/" class="body-link" style="margin-top:10px;">Full pricing breakdown &amp; plan comparison →</a>
+    <div class="section-label fade-up">How It Works</div>
+    <h2 class="fade-up">Up and running in days.<br><span>Not months.</span></h2>
+    <div class="steps-grid">
+      <div class="step fade-up">
+        <div class="step-num">01</div>
+        <h3>Free IT Assessment</h3>
+        <p>We audit your current environment — devices, software, security gaps, vendor contracts, and everything in between. You get a clear picture of what's at risk and what it costs to fix it. No commitment, no pressure.</p>
       </div>
-      <ul class="pricing-includes">
-        <li>Google Workspace &amp; Microsoft 365</li>
-        <li>Security tools &amp; endpoint protection</li>
-        <li>Backup — endpoints &amp; cloud data</li>
-        <li>One invoice · 12-month standard</li>
-      </ul>
+      <div class="step fade-up d1">
+        <div class="step-num">02</div>
+        <h3>A Plan Built for You</h3>
+        <p>We build a flat-rate proposal around your team size, industry, and risk profile. Published pricing — you'll know exactly what you're paying before you sign. No "call for a quote," no line-item surprises.</p>
+      </div>
+      <div class="step fade-up d2">
+        <div class="step-num">03</div>
+        <h3>Your IT Just Runs</h3>
+        <p>We handle the migration, configuration, and onboarding. Security is active from day one. And when something comes up — a real human picks up the phone. No ticket queue, no offshore support.</p>
+      </div>
     </div>
-    <div class="value-anchor fade-up">
-      <div class="value-anchor-comparisons">
-        <div class="anchor-item">
-          <div class="anchor-label">Internal IT hire</div>
-          <div class="anchor-value">$97–123k</div>
-          <div class="anchor-sub">Fully-loaded salary + benefits + tools — one person</div>
+  </div>
+</section>
+
+<!-- WHAT WE COVER -->
+<section class="covers-section">
+  <div class="container">
+    <div class="section-label fade-up">What We Cover</div>
+    <h2 class="fade-up">Every service your business needs.<br><span>One partner. One invoice.</span></h2>
+    <div class="covers-grid">
+
+      <a href="/pricing/managed-it/" class="cover-card fade-up">
+        <div class="cover-icon">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
         </div>
-        <div class="anchor-item">
-          <div class="anchor-label">One security incident</div>
-          <div class="anchor-value">$120k avg</div>
-          <div class="anchor-sub">Downtime, recovery, and legal fees for an SMB</div>
+        <h3>Managed IT</h3>
+        <p>Helpdesk, monitoring, patching, onboarding, and email administration — everything that keeps your team moving day to day. One flat monthly rate, no break-fix surprises.</p>
+        <span class="cover-link">See plans &amp; pricing →</span>
+      </a>
+
+      <a href="/cybersecurity/" class="cover-card fade-up d1">
+        <div class="cover-icon">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2l8 4v6c0 4.97-3.5 9.64-8 10.93C7.5 21.64 4 16.97 4 12V6l8-4z"/></svg>
         </div>
-        <div class="anchor-item">
-          <div class="anchor-label">Break-fix rate</div>
-          <div class="anchor-value">$150–250/hr</div>
-          <div class="anchor-sub">When something breaks and you don't have a retainer</div>
+        <h3>Cybersecurity</h3>
+        <p>24/7 threat detection, advanced email security, dark web monitoring, MFA enforcement, and verified backup recovery — included in every plan, not an upsell.</p>
+        <span class="cover-link">Explore our security stack →</span>
+      </a>
+
+      <a href="/ai-governance/" class="cover-card fade-up d2">
+        <div class="cover-icon">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.75H6A2.25 2.25 0 003.75 6v3.75M14.25 3.75H18A2.25 2.25 0 0120.25 6v3.75M20.25 14.25V18A2.25 2.25 0 0118 20.25h-3.75M3.75 14.25V18A2.25 2.25 0 006 20.25h3.75M9 12a3 3 0 106 0 3 3 0 00-6 0z"/></svg>
         </div>
-      </div>
+        <h3>AI Governance</h3>
+        <p>Your team is already using AI. We build the policies, controls, and private AI environments that let you capture the productivity without the liability or data exposure.</p>
+        <span class="cover-link">Learn about AI Governance →</span>
+      </a>
+
+      <a href="/pricing/starting-a-business/" class="cover-card fade-up d3">
+        <div class="cover-icon">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12H4s.55-3.03 2-4"/></svg>
+        </div>
+        <h3>Starting a Business</h3>
+        <p>Professional business email, a local Charlotte phone number, and the IT foundation to look established from day one. Built for contractors, tradespeople, and new businesses.</p>
+        <span class="cover-link">See the Starter Track →</span>
+      </a>
+
     </div>
 
-    <div class="starter-section fade-up">
+    <div class="pricing-teaser fade-up">
       <div>
-        <h3>Small Business <span>Starter Track</span></h3>
-        <p>Just getting started? We set up professional business email, a local Charlotte phone number, and the IT foundation to grow into managed services as your team scales. Built for contractors, tradespeople, and new businesses with 1–3 employees.</p>
-        <a href="/pricing/starting-a-business/" class="body-link">See everything included in the Starter Track →</a>
+        <div class="pt-label">Transparent pricing</div>
+        <div class="pt-text">Managed IT plans from <strong>$319/user/month</strong> — published rates, no "call for a quote."</div>
       </div>
-      <div class="starter-items">
-        <div class="starter-item"><span class="price">$300–500</span><span class="label">Email Setup (one-time)</span></div>
-        <div class="starter-item"><span class="price">$25–40</span><span class="label">/user/mo management</span></div>
-        <div class="starter-item"><span class="price">$20–35</span><span class="label">/user/mo business phone</span></div>
-      </div>
+      <a href="/pricing/managed-it/" class="btn-primary">Compare Plans</a>
     </div>
-
-    <div class="plans-grid fade-up">
-      <div class="plan">
-        <div class="plan-icon">▲</div>
-        <div class="plan-name">Essential</div>
-        <div class="plan-tagline">Protect your business from day one</div>
-        <div class="plan-price">
-          <span class="amount">$319</span>
-          <span class="per">/user/month · 5 user minimum</span>
-        </div>
-        <ul class="plan-features">
-          <li>Remote monitoring & management — OS & software patching</li>
-          <li>24/7 managed threat detection & response</li>
-          <li>Advanced email security & phishing protection</li>
-          <li>Automated backup — endpoints & cloud data</li>
-          <li>Helpdesk — Tier 1/2 remote support</li>
-          <li>User onboarding & offboarding</li>
-          <li>MFA enforcement + mobile device support</li>
-          <li>Monthly health report</li>
-          <li>Google Workspace & Microsoft 365 administration</li>
-        </ul>
-        <a href="/assessment" class="plan-cta">Get Essential</a>
-      </div>
-      <div class="plan featured">
-        <div class="plan-badge">Most Popular</div>
-        <div class="plan-icon">◆</div>
-        <div class="plan-name">Better</div>
-        <div class="plan-tagline">Prove you're protected, always</div>
-        <div class="plan-price">
-          <span class="amount">$445</span>
-          <span class="per">/user/month · Ideal 10–40 users</span>
-        </div>
-        <ul class="plan-features">
-          <li>Everything in Essential, plus:</li>
-          <li>Backup verification & restore testing (monthly)</li>
-          <li>Web & DNS content filtering</li>
-          <li>Dark web monitoring (domain + exec emails)</li>
-          <li>Proactive maintenance windows</li>
-          <li>Quarterly Business Reviews</li>
-        </ul>
-        <a href="/assessment" class="plan-cta">Get Better</a>
-      </div>
-      <div class="plan">
-        <div class="plan-icon">★</div>
-        <div class="plan-name">Best</div>
-        <div class="plan-tagline">Strategic IT, white-glove service</div>
-        <div class="plan-price">
-          <span class="amount">$499</span>
-          <span class="per">/user/month · Ideal 15–50 users</span>
-        </div>
-        <ul class="plan-features">
-          <li>Everything in Better, plus:</li>
-          <li>Virtual CIO — strategic IT planning & roadmapping</li>
-          <li>P1: 1-hr response / P2: 4-hr resolution SLA</li>
-          <li>Dedicated account manager</li>
-          <li>Vendor management</li>
-          <li>Disaster recovery planning + annual tabletop</li>
-          <li>Cybersecurity risk assessments</li>
-          <li>Compliance planning</li>
-          <li>After-hours emergency coverage included</li>
-        </ul>
-        <a href="/assessment" class="plan-cta">Get Best</a>
-      </div>
-    </div>
-    <p class="anchor-statement">A single security incident costs the average SMB $120,000. <strong>Our Best plan can cost less than one engineer's fully-loaded salary</strong> — and you get <span class="green">an entire team plus the tools they'd need.</span></p>
   </div>
 </section>
 
