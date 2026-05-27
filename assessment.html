@@ -804,7 +804,7 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
           setup:       extra.setup    || '',
           concern:     extra.concern  || '',
           platform:    extra.platform || '',
-          frustration: extra.concern  || ''
+          frustration: extra.concern || ''
         })
       });
     } catch (e) { /* no-cors */ }
@@ -928,7 +928,7 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
       setup:       prepAns.setup    || '',
       concern:     prepAns.concern  || '',
       platform:    prepAns.platform || '',
-      frustration: prepAns.concern  || ''
+      frustration: prepAns.concern || ''
     });
     navigator.sendBeacon(SCRIPT_URL, new Blob([payload], { type: 'application/json' }));
   });
