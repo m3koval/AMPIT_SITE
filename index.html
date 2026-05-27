@@ -1342,14 +1342,14 @@
     <div class="poll-results" id="pollResults">
       <div class="poll-bar-row">
         <div class="poll-bar-label">
-          <span class="poll-bar-name">🧑 Real human</span>
+          <span class="poll-bar-name"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e06868" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:6px"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0116 0v2"/></svg>Real human</span>
           <span class="poll-bar-pct" id="pctHuman">0%</span>
         </div>
         <div class="poll-bar-track"><div class="poll-bar-fill" id="barHuman"></div></div>
       </div>
       <div class="poll-bar-row">
         <div class="poll-bar-label">
-          <span class="poll-bar-name">🤖 AI / self-service</span>
+          <span class="poll-bar-name"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#54b8e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:6px"><rect x="4" y="4" width="16" height="16" rx="3"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>AI / self-service</span>
           <span class="poll-bar-pct" id="pctAi">0%</span>
         </div>
         <div class="poll-bar-track"><div class="poll-bar-fill alt" id="barAi"></div></div>
@@ -1666,7 +1666,9 @@
       });
 
       if (voted) {
-        msgEl.innerHTML = 'Your vote: <span>' + (voted === 'human' ? '🧑 Real human' : '🤖 AI / self-service') + '</span>';
+        var humanIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#e06868" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0116 0v2"/></svg>';
+        var aiIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#54b8e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px"><rect x="4" y="4" width="16" height="16" rx="3"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>';
+        msgEl.innerHTML = 'Your vote: <span>' + (voted === 'human' ? humanIcon + 'Real human' : aiIcon + 'AI / self-service') + '</span>';
       } else {
         msgEl.textContent = '';
       }
