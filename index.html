@@ -1303,7 +1303,7 @@
         <!-- Matrix rain canvas (base layer) -->
         <canvas class="matrix-rain-canvas" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true"></canvas>
         <!-- Morpheus character image — save as poll-morpheus.jpg in site root -->
-        <img class="poll-card-hero" src="poll-morpheus.png" alt="" aria-hidden="true">
+        <img class="poll-card-hero" src="poll-morpheus.png" alt="" aria-hidden="true" style="transform: scale(1.32) translateY(4%)">
         <div class="poll-card-overlay"></div>
         <div class="poll-card-quote">
           <p>"Some problems are just better solved with a <strong>human.</strong>"</p>
@@ -1325,14 +1325,14 @@
         <img class="poll-card-hero" src="poll-neo.png" alt="" aria-hidden="true" style="object-position: center 45%">
         <div class="poll-card-overlay"></div>
         <div class="poll-card-quote">
-          <p>"Some problems are faster to solve on your own with <strong>AI chat.</strong>"</p>
+          <p>"Some problems are faster to solve on your own with <strong>AI.</strong>"</p>
         </div>
         <div class="poll-card-content">
           <div class="poll-choice-row">
             <div class="poll-choice-icon-circle blue" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
             </div>
-            <div class="poll-choice-title">AI chat / self-service</div>
+            <div class="poll-choice-title">AI / self-service</div>
           </div>
           <div class="poll-choice-desc">Troubleshoot with an AI assistant on my own schedule</div>
         </div>
@@ -1349,7 +1349,7 @@
       </div>
       <div class="poll-bar-row">
         <div class="poll-bar-label">
-          <span class="poll-bar-name">🤖 AI self-service</span>
+          <span class="poll-bar-name">🤖 AI / self-service</span>
           <span class="poll-bar-pct" id="pctAi">0%</span>
         </div>
         <div class="poll-bar-track"><div class="poll-bar-fill alt" id="barAi"></div></div>
@@ -1666,7 +1666,7 @@
       });
 
       if (voted) {
-        msgEl.innerHTML = 'Your vote: <span>' + (voted === 'human' ? '🧑 Real human' : '🤖 AI self-service') + '</span>';
+        msgEl.innerHTML = 'Your vote: <span>' + (voted === 'human' ? '🧑 Real human' : '🤖 AI / self-service') + '</span>';
       } else {
         msgEl.textContent = '';
       }
