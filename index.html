@@ -786,25 +786,53 @@
   .poll-label::before, .poll-label::after { content: ''; width: 24px; height: 1px; background: var(--green); }
   .poll-question { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.2; margin-bottom: 8px; }
   .poll-sub { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 40px; line-height: 1.6; }
+  .poll-inner { max-width: 940px; }
   .poll-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
   .poll-choice {
-    background: var(--bg-card); border: 1px solid var(--border-strong);
-    padding: 36px 28px; cursor: pointer; transition: all 0.25s; text-align: center;
+    border: 1px solid var(--border-strong); background: #030604;
+    padding: 0; cursor: pointer; transition: all 0.25s;
     position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    min-height: 320px;
   }
   .poll-choice:hover:not(:disabled) {
-    border-color: var(--green); background: var(--bg-card-hover);
+    border-color: var(--green);
     transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(0,240,96,0.15);
+    box-shadow: 0 16px 48px rgba(0,240,96,0.22);
   }
   .poll-choice:disabled { cursor: default; }
-  .poll-choice-emoji { font-size: 2.6rem; margin-bottom: 16px; display: block; line-height: 1; }
-  .poll-choice-title {
-    font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.15rem;
-    margin-bottom: 10px; color: var(--text);
+  /* Character photo sits above the rain canvas, dark areas go transparent via screen blend */
+  .poll-card-hero {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+    mix-blend-mode: screen; z-index: 1; pointer-events: none;
+    filter: brightness(0.72) contrast(1.3) saturate(0.9);
   }
-  .poll-choice-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.65; max-width: 240px; margin: 0 auto; }
-  .poll-choice.selected { border-color: var(--green); background: rgba(0,240,96,0.07); box-shadow: 0 0 0 1px var(--green) inset; }
+  .poll-card-overlay {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: linear-gradient(to top, rgba(3,6,4,0.98) 0%, rgba(3,6,4,0.78) 30%, rgba(3,6,4,0.15) 56%, rgba(3,6,4,0.52) 100%);
+  }
+  .poll-card-quote {
+    position: absolute; left: 0; right: 0; top: 0; bottom: 110px; z-index: 3; pointer-events: none;
+    display: flex; align-items: center; justify-content: center; padding: 0 28px;
+  }
+  .poll-card-quote p {
+    font-family: 'Outfit', sans-serif; font-style: italic; font-size: 0.88rem;
+    color: rgba(255,255,255,0.85); text-align: center; line-height: 1.6; max-width: 220px;
+    text-shadow: 0 1px 12px rgba(0,0,0,0.9), 0 0 32px rgba(0,0,0,0.7);
+  }
+  .poll-card-quote strong { color: #fff; font-style: normal; font-weight: 800; text-shadow: 0 0 16px rgba(0,240,96,0.4); }
+  .poll-card-content { position: relative; z-index: 4; padding: 20px 24px 26px; }
+  .poll-choice-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .poll-choice-icon-circle {
+    width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .poll-choice-icon-circle.red { background: rgba(220,60,60,0.15); border: 1px solid rgba(220,60,60,0.55); color: #e06868; }
+  .poll-choice-icon-circle.blue { background: rgba(40,160,220,0.15); border: 1px solid rgba(40,160,220,0.55); color: #54b8e8; }
+  .poll-choice-title { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--text); line-height: 1.2; text-align: left; }
+  .poll-choice-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; text-align: left; }
+  .poll-choice.selected { border-color: var(--green); box-shadow: 0 0 0 1px var(--green) inset; }
   .poll-choice.winner { border-color: var(--green); }
 
   .poll-results { display: none; }
@@ -825,6 +853,9 @@
   }
   @media (max-width: 600px) {
     .poll-choices { grid-template-columns: 1fr; gap: 8px; }
+    .poll-choice { min-height: 240px; }
+    .poll-card-quote { bottom: 100px; }
+    .poll-card-quote p { font-size: 0.82rem; }
   }
 </style>
   <script defer src="/_vercel/insights/script.js"></script>
@@ -1269,14 +1300,42 @@
 
     <div class="poll-choices" id="pollChoices">
       <button class="poll-choice" data-choice="human" id="choiceHuman">
-        <span class="poll-choice-emoji">🧑</span>
-        <div class="poll-choice-title">Talk to a real human</div>
-        <div class="poll-choice-desc">Call or chat with a technician who actually knows your setup</div>
+        <!-- Matrix rain canvas (base layer) -->
+        <canvas class="matrix-rain-canvas" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true"></canvas>
+        <!-- Morpheus character image — save as poll-morpheus.jpg in site root -->
+        <img class="poll-card-hero" src="poll-morpheus.png" alt="" aria-hidden="true">
+        <div class="poll-card-overlay"></div>
+        <div class="poll-card-quote">
+          <p>"Some problems are better solved with a <strong>human.</strong>"</p>
+        </div>
+        <div class="poll-card-content">
+          <div class="poll-choice-row">
+            <div class="poll-choice-icon-circle red" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 011 1.18 2 2 0 013 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14z"/></svg>
+            </div>
+            <div class="poll-choice-title">Talk to a real human</div>
+          </div>
+          <div class="poll-choice-desc">Call or chat with a technician who actually knows your setup</div>
+        </div>
       </button>
       <button class="poll-choice" data-choice="ai" id="choiceAi">
-        <span class="poll-choice-emoji">🤖</span>
-        <div class="poll-choice-title">AI chat / self-service</div>
-        <div class="poll-choice-desc">Troubleshoot with an AI assistant on my own schedule</div>
+        <!-- Matrix rain canvas (base layer) -->
+        <canvas class="matrix-rain-canvas" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true"></canvas>
+        <!-- Neo character image — save as poll-neo.jpg in site root -->
+        <img class="poll-card-hero" src="poll-neo.png" alt="" aria-hidden="true">
+        <div class="poll-card-overlay"></div>
+        <div class="poll-card-quote">
+          <p>"Some problems are faster to solve <strong>on your own.</strong>"</p>
+        </div>
+        <div class="poll-card-content">
+          <div class="poll-choice-row">
+            <div class="poll-choice-icon-circle blue" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
+            </div>
+            <div class="poll-choice-title">AI chat / self-service</div>
+          </div>
+          <div class="poll-choice-desc">Troubleshoot with an AI assistant on my own schedule</div>
+        </div>
       </button>
     </div>
 
@@ -1517,6 +1576,58 @@
       });
     });
   }
+
+  // ── MATRIX RAIN (runs on every .matrix-rain-canvas) ──────────────────────
+  (function() {
+    var chars = 'ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍ012345789Z'.split('');
+
+    function spawnRain(mc) {
+      var mctx = mc.getContext('2d');
+      var drops = [], bright = [], cols = 0;
+
+      function setup() {
+        var w = mc.offsetWidth || 300;
+        var h = mc.offsetHeight || 320;
+        if (mc.width === w && mc.height === h) return;
+        mc.width = w; mc.height = h;
+        cols = Math.floor(w / 13);
+        drops = Array.from({length: cols}, function() { return -(Math.random() * 22 | 0); });
+        bright = Array.from({length: cols}, function() { return Math.random() > 0.62; });
+      }
+
+      function draw() {
+        setup();
+        mctx.fillStyle = 'rgba(3,6,4,0.062)';
+        mctx.fillRect(0, 0, mc.width, mc.height);
+        for (var i = 0; i < drops.length; i++) {
+          var y = drops[i] * 13;
+          if (y < 1) { drops[i]++; continue; }
+          var ch = chars[Math.random() * chars.length | 0];
+          if (drops[i] > 0 && Math.random() > 0.88) {
+            mctx.fillStyle = 'rgba(210,255,230,0.96)';
+            mctx.font = 'bold 12px monospace';
+          } else if (bright[i] && y < mc.height * 0.5) {
+            mctx.fillStyle = 'rgba(0,240,96,0.88)';
+            mctx.font = '12px monospace';
+          } else {
+            var alpha = Math.max(0.12, 0.55 - (y / mc.height) * 0.35);
+            mctx.fillStyle = 'rgba(0,200,70,' + alpha + ')';
+            mctx.font = '11px monospace';
+          }
+          mctx.fillText(ch, i * 13, y);
+          if (y > mc.height && Math.random() > 0.972) {
+            drops[i] = 0; bright[i] = Math.random() > 0.62;
+          } else { drops[i]++; }
+        }
+        requestAnimationFrame(draw);
+      }
+      window.addEventListener('resize', function() { mc.width = 0; });
+      draw();
+    }
+
+    document.querySelectorAll('.matrix-rain-canvas').forEach(spawnRain);
+  })();
+  // ─────────────────────────────────────────────────────────────────────────
 
   // ── POLL ─────────────────────────────────────────────────────────────────
   (function() {
