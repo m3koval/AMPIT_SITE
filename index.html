@@ -1213,6 +1213,75 @@
   </div>
 </section>
 
+<!-- QUICK POLL -->
+<section class="poll-section" id="poll">
+  <div class="poll-inner fade-up">
+    <div class="poll-label">Quick Poll</div>
+    <h2 class="poll-question">When something breaks at work,<br>how do you want IT support?</h2>
+    <p class="poll-sub">Genuinely curious — it helps us understand how Charlotte businesses think about this.</p>
+
+    <div class="poll-choices" id="pollChoices">
+      <button class="poll-choice" data-choice="human" id="choiceHuman">
+        <!-- Matrix rain canvas (base layer) -->
+        <canvas class="matrix-rain-canvas" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true"></canvas>
+        <!-- Morpheus character image — save as poll-morpheus.jpg in site root -->
+        <img class="poll-card-hero" src="poll-morpheus.png" alt="" aria-hidden="true" style="transform: scale(1.32) translateY(4%)">
+        <div class="poll-card-overlay"></div>
+        <div class="poll-card-quote">
+          <p>"Some problems are just better solved with a <strong>human.</strong>"</p>
+        </div>
+        <div class="poll-card-content">
+          <div class="poll-choice-row">
+            <div class="poll-choice-icon-circle red" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0116 0v2"/></svg>
+            </div>
+            <div class="poll-choice-title">Talk to a real human</div>
+          </div>
+          <div class="poll-choice-desc">Call or chat with a technician who actually knows your setup</div>
+        </div>
+      </button>
+      <button class="poll-choice" data-choice="ai" id="choiceAi">
+        <!-- Matrix rain canvas (base layer) -->
+        <canvas class="matrix-rain-canvas" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true"></canvas>
+        <!-- Neo character image -->
+        <img class="poll-card-hero" src="poll-neo.png" alt="" aria-hidden="true" style="object-position: center 45%">
+        <div class="poll-card-overlay"></div>
+        <div class="poll-card-quote">
+          <p>"Some problems are faster to solve on your own with <strong>AI.</strong>"</p>
+        </div>
+        <div class="poll-card-content">
+          <div class="poll-choice-row">
+            <div class="poll-choice-icon-circle blue" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
+            </div>
+            <div class="poll-choice-title">AI / self-service</div>
+          </div>
+          <div class="poll-choice-desc">Troubleshoot with an AI assistant on my own schedule</div>
+        </div>
+      </button>
+    </div>
+
+    <div class="poll-results" id="pollResults">
+      <div class="poll-bar-row">
+        <div class="poll-bar-label">
+          <span class="poll-bar-name"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e06868" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:6px"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0116 0v2"/></svg>Real human</span>
+          <span class="poll-bar-pct" id="pctHuman">0%</span>
+        </div>
+        <div class="poll-bar-track"><div class="poll-bar-fill" id="barHuman"></div></div>
+      </div>
+      <div class="poll-bar-row">
+        <div class="poll-bar-label">
+          <span class="poll-bar-name"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#54b8e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:6px"><rect x="4" y="4" width="16" height="16" rx="3"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>AI / self-service</span>
+          <span class="poll-bar-pct" id="pctAi">0%</span>
+        </div>
+        <div class="poll-bar-track"><div class="poll-bar-fill alt" id="barAi"></div></div>
+      </div>
+      <div class="poll-total" id="pollTotal"></div>
+      <div class="poll-voted-msg" id="pollVotedMsg"></div>
+    </div>
+  </div>
+</section>
+
 <!-- HOW IT WORKS -->
 <section class="how-it-works" id="services">
   <div class="container">
@@ -1301,75 +1370,6 @@
       <div class="why-card fade-up"><div class="why-num">04</div><h3>AI Governance Ready</h3><p>Private AI tools deployed with proper data governance. Your client privileged information never touches a public model — documented for your malpractice carrier.</p><a href="/ai-governance/" class="body-link">Explore our AI Governance program →</a></div>
       <div class="why-card fade-up d1"><div class="why-num">05</div><h3>Charlotte-Local, On-Site Capable</h3><p>When you need someone physically there, we're not outsourcing to a sub — we show up. Remote or in person, you get the same team every time.</p></div>
       <div class="why-card fade-up d2"><div class="why-num">06</div><h3>Grows With Your Business</h3><p>Whether you're a new business getting your first professional email or a 50-person firm needing full compliance planning, we have a track built for exactly where you are.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- QUICK POLL -->
-<section class="poll-section" id="poll">
-  <div class="poll-inner fade-up">
-    <div class="poll-label">Quick Poll</div>
-    <h2 class="poll-question">When something breaks at work,<br>how do you want IT support?</h2>
-    <p class="poll-sub">Genuinely curious — it helps us understand how Charlotte businesses think about this.</p>
-
-    <div class="poll-choices" id="pollChoices">
-      <button class="poll-choice" data-choice="human" id="choiceHuman">
-        <!-- Matrix rain canvas (base layer) -->
-        <canvas class="matrix-rain-canvas" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true"></canvas>
-        <!-- Morpheus character image — save as poll-morpheus.jpg in site root -->
-        <img class="poll-card-hero" src="poll-morpheus.png" alt="" aria-hidden="true" style="transform: scale(1.32) translateY(4%)">
-        <div class="poll-card-overlay"></div>
-        <div class="poll-card-quote">
-          <p>"Some problems are just better solved with a <strong>human.</strong>"</p>
-        </div>
-        <div class="poll-card-content">
-          <div class="poll-choice-row">
-            <div class="poll-choice-icon-circle red" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0116 0v2"/></svg>
-            </div>
-            <div class="poll-choice-title">Talk to a real human</div>
-          </div>
-          <div class="poll-choice-desc">Call or chat with a technician who actually knows your setup</div>
-        </div>
-      </button>
-      <button class="poll-choice" data-choice="ai" id="choiceAi">
-        <!-- Matrix rain canvas (base layer) -->
-        <canvas class="matrix-rain-canvas" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true"></canvas>
-        <!-- Neo character image -->
-        <img class="poll-card-hero" src="poll-neo.png" alt="" aria-hidden="true" style="object-position: center 45%">
-        <div class="poll-card-overlay"></div>
-        <div class="poll-card-quote">
-          <p>"Some problems are faster to solve on your own with <strong>AI.</strong>"</p>
-        </div>
-        <div class="poll-card-content">
-          <div class="poll-choice-row">
-            <div class="poll-choice-icon-circle blue" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
-            </div>
-            <div class="poll-choice-title">AI / self-service</div>
-          </div>
-          <div class="poll-choice-desc">Troubleshoot with an AI assistant on my own schedule</div>
-        </div>
-      </button>
-    </div>
-
-    <div class="poll-results" id="pollResults">
-      <div class="poll-bar-row">
-        <div class="poll-bar-label">
-          <span class="poll-bar-name"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e06868" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:6px"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0116 0v2"/></svg>Real human</span>
-          <span class="poll-bar-pct" id="pctHuman">0%</span>
-        </div>
-        <div class="poll-bar-track"><div class="poll-bar-fill" id="barHuman"></div></div>
-      </div>
-      <div class="poll-bar-row">
-        <div class="poll-bar-label">
-          <span class="poll-bar-name"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#54b8e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:6px"><rect x="4" y="4" width="16" height="16" rx="3"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>AI / self-service</span>
-          <span class="poll-bar-pct" id="pctAi">0%</span>
-        </div>
-        <div class="poll-bar-track"><div class="poll-bar-fill alt" id="barAi"></div></div>
-      </div>
-      <div class="poll-total" id="pollTotal"></div>
-      <div class="poll-voted-msg" id="pollVotedMsg"></div>
     </div>
   </div>
 </section>
