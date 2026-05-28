@@ -1718,7 +1718,11 @@
           body: JSON.stringify({ choice: choice })
         })
         .then(function(r) { return r.json(); })
-        .then(function(data) { showResults(data, choice); })
+        .then(function(data) {
+          // alreadyVoted: true means the server blocked a duplicate (e.g. localStorage
+          // was cleared but same IP). Show results without "Your vote:" label.
+          showResults(data, data.alreadyVoted ? null : choice);
+        })
         .catch(function() {
           // API unavailable — show placeholder bars so UX doesn't break
           showResults({ human: 1, ai: 1 }, choice);
