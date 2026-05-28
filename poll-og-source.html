@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: #0a0c0a;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 36px 56px 28px;
+    position: relative;
+  }
+
+  /* Grid overlay */
+  body::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,240,96,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,240,96,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .header {
+    position: relative; z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    justify-content: center;
+  }
+  .header-line {
+    width: 40px; height: 1px;
+    background: #00f060;
+    opacity: 0.6;
+  }
+  .header-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #00f060;
+    font-family: ui-monospace, Menlo, monospace;
+  }
+
+  .question-block {
+    position: relative; z-index: 1;
+    text-align: center;
+    line-height: 1.15;
+  }
+  .question-block h1 {
+    font-size: 42px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+    margin-bottom: 10px;
+  }
+  .question-block p {
+    font-size: 14.5px;
+    color: #7a9280;
+    font-weight: 400;
+  }
+
+  /* Cards row */
+  .cards {
+    position: relative; z-index: 1;
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .card {
+    flex: 1;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    border: 1.5px solid rgba(0,240,96,0.25);
+  }
+  .card.human { border-color: rgba(224,104,104,0.5); }
+  .card.ai    { border-color: rgba(84,184,232,0.4); }
+
+  /* Character image fills the card */
+  .card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  /* Dark overlay so text is readable */
+  .card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(10,12,10,0.1) 0%,
+      rgba(10,12,10,0.25) 40%,
+      rgba(10,12,10,0.75) 70%,
+      rgba(10,12,10,0.95) 100%
+    );
+  }
+
+  /* Quote */
+  .card-quote {
+    position: absolute;
+    bottom: 72px;
+    left: 0; right: 0;
+    padding: 0 20px;
+    font-size: 12.5px;
+    font-style: italic;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.45;
+  }
+  .card-quote strong { color: #fff; font-style: normal; }
+
+  /* Bottom row: icon + title + desc */
+  .card-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 14px 18px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .icon-circle {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .icon-circle.red  { background: rgba(224,104,104,0.18); border: 1px solid rgba(224,104,104,0.35); }
+  .icon-circle.blue { background: rgba(84,184,232,0.15);  border: 1px solid rgba(84,184,232,0.3); }
+
+  .card-text-block .title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+  .card-text-block .desc {
+    font-size: 11.5px;
+    color: #7a9280;
+  }
+
+  /* AMP IT footer */
+  .footer {
+    position: relative; z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: -4px;
+  }
+  .brand {
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+  .brand span { color: #00f060; }
+  .url {
+    font-size: 12.5px;
+    color: rgba(0,240,96,0.5);
+    font-family: ui-monospace, Menlo, monospace;
+    letter-spacing: 0.03em;
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-line"></div>
+    <div class="header-label">Quick Poll</div>
+    <div class="header-line"></div>
+  </div>
+
+  <div class="question-block">
+    <h1>When something breaks at work,<br>how do you want IT support?</h1>
+    <p>Genuinely curious — it helps us understand how Charlotte businesses think about this.</p>
+  </div>
+
+  <div class="cards">
+    <!-- Human card -->
+    <div class="card human">
+      <img src="poll-morpheus.png" alt="" style="transform: scale(1.28) translateY(6%)">
+      <div class="card-overlay"></div>
+      <div class="card-quote">"Some problems are just better solved with a <strong>human.</strong>"</div>
+      <div class="card-bottom">
+        <div class="icon-circle red">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e06868" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0116 0v2"/>
+          </svg>
+        </div>
+        <div class="card-text-block">
+          <div class="title">Talk to a real human</div>
+          <div class="desc">Call or chat with a technician who actually knows your setup</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI card -->
+    <div class="card ai">
+      <img src="poll-neo.png" alt="" style="object-position: center 45%">
+      <div class="card-overlay"></div>
+      <div class="card-quote">"Some problems are faster to solve on your own with <strong>AI.</strong>"</div>
+      <div class="card-bottom">
+        <div class="icon-circle blue">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#54b8e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="4" width="16" height="16" rx="3"/><rect x="9" y="9" width="6" height="6"/>
+            <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/>
+          </svg>
+        </div>
+        <div class="card-text-block">
+          <div class="title">AI / self-service</div>
+          <div class="desc">Troubleshoot with an AI assistant on my own schedule</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="brand">AMP <span>IT</span></div>
+    <div class="url">ampitsolutions.com/poll</div>
+  </div>
+
+</body>
+</html>
