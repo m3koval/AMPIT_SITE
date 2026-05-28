@@ -861,6 +861,16 @@
     .poll-card-quote { bottom: 100px; }
     .poll-card-quote p { font-size: 0.82rem; }
   }
+
+  /* ── Grid responsive overrides (repeated after base definitions to win cascade) ── */
+  @media (max-width: 900px) {
+    .steps-grid  { grid-template-columns: 1fr; }
+    .covers-grid { grid-template-columns: repeat(2, 1fr); }
+    .plans-grid  { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .covers-grid { grid-template-columns: 1fr; }
+  }
 </style>
   <script defer src="/_vercel/insights/script.js"></script>
   <script>
@@ -1296,7 +1306,7 @@
 </section>
 
 <!-- QUICK POLL -->
-<section class="poll-section">
+<section class="poll-section" id="poll">
   <div class="poll-inner fade-up">
     <div class="poll-label">Quick Poll</div>
     <h2 class="poll-question">When something breaks at work,<br>how do you want IT support?</h2>
