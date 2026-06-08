@@ -229,6 +229,46 @@ nav {
 }
 .dropdown li a:hover { color: var(--green); padding-left: 24px; }
 
+/* ─── LIGHT MODE COMPONENT OVERRIDES ───────────────────────────────────── */
+
+/* Card elevation — lift white cards off the light-grey page */
+html[data-theme="light"] .step,
+html[data-theme="light"] .why-card,
+html[data-theme="light"] .serve-card,
+html[data-theme="light"] .cover-item,
+html[data-theme="light"] .plan-card,
+html[data-theme="light"] .industry-item {
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.05);
+}
+
+/* Section rhythm — alternate white sections break the flat grey monotony */
+html[data-theme="light"] .how-it-works,
+html[data-theme="light"] .covers-section,
+html[data-theme="light"] .cta-section {
+  background: #ffffff;
+}
+
+/* Step/why numbers — opacity 0.25 is invisible on a light background */
+html[data-theme="light"] .step-num  { opacity: 0.5; }
+html[data-theme="light"] .why-num   { color: var(--green); opacity: 0.45; }
+
+/* Also apply to system-preference light users */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .step,
+  :root:not([data-theme="dark"]) .why-card,
+  :root:not([data-theme="dark"]) .serve-card,
+  :root:not([data-theme="dark"]) .cover-item,
+  :root:not([data-theme="dark"]) .plan-card,
+  :root:not([data-theme="dark"]) .industry-item {
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.05);
+  }
+  :root:not([data-theme="dark"]) .how-it-works,
+  :root:not([data-theme="dark"]) .covers-section,
+  :root:not([data-theme="dark"]) .cta-section { background: #ffffff; }
+  :root:not([data-theme="dark"]) .step-num { opacity: 0.5; }
+  :root:not([data-theme="dark"]) .why-num   { color: var(--green); opacity: 0.45; }
+}
+
 /* ─── THEME TOGGLE ──────────────────────────────────────────────────────── */
 
 .theme-toggle {
