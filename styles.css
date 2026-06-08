@@ -36,6 +36,7 @@
 }
 
 :root {
+  color-scheme: dark;
   --green: #00f060;
   --green-glow: rgba(0, 240, 96, 0.18);
   --bg: #0a0c0a;
@@ -55,6 +56,7 @@
 }
 
 html[data-theme="light"] {
+  color-scheme: light;
   --green: #007a28;
   --green-glow: rgba(0,122,40,0.14);
   --bg: #f3f6f3;

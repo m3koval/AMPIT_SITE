@@ -1,14 +1,15 @@
 // ── AMP IT theme toggle ────────────────────────────────────────────────────
-// Loaded just before </body>, so DOM is already available — no DOMContentLoaded needed.
+// Uses setAttribute (more reliable than dataset in Safari).
 // FOUC prevention is handled by the separate inline <script> in <head>.
 (function () {
   function apply(t) {
-    document.documentElement.dataset.theme = t;
-    localStorage.setItem('ampit-theme', t);
+    document.documentElement.setAttribute('data-theme', t);
+    try { localStorage.setItem('ampit-theme', t); } catch (e) {}
   }
 
-  // Re-apply saved/preferred theme (backup in case inline script was cached away)
-  var saved = localStorage.getItem('ampit-theme');
+  // Re-apply saved/preferred theme
+  var saved;
+  try { saved = localStorage.getItem('ampit-theme'); } catch (e) {}
   var preferLight = window.matchMedia('(prefers-color-scheme: light)').matches;
   apply(saved || (preferLight ? 'light' : 'dark'));
 
@@ -16,7 +17,8 @@
   var btn = document.getElementById('themeToggle');
   if (btn) {
     btn.addEventListener('click', function () {
-      apply(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+      var current = document.documentElement.getAttribute('data-theme');
+      apply(current === 'light' ? 'dark' : 'light');
     });
   }
 })();
