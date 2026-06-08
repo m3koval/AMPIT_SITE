@@ -1,1 +1,12 @@
 .DS_Store
+
+# Preview/debug screenshots (generated locally, not deployed)
+preview-*.png
+full-*.png
+light-*.png
+dark-*.png
+lm-*.png
+section-*.png
+polished-*.png
+crop-*.png
+node_modules/
