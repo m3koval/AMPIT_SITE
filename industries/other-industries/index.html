@@ -101,7 +101,7 @@
   .has-dropdown { position: relative; }
   .has-dropdown > a { display: flex; align-items: center; gap: 4px; }
   .has-dropdown > a::after { content: '▾'; font-size: 0.55rem; opacity: 0.5; }
-  .dropdown { display: none; position: absolute; top: 100%; padding-top: 12px; left: -12px; background: rgba(10,12,10,0.97); border: 1px solid var(--border); list-style: none; min-width: 210px; padding: 8px 0; backdrop-filter: blur(20px); z-index: 200; box-shadow: 0 16px 40px rgba(0,0,0,0.5); }
+  .dropdown { display: none; position: absolute; top: 100%; padding-top: 12px; left: -12px; background: var(--dropdown-bg); border: 1px solid var(--border); list-style: none; min-width: 210px; padding: 8px 0; backdrop-filter: blur(20px); z-index: 200; box-shadow: 0 16px 40px var(--shadow-heavy); }
   .has-dropdown:hover .dropdown, .has-dropdown:focus-within .dropdown { display: block; }
   .dropdown li a { display: block; padding: 9px 18px; color: var(--text-muted); font-size: 0.78rem; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; letter-spacing: 0.05em; text-decoration: none; transition: all 0.15s; }
   .dropdown li a:hover { color: var(--green); padding-left: 24px; }
