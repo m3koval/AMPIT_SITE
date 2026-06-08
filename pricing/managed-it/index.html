@@ -139,7 +139,7 @@
 
   /* BUTTONS */
   .btn-primary {
-    background: var(--green); color: #050a06;
+    background: var(--green); color: var(--btn-text);
     padding: 16px 36px;
     font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem;
     letter-spacing: 0.06em; text-transform: uppercase;
@@ -209,10 +209,10 @@
   .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); margin-bottom: 40px; }
   .plan { background: var(--bg-card); padding: 40px 32px; position: relative; transition: background 0.25s; }
   .plan:hover { background: var(--bg-card-hover); }
-  .plan.featured { background: #0c1a0e; border: 2px solid var(--green); margin: -2px; z-index: 2; }
+  .plan.featured { background: var(--featured-plan-bg); border: 2px solid var(--green); margin: -2px; z-index: 2; }
   .plan-badge {
     position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
-    background: var(--green); color: #050a06;
+    background: var(--green); color: var(--btn-text);
     font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 0.65rem;
     letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 14px;
   }
@@ -234,9 +234,16 @@
     text-decoration: none; border: 1px solid var(--border-strong); color: var(--text-muted);
     transition: all 0.2s;
   }
-  .featured .plan-cta { background: var(--green); color: #050a06; border-color: var(--green); }
+  .featured .plan-cta { background: var(--green); color: var(--btn-text); border-color: var(--green); }
   .plan-cta:hover { border-color: var(--green); color: var(--green); }
   .featured .plan-cta:hover { background: #10ff72; }
+  html[data-theme="light"] .plan.featured {
+    box-shadow: 0 18px 50px rgba(0,104,32,0.12);
+  }
+  html[data-theme="light"] .featured .plan-tagline,
+  html[data-theme="light"] .featured .plan-price .per,
+  html[data-theme="light"] .featured .plan-features li { color: #1e3d24; }
+  html[data-theme="light"] .featured .plan-price .amount { color: var(--green); }
 
   /* STARTER CALLOUT */
   .starter-callout {

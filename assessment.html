@@ -118,7 +118,7 @@
   .btn-back { background: transparent; border: 1px solid var(--border); color: var(--text-dim); padding: 11px 22px; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.03em; cursor: pointer; transition: all 0.2s; }
   .btn-back:hover { border-color: var(--border-strong); color: var(--text); }
   .btn-back.invisible { visibility: hidden; pointer-events: none; }
-  .btn-next { background: var(--green); color: #050a06; padding: 13px 32px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.94rem; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; transition: all 0.2s; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
+  .btn-next { background: var(--green); color: var(--btn-text); padding: 13px 32px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.94rem; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; transition: all 0.2s; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
   .btn-next:hover:not(:disabled) { background: #10ff72; transform: translateY(-2px); }
   .btn-next:disabled { opacity: 0.38; cursor: not-allowed; }
 
@@ -154,7 +154,7 @@
   .ccal-day { text-align: center; padding: 7px 2px; font-size: 0.92rem; color: var(--text-dim); transition: all 0.12s; min-height: 34px; display: flex; align-items: center; justify-content: center; }
   .ccal-day.avail { color: var(--text); cursor: pointer; border: 1px solid var(--border); background: rgba(255,255,255,0.02); }
   .ccal-day.avail:hover { border-color: var(--green); color: var(--green); background: rgba(0,240,96,0.05); }
-  .ccal-day.sel { background: var(--green) !important; color: #050a06 !important; border-color: var(--green) !important; font-weight: 700; }
+  .ccal-day.sel { background: var(--green) !important; color: var(--btn-text) !important; border-color: var(--green) !important; font-weight: 700; }
   .ccal-day.today.avail { border-color: var(--border-strong); }
   .ccal-day.empty, .ccal-day.unavail { opacity: 0.18; }
   .ccal-times { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); animation: stepIn 0.18s ease both; }
@@ -162,7 +162,7 @@
   .ccal-slots { display: flex; flex-wrap: wrap; gap: 8px; }
   .ccal-slot { background: var(--bg); border: 1px solid var(--border); color: var(--text-muted); padding: 9px 16px; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.92rem; cursor: pointer; transition: all 0.15s; }
   .ccal-slot:hover { border-color: var(--border-strong); color: var(--text); }
-  .ccal-slot.sel { background: var(--green); color: #050a06; border-color: var(--green); }
+  .ccal-slot.sel { background: var(--green); color: var(--btn-text); border-color: var(--green); }
   .ccal-confirm { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); animation: stepIn 0.18s ease both; }
   .ccal-confirm-box { border: 1px solid var(--green); background: rgba(0,240,96,0.03); padding: 18px 20px; margin-bottom: 14px; }
   .ccal-confirm-when { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 8px; }
