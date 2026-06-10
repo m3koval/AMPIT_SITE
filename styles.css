@@ -57,9 +57,8 @@
   --featured-plan-bg: #0c1a0e;   /* dark featured card — dark mode */
 }
 
-/* System preset fallback (no JS / no saved preference) */
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
+  :root {
     color-scheme: light;
     --green: #006820;
     --btn-text: #ffffff;
@@ -79,27 +78,6 @@
     --grid-line: rgba(0,90,28,0.06);
     --shadow-heavy: rgba(0,0,0,0.14);
   }
-}
-
-html[data-theme="light"] {
-  color-scheme: light;
-  --green: #006820;
-  --btn-text: #ffffff;           /* white text on deep green — light mode */
-  --featured-plan-bg: #f4fbf5;   /* light featured card — light mode */
-  --green-glow: rgba(0,104,32,0.16);
-  --bg: #f2f5f2;
-  --bg-card: #ffffff;
-  --bg-card-hover: #e8efe8;
-  --border: rgba(0,90,28,0.2);
-  --border-strong: rgba(0,90,28,0.5);
-  --text: #0a130a;
-  --text-muted: #1e3d24;
-  --text-dim: #3a5c42;
-  --nav-bg: rgba(242,245,242,0.94);
-  --mobile-menu-bg: #f2f5f2;
-  --dropdown-bg: rgba(255,255,255,0.99);
-  --grid-line: rgba(0,90,28,0.06);
-  --shadow-heavy: rgba(0,0,0,0.14);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -237,61 +215,17 @@ nav {
 
 /* ─── LIGHT MODE COMPONENT OVERRIDES ───────────────────────────────────── */
 
-/* Card elevation — lift white cards off the light-grey page */
-html[data-theme="light"] .step,
-html[data-theme="light"] .why-card,
-html[data-theme="light"] .serve-card,
-html[data-theme="light"] .cover-item,
-html[data-theme="light"] .plan-card,
-html[data-theme="light"] .industry-item {
-  box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.05);
-}
-
-/* Section rhythm — alternate white sections break the flat grey monotony */
-html[data-theme="light"] .how-it-works,
-html[data-theme="light"] .covers-section,
-html[data-theme="light"] .cta-section {
-  background: #ffffff;
-}
-
-/* Step/why numbers — opacity 0.25 is invisible on a light background */
-html[data-theme="light"] .step-num  { opacity: 0.5; }
-html[data-theme="light"] .why-num   { color: var(--green); opacity: 0.45; }
-
-/* Also apply to system-preference light users */
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) .step,
-  :root:not([data-theme="dark"]) .why-card,
-  :root:not([data-theme="dark"]) .serve-card,
-  :root:not([data-theme="dark"]) .cover-item,
-  :root:not([data-theme="dark"]) .plan-card,
-  :root:not([data-theme="dark"]) .industry-item {
+  /* Card elevation — lift white cards off the light-grey page */
+  .step, .why-card, .serve-card, .cover-item, .plan-card, .industry-item {
     box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.05);
   }
-  :root:not([data-theme="dark"]) .how-it-works,
-  :root:not([data-theme="dark"]) .covers-section,
-  :root:not([data-theme="dark"]) .cta-section { background: #ffffff; }
-  :root:not([data-theme="dark"]) .step-num { opacity: 0.5; }
-  :root:not([data-theme="dark"]) .why-num   { color: var(--green); opacity: 0.45; }
+  /* Section rhythm — alternate white sections break the flat monotone feel */
+  .how-it-works, .covers-section, .cta-section { background: #ffffff; }
+  /* Step/why numbers — opacity 0.25 is invisible on a light background */
+  .step-num { opacity: 0.5; }
+  .why-num  { color: var(--green); opacity: 0.45; }
 }
-
-/* ─── THEME TOGGLE ──────────────────────────────────────────────────────── */
-
-.theme-toggle {
-  background: none;
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  width: 34px; height: 34px;
-  border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; flex-shrink: 0;
-  transition: border-color 0.2s, color 0.2s;
-}
-.theme-toggle:hover { border-color: var(--green); color: var(--green); }
-
-/* Show sun in dark mode (click → go light), moon in light mode (click → go dark) */
-html[data-theme="dark"]  .theme-icon-moon { display: none; }
-html[data-theme="light"] .theme-icon-sun  { display: none; }
 
 @media (max-width: 900px) {
   .nav-links { display: none; }
