@@ -644,6 +644,15 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
 
     ans.name = name; ans.company = company;
     ans.email = email; ans.phone = phone; ans.address = address;
+
+    // Capture the lead the moment we have contact info — reliably, here — instead of
+    // waiting for a calendar booking that cold visitors often never complete.
+    // The booking step fires a separate 'Schedule' event if they do book.
+    if (!sheetsSubmitted) {
+      submitToSheets({});
+      if (typeof fbq !== 'undefined') fbq('track', 'Lead', {}, { eventID: 'lead_' + email });
+    }
+
     goTo(3);
   });
 
@@ -771,7 +780,7 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
         if (typeof gtag !== 'undefined')
           gtag('event', 'conversion', { send_to: 'AW-18009085486/ZIP4CKuYzJscEK6ss4tD' });
         if (typeof fbq !== 'undefined')
-          fbq('track', 'Lead');
+          fbq('track', 'Schedule', {}, { eventID: String(booking.uid || booking.id) });
         bookingConfirmed = true;
         showBookingSuccess();
       } else {
@@ -799,6 +808,7 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
           email:       ans.email,
           phone:       ans.phone      || '',
           address:     ans.address    || '',
+          booked:      (typeof bookingConfirmed !== 'undefined' && bookingConfirmed) ? 'yes' : 'no',
           industry:    extra.industry || '',
           size:        extra.size     || '',
           setup:       extra.setup    || '',
