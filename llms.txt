@@ -70,6 +70,8 @@ Per-user monthly pricing, all-inclusive — no per-ticket charges, no add-ons fo
 
 - **Why Local Admin Rights Put Small Businesses at Risk:** https://www.ampitsolutions.com/blog/local-admin-rights-small-business-risk
 
+- **Free Email Trust Check:** https://www.ampitsolutions.com/email-trust-check — public SPF, DKIM, and DMARC scan for business domains.
+
 ## Contact
 
 - **Website:** https://www.ampitsolutions.com
