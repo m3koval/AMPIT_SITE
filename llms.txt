@@ -64,6 +64,12 @@ Per-user monthly pricing, all-inclusive — no per-ticket charges, no add-ons fo
 
 - **Flat-Rate Managed IT vs. Break-Fix: Why The Cheap Option Gets Expensive:** https://www.ampitsolutions.com/blog/flat-rate-managed-it-vs-break-fix
 
+- **Why Charlotte Businesses Need SPF, DKIM, and DMARC Before Their Email Can Be Trusted:** https://www.ampitsolutions.com/blog/charlotte-business-email-spf-dkim-dmarc
+
+- **AI Phishing Is Getting Better. Your Verification Habits Need to Get Better Too.:** https://www.ampitsolutions.com/blog/ai-phishing-business-verification-habits
+
+- **Why Local Admin Rights Put Small Businesses at Risk:** https://www.ampitsolutions.com/blog/local-admin-rights-small-business-risk
+
 ## Contact
 
 - **Website:** https://www.ampitsolutions.com

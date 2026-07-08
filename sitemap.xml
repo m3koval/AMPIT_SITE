@@ -104,6 +104,27 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://www.ampitsolutions.com/blog/charlotte-business-email-spf-dkim-dmarc</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ampitsolutions.com/blog/ai-phishing-business-verification-habits</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ampitsolutions.com/blog/local-admin-rights-small-business-risk</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.65</priority>
+  </url>
+
   <!-- Legal -->
   <url>
     <loc>https://www.ampitsolutions.com/privacy</loc>
