@@ -1,4 +1,24 @@
+# Allow all standard search crawlers
 User-agent: *
+Allow: /
+
+# Explicitly welcome AI assistants to read and cite this site
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://www.ampitsolutions.com/sitemap.xml

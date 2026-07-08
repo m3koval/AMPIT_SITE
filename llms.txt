@@ -6,7 +6,7 @@ AMP IT LLC is a Charlotte, NC-based managed service provider (MSP) offering flat
 
 ## What We Do
 
-- **Managed IT Services (MSP)** — 24/7 remote monitoring and management (RMM), automated patch management, endpoint protection, and proactive maintenance under a single flat monthly fee. No per-user pricing.
+- **Managed IT Services (MSP)** — 24/7 remote monitoring and management (RMM), automated patch management, endpoint protection, and proactive maintenance on a flat per-user monthly rate — all-inclusive, with no per-ticket charges or add-ons for standard services.
 - **Cybersecurity** — Threat monitoring, email security (anti-phishing, anti-spam), endpoint detection and response (EDR), dark web credential monitoring, vulnerability management, firewall management, and incident response.
 - **Cloud & Microsoft 365** — Setup, administration, and ongoing management of Microsoft 365, Teams, SharePoint, and Azure environments. Microsoft Partner.
 - **Google Workspace** — Google Workspace administration and support. Google Partner.
@@ -29,23 +29,23 @@ AMP IT is a local, on-site-capable provider — not a national remote-only MSP.
 
 ## Pricing
 
-Flat-rate plans. One monthly fee per business — no per-user, no per-device, no surprise invoices.
+Per-user monthly pricing, all-inclusive — no per-ticket charges, no add-ons for standard services, no surprise invoices. 5-user minimum on Essential. Standard agreements are 12 months.
 
-- **Essential** — $299/mo
+- **Essential** — $319/user/month (5-user minimum)
   - 24/7 remote monitoring and management
   - Automated patch management
   - Email security (anti-phishing, anti-spam)
   - Business-hours helpdesk support
   - Basic endpoint protection
 
-- **Better** — $399/mo
+- **Better** — $445/user/month (ideal 10–40 users)
   - Everything in Essential
   - Endpoint Detection and Response (EDR)
   - Dark web credential monitoring
   - Advanced email threat protection
   - Expanded helpdesk hours
 
-- **Best** — $499/mo
+- **Best** — $499/user/month (ideal 15–50 users)
   - Everything in Better
   - Advanced threat response and remediation
   - Compliance reporting (FINRA, state bar, cyber liability)
@@ -59,7 +59,12 @@ Flat-rate plans. One monthly fee per business — no per-user, no per-device, no
 - **Email:** hello@ampitsolutions.com
 - **Phone:** +1 (980) 377-2733
 - **Address:** 919 Berryhill Rd Suite 100A, Charlotte, NC 28208
-- **LinkedIn:** https://www.linkedin.com/company/ampitservices
+- **LinkedIn:** https://www.linkedin.com/company/ampitsolutions
+- **Clutch:** https://clutch.co/profile/amp-it
+
+## Reviews & Ratings
+
+- **Google Business Profile:** 5.0 out of 5 (3 reviews) — "Computer support and services," Charlotte, NC. https://share.google/zif9o1B9gbvJqxR4V
 
 ## Service Area
 
