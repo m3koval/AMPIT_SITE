@@ -83,6 +83,27 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://www.ampitsolutions.com/blog/microsoft-365-security-basics-charlotte-firms</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ampitsolutions.com/blog/cyber-insurance-requirements-small-business</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ampitsolutions.com/blog/flat-rate-managed-it-vs-break-fix</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Legal -->
   <url>
     <loc>https://www.ampitsolutions.com/privacy</loc>
