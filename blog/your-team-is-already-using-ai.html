@@ -102,6 +102,7 @@
     display: flex; align-items: center; gap: 8px;
   }
   .nav-back-link:hover { color: var(--green); }
+  .blog-nav-actions { display: flex; align-items: center; gap: 18px; }
 
   .article-wrap {
     max-width: 780px; margin: 0 auto;
@@ -252,6 +253,29 @@
     margin-top: 4px;
   }
 
+
+  /* RELATED RESOURCES */
+  .article-next-steps {
+    margin: 36px 0 0; padding: 28px;
+    border: 1px solid var(--border); background: var(--bg-card);
+  }
+  .article-next-label {
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.64rem; color: var(--green); letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+  .article-next-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .article-next-grid a {
+    border: 1px solid var(--border); background: var(--bg); padding: 18px;
+    color: var(--text-muted); text-decoration: none; font-size: 0.82rem; line-height: 1.55;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .article-next-grid a:hover { border-color: var(--green); transform: translateY(-2px); }
+  .article-next-grid span {
+    display: block; color: var(--text); font-family: 'Outfit', sans-serif;
+    font-weight: 800; font-size: 0.92rem; margin-bottom: 8px;
+  }
+
   /* DISCLAIMER */
   .article-disclaimer {
     margin-top: 48px; padding: 20px 24px;
@@ -278,6 +302,10 @@
   }
   .blog-footer-links a:hover { color: var(--green); }
 
+  @media (max-width: 760px) {
+    .article-next-grid { grid-template-columns: 1fr; }
+    .blog-nav-actions { gap: 12px; }
+  }
   @media (max-width: 600px) {
     .article-wrap { padding: 48px 20px 80px; }
     .plan-row { grid-template-columns: 1fr; gap: 8px; }
@@ -335,7 +363,7 @@
     <svg width="34" height="32" aria-hidden="true"><use href="#amp-logo"/></svg>
     <span class="nav-wordmark"><span class="g">AMP</span> IT</span>
   </a>
-  <a href="/" class="nav-back-link">← Back to home</a>
+  <div class="blog-nav-actions"><a href="/blog/" class="nav-back-link">← Blog</a><a href="/" class="nav-back-link">Home</a></div>
 </nav>
 
 <main>
@@ -506,6 +534,25 @@
         <span class="contact-footer">Microsoft Partner · Google Partner · On-Site Available · 919 Berryhill Rd Suite 100A, Charlotte, NC 28208</span>
       </div>
 
+
+      <div class="article-next-steps">
+        <div class="article-next-label">Related AMP IT resources</div>
+        <div class="article-next-grid">
+          <a href="/ai-governance/">
+            <span>AI Governance</span>
+            Build a written policy and approved-tool list before shadow AI becomes a client-data problem.
+          </a>
+          <a href="/cybersecurity/">
+            <span>Cybersecurity</span>
+            Protect email, identity, endpoints, and credentials with controls that fit professional firms.
+          </a>
+          <a href="/industries/law-firms/">
+            <span>Law Firm IT</span>
+            Keep client data private, document your safeguards, and give your team a safer workflow.
+          </a>
+        </div>
+      </div>
+
     </div>
 
     <div class="article-disclaimer">
@@ -519,6 +566,7 @@
   <div class="blog-footer">
     <span class="blog-footer-copy">© 2026 AMP IT LLC. All rights reserved.</span>
     <div class="blog-footer-links">
+      <a href="/blog/">Blog</a>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
       <a href="/">Back to Home</a>

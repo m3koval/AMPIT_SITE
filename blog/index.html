@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMP IT Blog | Charlotte Managed IT, Cybersecurity & AI Governance</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="description" content="Practical guidance from AMP IT on managed IT, cybersecurity, Microsoft 365, and AI governance for Charlotte law firms, financial firms, and small businesses.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.ampitsolutions.com/blog/">
+<meta property="og:title" content="AMP IT Blog | Managed IT, Cybersecurity & AI Governance">
+<meta property="og:description" content="Clear, practical technology guidance for Charlotte professional firms that need secure systems, less IT noise, and better next steps.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.ampitsolutions.com/blog/">
+<meta property="og:image" content="https://www.ampitsolutions.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AMP IT Blog | Managed IT, Cybersecurity & AI Governance">
+<meta name="twitter:description" content="Practical IT, cybersecurity, and AI governance guidance for Charlotte professional firms.">
+<meta name="twitter:image" content="https://www.ampitsolutions.com/og-image.png">
+<link rel="preload" as="font" type="font/woff2" href="/fonts/outfit-latin.woff2" crossorigin>
+<link rel="preload" as="style" href="/styles.css">
+<link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "AMP IT Blog",
+  "description": "Managed IT, cybersecurity, Microsoft 365, and AI governance guidance for Charlotte professional firms.",
+  "url": "https://www.ampitsolutions.com/blog/",
+  "publisher": {
+    "@type": "Organization",
+    "name": "AMP IT",
+    "url": "https://www.ampitsolutions.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.ampitsolutions.com/favicon.svg"
+    }
+  },
+  "blogPost": [
+    {
+      "@type": "BlogPosting",
+      "headline": "AI Chats Aren't Protected by Attorney-Client Privilege",
+      "url": "https://www.ampitsolutions.com/blog/your-team-is-already-using-ai",
+      "datePublished": "2026-04-29",
+      "dateModified": "2026-05-04",
+      "author": { "@type": "Organization", "name": "AMP IT" }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "AMP IT latest articles",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "url": "https://www.ampitsolutions.com/blog/your-team-is-already-using-ai",
+      "name": "AI Chats Aren't Protected by Attorney-Client Privilege"
+    }
+  ]
+}
+</script>
+<style>
+  .blog-index-hero {
+    padding: 150px 60px 72px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .blog-index-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  .blog-index-hero::after {
+    content: '';
+    position: absolute;
+    width: 620px;
+    height: 360px;
+    right: -160px;
+    top: 80px;
+    background: radial-gradient(ellipse, rgba(0,240,96,0.13) 0%, transparent 68%);
+    pointer-events: none;
+  }
+  .blog-index-shell {
+    max-width: 1180px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .blog-index-eyebrow {
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.7rem;
+    color: var(--green);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .blog-index-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--green); }
+  .blog-index-hero h1 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 6vw, 5.4rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    max-width: 880px;
+    margin-bottom: 24px;
+  }
+  .blog-index-hero h1 span { color: var(--green); }
+  .blog-index-lede {
+    max-width: 680px;
+    color: var(--text-muted);
+    font-size: 1.08rem;
+    line-height: 1.85;
+    margin-bottom: 36px;
+  }
+  .blog-filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .blog-chip {
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    padding: 9px 13px;
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
+  }
+  .blog-chip:hover { color: var(--green); border-color: var(--green); transform: translateY(-1px); }
+
+  .blog-index-main { padding: 80px 60px 110px; }
+  .blog-layout {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 34px;
+    align-items: start;
+  }
+  .featured-article {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    min-height: 460px;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 220px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.03);
+  }
+  .featured-article::after {
+    content: '';
+    position: absolute;
+    inset: auto -80px -120px auto;
+    width: 340px;
+    height: 260px;
+    background: radial-gradient(ellipse, rgba(0,240,96,0.16) 0%, transparent 70%);
+  }
+  .featured-content { padding: 42px; position: relative; z-index: 1; }
+  .article-label {
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.66rem;
+    color: var(--green);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .featured-content h2 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3.15rem);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+    max-width: 700px;
+  }
+  .featured-content h2 a { color: var(--text); text-decoration: none; transition: color 0.2s; }
+  .featured-content h2 a:hover { color: var(--green); }
+  .article-excerpt {
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-size: 1rem;
+    max-width: 680px;
+    margin-bottom: 28px;
+  }
+  .article-meta-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    color: var(--text-dim);
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 30px;
+  }
+  .read-link {
+    color: var(--green);
+    text-decoration: none;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+  .read-link:hover { text-decoration: underline; text-underline-offset: 5px; }
+  .featured-visual {
+    border-left: 1px solid var(--border);
+    background:
+      linear-gradient(180deg, rgba(0,240,96,0.10), transparent 42%),
+      var(--bg);
+    position: relative;
+    min-height: 100%;
+  }
+  .featured-visual::before {
+    content: 'AI\A RISK\A //\A POLICY';
+    white-space: pre;
+    position: absolute;
+    right: 28px;
+    top: 34px;
+    color: rgba(0,240,96,0.32);
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.86rem;
+    letter-spacing: 0.18em;
+    line-height: 1.8;
+    text-align: right;
+  }
+  .featured-visual::after {
+    content: '';
+    position: absolute;
+    left: 44px;
+    bottom: 42px;
+    width: 108px;
+    height: 108px;
+    border: 1px solid rgba(0,240,96,0.34);
+    clip-path: polygon(50% 0, 100% 86%, 0 86%);
+    box-shadow: 0 0 38px rgba(0,240,96,0.10);
+  }
+
+  .blog-side { display: flex; flex-direction: column; gap: 18px; }
+  .side-card {
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    padding: 26px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .side-card h3 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+  .side-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 18px; }
+  .side-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .side-list a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.76rem;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .side-list a:hover { color: var(--green); }
+  .side-cta {
+    border-left: 3px solid var(--green);
+  }
+  .side-cta .btn-primary { padding: 13px 22px; font-size: 0.78rem; }
+
+  .topic-section {
+    max-width: 1180px;
+    margin: 54px auto 0;
+  }
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .topic-card {
+    border: 1px solid var(--border);
+    background: #ffffff;
+    padding: 28px;
+    min-height: 190px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  }
+  .topic-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(0,240,96,0.45);
+    box-shadow: 0 12px 34px rgba(0,0,0,0.08);
+  }
+  .topic-card span {
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
+    color: var(--green);
+    font-size: 0.64rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .topic-card h3 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 1.35rem;
+    line-height: 1.18;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .topic-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.65; }
+
+  @media (max-width: 960px) {
+    .blog-layout { grid-template-columns: 1fr; }
+    .featured-article { grid-template-columns: 1fr; }
+    .featured-visual { display: none; }
+    .topic-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 700px) {
+    .blog-index-hero { padding: 125px 20px 56px; }
+    .blog-index-main { padding: 52px 20px 78px; }
+    .featured-content { padding: 28px; }
+  }
+</style>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "WebPage", "url": "https://www.ampitsolutions.com/blog/", "speakable": {"@type": "SpeakableSpecification", "cssSelector": ["h1", ".blog-index-lede", ".article-excerpt"]}}
+</script>
+</head>
+<body>
+
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="amp-logo" viewBox="0 0 252 231">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M161.532 109.574L201.942 157.822L188.656 180.754L126.476 170.031L64.2794 180.757L51 157.834L91.4207 109.574L113.034 51H139.918L161.532 109.574ZM66.9185 158.821L71.2594 166.307L116.371 140.374L112.03 132.888L66.9185 158.821ZM136.296 140.374L181.408 166.307L185.749 158.821L140.637 132.888L136.296 140.374ZM122.314 115.833H130.996V63.9666H122.314V115.833Z" fill="#00f060"/>
+  </symbol>
+</svg>
+
+<nav aria-label="Main navigation">
+  <a href="/" class="nav-logo" aria-label="AMP IT home">
+    <svg width="34" height="32" aria-hidden="true"><use href="#amp-logo"/></svg>
+    <span class="nav-wordmark"><span class="g">AMP</span> IT</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/pricing/managed-it/">Pricing</a></li>
+    <li><a href="/industries/law-firms/">Industries</a></li>
+    <li><a href="/cybersecurity/">Cybersecurity</a></li>
+    <li><a href="/ai-governance/">AI Governance</a></li>
+    <li><a href="/blog/" aria-current="page">Blog</a></li>
+  </ul>
+  <a href="/assessment" class="nav-cta">Get Started</a>
+</nav>
+
+<main>
+  <section class="blog-index-hero">
+    <div class="blog-index-shell">
+      <div class="blog-index-eyebrow">AMP IT Field Notes</div>
+      <h1>Practical IT guidance for firms that cannot afford <span>surprises.</span></h1>
+      <p class="blog-index-lede">Short, clear guidance on managed IT, cybersecurity, Microsoft 365, and AI governance for Charlotte law firms, financial firms, insurance agencies, and growing businesses.</p>
+      <div class="blog-filter-row" aria-label="Blog topics">
+        <a class="blog-chip" href="/ai-governance/">AI Governance</a>
+        <a class="blog-chip" href="/cybersecurity/">Cybersecurity</a>
+        <a class="blog-chip" href="/pricing/managed-it/">Managed IT</a>
+        <a class="blog-chip" href="/industries/law-firms/">Law Firms</a>
+        <a class="blog-chip" href="/industries/finance-cpa/">Finance &amp; CPA</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="blog-index-main" aria-labelledby="latest-article">
+    <div class="blog-layout">
+      <article class="featured-article">
+        <div class="featured-content">
+          <div class="article-label">Latest article · AI Risk</div>
+          <h2 id="latest-article"><a href="/blog/your-team-is-already-using-ai">AI Chats Aren't Protected by Attorney-Client Privilege</a></h2>
+          <p class="article-excerpt">A federal court ruled AI chat logs can be handed to prosecutors. Here is what Charlotte law firms and professional businesses need to know before employees paste client data into consumer AI tools.</p>
+          <div class="article-meta-line">
+            <span>May 4, 2026</span>
+            <span>10 min read</span>
+            <span>AI Governance</span>
+          </div>
+          <a class="read-link" href="/blog/your-team-is-already-using-ai">Read the article →</a>
+        </div>
+        <div class="featured-visual" aria-hidden="true"></div>
+      </article>
+
+      <aside class="blog-side" aria-label="Blog resources">
+        <div class="side-card side-cta">
+          <h3>Need a clear IT next step?</h3>
+          <p>AMP IT reviews your environment, flags the real risks, and gives you a practical path forward — no pressure, no surprise invoice.</p>
+          <a href="/assessment" class="btn-primary">Book Free Assessment</a>
+        </div>
+        <div class="side-card">
+          <h3>Browse by need</h3>
+          <ul class="side-list">
+            <li><a href="/ai-governance/">AI policy and governance</a></li>
+            <li><a href="/cybersecurity/">Cybersecurity and email protection</a></li>
+            <li><a href="/pricing/managed-it/">Flat-rate managed IT</a></li>
+            <li><a href="/industries/law-firms/">IT for law firms</a></li>
+            <li><a href="/industries/finance-cpa/">IT for finance and CPA firms</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    <div class="topic-section" aria-labelledby="topic-paths">
+      <div class="section-label" id="topic-paths">Where to go next</div>
+      <div class="topic-grid">
+        <a class="topic-card" href="/ai-governance/">
+          <span>AI Governance</span>
+          <div>
+            <h3>Stop shadow AI before it becomes discovery risk.</h3>
+            <p>Policies, business accounts, user training, and safe adoption for firms handling sensitive information.</p>
+          </div>
+        </a>
+        <a class="topic-card" href="/cybersecurity/">
+          <span>Cybersecurity</span>
+          <div>
+            <h3>Email, identity, endpoint, and dark web monitoring.</h3>
+            <p>Practical controls that protect client data and satisfy rising insurance and compliance expectations.</p>
+          </div>
+        </a>
+        <a class="topic-card" href="/pricing/managed-it/">
+          <span>Managed IT</span>
+          <div>
+            <h3>Flat-rate IT support without break-fix surprises.</h3>
+            <p>One number to call, one invoice, and a Charlotte-local team that actually picks up.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <div class="section-label">Ready for less IT noise?</div>
+      <h2>Your IT should <span>just run.</span></h2>
+      <p>Book a free assessment and leave with clear next steps — even if we do not work together.</p>
+      <div class="hero-actions" style="justify-content:center;">
+        <a href="/assessment" class="btn-primary">Book a Free Assessment</a>
+        <a href="tel:+19803772733" class="btn-outline">Call (980) 377-2733</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-brand">
+    <svg width="30" height="28"><use href="#amp-logo"/></svg>
+    <div>
+      <span class="footer-wordmark"><span class="g">AMP</span> IT LLC</span>
+      <span class="footer-meta">Part of AMP Dynamics · Charlotte, NC</span>
+    </div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="/pricing/managed-it/">Pricing</a></li>
+    <li><a href="/industries/law-firms/">Industries</a></li>
+    <li><a href="/cybersecurity/">Cybersecurity</a></li>
+    <li><a href="/ai-governance/">AI Governance</a></li>
+    <li><a href="/blog/">Blog</a></li>
+    <li><a href="/assessment">Assessment</a></li>
+    <li><a href="/privacy">Privacy</a></li>
+    <li><a href="/terms">Terms</a></li>
+  </ul>
+</footer>
+</body>
+</html>

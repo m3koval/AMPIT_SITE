@@ -53,6 +53,11 @@ Per-user monthly pricing, all-inclusive — no per-ticket charges, no add-ons fo
   - Priority SLA
   - On-site support included
 
+## Resources
+
+- **Blog / Field Notes:** https://www.ampitsolutions.com/blog/
+- **AI privilege and shadow AI risk article:** https://www.ampitsolutions.com/blog/your-team-is-already-using-ai
+
 ## Contact
 
 - **Website:** https://www.ampitsolutions.com
