@@ -72,6 +72,7 @@ module.exports = async function handler(req, res) {
   const email = String(body.email || '').trim();
   const name = String(body.name || '').trim();
   const company = String(body.company || '').trim();
+  const phone = String(body.phone || '').trim();
 
   if (!DOMAIN_RX.test(domain)) return res.status(400).json({ error: 'Enter a valid domain, like example.com.' });
   if (!EMAIL_RX.test(email)) return res.status(400).json({ error: 'Enter a valid email address.' });
@@ -106,6 +107,7 @@ module.exports = async function handler(req, res) {
     email,
     name,
     company,
+    phone,
     booked: 'no',
     concern: 'SPF DKIM DMARC scan request',
     platform: 'Public DNS check',
