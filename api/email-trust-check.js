@@ -70,7 +70,6 @@ module.exports = async function handler(req, res) {
   const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
   const domain = normalizeDomain(body.domain);
   const email = String(body.email || '').trim();
-  const name = String(body.name || '').trim();
   const company = String(body.company || '').trim();
   const phone = String(body.phone || '').trim();
 
@@ -105,7 +104,6 @@ module.exports = async function handler(req, res) {
     path: 'email-trust-check',
     domain,
     email,
-    name,
     company,
     phone,
     booked: 'no',
