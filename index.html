@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AMP IT — Your IT Just Runs. | Charlotte IT Solutions</title>
+<title>AMP IT — Managed IT Services in Charlotte, NC</title>
 <meta http-equiv="x-dns-prefetch-control" content="on">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<meta name="description" content="Flat-rate managed IT for Charlotte law firms, financial firms, and growing businesses. One invoice, one number to call. Book a free assessment.">
+<meta name="description" content="Managed IT, cybersecurity, Microsoft 365 support, and AI governance for Charlotte law firms, financial firms, and growing businesses. Published per-user pricing and one predictable monthly invoice.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.ampitsolutions.com/">
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 <meta property="og:title" content="AMP IT — Your IT Just Runs.">
-<meta property="og:description" content="Flat-rate managed IT for Charlotte-area professional firms. 24/7 threat monitoring, email security, and helpdesk — all on one invoice.">
+<meta property="og:description" content="Managed IT, cybersecurity, and AI governance for Charlotte professional firms. Published per-user pricing, automated monitoring, and human support that picks up.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.ampitsolutions.com/">
 <meta property="og:image" content="https://www.ampitsolutions.com/og-image.png">
@@ -23,7 +23,7 @@
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AMP IT — Your IT Just Runs.">
-<meta name="twitter:description" content="Flat-rate managed IT for Charlotte-area professional firms. 24/7 threat monitoring, email security, and helpdesk — all on one invoice.">
+<meta name="twitter:description" content="Managed IT, cybersecurity, and AI governance for Charlotte professional firms. Published per-user pricing, automated monitoring, and human support that picks up.">
 <meta name="twitter:image" content="https://www.ampitsolutions.com/og-image.png">
 <link rel="preload" as="font" type="font/woff2" href="/fonts/outfit-latin.woff2" crossorigin>
 <link rel="preload" as="style" href="styles.css">
@@ -782,84 +782,69 @@
   .pt-text { font-size: 0.95rem; color: var(--text-muted); }
   .pt-text strong { color: var(--text); font-family: 'Outfit', sans-serif; font-size: 1.1rem; }
 
-  /* POLL SECTION */
-  .poll-section { padding: 72px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
-  .poll-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 300px; background: radial-gradient(ellipse, rgba(0,240,96,0.04) 0%, transparent 70%); pointer-events: none; }
-  .poll-inner { max-width: 680px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
-  .poll-label { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.68rem; color: var(--green); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; }
-  .poll-label::before, .poll-label::after { content: ''; width: 24px; height: 1px; background: var(--green); }
-  .poll-question { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.2; margin-bottom: 8px; }
-  .poll-sub { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 40px; line-height: 1.6; }
-  .poll-inner { max-width: 940px; }
-  .poll-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
-  .poll-choice {
-    border: 1px solid var(--border-strong); background: #030604;
-    padding: 0; cursor: pointer; transition: all 0.25s;
-    position: relative; overflow: hidden;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    min-height: 380px;
-  }
-  .poll-choice:hover:not(:disabled) {
-    border-color: var(--green);
-    transform: translateY(-3px);
-    box-shadow: 0 16px 48px rgba(0,240,96,0.22);
-  }
+  /* POLL SECTION — editorial HTML/CSS design, no external art */
+  .poll-section { padding: 80px 20px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; scroll-margin-top: 88px; }
+  .poll-inner { max-width: 1180px; margin: 0 auto; position: relative; z-index: 1; }
+  .poll-board { overflow: hidden; border: 1px solid rgba(255,255,255,0.12); background: #17120d; color: #f6efe4; box-shadow: 0 28px 90px rgba(0,0,0,0.28); }
+  .poll-header { min-height: 260px; padding: 58px 54px 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle at 50% 0%, rgba(217,95,39,0.16), transparent 42%), #17120d; border-bottom: 1px solid rgba(217,95,39,0.18); }
+  .poll-label { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: clamp(0.68rem, 1.2vw, 0.9rem); color: #e86825; letter-spacing: 0.42em; text-transform: uppercase; margin-bottom: 28px; font-weight: 800; }
+  .poll-question { font-family: Georgia, 'Times New Roman', serif; font-weight: 900; font-size: clamp(2.15rem, 5.7vw, 5.1rem); line-height: 0.98; letter-spacing: -0.045em; max-width: 1020px; margin: 0; color: #f7f0e5; }
+  .poll-question em { display: block; color: #e86825; font-style: italic; letter-spacing: -0.035em; }
+  .poll-sub { font-size: clamp(0.9rem, 1.4vw, 1.05rem); color: rgba(247,240,229,0.72); margin: 24px auto 0; line-height: 1.6; max-width: 640px; }
+  .poll-choices { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 0; }
+  .poll-choice { min-height: 360px; border: 0; padding: 58px 54px 48px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease, outline-color 0.2s ease; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; text-align: left; outline: 1px solid transparent; }
+  .poll-choice:hover:not(:disabled), .poll-choice:focus-visible { transform: translateY(-3px); outline-color: rgba(0,240,96,0.52); z-index: 2; box-shadow: 0 24px 70px rgba(0,0,0,0.28); }
   .poll-choice:disabled { cursor: default; }
-  /* Character photo sits above the rain canvas, dark areas go transparent via screen blend */
-  .poll-card-hero {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; object-position: center 20%;
-    mix-blend-mode: screen; z-index: 1; pointer-events: none;
-    filter: brightness(0.72) contrast(1.3) saturate(0.9);
-  }
-  .poll-card-overlay {
-    position: absolute; inset: 0; z-index: 2; pointer-events: none;
-    background: linear-gradient(to top, rgba(3,6,4,0.98) 0%, rgba(3,6,4,0.78) 30%, rgba(3,6,4,0.15) 56%, rgba(3,6,4,0.52) 100%);
-  }
-  .poll-card-quote {
-    position: absolute; left: 0; right: 0; bottom: 108px; height: 72px; z-index: 3; pointer-events: none;
-    display: flex; align-items: center; justify-content: flex-start; padding: 0 24px;
-  }
-  .poll-card-quote p {
-    font-family: 'Outfit', sans-serif; font-style: italic; font-size: 0.78rem;
-    color: rgba(255,255,255,0.78); text-align: left; line-height: 1.5; max-width: 280px;
-    text-shadow: 0 1px 10px rgba(0,0,0,0.95), 0 0 24px rgba(0,0,0,0.8);
-  }
-  .poll-card-quote strong { color: #fff; font-style: normal; font-weight: 800; text-shadow: 0 0 14px rgba(0,240,96,0.45); }
-  .poll-card-content { position: relative; z-index: 4; padding: 20px 24px 26px; }
-  .poll-choice-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-  .poll-choice-icon-circle {
-    width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .poll-choice-icon-circle.red { background: rgba(220,60,60,0.15); border: 1px solid rgba(220,60,60,0.55); color: #e06868; }
-  .poll-choice-icon-circle.blue { background: rgba(40,160,220,0.15); border: 1px solid rgba(40,160,220,0.55); color: #54b8e8; }
-  .poll-choice-title { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--text); line-height: 1.2; text-align: left; }
-  .poll-choice-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; text-align: left; }
-  .poll-choice.selected { border-color: var(--green); box-shadow: 0 0 0 1px var(--green) inset; }
-  .poll-choice.winner { border-color: var(--green); }
-
-  .poll-results { display: none; }
+  .poll-choice.human { background: linear-gradient(115deg, #f5efe4 0%, #f5efe4 58%, #ecd3bd 100%); color: #1b150f; }
+  .poll-choice.human::after { content: ''; position: absolute; right: -130px; top: -80px; width: 420px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(232,104,37,0.18), transparent 64%); pointer-events: none; }
+  .poll-choice.ai { background: #02090a; color: #eff8f3; border-left: 2px solid rgba(56,230,164,0.55); }
+  .poll-choice.ai::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(56,230,164,0.08) 0px, rgba(56,230,164,0.08) 2px, transparent 2px, transparent 8px), linear-gradient(90deg, rgba(56,230,164,0.07), transparent 35%, rgba(56,230,164,0.04)); pointer-events: none; }
+  .poll-choice.ai::after { content: ''; position: absolute; left: 0; right: 0; top: 42%; height: 1px; background: linear-gradient(90deg, transparent, rgba(56,230,164,0.65), transparent); box-shadow: 0 96px 0 rgba(56,230,164,0.16), 0 192px 0 rgba(56,230,164,0.09); pointer-events: none; }
+  .poll-choice-content { position: relative; z-index: 1; width: 100%; }
+  .poll-choice-badge { width: 88px; height: 88px; border-radius: 20px; display: grid; place-items: center; font-family: 'Outfit', system-ui, sans-serif; font-weight: 900; font-size: 2.8rem; margin-bottom: 34px; }
+  .human .poll-choice-badge { background: #1b150f; color: #f8f0e5; box-shadow: 0 8px 0 rgba(27,21,15,0.28); }
+  .ai .poll-choice-badge { background: rgba(2,9,10,0.72); color: #38e6a4; border: 3px solid #38e6a4; box-shadow: 0 0 34px rgba(56,230,164,0.18); }
+  .poll-choice-title { font-family: Georgia, 'Times New Roman', serif; font-weight: 900; font-size: clamp(2rem, 4.2vw, 4rem); line-height: 1.05; letter-spacing: -0.045em; max-width: 470px; }
+  .poll-choice-title em { color: #e86825; font-style: italic; }
+  .ai .poll-choice-title { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; color: #eff8f3; font-size: clamp(1.65rem, 3.2vw, 3.1rem); letter-spacing: -0.03em; }
+  .ai .prompt { color: #38e6a4; margin-right: 0.35em; }
+  .ai .cursor { display: inline-block; width: 0.52em; height: 0.9em; background: #38e6a4; vertical-align: -0.12em; margin-left: 0.12em; box-shadow: 0 0 20px rgba(56,230,164,0.45); }
+  .poll-choice-desc { position: relative; z-index: 1; font-size: clamp(1rem, 1.8vw, 1.45rem); line-height: 1.35; margin-top: 34px; max-width: 460px; }
+  .human .poll-choice-desc { color: #5c4d3c; font-style: italic; }
+  .ai .poll-choice-desc { color: #a8b8bc; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; letter-spacing: 0.02em; }
+  .ai .poll-choice-desc span { color: #38e6a4; }
+  .poll-choice.selected { outline-color: #00f060; box-shadow: 0 0 0 2px #00f060 inset; }
+  .poll-choice.winner { outline-color: rgba(0,240,96,0.75); }
+  .poll-or { position: absolute; left: 50%; top: 480px; transform: translate(-50%, -50%); z-index: 5; width: 96px; height: 96px; border-radius: 999px; background: #1a140f; color: #fff7e7; display: grid; place-items: center; font: italic 1.9rem/1 Georgia, serif; box-shadow: 14px 10px 0 rgba(65,82,83,0.55), 0 0 0 10px rgba(255,255,255,0.035), 0 10px 34px rgba(0,0,0,0.26); pointer-events: none; }
+  .poll-results { display: none; padding: 28px 34px 32px; background: #100d09; border-top: 1px solid rgba(255,255,255,0.1); }
   .poll-results.show { display: block; animation: fadeUp 0.5s ease both; }
   .poll-bar-row { margin-bottom: 14px; }
-  .poll-bar-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
-  .poll-bar-name { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem; }
-  .poll-bar-pct { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.82rem; color: var(--green); }
-  .poll-bar-track { height: 6px; background: var(--border); position: relative; }
-  .poll-bar-fill { height: 100%; background: var(--green); width: 0; transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
-  .poll-bar-fill.alt { background: var(--border-strong); }
-  .poll-total { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.08em; margin-top: 20px; }
-  .poll-voted-msg { font-size: 0.82rem; color: var(--text-muted); margin-top: 12px; }
-  .poll-voted-msg span { color: var(--green); }
+  .poll-bar-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 7px; color: #f6efe4; }
+  .poll-bar-name { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.92rem; }
+  .poll-bar-pct { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.84rem; color: #38e6a4; }
+  .poll-bar-track { height: 7px; background: rgba(255,255,255,0.12); position: relative; }
+  .poll-bar-fill { height: 100%; background: #38e6a4; width: 0; transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+  .poll-bar-fill.alt { background: #e86825; }
+  .poll-total { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; color: rgba(246,239,228,0.58); letter-spacing: 0.08em; margin-top: 20px; }
+  .poll-voted-msg { font-size: 0.86rem; color: rgba(246,239,228,0.72); margin-top: 12px; }
+  .poll-voted-msg span { color: #38e6a4; }
 
   @media (max-width: 900px) {
     .nav-hamburger { display: flex; }
   }
   @media (max-width: 600px) {
-    .poll-choices { grid-template-columns: 1fr; gap: 8px; }
-    .poll-choice { min-height: 280px; }
-    .poll-card-quote { bottom: 100px; }
-    .poll-card-quote p { font-size: 0.82rem; }
+    .poll-section { padding: 56px 14px; }
+    .poll-header { min-height: auto; padding: 104px 24px 38px; }
+    .poll-label { letter-spacing: 0.24em; margin-bottom: 20px; }
+    .poll-question { font-size: clamp(2rem, 11vw, 3.2rem); }
+    .poll-choices { grid-template-columns: 1fr; }
+    .poll-choice { min-height: 310px; padding: 40px 28px 34px; }
+    .poll-choice.ai { border-left: 0; border-top: 2px solid rgba(56,230,164,0.55); }
+    .poll-choice-badge { width: 68px; height: 68px; border-radius: 16px; font-size: 2.1rem; margin-bottom: 26px; }
+    .poll-choice-title { font-size: clamp(2.2rem, 13vw, 3.6rem); }
+    .ai .poll-choice-title { font-size: clamp(1.65rem, 9vw, 2.55rem); }
+    .poll-choice-desc { margin-top: 24px; }
+    .poll-or { top: auto; left: 50%; bottom: 238px; width: 72px; height: 72px; font-size: 1.45rem; box-shadow: 10px 7px 0 rgba(65,82,83,0.48), 0 0 0 8px rgba(255,255,255,0.035); }
   }
 
   /* ── Grid responsive overrides (repeated after base definitions to win cascade) ── */
@@ -886,7 +871,7 @@
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "AMP IT", "legalName": "AMP IT LLC",
-    "description": "Flat-rate managed IT for Charlotte-area professional firms. 24/7 threat monitoring, email security, and helpdesk — all on one invoice.",
+    "description": "Managed IT, cybersecurity, Microsoft 365 support, and AI governance for Charlotte professional firms. Published per-user pricing, one predictable monthly invoice, and automated monitoring for covered systems.",
     "url": "https://www.ampitsolutions.com",
     "telephone": "+19803772733",
     "email": "hello@ampitsolutions.com",
@@ -966,12 +951,12 @@
     ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
-      "name": "Flat-Rate Managed IT Service Plans",
+      "name": "Published Per-User Managed IT Service Plans",
       "itemListElement": [
         {
           "@type": "Offer",
           "name": "Essential Plan",
-          "description": "Flat-rate managed IT for small businesses. Includes 24/7 remote monitoring, automated patch management, email security with anti-phishing, and business-hours helpdesk support. One invoice, no per-user fees.",
+          "description": "All-inclusive per-user managed IT for small businesses. Includes automated remote monitoring, patch management, email security with anti-phishing, and business-hours helpdesk support. Published rates and one predictable monthly invoice.",
           "price": "319",
           "priceCurrency": "USD",
           "priceSpecification": { "@type": "UnitPriceSpecification", "billingIncrement": "month" },
@@ -1072,6 +1057,7 @@
     <li class="has-dropdown"><a href="/industries/law-firms/">Industries</a><ul class="dropdown"><li><a href="/industries/law-firms/">Law Firms</a></li><li><a href="/industries/finance-cpa/">Finance &amp; CPA</a></li><li><a href="/industries/insurance/">Insurance Agencies</a></li><li><a href="/industries/other-industries/">Other Industries</a></li></ul></li>
     <li><a href="/cybersecurity/">Cybersecurity</a></li>
     <li><a href="/ai-governance/">AI Governance</a></li>
+    <li><a href="/about/">About</a></li>
     <li><a href="/blog/">Blog</a></li>
   </ul>
   <a href="/assessment" class="nav-cta">Get Started</a>
@@ -1085,6 +1071,7 @@
     <li><a href="/industries/law-firms/">Law Firms</a></li><li><a href="/industries/finance-cpa/">Finance &amp; CPA</a></li>
     <li><a href="/industries/insurance/">Insurance Agencies</a></li><li><a href="/industries/other-industries/">Other Industries</a></li>
     <li><a href="/cybersecurity/">Cybersecurity</a></li><li><a href="/ai-governance/">AI Governance</a></li>
+    <li><a href="/about/">About</a></li>
     <li><a href="/blog/">Blog</a></li>
   </ul>
 </div>
@@ -1097,9 +1084,9 @@
     <h1>
       Your IT<br>
       <span class="accent">Just Runs.</span>
-      <span class="sub-line">// Flat rate. Zero surprises. Always on.</span>
+      <span class="sub-line">// Published rates. No surprise invoices. Real support.</span>
     </h1>
-    <p class="hero-sub">Managed IT for law firms, financial service firms, and growing businesses across Charlotte. One flat invoice. One number to call. A team that actually picks up.</p>
+    <p class="hero-sub">Managed IT for law firms, financial service firms, and growing businesses across Charlotte. One predictable monthly invoice. One number to call. A team that actually picks up.</p>
     <div class="hero-actions">
       <a href="/assessment" class="btn-primary">Book a Free Assessment</a>
       <a href="tel:+19803772733" class="btn-outline">Call Us</a>
@@ -1174,11 +1161,11 @@
       <div class="positioning-left fade-up">
         <h2 id="outcomes-not-overhead">Outcomes, not <span>overhead.</span></h2>
         <p>We partner with you to deliver technology that works, security that holds, and a team that picks up the phone — resolving things for you, on your schedule.</p>
-        <p>For Charlotte-area professional services firms, that means one flat monthly rate with no surprises, no break-fix nickel-and-diming, and a partner who treats your business like an owner.</p>
+        <p>For Charlotte-area professional services firms, that means all-inclusive per-user pricing, one predictable monthly invoice, and a partner who treats your business like an owner.</p>
         <div class="stat-row">
-          <div class="stat"><div class="stat-num">1-Hr</div><div class="stat-label">Emergency Response SLA (Best Plan)</div></div>
-          <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Threat Monitoring (Best Tier)</div></div>
-          <div class="stat"><div class="stat-num">Flat</div><div class="stat-label">Monthly Rate — No Surprises</div></div>
+          <div class="stat"><div class="stat-num">1-Hr</div><div class="stat-label">Emergency Response SLA on Best</div></div>
+          <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Automated Monitoring</div></div>
+          <div class="stat"><div class="stat-num">Clear</div><div class="stat-label">Published Per-User Pricing</div></div>
           <div class="stat"><div class="stat-num">On-Site</div><div class="stat-label">Charlotte Metro Coverage</div></div>
         </div>
       </div>
@@ -1223,52 +1210,32 @@
 <!-- QUICK POLL -->
 <section class="poll-section" id="poll">
   <div class="poll-inner fade-up">
-    <div class="poll-label">Quick Poll</div>
-    <h2 class="poll-question" id="when-something-breaks-at-work-how-do-you">When something breaks at work,<br>how do you want IT support?</h2>
-    <p class="poll-sub">Genuinely curious — it helps us understand how Charlotte businesses think about this.</p>
+    <div class="poll-board">
+      <div class="poll-header">
+        <div class="poll-label">Quick Poll · Charlotte NC</div>
+        <h2 class="poll-question" id="when-something-breaks-at-work-how-do-you">When something breaks, who do you want <em>owning the fix?</em></h2>
+        <p class="poll-sub">Genuinely curious — it helps us understand how professional firms want support when the clock is running.</p>
+      </div>
 
-    <div class="poll-choices" id="pollChoices">
-      <button class="poll-choice" data-choice="human" id="choiceHuman">
-        <!-- Matrix rain canvas (base layer) -->
-        <canvas class="matrix-rain-canvas" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true"></canvas>
-        <!-- Morpheus character image — save as poll-morpheus.jpg in site root -->
-        <img class="poll-card-hero" src="poll-morpheus.png" alt="" aria-hidden="true" width="2466" height="1696" style="transform: scale(1.32) translateY(4%)">
-        <div class="poll-card-overlay"></div>
-        <div class="poll-card-quote">
-          <p>"Some problems are just better solved with a <strong>human.</strong>"</p>
-        </div>
-        <div class="poll-card-content">
-          <div class="poll-choice-row">
-            <div class="poll-choice-icon-circle red" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0116 0v2"/></svg>
-            </div>
-            <div class="poll-choice-title">Talk to a real human</div>
+      <div class="poll-choices" id="pollChoices">
+        <button class="poll-choice human" data-choice="human" id="choiceHuman">
+          <div class="poll-choice-content">
+            <div class="poll-choice-badge" aria-hidden="true">A</div>
+            <div class="poll-choice-title">A real <em>human</em> who knows your setup.</div>
+            <div class="poll-choice-desc">Someone who owns the outcome.</div>
           </div>
-          <div class="poll-choice-desc">Call or chat with a technician who actually knows your setup</div>
-        </div>
-      </button>
-      <button class="poll-choice" data-choice="ai" id="choiceAi">
-        <!-- Matrix rain canvas (base layer) -->
-        <canvas class="matrix-rain-canvas" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true"></canvas>
-        <!-- Neo character image -->
-        <img class="poll-card-hero" src="poll-neo.png" alt="" aria-hidden="true" width="2510" height="1664" style="object-position: center 45%">
-        <div class="poll-card-overlay"></div>
-        <div class="poll-card-quote">
-          <p>"Some problems are faster to solve on your own with <strong>AI.</strong>"</p>
-        </div>
-        <div class="poll-card-content">
-          <div class="poll-choice-row">
-            <div class="poll-choice-icon-circle blue" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>
-            </div>
-            <div class="poll-choice-title">AI / self-service</div>
+        </button>
+        <button class="poll-choice ai" data-choice="ai" id="choiceAi">
+          <div class="poll-choice-content">
+            <div class="poll-choice-badge" aria-hidden="true">B</div>
+            <div class="poll-choice-title"><span class="prompt">&gt;_</span>AI triage<span class="cursor" aria-hidden="true"></span></div>
+            <div class="poll-choice-desc"><span>//</span> instant help, with a human accountable</div>
           </div>
-          <div class="poll-choice-desc">Troubleshoot with an AI assistant on my own schedule</div>
-        </div>
-      </button>
-    </div>
+        </button>
+      </div>
+      <div class="poll-or" aria-hidden="true">or</div>
 
-    <div class="poll-results" id="pollResults">
+      <div class="poll-results" id="pollResults">
       <div class="poll-bar-row">
         <div class="poll-bar-label">
           <span class="poll-bar-name"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e06868" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:6px"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0116 0v2"/></svg>Real human</span>
@@ -1278,13 +1245,14 @@
       </div>
       <div class="poll-bar-row">
         <div class="poll-bar-label">
-          <span class="poll-bar-name"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#54b8e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:6px"><rect x="4" y="4" width="16" height="16" rx="3"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>AI / self-service</span>
+          <span class="poll-bar-name"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#54b8e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:6px"><rect x="4" y="4" width="16" height="16" rx="3"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>AI triage + human accountable</span>
           <span class="poll-bar-pct" id="pctAi">0%</span>
         </div>
         <div class="poll-bar-track"><div class="poll-bar-fill alt" id="barAi"></div></div>
       </div>
       <div class="poll-total" id="pollTotal"></div>
       <div class="poll-voted-msg" id="pollVotedMsg"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1303,7 +1271,7 @@
       <div class="step fade-up d1">
         <div class="step-num">02</div>
         <h3>A Plan Built for You</h3>
-        <p>We build a flat-rate proposal around your team size, industry, and risk profile. Published pricing — you'll know exactly what you're paying before you sign. No "call for a quote," no line-item surprises.</p>
+        <p>We build a proposal around your team size, industry, and risk profile. Published per-user pricing means you know the rate before you sign. No hidden per-ticket billing for covered support.</p>
       </div>
       <div class="step fade-up d2">
         <div class="step-num">03</div>
@@ -1326,7 +1294,7 @@
           <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
         </div>
         <h3>Managed IT</h3>
-        <p>Helpdesk, monitoring, patching, onboarding, and email administration — everything that keeps your team moving day to day. One flat monthly rate, no break-fix surprises.</p>
+        <p>Helpdesk, monitoring, patching, onboarding, and email administration — everything that keeps your team moving day to day. One predictable monthly invoice, no break-fix surprises.</p>
         <span class="cover-link">See plans &amp; pricing →</span>
       </a>
 
@@ -1335,7 +1303,7 @@
           <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2l8 4v6c0 4.97-3.5 9.64-8 10.93C7.5 21.64 4 16.97 4 12V6l8-4z"/></svg>
         </div>
         <h3>Cybersecurity</h3>
-        <p>24/7 threat detection, advanced email security, dark web monitoring, MFA enforcement, and verified backup recovery — included in every plan, not an upsell.</p>
+        <p>Automated threat detection, advanced email security, dark web monitoring, MFA enforcement, and verified backup recovery — included in every plan, not an upsell.</p>
         <span class="cover-link">Explore our security stack →</span>
       </a>
 
@@ -1371,7 +1339,7 @@
     <div class="section-label fade-up">Why AMP IT</div>
     <h2 class="fade-up" id="we-partner-with-you-not-complicate-things">We partner with you,<br>not <span style="color:var(--green)">complicate things.</span></h2>
     <div class="why-grid">
-      <div class="why-card fade-up"><div class="why-num">01</div><h3>Flat, Predictable Rate</h3><p>One invoice covers everything — licensing, security, helpdesk, and backups. No break-fix billing. You always know what IT costs.</p></div>
+      <div class="why-card fade-up"><div class="why-num">01</div><h3>Published, Predictable Pricing</h3><p>Clear per-user rates cover licensing, security, helpdesk, and backups. No break-fix billing for covered support. You always know what IT costs.</p></div>
       <div class="why-card fade-up d1"><div class="why-num">02</div><h3>Real Security at Every Tier</h3><p>Managed threat detection, email phishing protection, and automated backups are all in our Essential tier — not upsells. If it can put a business out of business, it's essential.</p><a href="/cybersecurity/" class="body-link">Explore our full security stack →</a></div>
       <div class="why-card fade-up d2"><div class="why-num">03</div><h3>A-Player Team</h3><p>We hire experienced engineers and pay them well — because the person answering your ticket needs to actually know what they're doing. You'll notice the difference.</p></div>
       <div class="why-card fade-up"><div class="why-num">04</div><h3>AI Governance Ready</h3><p>Private AI tools deployed with proper data governance. Your client privileged information never touches a public model — documented for your malpractice carrier.</p><a href="/ai-governance/" class="body-link">Explore our AI Governance program →</a></div>
@@ -1478,7 +1446,7 @@
       <div class="contact-item"><span class="ci-label">Email</span><span class="ci-value"><a href="mailto:hello@ampitsolutions.com" style="color:var(--text-muted);text-decoration:none;">hello@ampitsolutions.com</a></span></div>
       <div class="contact-item"><span class="ci-label">Phone</span><span class="ci-value"><a href="tel:+19803772733" style="color:var(--text-muted);text-decoration:none;">(980) 377-2733</a></span></div>
       <div class="contact-item"><span class="ci-label">Service Area</span><span class="ci-value">Charlotte Metro & Surrounding Area</span></div>
-      <div class="contact-item"><span class="ci-label">Emergency Line</span><span class="ci-value">Available 24/7 for critical issues</span></div>
+      <div class="contact-item"><span class="ci-label">Emergency Line</span><span class="ci-value">24/7 automated monitoring; emergency response on qualifying plans</span></div>
     </div>
   </div>
 </section>
@@ -1490,7 +1458,7 @@
     <svg width="30" height="28"><use href="#amp-logo"/></svg>
     <div>
       <span class="footer-wordmark"><span class="g">AMP</span> IT LLC</span>
-      <span class="footer-meta">Part of AMP Dynamics · Charlotte, NC</span>
+      <span class="footer-meta">Part of AMP Dynamic · Charlotte, NC</span>
     </div>
   </div>
   <ul class="footer-links">
@@ -1498,6 +1466,7 @@
     <li><a href="/industries/law-firms/">Industries</a></li>
     <li><a href="/cybersecurity/">Cybersecurity</a></li>
     <li><a href="/ai-governance/">AI Governance</a></li>
+    <li><a href="/about/">About</a></li>
     <li><a href="/blog/">Blog</a></li>
     <li><a href="/assessment">Assessment</a></li>
     <li><a href="/privacy">Privacy</a></li>
@@ -1598,57 +1567,7 @@
     });
   }
 
-  // ── MATRIX RAIN (runs on every .matrix-rain-canvas) ──────────────────────
-  (function() {
-    var chars = 'ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍ012345789Z'.split('');
-
-    function spawnRain(mc) {
-      var mctx = mc.getContext('2d');
-      var drops = [], bright = [], cols = 0;
-
-      function setup() {
-        var w = mc.offsetWidth || 300;
-        var h = mc.offsetHeight || 320;
-        if (mc.width === w && mc.height === h) return;
-        mc.width = w; mc.height = h;
-        cols = Math.floor(w / 13);
-        drops = Array.from({length: cols}, function() { return -(Math.random() * 22 | 0); });
-        bright = Array.from({length: cols}, function() { return Math.random() > 0.62; });
-      }
-
-      function draw() {
-        setup();
-        mctx.fillStyle = 'rgba(3,6,4,0.062)';
-        mctx.fillRect(0, 0, mc.width, mc.height);
-        for (var i = 0; i < drops.length; i++) {
-          var y = drops[i] * 13;
-          if (y < 1) { drops[i]++; continue; }
-          var ch = chars[Math.random() * chars.length | 0];
-          if (drops[i] > 0 && Math.random() > 0.88) {
-            mctx.fillStyle = 'rgba(210,255,230,0.96)';
-            mctx.font = 'bold 12px monospace';
-          } else if (bright[i] && y < mc.height * 0.5) {
-            mctx.fillStyle = 'rgba(0,240,96,0.88)';
-            mctx.font = '12px monospace';
-          } else {
-            var alpha = Math.max(0.12, 0.55 - (y / mc.height) * 0.35);
-            mctx.fillStyle = 'rgba(0,200,70,' + alpha + ')';
-            mctx.font = '11px monospace';
-          }
-          mctx.fillText(ch, i * 13, y);
-          if (y > mc.height && Math.random() > 0.972) {
-            drops[i] = 0; bright[i] = Math.random() > 0.62;
-          } else { drops[i]++; }
-        }
-        requestAnimationFrame(draw);
-      }
-      window.addEventListener('resize', function() { mc.width = 0; });
-      draw();
-    }
-
-    document.querySelectorAll('.matrix-rain-canvas').forEach(spawnRain);
-  })();
-  // ─────────────────────────────────────────────────────────────────────────
+  // Poll section is rendered with HTML/CSS only — no licensed-IP or movie-character assets.
 
   // ── POLL ─────────────────────────────────────────────────────────────────
   (function() {
@@ -1689,7 +1608,7 @@
       if (voted) {
         var humanIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#e06868" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0116 0v2"/></svg>';
         var aiIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#54b8e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px"><rect x="4" y="4" width="16" height="16" rx="3"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>';
-        msgEl.innerHTML = 'Your vote: <span>' + (voted === 'human' ? humanIcon + 'Real human' : aiIcon + 'AI / self-service') + '</span>';
+        msgEl.innerHTML = 'Your vote: <span>' + (voted === 'human' ? humanIcon + 'Real human' : aiIcon + 'AI triage + human accountable') + '</span>';
       } else {
         msgEl.textContent = '';
       }
