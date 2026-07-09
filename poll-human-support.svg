@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" role="img" aria-label="Human IT support with secure systems">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#15251d"/><stop offset="1" stop-color="#07100c"/></linearGradient><radialGradient id="glow" cx="35%" cy="30%" r="70%"><stop stop-color="#00f060" stop-opacity=".45"/><stop offset="1" stop-color="#00f060" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1200" height="820" fill="url(#g)"/><rect width="1200" height="820" fill="url(#glow)"/>
+  <g fill="none" stroke="#00f060" stroke-opacity=".18" stroke-width="2"> <path d="M120 160h960M120 310h960M120 460h960M120 610h960M220 80v660M420 80v660M620 80v660M820 80v660M1020 80v660"/> </g>
+  <g transform="translate(380 150)"><circle cx="220" cy="150" r="112" fill="#111b16" stroke="#00f060" stroke-width="14"/><path d="M45 520c26-132 112-204 175-204s149 72 175 204" fill="#111b16" stroke="#00f060" stroke-width="18" stroke-linecap="round"/><path d="M128 165c38 35 142 35 184 0" stroke="#c9f7dc" stroke-width="12" stroke-linecap="round"/><circle cx="180" cy="134" r="10" fill="#c9f7dc"/><circle cx="260" cy="134" r="10" fill="#c9f7dc"/></g>
+  <g transform="translate(100 560)" font-family="Arial, sans-serif" fill="#dfffea"><text font-size="42" font-weight="700">Real support. Real accountability.</text><text y="58" font-size="26" fill="#9fb8aa">A technician who knows your setup and owns the outcome.</text></g>
+</svg>
