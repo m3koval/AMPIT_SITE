@@ -1,4 +1,11 @@
 const dns = require('dns').promises;
+const {
+  cleanString,
+  parseJsonBody,
+  rateLimit,
+  setNoStore,
+  setSameOriginCors
+} = require('../lib/http-security');
 
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzVSYcjWLFPz8P4HfusgA7obD2ikdRH7wCcRS91hFY-Vl7rko5P0EVGszSAzCzTocv45g/exec';
 const EMAIL_RX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
@@ -17,7 +24,10 @@ function normalizeDomain(input) {
 
 async function resolveTxtSafe(name) {
   try {
-    return flattenTxt(await dns.resolveTxt(name));
+    return flattenTxt(await Promise.race([
+      dns.resolveTxt(name),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('DNS timeout')), 4000))
+    ]));
   } catch (error) {
     return [];
   }
@@ -53,7 +63,8 @@ async function submitLead(payload) {
     await fetch(SHEETS_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(5000)
     });
   } catch (error) {
     // Do not fail the scan because lead capture had an issue.
@@ -61,20 +72,38 @@ async function submitLead(payload) {
 }
 
 module.exports = async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  setNoStore(res);
+  setSameOriginCors(req, res, 'POST, OPTIONS');
   if (req.method === 'OPTIONS') return res.status(204).end();
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Use POST.' });
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST');
+    return res.status(405).json({ error: 'Use POST.' });
+  }
 
-  const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
+  if (!String(req.headers['content-type'] || '').toLowerCase().startsWith('application/json')) {
+    return res.status(415).json({ error: 'Content-Type must be application/json' });
+  }
+
+  const throttle = await rateLimit(req, 'email-trust-check', 10, 600);
+  if (!throttle.allowed) {
+    res.setHeader('Retry-After', String(throttle.retryAfter));
+    return res.status(429).json({ error: 'Too many scans. Please wait and try again.' });
+  }
+
+  let body;
+  try {
+    body = parseJsonBody(req);
+  } catch (error) {
+    return res.status(400).json({ error: 'Invalid JSON body' });
+  }
   const domain = normalizeDomain(body.domain);
-  const email = String(body.email || '').trim();
-  const company = String(body.company || '').trim();
-  const phone = String(body.phone || '').trim();
+  const email = cleanString(body.email, 254).toLowerCase();
+  const company = cleanString(body.company, 120);
+  const phone = cleanString(body.phone, 32);
 
   if (!DOMAIN_RX.test(domain)) return res.status(400).json({ error: 'Enter a valid domain, like example.com.' });
-  if (!EMAIL_RX.test(email)) return res.status(400).json({ error: 'Enter a valid email address.' });
+  if (!EMAIL_RX.test(email) || email.length > 254) return res.status(400).json({ error: 'Enter a valid email address.' });
+  if (company.length > 120 || phone.length > 32) return res.status(400).json({ error: 'One or more fields are too long.' });
 
   const txt = await resolveTxtSafe(domain);
   const spfRecords = txt.filter(r => /^v=spf1\b/i.test(r));

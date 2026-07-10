@@ -378,29 +378,29 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
         <div class="frow">
           <div class="field">
             <label for="f-name">Name <span class="req-tag">*</span></label>
-            <input type="text" id="f-name" placeholder="Jane Smith" autocomplete="name">
+            <input type="text" id="f-name" placeholder="Jane Smith" autocomplete="name" maxlength="100">
             <span class="ferr" id="err-name">Please enter your name</span>
           </div>
           <div class="field">
             <label for="f-company">Company <span class="req-tag">*</span></label>
-            <input type="text" id="f-company" placeholder="Smith Law PLLC" autocomplete="organization">
+            <input type="text" id="f-company" placeholder="Smith Law PLLC" autocomplete="organization" maxlength="120">
             <span class="ferr" id="err-company">Please enter your company</span>
           </div>
         </div>
         <div class="frow">
           <div class="field">
             <label for="f-email">Email <span class="req-tag">*</span></label>
-            <input type="email" id="f-email" placeholder="jane@smithlaw.com" autocomplete="email">
+            <input type="email" id="f-email" placeholder="jane@smithlaw.com" autocomplete="email" maxlength="254">
             <span class="ferr" id="err-email">Please enter a valid email</span>
           </div>
           <div class="field">
             <label for="f-phone">Phone <span class="opt-tag">(optional)</span></label>
-            <input type="tel" id="f-phone" placeholder="(704) 555-0000" autocomplete="tel">
+            <input type="tel" id="f-phone" placeholder="(704) 555-0000" autocomplete="tel" maxlength="32">
           </div>
         </div>
         <div class="field" id="addressField" style="display:none">
           <label for="f-address">Office address <span class="req-tag">*</span></label>
-          <input type="text" id="f-address" placeholder="919 Berryhill Rd, Charlotte, NC" autocomplete="street-address">
+          <input type="text" id="f-address" placeholder="919 Berryhill Rd, Charlotte, NC" autocomplete="street-address" maxlength="300">
           <span class="ferr" id="err-address">Please enter your office address</span>
         </div>
         <div class="step-nav">
@@ -679,6 +679,7 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     year: new Date().getFullYear(), month: new Date().getMonth(),
     slots: {}, selDate: null, selTime: null, selDisplay: ''
   };
+  const CCAL_HORIZON_DAYS = 62;
 
   async function ccalLoad(year, month) {
     const key = `${year}-${String(month+1).padStart(2,'0')}`;
@@ -709,6 +710,10 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
       new Date(year, month).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
     document.getElementById('ccalPrev').disabled =
       year === now.getFullYear() && month === now.getMonth();
+    const nextMonthStart = new Date(year, month + 1, 1);
+    const horizon = new Date();
+    horizon.setDate(horizon.getDate() + CCAL_HORIZON_DAYS);
+    document.getElementById('ccalNext').disabled = nextMonthStart > horizon;
 
     let html = hdrs.map(d => `<div class="ccal-day-hdr">${d}</div>`).join('');
     for (let i = 0; i < firstDow; i++) html += `<div class="ccal-day empty"></div>`;
@@ -735,11 +740,18 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     const label = new Date(ds + 'T12:00:00').toLocaleDateString('en-US',
       { weekday: 'long', month: 'long', day: 'numeric' });
     document.getElementById('ccalTimesHead').textContent = label;
-    document.getElementById('ccalSlots').innerHTML = times.map(iso => {
+    const slots = document.getElementById('ccalSlots');
+    slots.replaceChildren();
+    times.forEach(iso => {
       const disp = new Date(iso).toLocaleTimeString('en-US',
         { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' });
-      return `<button class="ccal-slot" onclick="ccalPickTime('${iso}','${disp}',this)">${disp}</button>`;
-    }).join('');
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'ccal-slot';
+      button.textContent = disp;
+      button.addEventListener('click', () => ccalPickTime(iso, disp, button));
+      slots.append(button);
+    });
     document.getElementById('ccalTimes').style.display   = 'block';
     document.getElementById('ccalConfirm').style.display = 'none';
   }
@@ -752,10 +764,13 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
       { weekday: 'long', month: 'long', day: 'numeric' });
     const isAudit = ans.path === 'onsite-audit';
     document.getElementById('ccalConfirmWhen').textContent = `${dateLabel} · ${disp}`;
-    document.getElementById('ccalConfirmWho').innerHTML =
-      `${ans.name} · ${ans.email}` +
-      (ans.phone  ? ` · ${ans.phone}` : '') +
-      (isAudit && ans.address ? `<br>${ans.address}` : '');
+    const confirmWho = document.getElementById('ccalConfirmWho');
+    confirmWho.replaceChildren(document.createTextNode(
+      `${ans.name} · ${ans.email}` + (ans.phone ? ` · ${ans.phone}` : '')
+    ));
+    if (isAudit && ans.address) {
+      confirmWho.append(document.createElement('br'), document.createTextNode(ans.address));
+    }
     document.getElementById('ccalError').style.display   = 'none';
     document.getElementById('ccalConfirm').style.display = 'block';
   }

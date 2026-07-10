@@ -1,30 +1,43 @@
 // POST /api/cal-book
 // Body: { type, start, name, email, phone, address, note }
 const crypto = require('crypto');
+const {
+  cleanString,
+  parseJsonBody,
+  rateLimit,
+  setNoStore
+} = require('../lib/http-security');
+
+const EMAIL_RX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+const EVENT_TYPES = new Set(['intro-call', 'onsite-audit']);
 
 function sha256(value) {
-  const v = (value == null ? '' : String(value)).trim().toLowerCase();
-  if (!v) return undefined;
-  return crypto.createHash('sha256').update(v).digest('hex');
+  const normalized = (value == null ? '' : String(value)).trim().toLowerCase();
+  if (!normalized) return undefined;
+  return crypto.createHash('sha256').update(normalized).digest('hex');
 }
 
 function readCookie(cookieHeader, name) {
   if (!cookieHeader) return undefined;
-  const m = String(cookieHeader).match(new RegExp('(?:^|;\\s*)' + name + '=([^;]+)'));
-  return m ? decodeURIComponent(m[1]) : undefined;
+  const match = String(cookieHeader).match(new RegExp('(?:^|;\\s*)' + name + '=([^;]+)'));
+  if (!match) return undefined;
+  try {
+    return decodeURIComponent(match[1]);
+  } catch (error) {
+    return undefined;
+  }
 }
 
 // Server-side Meta CAPI Schedule event fired on confirmed bookings.
 // Deduped with the browser pixel via event_id (cal.com booking uid).
-// Silently no-ops until META_CAPI_ACCESS_TOKEN is set in Vercel — safe to ship as-is.
 async function fireMetaSchedule(req, { email, phone, name, eventId, eventSourceUrl }) {
   const token = process.env.META_CAPI_ACCESS_TOKEN;
   if (!token) return;
   const datasetId = process.env.META_DATASET_ID || '2176447043191960';
 
-  const fullName  = (name || '').trim();
+  const fullName = (name || '').trim();
   const firstName = fullName.split(/\s+/)[0];
-  const lastName  = fullName.split(/\s+/).slice(1).join(' ');
+  const lastName = fullName.split(/\s+/).slice(1).join(' ');
 
   const userData = {
     em: sha256(email),
@@ -36,7 +49,7 @@ async function fireMetaSchedule(req, { email, phone, name, eventId, eventSourceU
     fbp: readCookie(req.headers.cookie, '_fbp'),
     fbc: readCookie(req.headers.cookie, '_fbc')
   };
-  Object.keys(userData).forEach(k => userData[k] === undefined && delete userData[k]);
+  Object.keys(userData).forEach(key => userData[key] === undefined && delete userData[key]);
 
   const event = {
     event_name: 'Schedule',
@@ -48,25 +61,69 @@ async function fireMetaSchedule(req, { email, phone, name, eventId, eventSourceU
   };
 
   try {
-    const r = await fetch(`https://graph.facebook.com/v21.0/${datasetId}/events`, {
-      method:  'POST',
+    const response = await fetch(`https://graph.facebook.com/v21.0/${datasetId}/events`, {
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data: [event], access_token: token })
+      body: JSON.stringify({ data: [event], access_token: token }),
+      signal: AbortSignal.timeout(5000)
     });
-    if (!r.ok) console.error('Meta CAPI Schedule failed:', r.status, await r.text());
-  } catch (err) {
-    console.error('Meta CAPI Schedule error:', err.message);
+    if (!response.ok) console.error('Meta CAPI Schedule failed:', response.status, await response.text());
+  } catch (error) {
+    console.error('Meta CAPI Schedule error:', error.message);
   }
 }
 
 module.exports = async function handler(req, res) {
+  setNoStore(res);
   if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const apiKey = process.env.CAL_API_KEY;
-  const { type, start, name, email, phone, address, note } = req.body;
+  if (!String(req.headers['content-type'] || '').toLowerCase().startsWith('application/json')) {
+    return res.status(415).json({ error: 'Content-Type must be application/json' });
+  }
 
+  const throttle = await rateLimit(req, 'cal-book', 5, 600);
+  if (!throttle.allowed) {
+    res.setHeader('Retry-After', String(throttle.retryAfter));
+    return res.status(429).json({ error: 'Too many booking attempts. Please wait and try again.' });
+  }
+
+  let body;
+  try {
+    body = parseJsonBody(req);
+  } catch (error) {
+    return res.status(400).json({ error: 'Invalid JSON body' });
+  }
+
+  const type = cleanString(body.type, 40);
+  const start = cleanString(body.start, 40);
+  const name = cleanString(body.name, 100);
+  const email = cleanString(body.email, 254).toLowerCase();
+  const phone = cleanString(body.phone, 32);
+  const address = cleanString(body.address, 300);
+  const note = cleanString(body.note, 1000);
+
+  if (!EVENT_TYPES.has(type)) return res.status(400).json({ error: 'Invalid appointment type' });
+  if (name.length < 2 || name.length > 100) return res.status(400).json({ error: 'Enter a valid name' });
+  if (!EMAIL_RX.test(email) || email.length > 254) return res.status(400).json({ error: 'Enter a valid email address' });
+  if (phone.length > 32 || address.length > 300 || note.length > 1000) {
+    return res.status(400).json({ error: 'One or more fields are too long' });
+  }
+
+  const startMs = Date.parse(start);
+  const now = Date.now();
+  if (!Number.isFinite(startMs) || startMs < now + 2 * 60 * 1000 || startMs > now + 62 * 24 * 60 * 60 * 1000) {
+    return res.status(400).json({ error: 'Choose a valid future appointment time' });
+  }
+
+  const isAudit = type === 'onsite-audit';
+  if (isAudit && !address) {
+    return res.status(400).json({ error: 'Enter an office address for an on-site audit' });
+  }
+
+  const apiKey = process.env.CAL_API_KEY;
   const eventId = type === 'onsite-audit'
     ? process.env.CAL_EVENT_AUDIT
     : process.env.CAL_EVENT_INTRO;
@@ -75,15 +132,13 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Cal.com not configured' });
   }
 
-  const isAudit = type === 'onsite-audit';
-
-  const location = isAudit && address
+  const location = isAudit
     ? { type: 'attendeeAddress', address }
     : { type: 'integration', integration: 'google-meet' };
 
   const payload = {
     eventTypeId: Number(eventId),
-    start,
+    start: new Date(startMs).toISOString(),
     attendee: {
       name,
       email,
@@ -93,24 +148,24 @@ module.exports = async function handler(req, res) {
     location,
     ...(note ? { bookingFieldsResponses: { notes: note } } : {}),
     metadata: {
-      ...(phone   ? { phone }   : {}),
+      ...(phone ? { phone } : {}),
       ...(address ? { address } : {})
     }
   };
 
   try {
     const calRes = await fetch('https://api.cal.com/v2/bookings', {
-      method:  'POST',
+      method: 'POST',
       headers: {
-        'Content-Type':    'application/json',
+        'Content-Type': 'application/json',
         'cal-api-version': '2026-02-25',
-        'Authorization':   `Bearer ${apiKey}`
+        Authorization: `Bearer ${apiKey}`
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(10000)
     });
     const data = await calRes.json();
 
-    // Fire server-side Schedule on confirmed bookings, deduped with browser pixel via event_id.
     if (calRes.ok && data && data.status === 'success') {
       const booking = data.data || {};
       await fireMetaSchedule(req, {
@@ -118,11 +173,12 @@ module.exports = async function handler(req, res) {
         phone,
         name,
         eventId: booking.uid || booking.id
-      });
+      }).catch(error => console.error('Meta CAPI Schedule error:', error.message));
     }
 
     return res.status(calRes.status).json(data);
-  } catch (err) {
-    return res.status(502).json({ error: 'Booking request failed', detail: err.message });
+  } catch (error) {
+    console.error('Booking request failed:', error.message);
+    return res.status(502).json({ error: 'Booking request failed' });
   }
 };

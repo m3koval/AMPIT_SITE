@@ -8,10 +8,11 @@
 //
 // To see raw counts: GET https://www.ampitsolutions.com/api/poll
 
+const { parseJsonBody, rateLimit, setNoStore, setSameOriginCors } = require('../lib/http-security');
+
 module.exports = async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  setNoStore(res);
+  setSameOriginCors(req, res, 'GET, POST, OPTIONS');
   if (req.method === 'OPTIONS') return res.status(204).end();
 
   const baseUrl = process.env.UPSTASH_REDIS_REST_URL;
@@ -44,7 +45,21 @@ module.exports = async function handler(req, res) {
     }
 
     if (req.method === 'POST') {
-      const { choice } = req.body;
+      if (!String(req.headers['content-type'] || '').toLowerCase().startsWith('application/json')) {
+        return res.status(415).json({ error: 'Content-Type must be application/json' });
+      }
+      const throttle = await rateLimit(req, 'poll-vote', 5, 3600);
+      if (!throttle.allowed) {
+        res.setHeader('Retry-After', String(throttle.retryAfter));
+        return res.status(429).json({ error: 'Vote limit reached. Please try again later.' });
+      }
+      let body;
+      try {
+        body = parseJsonBody(req);
+      } catch (error) {
+        return res.status(400).json({ error: 'Invalid JSON body' });
+      }
+      const { choice } = body;
       if (choice !== 'human' && choice !== 'ai') {
         return res.status(400).json({ error: 'Invalid choice. Must be "human" or "ai".' });
       }
@@ -61,10 +76,11 @@ module.exports = async function handler(req, res) {
       });
     }
 
+    res.setHeader('Allow', 'GET, POST');
     return res.status(405).json({ error: 'Method not allowed' });
 
   } catch (err) {
     console.error('[poll]', err.message);
-    return res.status(502).json({ error: 'Poll unavailable', detail: err.message });
+    return res.status(502).json({ error: 'Poll unavailable' });
   }
 };
