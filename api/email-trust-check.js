@@ -60,14 +60,20 @@ function recommendations(results) {
 
 async function submitLead(payload) {
   try {
-    await fetch(SHEETS_URL, {
+    const response = await fetch(SHEETS_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
       signal: AbortSignal.timeout(5000)
     });
+    const data = await response.json().catch(() => null);
+    if (!response.ok || data?.success !== true) {
+      throw new Error(data?.error || `lead sheet returned ${response.status}`);
+    }
+    return true;
   } catch (error) {
-    // Do not fail the scan because lead capture had an issue.
+    console.error('[email-trust-check] Lead capture failed:', error.message);
+    return false;
   }
 }
 
@@ -128,15 +134,17 @@ module.exports = async function handler(req, res) {
   results.score = score(results);
   results.recommendations = recommendations(results);
 
-  await submitLead({
-    origin: 'email-trust-check',
+  const leadRecorded = await submitLead({
+    origin: 'https://www.ampitsolutions.com',
     path: 'email-trust-check',
+    name: 'Email Trust Check',
     domain,
     email,
-    company,
+    company: company || domain,
     phone,
     booked: 'no',
     concern: 'SPF DKIM DMARC scan request',
+    frustration: 'SPF DKIM DMARC scan request',
     platform: 'Public DNS check',
     scan_score: results.score,
     scan_spf: results.spf.present ? 'present' : 'missing',
@@ -144,5 +152,6 @@ module.exports = async function handler(req, res) {
     scan_dkim: results.dkim.found.length ? results.dkim.found.map(x => x.selector).join(',') : 'not found common selectors'
   });
 
+  results.leadRecorded = leadRecorded;
   return res.status(200).json(results);
 };

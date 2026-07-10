@@ -127,6 +127,17 @@ test('booking confirmation does not render user fields through innerHTML', () =>
   assert.doesNotMatch(html, /ccalSlots['"]\)\.innerHTML/);
 });
 
+test('email trust lead payload matches the AMP IT Form Submissions contract', () => {
+  const api = fs.readFileSync(path.join(__dirname, '..', 'api', 'email-trust-check.js'), 'utf8');
+  const html = fs.readFileSync(path.join(__dirname, '..', 'email-trust-check.html'), 'utf8');
+  assert.match(api, /origin: 'https:\/\/www\.ampitsolutions\.com'/);
+  assert.match(api, /name: 'Email Trust Check'/);
+  assert.match(api, /company: company \|\| domain/);
+  assert.match(api, /data\?\.success !== true/);
+  assert.match(api, /results\.leadRecorded = leadRecorded/);
+  assert.match(html, /submitted domain, email, and optional phone are saved by AMP IT/);
+});
+
 test('Vercel headers include a narrow CSP and omit obsolete X-XSS-Protection', () => {
   const config = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'vercel.json'), 'utf8'));
   const headers = Object.fromEntries(config.headers[0].headers.map(item => [item.key, item.value]));
