@@ -8,7 +8,7 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<meta name="description" content="Managed IT, cybersecurity, Microsoft 365 support, and AI governance for Charlotte law firms, financial firms, and growing businesses. Published per-user pricing and one predictable monthly invoice.">
+<meta name="description" content="Managed IT, cybersecurity, and AI governance for Charlotte law firms, CPA practices, and growing businesses. Published per-user pricing.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.ampitsolutions.com/">
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
@@ -706,6 +706,37 @@
     color: var(--text-muted); letter-spacing: 0.06em;
   }
 
+  /* SOCIAL PROOF STRIP — real Google reviews only; no review schema (Google policy) */
+  .proof-strip {
+    position: relative; z-index: 1;
+    border-bottom: 1px solid var(--border);
+    padding: 26px 0; background: var(--bg-card);
+  }
+  .proof-inner { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+  .proof-rating { display: flex; flex-direction: column; gap: 3px; flex-shrink: 0; }
+  .proof-stars { color: var(--green); font-size: 0.95rem; letter-spacing: 0.16em; line-height: 1; }
+  .proof-rating-text {
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.06em;
+  }
+  .proof-rating-text strong { color: var(--text); font-weight: 700; }
+  .proof-quote { flex: 1; min-width: 240px; border-left: 2px solid var(--green); padding-left: 18px; margin: 0; }
+  .proof-quote p { font-size: 0.95rem; color: var(--text); line-height: 1.6; font-style: italic; margin: 0 0 5px; }
+  .proof-quote cite {
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.66rem; color: var(--text-dim); font-style: normal; letter-spacing: 0.06em;
+  }
+  .proof-link {
+    font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.74rem; color: var(--text-muted); text-decoration: none;
+    letter-spacing: 0.05em; white-space: nowrap; flex-shrink: 0; transition: color 0.2s;
+  }
+  .proof-link:hover { color: var(--green); }
+  @media (max-width: 900px) {
+    .proof-inner { flex-direction: column; align-items: flex-start; gap: 18px; }
+    .proof-link { white-space: normal; }
+  }
+
   @media (max-width: 900px) {
     .trust-bar-inner { padding: 0 20px; gap: 24px; }
     .trust-divider { display: none; }
@@ -1060,7 +1091,8 @@
     <li><a href="/about/">About</a></li>
     <li><a href="/blog/">Blog</a></li>
   </ul>
-  <a href="/assessment" class="nav-cta">Get Started</a>
+  <a href="tel:+19803772733" class="nav-phone" aria-label="Call AMP IT at (980) 377-2733">(980) 377-2733</a>
+  <a href="/assessment" class="nav-cta">Free Assessment</a>
   <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -1073,6 +1105,7 @@
     <li><a href="/cybersecurity/">Cybersecurity</a></li><li><a href="/ai-governance/">AI Governance</a></li>
     <li><a href="/about/">About</a></li>
     <li><a href="/blog/">Blog</a></li>
+    <li><a href="tel:+19803772733">Call (980) 377-2733</a></li>
   </ul>
 </div>
 
@@ -1153,6 +1186,22 @@
     </div>
   </div>
 </div>
+
+<!-- SOCIAL PROOF — real Google reviews only. Never add fabricated testimonials
+     or AggregateRating schema (Google disallows self-serving review markup). -->
+<section class="proof-strip" aria-label="Client reviews">
+  <div class="container proof-inner">
+    <div class="proof-rating">
+      <span class="proof-stars" aria-hidden="true">★★★★★</span>
+      <span class="proof-rating-text"><strong>5.0</strong> on Google · 3 reviews</span>
+    </div>
+    <blockquote class="proof-quote">
+      <p>&ldquo;Most important was their quick response and follow-up.&rdquo;</p>
+      <cite>Google review · Charlotte, NC</cite>
+    </blockquote>
+    <a class="proof-link" href="https://share.google/zif9o1B9gbvJqxR4V" target="_blank" rel="noopener">Read our Google reviews &rarr;</a>
+  </div>
+</section>
 
 <section class="positioning">
   <div class="container">
@@ -1473,8 +1522,21 @@
     <li><a href="/terms">Terms</a></li>
     <li><a href="https://www.linkedin.com/company/ampitsolutions" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="https://clutch.co/profile/amp-it" target="_blank" rel="noopener">Clutch</a></li><li><a href="https://share.google/zif9o1B9gbvJqxR4V" target="_blank" rel="noopener">Reviews</a></li>
   </ul>
+  <address class="footer-nap">
+    <a href="tel:+19803772733">(980) 377-2733</a>
+    <a href="mailto:hello@ampitsolutions.com">hello@ampitsolutions.com</a>
+    <span>919 Berryhill Rd, Suite 100A, Charlotte, NC 28208</span>
+    <span>Mon–Fri, 8am–6pm ET · Automated monitoring 24/7</span>
+    <span>Serving Charlotte metro &amp; within ~50 miles</span>
+  </address>
   <span class="footer-meta">© 2026 AMP IT LLC. All rights reserved.</span>
 </footer>
+
+<!-- STICKY MOBILE CTA — shown only ≤900px -->
+<div class="sticky-cta">
+  <a href="tel:+19803772733" class="sticky-cta-call">Call</a>
+  <a href="/assessment" class="sticky-cta-book">Book Free Assessment</a>
+</div>
 
 <script>
   // Hero canvas particles — deferred until idle

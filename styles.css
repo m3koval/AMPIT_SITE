@@ -149,6 +149,18 @@ nav {
 
 .nav-cta:hover { background: #10ff72; transform: translateY(-1px); }
 
+/* Tap-to-call in nav. No auto margin — nav already uses justify-content: space-between. */
+.nav-phone {
+  font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
+  font-size: 0.82rem; color: var(--text);
+  letter-spacing: 0.05em; text-decoration: none;
+  margin-right: 20px; white-space: nowrap;
+  transition: color 0.2s;
+}
+/* \260E = ☎ as a CSS escape so it renders regardless of stylesheet charset */
+.nav-phone::before { content: '\260E'; color: var(--green); margin-right: 6px; }
+.nav-phone:hover { color: var(--green); }
+
 .nav-back {
   font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.75rem;
   color: var(--text-muted); text-decoration: none;
@@ -227,11 +239,59 @@ nav {
   .why-num  { color: var(--green); opacity: 0.45; }
 }
 
+/* Nav has 6 links + CTA — retire the phone before things crowd */
+@media (max-width: 1180px) {
+  .nav-phone { display: none; }
+}
+
 @media (max-width: 900px) {
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
   .nav-cta { display: none; }
 }
+
+/* ─── STICKY MOBILE CTA BAR ─────────────────────────────────────────────── */
+
+.sticky-cta { display: none; }
+
+@media (max-width: 900px) {
+  .sticky-cta {
+    display: grid; grid-template-columns: 1fr 1.6fr;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 200;
+    background: var(--nav-bg);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border-strong);
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    gap: 10px;
+  }
+  .sticky-cta a {
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.82rem;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    text-decoration: none; padding: 13px 10px;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .sticky-cta-call { color: var(--text); border: 1px solid var(--border-strong); }
+  .sticky-cta-call:hover { color: var(--green); border-color: var(--green); }
+  .sticky-cta-book { background: var(--green); color: var(--btn-text); }
+  .sticky-cta-book:hover { background: #10ff72; }
+  /* reserve space only on pages that actually render the bar */
+  body:has(.sticky-cta) { padding-bottom: 76px; }
+}
+
+/* ─── FOOTER NAP (name / address / phone / hours) ───────────────────────── */
+
+.footer-nap {
+  display: flex; flex-wrap: wrap; gap: 6px 20px;
+  font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace;
+  font-size: 0.72rem; color: var(--text-dim);
+  letter-spacing: 0.05em; line-height: 1.7;
+  font-style: normal; /* <address> defaults to italic */
+  width: 100%; padding-top: 18px; margin-top: 4px;
+  border-top: 1px solid var(--border);
+}
+.footer-nap a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+.footer-nap a:hover { color: var(--green); }
 
 /* ─── SHARED LAYOUT ─────────────────────────────────────────────────────── */
 
