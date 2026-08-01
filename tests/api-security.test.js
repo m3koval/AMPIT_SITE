@@ -166,6 +166,41 @@ test('Google Ads Contact conversion is reserved for completed bookings', () => {
   }
 });
 
+test('every public HTML page loads one Google Ads base tag and privacy discloses its use', () => {
+  const root = path.join(__dirname, '..');
+  const tagId = 'AW-18009085486';
+  const htmlFiles = [];
+
+  function collectHtml(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (entry.name === '.git') continue;
+      const target = path.join(dir, entry.name);
+      if (entry.isDirectory()) collectHtml(target);
+      else if (entry.name.endsWith('.html')) htmlFiles.push(target);
+    }
+  }
+
+  collectHtml(root);
+  const missing = [];
+  const duplicated = [];
+
+  for (const file of htmlFiles) {
+    const html = fs.readFileSync(file, 'utf8');
+    const loaderCount = (html.match(new RegExp(`googletagmanager\\.com/gtag/js\\?id=${tagId}`, 'g')) || []).length;
+    const configCount = (html.match(new RegExp(`gtag\\(\\s*['\"]config['\"]\\s*,\\s*['\"]${tagId}['\"]\\s*\\)`, 'g')) || []).length;
+    const relative = path.relative(root, file);
+    if (loaderCount === 0 || configCount === 0) missing.push(relative);
+    if (loaderCount > 1 || configCount > 1) duplicated.push(relative);
+  }
+
+  assert.deepEqual(missing, [], `Missing Google Ads base tag: ${missing.join(', ')}`);
+  assert.deepEqual(duplicated, [], `Duplicated Google Ads base tag: ${duplicated.join(', ')}`);
+
+  const privacy = fs.readFileSync(path.join(root, 'privacy.html'), 'utf8');
+  assert.match(privacy, /Google Ads/);
+  assert.match(privacy, /conversion measurement and remarketing/i);
+});
+
 test('email trust lead payload matches the AMP IT Form Submissions contract', () => {
   const api = fs.readFileSync(path.join(__dirname, '..', 'api', 'email-trust-check.js'), 'utf8');
   const html = fs.readFileSync(path.join(__dirname, '..', 'email-trust-check.html'), 'utf8');
