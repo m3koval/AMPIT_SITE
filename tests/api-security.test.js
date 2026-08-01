@@ -127,6 +127,45 @@ test('booking confirmation does not render user fields through innerHTML', () =>
   assert.doesNotMatch(html, /ccalSlots['"]\)\.innerHTML/);
 });
 
+test('Google Ads Contact conversion is reserved for completed bookings', () => {
+  const root = path.join(__dirname, '..');
+  const label = 'AW-18009085486/ZIP4CKuYzJscEK6ss4tD';
+  const htmlFiles = [];
+
+  function collectHtml(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (entry.name === '.git') continue;
+      const target = path.join(dir, entry.name);
+      if (entry.isDirectory()) collectHtml(target);
+      else if (entry.name.endsWith('.html')) htmlFiles.push(target);
+    }
+  }
+
+  collectHtml(root);
+  const occurrences = htmlFiles.flatMap(file => {
+    const html = fs.readFileSync(file, 'utf8');
+    return Array.from(html.matchAll(new RegExp(label, 'g')), () => path.relative(root, file));
+  });
+
+  assert.deepEqual(occurrences, ['assessment.html']);
+
+  const assessment = fs.readFileSync(path.join(root, 'assessment.html'), 'utf8');
+  assert.match(
+    assessment,
+    /res\.ok && data\.status === 'success' && \(booking\.uid \|\| booking\.id\)[\s\S]{0,300}gtag\('event', 'conversion', \{ send_to: 'AW-18009085486\/ZIP4CKuYzJscEK6ss4tD' \}\)/
+  );
+
+  const phoneHandlers = htmlFiles.filter(file => {
+    const html = fs.readFileSync(file, 'utf8');
+    return /querySelectorAll\('a\[href\^="tel:"\]'\)/.test(html);
+  });
+  assert.ok(phoneHandlers.length > 0);
+  for (const file of phoneHandlers) {
+    const html = fs.readFileSync(file, 'utf8');
+    assert.match(html, /gtag\('event',\s*'clicked_phone'/);
+  }
+});
+
 test('email trust lead payload matches the AMP IT Form Submissions contract', () => {
   const api = fs.readFileSync(path.join(__dirname, '..', 'api', 'email-trust-check.js'), 'utf8');
   const html = fs.readFileSync(path.join(__dirname, '..', 'email-trust-check.html'), 'utf8');

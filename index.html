@@ -1716,13 +1716,13 @@
   })();
   // ─────────────────────────────────────────────────────────────────────────
 
-  // Google Ads conversion — phone call click (mobile only, where tap-to-call actually dials)
+  // Analytics only — phone clicks are not completed-lead conversions.
   var isMobile = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent);
   if (isMobile) {
     document.querySelectorAll('a[href^="tel:"]').forEach(function(el) {
       el.addEventListener('click', function() {
         if (typeof gtag === 'function') {
-          gtag('event', 'conversion', { send_to: 'AW-18009085486/ZIP4CKuYzJscEK6ss4tD' });
+          gtag('event', 'clicked_phone', { page_path: window.location.pathname });
         }
       });
     });

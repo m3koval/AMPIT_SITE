@@ -384,7 +384,7 @@
     mobileMenu.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); }); });
   }
   var isMobile = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  if (isMobile) { document.querySelectorAll('a[href^="tel:"]').forEach(function(el) { el.addEventListener('click', function() { if (typeof gtag === 'function') { gtag('event','conversion',{send_to:'AW-18009085486/ZIP4CKuYzJscEK6ss4tD'}); } }); }); }
+  if (isMobile) { document.querySelectorAll('a[href^="tel:"]').forEach(function(el) { el.addEventListener('click', function() { if (typeof gtag === 'function') { gtag('event','clicked_phone',{page_path:window.location.pathname}); } }); }); }
 </script>
 </body>
 </html>
