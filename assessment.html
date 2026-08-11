@@ -102,6 +102,18 @@
   .path-meta { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.04em; }
   .path-card.sel .path-meta { color: var(--green); }
 
+  /* CALL NOW — instant path on step 1 */
+  .call-now-row { display: flex; align-items: center; gap: 14px; margin: -12px 0 28px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .call-now-label { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
+  .call-now-btn { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; background: transparent; border: 1px solid var(--green); color: var(--green); padding: 12px 20px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.04em; text-decoration: none; transition: background 0.15s, color 0.15s; }
+  .call-now-btn:hover { background: var(--green); color: var(--btn-text); }
+  @media (max-width: 560px) { .call-now-row { flex-direction: column; align-items: stretch; gap: 10px; } .call-now-btn { justify-content: center; } }
+
+  /* INLINE EMAIL CAPTURE — fast booking path */
+  .quick-fields { margin-bottom: 18px; }
+  .quick-fields .field { margin-bottom: 12px; }
+  .quick-note { font-size: 0.78rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 16px; }
+
   /* OPTION CARDS — steps 2–6 */
   .options { display: flex; flex-direction: column; gap: 8px; }
   .opt { display: flex; align-items: flex-start; gap: 14px; padding: 14px 20px; background: var(--bg); border: 1px solid var(--border); cursor: pointer; transition: border-color 0.15s, background 0.15s, color 0.15s; width: 100%; text-align: left; font-size: 0.95rem; color: var(--text-muted); font-family: 'Inter', sans-serif; line-height: 1.5; }
@@ -344,7 +356,7 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
       <li>Free — no fee, no obligation</li>
       <li>Charlotte-local team, available on-site</li>
     </ul>
-    <div class="step-tracker">Step <em id="stepNum">1</em> of 3</div>
+    <div class="step-tracker">Step <em id="stepNum">1</em> of <em id="stepTotal">3</em></div>
   </div>
 
   <div class="right-panel">
@@ -368,6 +380,10 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
             <div class="path-body">We come to your office and walk through your full environment — devices, network, security posture, and backups.</div>
             <div class="path-meta">60 min · In-person · Charlotte area · 24hr notice appreciated</div>
           </button>
+        </div>
+        <div class="call-now-row">
+          <span class="call-now-label">Rather not wait? Talk to a Charlotte technician right now.</span>
+          <a href="tel:+19803772733" class="call-now-btn" id="callNowBtn">📞 Call (980) 377-2733</a>
         </div>
       </div>
 
@@ -412,9 +428,10 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
 
       <!-- STEP 3: PICK A TIME -->
       <div class="quiz-step" id="step-3">
-        <span class="step-tag">// 03 — pick a time</span>
+        <span class="step-tag" id="calStepTag">// 03 — pick a time</span>
         <p class="cal-heading" id="calHeading"></p>
         <p class="cal-sub" id="calSub"></p>
+        <button class="ccal-change-btn" id="calBackBtn" style="display:none">← Choose a different format</button>
 
         <!-- Custom calendar -->
         <div class="custom-cal" id="customCal">
@@ -432,6 +449,18 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
             <div class="ccal-confirm-box">
               <div class="ccal-confirm-when" id="ccalConfirmWhen"></div>
               <div class="ccal-confirm-who"  id="ccalConfirmWho"></div>
+            </div>
+            <div class="quick-fields" id="quickFields" style="display:none">
+              <div class="field">
+                <label for="q-email">Email <span class="req-tag">*</span></label>
+                <input type="email" id="q-email" placeholder="jane@smithlaw.com" autocomplete="email" maxlength="254" inputmode="email">
+                <span class="ferr" id="err-qemail">Please enter a valid email</span>
+              </div>
+              <div class="field">
+                <label for="q-name">Name <span class="opt-tag">(optional)</span></label>
+                <input type="text" id="q-name" placeholder="Jane Smith" autocomplete="name" maxlength="100">
+              </div>
+              <p class="quick-note">That's all we need — the calendar invite lands in your inbox immediately.</p>
             </div>
             <button class="btn-next" id="ccalConfirmBtn">Confirm Booking →</button>
             <button class="ccal-change-btn" id="ccalChangeBtn">← Change time</button>
@@ -545,11 +574,25 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
   let current = 1;
   let prepStep = 1;
 
+  // The 15-min intro call skips the contact step entirely (step 1 → calendar).
+  const isFastPath = () => ans.path === 'intro-call';
+
+  // cal-book requires a name of 2+ chars, but we only ask for an email on the
+  // fast path. Derive a presentable one from the address so the calendar invite
+  // isn't addressed to a raw handle. "jane.smith@x.com" → "Jane Smith".
+  function nameFromEmail(email) {
+    const local = String(email).split('@')[0].replace(/\+.*$/, '');
+    const parts = local.split(/[._\-]+/).filter(Boolean);
+    const pretty = parts.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ').trim();
+    return pretty.length >= 2 ? pretty.slice(0, 100) : 'Guest';
+  }
+
   // ── Left panel copy ───────────────────────────────────────────
   const lpCopy = {
     1: { h: "Let's get you <span>on the calendar.</span>",  s: "Pick a format — takes 60 seconds to book." },
     2: { h: "Almost <span>done.</span>",                    s: "We'll reach out personally — no auto-responders, no drip campaigns." },
-    3: { h: "Pick a <span>time.</span>",                    s: "Your info is already filled in — just choose a slot that works." }
+    3: { h: "Pick a <span>time.</span>",                    s: "Your info is already filled in — just choose a slot that works." },
+    fast3: { h: "Pick a <span>time.</span>",                s: "Choose a slot, drop your email, and the invite is on its way." }
   };
 
   // ── Google Places loader ──────────────────────────────────────
@@ -587,7 +630,9 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     document.getElementById('step-' + step).classList.add('active');
     current = step;
     updateProgress(step);
-    const d = lpCopy[step] || lpCopy[1];
+    // Step 3's default copy promises pre-filled details, which is only true when
+    // they came through step 2.
+    const d = (step === 3 && isFastPath()) ? lpCopy.fast3 : (lpCopy[step] || lpCopy[1]);
     document.getElementById('lpHeading').innerHTML = d.h;
     document.getElementById('lpSub').textContent   = d.s;
     document.querySelector('.right-panel').scrollTo({ top: 0, behavior: 'smooth' });
@@ -596,12 +641,21 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
         ans.path === 'onsite-audit' ? 'flex' : 'none';
       loadPlacesAPI();
     }
-    if (step === 3) buildCalStep();
+    if (step === 3) {
+      // Fast path never ran step 2, so ask for the email inline at confirm time.
+      document.getElementById('quickFields').style.display = isFastPath() ? 'block' : 'none';
+      buildCalStep();
+    }
   }
 
   function updateProgress(step) {
-    document.getElementById('progFill').style.width = ((step - 1) / (TOTAL - 1) * 100) + '%';
-    document.getElementById('stepNum').textContent = step;
+    // Fast path is a 2-step flow (choose format → pick a time).
+    const fast  = isFastPath();
+    const total = fast ? 2 : TOTAL;
+    const shown = (fast && step === 3) ? 2 : step;
+    document.getElementById('progFill').style.width = ((shown - 1) / (total - 1) * 100) + '%';
+    document.getElementById('stepNum').textContent   = shown;
+    document.getElementById('stepTotal').textContent = total;
   }
 
   // ── Step 1 — path cards (auto-advance) ───────────────────────
@@ -610,8 +664,12 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
       document.querySelectorAll('.path-card').forEach(c => c.classList.remove('sel'));
       this.classList.add('sel');
       ans.path = this.dataset.slug;
+      // Intro call is a low-commitment ask — skip the contact form and go
+      // straight to availability. We collect the email at the confirm step,
+      // once they've already picked a time and are invested.
+      const dest = isFastPath() ? 3 : 2;
       const stepAtClick = current;
-      setTimeout(() => { if (current === stepAtClick) goTo(2); }, 280);
+      setTimeout(() => { if (current === stepAtClick) goTo(dest); }, 280);
     });
   });
 
@@ -619,6 +677,36 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
   document.querySelectorAll('.btn-back:not(.invisible)').forEach(btn => {
     btn.addEventListener('click', () => { if (current > 1) goTo(current - 1); });
   });
+
+  // Fast path jumps 1 → 3, so its way back is to step 1, not step 2.
+  document.getElementById('calBackBtn').addEventListener('click', () => {
+    document.querySelectorAll('.path-card').forEach(c => c.classList.remove('sel'));
+    ans.path = null;
+    goTo(1);
+  });
+
+  // ── Live error clear — inline email ───────────────────────────
+  document.getElementById('q-email').addEventListener('input', function () {
+    this.classList.remove('err');
+    document.getElementById('err-qemail').classList.remove('show');
+  });
+
+  // Capture the lead as soon as we have a usable email — not at Confirm.
+  // Step 2 used to bank the contact before the calendar; on the fast path the
+  // only chance is here, so don't wait for a click they may never make.
+  function captureQuickLead() {
+    if (sheetsSubmitted || !isFastPath()) return;
+    const email = document.getElementById('q-email').value.trim();
+    if (!EMAIL_RX.test(email)) return;
+    ans.email = email;
+    ans.name  = document.getElementById('q-name').value.trim() || nameFromEmail(email);
+    submitToSheets({});
+    if (typeof fbq !== 'undefined') fbq('track', 'Lead', {}, { eventID: 'lead_' + email });
+  }
+  document.getElementById('q-email').addEventListener('blur', captureQuickLead);
+  document.getElementById('q-name').addEventListener('blur', captureQuickLead);
+  // Last resort: they typed an email and closed the tab without blurring.
+  window.addEventListener('pagehide', captureQuickLead);
 
   // ── Step 2 → 3 (validate contact, then calendar) ─────────────
   document.getElementById('next-2').addEventListener('click', function () {
@@ -765,8 +853,12 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     const isAudit = ans.path === 'onsite-audit';
     document.getElementById('ccalConfirmWhen').textContent = `${dateLabel} · ${disp}`;
     const confirmWho = document.getElementById('ccalConfirmWho');
+    // On the fast path we don't have their details yet — the fields sit directly
+    // below this box, so showing an empty "· ·" line would just look broken.
     confirmWho.replaceChildren(document.createTextNode(
-      `${ans.name} · ${ans.email}` + (ans.phone ? ` · ${ans.phone}` : '')
+      isFastPath() && !ans.email
+        ? '15-minute intro call · Google Meet or phone'
+        : `${ans.name} · ${ans.email}` + (ans.phone ? ` · ${ans.phone}` : '')
     ));
     if (isAudit && ans.address) {
       confirmWho.append(document.createElement('br'), document.createTextNode(ans.address));
@@ -777,6 +869,28 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
 
   async function ccalConfirm() {
     const btn = document.getElementById('ccalConfirmBtn');
+
+    // Fast path collects the email here rather than on a separate step.
+    if (isFastPath()) {
+      const emailEl = document.getElementById('q-email');
+      const errEl   = document.getElementById('err-qemail');
+      const email   = emailEl.value.trim();
+      if (!EMAIL_RX.test(email)) {
+        emailEl.classList.add('err'); errEl.classList.add('show'); emailEl.focus();
+        return;
+      }
+      emailEl.classList.remove('err'); errEl.classList.remove('show');
+      ans.email = email;
+      ans.name  = document.getElementById('q-name').value.trim() || nameFromEmail(email);
+
+      // Step 2 never ran, so capture the lead now — before the booking call,
+      // so a cal.com failure still leaves us with a contactable prospect.
+      if (!sheetsSubmitted) {
+        submitToSheets({});
+        if (typeof fbq !== 'undefined') fbq('track', 'Lead', {}, { eventID: 'lead_' + email });
+      }
+    }
+
     btn.disabled = true; btn.textContent = 'Booking...';
     document.getElementById('ccalError').style.display = 'none';
     try {
@@ -868,7 +982,12 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     const isAudit = ans.path === 'onsite-audit';
     const label   = isAudit ? 'On-Site IT Audit' : '15-Minute Intro Call';
     document.getElementById('calHeading').innerHTML = `You chose: <span>${label}</span>`;
-    document.getElementById('calSub').textContent   = 'Select a date and time below.';
+    document.getElementById('calSub').textContent   = isAudit
+      ? 'Select a date and time below.'
+      : 'Pick a time — then just your email and you’re booked.';
+    document.getElementById('calBackBtn').style.display = isFastPath() ? 'inline-block' : 'none';
+    document.getElementById('calStepTag').textContent   =
+      isFastPath() ? '// 02 — pick a time' : '// 03 — pick a time';
 
     ccal.year = new Date().getFullYear(); ccal.month = new Date().getMonth();
     ccal.selDate = null; ccal.selTime = null; ccal.slots = {};
