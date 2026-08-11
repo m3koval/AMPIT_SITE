@@ -587,6 +587,13 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     return pretty.length >= 2 ? pretty.slice(0, 100) : 'Guest';
   }
 
+  // Only honour a typed name if cal-book will accept it (2+ chars); a stray
+  // single character would otherwise 400 the booking with a generic error.
+  function resolveQuickName(email) {
+    const typed = document.getElementById('q-name').value.trim();
+    return typed.length >= 2 ? typed.slice(0, 100) : nameFromEmail(email);
+  }
+
   // ── Left panel copy ───────────────────────────────────────────
   const lpCopy = {
     1: { h: "Let's get you <span>on the calendar.</span>",  s: "Pick a format — takes 60 seconds to book." },
@@ -699,7 +706,7 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
     const email = document.getElementById('q-email').value.trim();
     if (!EMAIL_RX.test(email)) return;
     ans.email = email;
-    ans.name  = document.getElementById('q-name').value.trim() || nameFromEmail(email);
+    ans.name  = resolveQuickName(email);
     submitToSheets({});
     if (typeof fbq !== 'undefined') fbq('track', 'Lead', {}, { eventID: 'lead_' + email });
   }
@@ -881,7 +888,7 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
       }
       emailEl.classList.remove('err'); errEl.classList.remove('show');
       ans.email = email;
-      ans.name  = document.getElementById('q-name').value.trim() || nameFromEmail(email);
+      ans.name  = resolveQuickName(email);
 
       // Step 2 never ran, so capture the lead now — before the booking call,
       // so a cal.com failure still leaves us with a contactable prospect.
