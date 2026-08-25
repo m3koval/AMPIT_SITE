@@ -114,13 +114,27 @@
 
   /* PATH CARDS — step 1 */
   .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
-  .path-card { background: var(--bg); border: 1px solid var(--border); padding: 22px 18px; text-align: left; cursor: pointer; transition: border-color 0.15s, background 0.15s; width: 100%; }
-  .path-card:hover { border-color: var(--border-strong); }
+  .path-card { background: linear-gradient(145deg, rgba(19,23,21,0.96), rgba(10,12,10,0.98)); border: 1px solid var(--border); padding: 22px 18px; text-align: left; cursor: pointer; transition: border-color 0.18s, background 0.18s, transform 0.18s, box-shadow 0.18s; width: 100%; position: relative; overflow: hidden; }
+  .path-card::after { content: ''; position: absolute; inset: auto -45px -60px auto; width: 130px; height: 130px; border: 1px solid rgba(0,240,96,0.1); border-radius: 50%; pointer-events: none; }
+  .path-card:hover { border-color: var(--border-strong); transform: translateY(-2px); box-shadow: 0 14px 36px rgba(0,0,0,0.22); }
+  .path-card.featured { border-color: rgba(0,240,96,0.3); background: linear-gradient(145deg, rgba(0,240,96,0.08), rgba(10,12,10,0.98) 58%); }
   .path-card.sel { border-color: var(--green); background: rgba(0,240,96,0.03); }
+  .path-card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .path-icon { width: 42px; height: 42px; border: 1px solid rgba(0,240,96,0.3); background: rgba(0,240,96,0.07); color: var(--green); display: grid; place-items: center; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
+  .path-icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .path-badge { color: var(--green); background: rgba(0,240,96,0.07); border: 1px solid rgba(0,240,96,0.18); padding: 5px 8px; font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; }
   .path-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.08rem; color: var(--text); margin-bottom: 8px; line-height: 1.3; }
   .path-body { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px; }
   .path-meta { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.04em; }
   .path-card.sel .path-meta { color: var(--green); }
+
+  /* REAL TEAM TRUST CARD */
+  .team-proof { display: grid; grid-template-columns: 132px 1fr; align-items: stretch; margin-top: 26px; border: 1px solid var(--border); background: linear-gradient(135deg, rgba(19,23,21,0.96), rgba(0,240,96,0.035)); overflow: hidden; animation: fadeUp 0.6s ease both 0.48s; max-width: 460px; }
+  .team-proof img { width: 132px; height: 100%; min-height: 86px; object-fit: cover; object-position: center 68%; filter: grayscale(1) contrast(1.04); }
+  .team-proof-copy { padding: 13px 15px; display: flex; flex-direction: column; justify-content: center; }
+  .team-proof-label { font-family: ui-monospace, Menlo, 'Cascadia Mono', Consolas, monospace; color: var(--green); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px; }
+  .team-proof strong { font-family: 'Outfit', sans-serif; font-size: 0.86rem; line-height: 1.35; color: var(--text); }
+  .team-proof small { color: var(--text-dim); font-size: 0.7rem; line-height: 1.4; margin-top: 3px; }
 
   /* CALL NOW — instant path on step 1 */
   .call-now-row { display: flex; align-items: center; gap: 14px; margin: -12px 0 28px; padding-top: 20px; border-top: 1px solid var(--border); }
@@ -305,6 +319,8 @@
     .left-panel h1 { font-size: clamp(1.6rem, 4.5vw, 2.2rem); }
     .left-panel .sub { margin-bottom: 0; max-width: 100%; }
     .promise-list { display: none; }
+    .team-proof { margin-top: 20px; max-width: 440px; grid-template-columns: 108px 1fr; }
+    .team-proof img { width: 108px; min-height: 76px; }
     .step-tracker { display: none; }
     .right-panel { padding: 32px 32px 56px; }
     .quiz-card { max-width: 100%; }
@@ -321,6 +337,9 @@
   @media (max-width: 700px) {
     .path-grid { gap: 8px; }
     .path-card { padding: 14px 10px; }
+    .path-card-top { margin-bottom: 12px; }
+    .path-icon { width: 36px; height: 36px; }
+    .path-icon svg { width: 19px; height: 19px; }
     .path-title { font-size: 0.95rem; }
     .path-body { font-size: 0.84rem; line-height: 1.5; }
     .path-meta { font-size: 0.67rem; letter-spacing: 0.01em; }
@@ -407,6 +426,10 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
       <li>Human support Mon–Fri, 7am–6pm ET</li>
       <li>Published per-user pricing with no surprise add-ons</li>
     </ul>
+    <div class="team-proof">
+      <img src="/images/amp-it-founders-square.jpg" alt="AMP IT founders Nik Kotov and Mikhail Koval in their Charlotte office" width="1000" height="1000">
+      <div class="team-proof-copy"><span class="team-proof-label">Real people. Local accountability.</span><strong>Talk to AMP IT—not a national call center.</strong><small>Charlotte-based founders Nik and Mike.</small></div>
+    </div>
     <div class="step-tracker">Step <em id="stepNum">1</em> of <em id="stepTotal">3</em></div>
   </div>
 
@@ -421,12 +444,14 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
         <p class="step-q">Choose your free first step.</p>
         <p class="step-hint">No pressure. You will leave with a clearer next step.</p>
         <div class="path-grid">
-          <button class="path-card" data-slug="intro-call">
+          <button class="path-card featured" data-slug="intro-call">
+            <div class="path-card-top"><span class="path-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 6.5h14v9H9l-4 3v-12Z"/><path d="M9 10h6M9 13h4"/></svg></span><span class="path-badge">Fastest</span></div>
             <div class="path-title">15-Minute IT Checkup</div>
             <div class="path-body">Tell us what is slowing your team down. We will ask a few focused questions and help you identify the next practical step.</div>
             <div class="path-meta">15 min · Google Meet or phone · No preparation needed</div>
           </button>
           <button class="path-card" data-slug="onsite-audit">
+            <div class="path-card-top"><span class="path-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 20V8l6-4 6 4v12"/><path d="M9 11h1M14 11h1M9 15h1M14 15h1"/></svg></span><span class="path-badge">Most thorough</span></div>
             <div class="path-title">On-Site IT Assessment</div>
             <div class="path-body">We come to your office and walk through your environment, including devices, network, security posture, and backups.</div>
             <div class="path-meta">60 min · In-person · Charlotte area · 24hr notice appreciated</div>
