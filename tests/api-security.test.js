@@ -147,13 +147,16 @@ test('Google Ads Contact conversion is reserved for completed bookings', () => {
     return Array.from(html.matchAll(new RegExp(label, 'g')), () => path.relative(root, file));
   });
 
-  assert.deepEqual(occurrences, ['assessment.html']);
+  const bookingPages = ['assessment.html', 'managed-it-charlotte/index.html'];
+  assert.deepEqual(occurrences.sort(), bookingPages);
 
-  const assessment = fs.readFileSync(path.join(root, 'assessment.html'), 'utf8');
-  assert.match(
-    assessment,
-    /res\.ok && data\.status === 'success' && \(booking\.uid \|\| booking\.id\)[\s\S]{0,300}gtag\('event', 'conversion', \{ send_to: 'AW-18009085486\/ZIP4CKuYzJscEK6ss4tD' \}\)/
-  );
+  for (const bookingPage of bookingPages) {
+    const html = fs.readFileSync(path.join(root, bookingPage), 'utf8');
+    assert.match(
+      html,
+      /res\.ok && data\.status === 'success' && \(booking\.uid \|\| booking\.id\)[\s\S]{0,300}gtag\('event', 'conversion', \{ send_to: 'AW-18009085486\/ZIP4CKuYzJscEK6ss4tD' \}\)/
+    );
+  }
 
   const phoneHandlers = htmlFiles.filter(file => {
     const html = fs.readFileSync(file, 'utf8');
