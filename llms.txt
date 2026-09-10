@@ -1,8 +1,8 @@
 # AMP IT LLC
 
-> Managed IT for Charlotte-area professional firms. Published per-user pricing, one predictable invoice, one call, IT that just runs.
+> Technology that moves your business forward. Charlotte-based managed IT, cybersecurity, and AI governance from a partner invested in your success.
 
-AMP IT LLC is a Charlotte, NC-based managed service provider (MSP) offering all-inclusive per-user IT support, cybersecurity, and AI governance to law firms, CPA practices, financial advisory firms, and other professional service businesses in the greater Charlotte area. Founded 2026. Human support is available Monday–Friday, 7 AM–6 PM ET; automated monitoring runs 24/7 for covered systems.
+AMP IT LLC is a Charlotte, NC-based managed service provider (MSP) offering all-inclusive per-user IT support, cybersecurity, and AI governance to law firms, CPA practices, financial advisory firms, and other professional service businesses locally and remotely across the United States. Founded 2026. Human support is available Monday–Friday, 7 AM–6 PM ET; automated monitoring runs 24/7 for covered systems.
 
 ## What We Do
 
@@ -18,14 +18,14 @@ AMP IT LLC is a Charlotte, NC-based managed service provider (MSP) offering all-
 
 ## Who We Serve
 
-Professional firms in the Charlotte, NC metropolitan area, including:
+Professional firms in the Charlotte, NC metropolitan area and businesses supported remotely across the United States, including:
 - Law firms and legal practices (ABA technology ethics compliance)
 - CPA and accounting firms
 - Financial advisors and registered investment advisors (RIAs) — FINRA compliance
 - Healthcare-adjacent professional offices — HIPAA compliance
 - General small and mid-size businesses (typically 5–75 employees)
 
-AMP IT is a local, on-site-capable provider — not a national remote-only MSP.
+AMP IT is Charlotte-based and on-site-capable locally, with remote support available across the United States. It is not an anonymous national call center.
 
 ## Pricing
 
@@ -87,7 +87,7 @@ Per-user monthly pricing, all-inclusive — no per-ticket charges, no add-ons fo
 
 ## Service Area
 
-Greater Charlotte, NC metro — including Uptown, SouthPark, Ballantyne, Concord, Gastonia, and surrounding communities within ~50 miles of Charlotte.
+On-site service throughout the greater Charlotte, NC metro — including Uptown, SouthPark, Ballantyne, Concord, Gastonia, and surrounding communities within ~50 miles of Charlotte — plus remote support across the United States.
 
 ## Credentials & Partnerships
 
