@@ -12,8 +12,18 @@ This file is the source of truth for pricing, monitoring, support-hours, SLA, an
 | Phone | (980) 377-2733 |
 | Email | hello@ampitsolutions.com |
 | Address | 919 Berryhill Rd, Suite 100A, Charlotte, NC 28208 |
-| Human support hours | Monday–Friday, 8 AM–6 PM ET |
+| Human support hours | Monday–Friday, 7 AM–6 PM ET |
 | Monitoring | Automated monitoring runs 24/7 for covered systems |
+
+## Partner status
+
+Confirmed by Mikhail 2026-09-23: AMP IT is enrolled in the Microsoft and Google partner programs and is an official reseller for both.
+
+Approved:
+
+- Microsoft Partner
+- Google Partner
+- official Microsoft and Google reseller
 
 ## Pricing language
 
@@ -36,19 +46,19 @@ Avoid unless specifically referring to a fixed Starter Track fee:
 
 | Plan | Price | Fit | Agreement | Monitoring | Human support | Emergency/SLA language |
 |---|---:|---|---|---|---|---|
-| Essential | $319/user/month, 5-user minimum | Small firms that need managed IT, baseline security, and dependable support | 12-month standard managed IT agreement | 24/7 automated remote monitoring for covered systems | Mon–Fri 8 AM–6 PM ET | Standard support queue; no 1-hour emergency SLA claim |
-| Better | $445/user/month, ideal 10–40 users | Firms that need stronger security, documentation, and planning cadence | 12-month standard managed IT agreement | 24/7 automated remote monitoring for covered systems | Mon–Fri 8 AM–6 PM ET | Priority support language allowed if included in plan copy; no 1-hour emergency SLA claim unless contract says it |
-| Best | $499/user/month, ideal 15–50 users | Firms that need highest-touch support, strategic planning, and faster emergency response | 12-month standard managed IT agreement | 24/7 automated remote monitoring for covered systems | Mon–Fri 8 AM–6 PM ET | 1-hour emergency response SLA for covered urgent issues |
+| Essential | $319/user/month, 5-user minimum | Small firms that need managed IT, baseline security, and dependable support | 12-month standard managed IT agreement | 24/7 automated remote monitoring for covered systems | Mon–Fri 7 AM–6 PM ET | Standard support queue; no 1-hour emergency SLA claim |
+| Better | $445/user/month, ideal 10–40 users | Firms that need stronger security, documentation, and planning cadence | 12-month standard managed IT agreement | 24/7 automated remote monitoring for covered systems | Mon–Fri 7 AM–6 PM ET | Priority support language allowed if included in plan copy; no 1-hour emergency SLA claim unless contract says it |
+| Best | $499/user/month, ideal 15–50 users | Firms that need highest-touch support, strategic planning, and faster emergency response | 12-month standard managed IT agreement | 24/7 automated remote monitoring for covered systems | Mon–Fri 7 AM–6 PM ET | 1-hour emergency response SLA for covered urgent issues |
 
 ## Canonical support/monitoring copy
 
 Use this short version anywhere space is tight:
 
-> AMP IT monitors covered systems around the clock. Human support is available Monday–Friday, 8 AM–6 PM ET, with emergency response options on qualifying plans.
+> AMP IT monitors covered systems around the clock. Human support is available Monday–Friday, 7 AM–6 PM ET, with emergency response options on qualifying plans.
 
 Use this longer version for pricing/FAQ/llms.txt:
 
-> AMP IT provides 24/7 automated monitoring for covered systems. Human helpdesk and account support are available Monday–Friday, 8 AM–6 PM ET. Emergency response options and the 1-hour emergency response SLA apply to qualifying plans and covered urgent issues, with the 1-hour SLA reserved for Best.
+> AMP IT provides 24/7 automated monitoring for covered systems. Human helpdesk and account support are available Monday–Friday, 7 AM–6 PM ET. Emergency response options and the 1-hour emergency response SLA apply to qualifying plans and covered urgent issues, with the 1-hour SLA reserved for Best.
 
 ## Salary anchor math
 

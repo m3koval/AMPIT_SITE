@@ -1,0 +1,8 @@
+# Internal files — keep them out of the public deployment.
+# docs/claims-matrix.md was being served at /docs/claims-matrix.md, where AI
+# crawlers could read (and quote) our internal "claims to avoid" list.
+#
+# Do NOT add lib/ here: api/*.js require('../lib/http-security') at runtime.
+docs/
+tests/
+scripts/
