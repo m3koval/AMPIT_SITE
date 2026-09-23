@@ -1,5 +1,8 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/blog/flat-rate-managed-it-vs-break-fix", "destination": "/blog/predictable-managed-it-vs-break-fix", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",
