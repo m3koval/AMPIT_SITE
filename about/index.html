@@ -27,7 +27,11 @@
   "name": "About AMP IT",
   "url": "https://www.ampitsolutions.com/about/",
   "description": "AMP IT is a Charlotte-based managed IT, cybersecurity, and AI governance provider serving businesses locally and remotely across the United States.",
-  "isPartOf": { "@type": "WebSite", "name": "AMP IT", "url": "https://www.ampitsolutions.com" },
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "AMP IT",
+    "url": "https://www.ampitsolutions.com"
+  },
   "about": {
     "@type": "LocalBusiness",
     "name": "AMP IT",
@@ -44,7 +48,18 @@
       "addressCountry": "US"
     },
     "foundingDate": "2026",
-    "areaServed": ["Charlotte Metro", "United States"]
+    "areaServed": [
+      "Charlotte Metro",
+      "United States"
+    ],
+    "@id": "https://www.ampitsolutions.com/#business",
+    "sameAs": [
+      "https://www.linkedin.com/company/ampitsolutions",
+      "https://clutch.co/profile/amp-it",
+      "https://share.google/zif9o1B9gbvJqxR4V",
+      "https://www.instagram.com/ampit.clt/",
+      "https://www.facebook.com/people/Amp-It/61565270488911/"
+    ]
   }
 }
 </script>
@@ -61,6 +76,10 @@
   .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; align-items: start; }
   .about-section h2 { font-size: clamp(2rem, 4vw, 3.8rem); margin: 0; }
   .about-copy p { color: var(--text-muted); line-height: 1.8; font-size: 1.05rem; margin: 0 0 20px; }
+  #work-and-references { scroll-margin-top: 100px; }
+  #work-and-references a { color: var(--green); text-decoration: underline; text-underline-offset: .2em; }
+  #work-and-references a:hover { color: var(--text); }
+  #work-and-references a:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
   .beliefs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; margin-top: 34px; }
   .belief { border: 1px solid var(--border); background: var(--surface); padding: 22px; color: var(--text-muted); line-height: 1.55; }
   .about-cta { margin: 0 max(40px, calc((100% - 1180px) / 2)) 80px; padding: 44px; border: 1px solid rgba(0,240,96,.28); background: linear-gradient(135deg, rgba(0,240,96,.1), rgba(0,0,0,.02)); display: flex; gap: 28px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
@@ -104,10 +123,11 @@
   <section class="about-section"><div class="about-grid"><h2>Why AMP IT exists</h2><div class="about-copy"><p>Modern businesses rely on technology for almost everything: email, phones, files, client communication, billing, AI tools, security, and daily operations. But too many companies are forced to choose between slow enterprise IT, reactive break-fix support, or risky DIY systems.</p><p>AMP IT exists to give businesses a better option: practical managed IT, clear cybersecurity, responsible AI governance, and support from people who take the time to understand the business behind the technology.</p></div></div></section>
   <section class="about-section"><div class="about-grid"><h2>Moving fast should not mean losing control.</h2><div class="about-copy"><p>AI is already inside most businesses, whether leadership has approved it or not. Employees use tools to summarize documents, draft emails, analyze data, and speed up daily work. That can be powerful — but without policies, access controls, and documentation, it can also expose client information, regulated data, and internal workflows.</p><p>AMP IT helps businesses adopt AI with confidence by building the foundation first: secure accounts, documented systems, clear policies, responsible workflows, and practical guardrails for Shadow AI and Shadow IT.</p></div></div></section>
   <section class="about-section"><h2>What we believe</h2><div class="beliefs"><div class="belief">Technology should make the business calmer, not more chaotic.</div><div class="belief">Cybersecurity should be practical, documented, and understandable.</div><div class="belief">AI adoption needs guardrails, not fearmongering.</div><div class="belief">Business owners deserve clear pricing and plain-English answers.</div><div class="belief">A technology partner should be invested in the business outcome, not just closing the next ticket.</div></div></section>
+  <section class="about-section" id="work-and-references"><div class="about-grid"><h2>Our work. In their words.</h2><div class="about-copy"><p>Read a verified client review of our Microsoft services migration work on Clutch, or find AMP IT among Catch My Drift’s technology partners.</p><p><a href="https://clutch.co/profile/amp-it#reviews" target="_blank" rel="noopener">Read the Microsoft migration review on Clutch →</a></p><p><a href="https://cmdrift.com/partners.html" target="_blank" rel="noopener">See AMP IT on Catch My Drift’s partner page →</a></p></div></div></section>
   <section class="about-section"><div class="about-grid"><h2>Part of AMP Dynamic</h2><div class="about-copy"><p>AMP IT is part of AMP Dynamic, a Charlotte-based company focused on building and operating practical technology platforms and services for growing businesses.</p></div></div></section>
   <section class="about-cta"><div><h2>Want a clearer read on your IT, cybersecurity, and AI risk?</h2><p>Book a free assessment. We will help you see what is working, what is exposed, and what to fix first.</p></div><a href="/assessment" class="btn-primary">Book a Free Assessment</a></section>
 </main>
-<footer><div class="footer-brand"><svg width="30" height="28"><use href="#amp-logo"/></svg><div><span class="footer-wordmark"><span class="g">AMP</span> IT LLC</span><span class="footer-meta">Part of AMP Dynamic · Charlotte, NC</span></div></div><ul class="footer-links"><li><a href="/pricing/managed-it/">Pricing</a></li><li><a href="/industries/law-firms/">Industries</a></li><li><a href="/cybersecurity/">Cybersecurity</a></li><li><a href="/ai-governance/">AI Governance</a></li><li><a href="/about/">About</a></li><li><a href="/blog/">Blog</a></li><li><a href="/assessment">Assessment</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li><li><a href="https://www.linkedin.com/company/ampitsolutions" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="https://clutch.co/profile/amp-it" target="_blank" rel="noopener">Clutch Reviews</a></li></ul></footer>
+<footer><div class="footer-brand"><svg width="30" height="28"><use href="#amp-logo"/></svg><div><span class="footer-wordmark"><span class="g">AMP</span> IT LLC</span><span class="footer-meta">Part of AMP Dynamic · Charlotte, NC</span></div></div><ul class="footer-links"><li><a href="/pricing/managed-it/">Pricing</a></li><li><a href="/industries/law-firms/">Industries</a></li><li><a href="/cybersecurity/">Cybersecurity</a></li><li><a href="/ai-governance/">AI Governance</a></li><li><a href="/about/">About</a></li><li><a href="/blog/">Blog</a></li><li><a href="/assessment">Assessment</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li><li><a href="https://www.linkedin.com/company/ampitsolutions" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="https://clutch.co/profile/amp-it" target="_blank" rel="noopener">Clutch Reviews</a></li><li><a href="https://www.instagram.com/ampit.clt/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/people/Amp-It/61565270488911/" target="_blank" rel="noopener">Facebook</a></li></ul></footer>
 
 <script>
   const hamburger = document.getElementById('navHamburger');

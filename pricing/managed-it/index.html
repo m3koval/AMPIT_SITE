@@ -28,19 +28,98 @@
   "description": "All-inclusive per-user managed IT services for Charlotte NC businesses. Includes remote monitoring, cybersecurity, email security, backup, helpdesk, and more.",
   "provider": {
     "@type": "LocalBusiness",
-    "name": "AMP IT", "legalName": "AMP IT LLC",
+    "name": "AMP IT",
+    "legalName": "AMP IT LLC",
     "url": "https://www.ampitsolutions.com",
     "telephone": "+19803772733",
-    "address": { "@type": "PostalAddress", "addressLocality": "Charlotte", "addressRegion": "NC", "addressCountry": "US" }
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Charlotte",
+      "addressRegion": "NC",
+      "addressCountry": "US"
+    }
   },
-  "areaServed": { "@type": "City", "name": "Charlotte", "addressRegion": "NC" },
+  "areaServed": {
+    "@type": "City",
+    "name": "Charlotte",
+    "addressRegion": "NC"
+  },
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Managed IT Plans",
     "itemListElement": [
-      { "@type": "Offer", "name": "Essential", "price": "319", "priceCurrency": "USD", "description": "Managed IT foundation — monitoring, security, helpdesk, backup" },
-      { "@type": "Offer", "name": "Better", "price": "445", "priceCurrency": "USD", "description": "Essential plus backup verification, dark web monitoring, QBRs" },
-      { "@type": "Offer", "name": "Best", "price": "499", "priceCurrency": "USD", "description": "Full-stack managed IT with vCIO, SLA guarantees, compliance planning" }
+      {
+        "@type": "Offer",
+        "name": "Essential",
+        "url": "https://www.ampitsolutions.com/pricing/managed-it/",
+        "price": "319",
+        "priceCurrency": "USD",
+        "description": "Remote monitoring & management — OS & software patching; 24/7 automated threat detection with managed response; Advanced email security & phishing protection; Automated backup — endpoints & cloud data; Helpdesk — Tier 1/2 remote support; User onboarding & offboarding; MFA enforcement + mobile device support; Monthly health report; Google Workspace & Microsoft 365 administration. Human support is available Monday–Friday, 7 AM–6 PM ET. Automated monitoring runs 24/7 for covered systems. Emergency coverage and response commitments depend on the selected plan and covered issue.",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "319",
+          "priceCurrency": "USD",
+          "billingDuration": "P1M",
+          "unitText": "user"
+        },
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Essential Managed IT",
+          "serviceType": "Managed IT Services",
+          "areaServed": [
+            "Charlotte, NC",
+            "United States"
+          ]
+        }
+      },
+      {
+        "@type": "Offer",
+        "name": "Better",
+        "url": "https://www.ampitsolutions.com/pricing/managed-it/",
+        "price": "445",
+        "priceCurrency": "USD",
+        "description": "Everything in Essential, plus:; Backup verification & restore testing (monthly); Web & DNS content filtering; Dark web monitoring (domain + exec emails); Proactive maintenance windows; Quarterly Business Reviews. Human support is available Monday–Friday, 7 AM–6 PM ET. Automated monitoring runs 24/7 for covered systems. Emergency coverage and response commitments depend on the selected plan and covered issue.",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "445",
+          "priceCurrency": "USD",
+          "billingDuration": "P1M",
+          "unitText": "user"
+        },
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Better Managed IT",
+          "serviceType": "Managed IT Services",
+          "areaServed": [
+            "Charlotte, NC",
+            "United States"
+          ]
+        }
+      },
+      {
+        "@type": "Offer",
+        "name": "Best",
+        "url": "https://www.ampitsolutions.com/pricing/managed-it/",
+        "price": "499",
+        "priceCurrency": "USD",
+        "description": "Everything in Better, plus:; Virtual CIO — strategic IT planning & roadmapping; P1: 1-hr response / P2: 4-hr resolution SLA; Dedicated account manager; Vendor management; Disaster recovery planning + annual tabletop; Cybersecurity risk assessments; Compliance planning; After-hours emergency coverage included. Human support is available Monday–Friday, 7 AM–6 PM ET. Automated monitoring runs 24/7 for covered systems. Emergency coverage and response commitments depend on the selected plan and covered issue.",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "499",
+          "priceCurrency": "USD",
+          "billingDuration": "P1M",
+          "unitText": "user"
+        },
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Best Managed IT",
+          "serviceType": "Managed IT Services",
+          "areaServed": [
+            "Charlotte, NC",
+            "United States"
+          ]
+        }
+      }
     ]
   }
 }
@@ -258,7 +337,8 @@
     font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.8rem;
     letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--green); text-decoration: none;
-    white-space: nowrap; display: flex; align-items: center; gap: 8px;
+    white-space: normal; min-width: 0; max-width: 100%;
+    display: flex; align-items: center; gap: 8px;
     transition: gap 0.2s;
   }
   .starter-callout a.link-arrow:hover { gap: 12px; }
@@ -694,7 +774,7 @@
     <li><a href="/privacy">Privacy</a></li>
     <li><a href="/terms">Terms</a></li>
     <li><a href="https://www.linkedin.com/company/ampitsolutions" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="https://clutch.co/profile/amp-it" target="_blank" rel="noopener">Clutch</a></li><li><a href="https://share.google/zif9o1B9gbvJqxR4V" target="_blank" rel="noopener">Reviews</a></li>
-  </ul>
+  <li><a href="https://www.instagram.com/ampit.clt/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/people/Amp-It/61565270488911/" target="_blank" rel="noopener">Facebook</a></li></ul>
   <span class="footer-meta">© 2026 AMP IT LLC. All rights reserved.</span>
 </footer>
 

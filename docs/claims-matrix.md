@@ -42,6 +42,20 @@ Avoid unless specifically referring to a fixed Starter Track fee:
 - flat monthly rate
 - one price for everything
 
+## Search consistency and official profiles
+
+The visible cards on `/pricing/managed-it/` are the canonical plan-feature lists. Do not independently maintain a different tier breakdown in homepage JSON-LD or `llms.txt`.
+
+After a plan edit, run `python scripts/sync-search-plans.py`, then `python scripts/sync-search-plans.py --check` and `python tests/search-consistency.test.py` (Python dependency: `beautifulsoup4==4.13.4`). GitHub Actions also runs these checks and the existing API tests.
+
+Official social profile URLs:
+
+- Instagram: https://www.instagram.com/ampit.clt/ — supplied by Mikhail.
+- Facebook: https://www.facebook.com/people/Amp-It/61565270488911/ — public page identifies AMP IT LLC and matches the website, email, phone, and owner-supplied screenshot.
+- LinkedIn: https://www.linkedin.com/company/ampitsolutions
+
+Public references are linked, not represented as new case studies or endorsements: Clutch's verified Microsoft migration review and CMD's partner listing. New client quotes, logos, detailed case studies, and outcome metrics still need appropriate permission and evidence.
+
 ## Managed IT plans
 
 | Plan | Price | Fit | Agreement | Monitoring | Human support | Emergency/SLA language |

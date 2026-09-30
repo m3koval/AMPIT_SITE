@@ -369,7 +369,7 @@ footer {
   display: block; margin-top: 2px;
 }
 
-.footer-links { display: flex; gap: 32px; list-style: none; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 16px 32px; max-width: 100%; list-style: none; }
 
 .footer-links a {
   font-size: 0.75rem; color: var(--text-dim); text-decoration: none;

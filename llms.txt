@@ -10,7 +10,7 @@ AMP IT LLC is a Charlotte, NC-based managed service provider (MSP) offering all-
 - **Cybersecurity** — Threat monitoring, email security (anti-phishing, anti-spam), endpoint detection and response (EDR), dark web credential monitoring, vulnerability management, firewall management, and incident response.
 - **Cloud & Microsoft 365** — Setup, administration, and ongoing management of Microsoft 365, Teams, SharePoint, and Azure environments. Microsoft Partner.
 - **Google Workspace** — Google Workspace administration and support. Google Partner.
-- **Helpdesk Support** — Unlimited remote and on-site support for end users across all covered devices.
+- **Helpdesk Support** — Tier 1/2 remote support for covered users and systems. Human support is available Monday–Friday, 7 AM–6 PM ET; on-site service and emergency coverage depend on the agreed scope and selected plan.
 - **Backup & Disaster Recovery** — Automated backup verification, disaster recovery planning, and business continuity documentation.
 - **Multi-Factor Authentication (MFA) & Zero Trust** — MFA deployment, conditional access policies, and zero trust architecture implementation.
 - **Shadow AI Risk Management** — Detection and governance of unauthorized AI tool usage (e.g., ChatGPT, Claude, Gemini used outside approved channels) that may expose confidential client data to FINRA, state bar, HIPAA, or cyber liability carrier violations.
@@ -29,29 +29,41 @@ AMP IT is Charlotte-based and on-site-capable locally, with remote support avail
 
 ## Pricing
 
-Per-user monthly pricing, all-inclusive — no per-ticket charges, no add-ons for standard services, no surprise invoices. 5-user minimum on Essential. Standard agreements are 12 months.
+Published per-user monthly rates for standard covered services. Essential has a 5-user minimum. Standard managed IT agreements are 12 months.
 
-- **Essential** — $319/user/month (5-user minimum)
-  - 24/7 automated remote monitoring for covered systems
-  - Automated patch management
-  - Email security (anti-phishing, anti-spam)
-  - Business-hours helpdesk support
-  - Basic endpoint protection
+Human support is available Monday–Friday, 7 AM–6 PM ET. Automated monitoring runs 24/7 for covered systems. Emergency coverage and response commitments depend on the selected plan and covered issue.
 
-- **Better** — $445/user/month (ideal 10–40 users)
-  - Everything in Essential
-  - Endpoint Detection and Response (EDR)
-  - Dark web credential monitoring
-  - Advanced email threat protection
-  - Expanded helpdesk hours
+Current plan details: https://www.ampitsolutions.com/pricing/managed-it/
 
-- **Best** — $499/user/month (ideal 15–50 users)
-  - Everything in Better
-  - Advanced threat response and remediation
-  - Compliance reporting (FINRA, state bar, cyber liability)
-  - Shadow AI monitoring and governance
-  - Priority SLA
-  - On-site support included
+- **Essential** — $319/user/month (5 user minimum)
+  - Remote monitoring & management — OS & software patching
+  - 24/7 automated threat detection with managed response
+  - Advanced email security & phishing protection
+  - Automated backup — endpoints & cloud data
+  - Helpdesk — Tier 1/2 remote support
+  - User onboarding & offboarding
+  - MFA enforcement + mobile device support
+  - Monthly health report
+  - Google Workspace & Microsoft 365 administration
+
+- **Better** — $445/user/month (Ideal 10–40 users)
+  - Everything in Essential, plus:
+  - Backup verification & restore testing (monthly)
+  - Web & DNS content filtering
+  - Dark web monitoring (domain + exec emails)
+  - Proactive maintenance windows
+  - Quarterly Business Reviews
+
+- **Best** — $499/user/month (Ideal 15–50 users)
+  - Everything in Better, plus:
+  - Virtual CIO — strategic IT planning & roadmapping
+  - P1: 1-hr response / P2: 4-hr resolution SLA
+  - Dedicated account manager
+  - Vendor management
+  - Disaster recovery planning + annual tabletop
+  - Cybersecurity risk assessments
+  - Compliance planning
+  - After-hours emergency coverage included
 
 ## Resources
 
@@ -80,10 +92,15 @@ Per-user monthly pricing, all-inclusive — no per-ticket charges, no add-ons fo
 - **Address:** 919 Berryhill Rd Suite 100A, Charlotte, NC 28208
 - **LinkedIn:** https://www.linkedin.com/company/ampitsolutions
 - **Clutch:** https://clutch.co/profile/amp-it
+- **Instagram:** https://www.instagram.com/ampit.clt/
+- **Facebook:** https://www.facebook.com/people/Amp-It/61565270488911/
 
-## Reviews & Ratings
+## Reviews & References
 
-- **Google Business Profile:** 5.0 out of 5 (3 reviews) — "Computer support and services," Charlotte, NC. https://share.google/zif9o1B9gbvJqxR4V
+- **Google Business Profile and current reviews:** https://share.google/zif9o1B9gbvJqxR4V
+- **Verified Microsoft migration client review on Clutch:** https://clutch.co/profile/amp-it#reviews
+- **Catch My Drift partner listing:** https://cmdrift.com/partners.html
+- **About AMP IT:** https://www.ampitsolutions.com/about/
 
 ## Service Area
 
