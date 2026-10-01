@@ -42,6 +42,18 @@ Avoid unless specifically referring to a fixed Starter Track fee:
 - flat monthly rate
 - one price for everything
 
+## Engagement model
+
+Confirmed by Mikhail 2026-10-01: AMP IT takes on project-based engagements (one-time work, not just ongoing managed IT subscriptions).
+
+Approved:
+
+- project-based work welcome
+- one-time projects
+- not just subscriptions — project work too
+
+Avoid: implying every engagement requires the standard 12-month managed IT agreement, or that AMP IT only works on a subscription basis.
+
 ## Search consistency and official profiles
 
 The visible cards on `/pricing/managed-it/` are the canonical plan-feature lists. Do not independently maintain a different tier breakdown in homepage JSON-LD or `llms.txt`.
