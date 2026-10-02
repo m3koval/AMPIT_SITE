@@ -73,7 +73,7 @@
     --border-strong: rgba(0,240,96,0.3);
     --text: #e8f0e8;
     --text-muted: #9fb1a6;
-    --text-dim: #718579;
+    --text-dim: #8fa497;
     --nav-bg: rgba(10,12,10,0.92);
     --mobile-menu-bg: #0d1410;
     --shadow-heavy: rgba(0,0,0,0.5);
@@ -369,6 +369,9 @@
   }
 </style>
 
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script>
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Ii init Di qi Sr Bi Zi Pi capture calculateEventProperties Yi register register_once register_for_session unregister unregister_for_session Xi getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Ji identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Wi Vi createPersonProfile setInternalOrTestUser Gi Fi Ki opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing $i debug Tr Ui getPageViewId captureTraceFeedback captureTraceMetric Ri".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -696,6 +699,7 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
   };
   const prepAns = { industry: null, size: null, setup: null, concern: null, platform: null };
   let bookingConfirmed = false;
+  let assessmentStarted = false;
   let sheetsSubmitted  = false;
   let current = 1;
   let prepStep = 1;
@@ -797,6 +801,10 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
       document.querySelectorAll('.path-card').forEach(c => c.classList.remove('sel'));
       this.classList.add('sel');
       ans.path = this.dataset.slug;
+      if (!assessmentStarted) {
+        assessmentStarted = true;
+        try { window.va('event', { name: 'assessment_start' }); } catch (_) { /* Analytics must not interrupt booking. */ }
+      }
       // Intro call is a low-commitment ask — skip the contact form and go
       // straight to availability. We collect the email at the confirm step,
       // once they've already picked a time and are invested.
@@ -1004,6 +1012,7 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
 
   async function ccalConfirm() {
     const btn = document.getElementById('ccalConfirmBtn');
+    if (btn.disabled || bookingConfirmed) return;
 
     // Fast path collects the email here rather than on a separate step.
     if (isFastPath()) {
@@ -1041,11 +1050,14 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
       const data    = await res.json();
       const booking = data.data || data;
       if (res.ok && data.status === 'success' && (booking.uid || booking.id)) {
-        if (typeof gtag !== 'undefined')
-          gtag('event', 'conversion', { send_to: 'AW-18009085486/ZIP4CKuYzJscEK6ss4tD' });
-        if (typeof fbq !== 'undefined')
-          fbq('track', 'Schedule', {}, { eventID: String(booking.uid || booking.id) });
         bookingConfirmed = true;
+        try { window.va('event', { name: 'assessment_complete' }); } catch (_) { /* Analytics must not interrupt booking. */ }
+        try {
+          if (typeof gtag !== 'undefined')
+            gtag('event', 'conversion', { send_to: 'AW-18009085486/ZIP4CKuYzJscEK6ss4tD' });
+          if (typeof fbq !== 'undefined')
+            fbq('track', 'Schedule', {}, { eventID: String(booking.uid || booking.id) });
+        } catch (_) { /* Optional marketing tags must not hide an accepted booking. */ }
         showBookingSuccess();
       } else {
         throw new Error(data.error?.message || data.message || 'Booking failed');
