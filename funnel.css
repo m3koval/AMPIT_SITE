@@ -59,3 +59,5 @@ body{background:#050807;color:#f4fff8}
 .q-prog i{flex:1;height:4px;background:#1d2a23;transition:background .25s}
 .q-prog i.on{background:#00f060}
 .q-opts+.q-back{margin-top:16px}
+.q-risk{flex:none;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:7px 10px;border:1px solid currentColor;white-space:nowrap}
+.q-risk.high{color:#ff7a7a}.q-risk.medium{color:#ffd166}.q-risk.low{color:#00f060}
