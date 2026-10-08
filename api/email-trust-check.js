@@ -122,7 +122,8 @@ module.exports = async function handler(req, res) {
     quizRisk && `Risk: ${quizRisk}`,
     answers.account && `Account: ${cleanString(answers.account, 40)}`,
     answers.when && `Noticed: ${cleanString(answers.when, 40)}`,
-    answers.payment && `Payment change asked: ${cleanString(answers.payment, 20)}`
+    answers.payment && `Payment change asked: ${cleanString(answers.payment, 20)}`,
+    answers.plan && `Response plan: ${cleanString(answers.plan, 40)}`
   ].filter(Boolean).map(x => ` | ${x}`).join('');
 
   if (!EMAIL_RX.test(email) || email.length > 254) return res.status(400).json({ error: 'Enter a valid email address.' });

@@ -96,6 +96,9 @@ window.FUNNEL={
     ]},
     {key:'payment',title:'Has anyone asked to <span>change payment details?</span>',showIf:function(a){return a.concern==='Someone sent emails pretending to be me'||a.account==='Business email'||a.account==='More than one account'},options:[
       {label:'Yes, recently'},{label:'No'},{label:'Not sure'}
+    ]},
+    {key:'plan',title:'Do you have a written <span>security response plan?</span>',options:[
+      {label:'Yes, we have one'},{label:'No, we’d like help building one'},{label:'No, we’ll put one together'},{label:'Not sure what that is'}
     ]}
   ],
   risk:function(a){
@@ -124,7 +127,8 @@ window.FUNNEL={
     if(a.when==='Over a week ago')steps.splice(1,0,'Look back through Sent items, forwarding rules and bank activity for that whole stretch, not just today.');
     if(a.mfa==='Yes, on everything')steps=steps.map(function(x){return /two-step/.test(x)?'Check which phones and devices are approved for two-step verification and remove any you don’t recognize.':x});
     if(d.skipped)steps=steps.filter(function(x){return !/Your check is below/.test(x)});
-    steps=steps.slice(0,5);
+    steps=steps.slice(0,4);
+    if(a.plan)steps.push(a.plan==='Yes, we have one'?'Follow your response plan and write down what you’ve done so far, with times.':'Start a simple log now: what happened, when, which accounts, and who you told. Insurers and banks often ask for it.');
     var title=risk==='High'?'Act on this today':risk==='Medium'?'Do this now':'Good call checking';
     var recap=[a.account&&a.account!=='Not sure'?a.account:'',a.when==='Today'?'Noticed today':a.when==='In the last few days'?'Noticed this week':a.when==='Over a week ago'?'Noticed over a week ago':'',a.mfa==='No'?'Two-step off':a.mfa==='On some accounts'?'Two-step on some accounts':a.mfa==='Yes, on everything'?'Two-step on':'',a.payment==='Yes, recently'?'Payment change requested':''].filter(Boolean).join(' · ');
     var html=(recap?'<p class="q-label">'+h.esc(recap)+'</p>':'')+'<div class="q-head"><h2 id="rTitle" tabindex="-1">'+title+'</h2><span class="q-risk '+risk.toLowerCase()+'">'+risk+' risk</span></div>'+
@@ -135,7 +139,7 @@ window.FUNNEL={
       var spf=d.spf.present?h.row('Sender list','Found','good'):h.row('Sender list','Missing','bad');
       html+='<p class="q-label">'+h.esc(d.domain)+'</p><div class="q-rows">'+dmarc+spf+'</div>';
     }
-    var book='<a class="q-btn'+(risk==='High'?' alt':'')+'" href="/assessment" data-cta="book">Book a free 15-minute call</a>';
+    var book='<a class="q-btn'+(risk==='High'?' alt':'')+'" href="/assessment" data-cta="book">'+(a.plan==='No, we’d like help building one'?'Get help with your response plan':'Book a free 15-minute call')+'</a>';
     return html+(risk==='High'?call+book:book+call.replace('class="q-btn"','class="q-btn alt"'));
   }
 };
