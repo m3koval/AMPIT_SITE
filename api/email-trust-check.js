@@ -10,6 +10,7 @@ const {
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzVSYcjWLFPz8P4HfusgA7obD2ikdRH7wCcRS91hFY-Vl7rko5P0EVGszSAzCzTocv45g/exec';
 const EMAIL_RX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
 const DOMAIN_RX = /^(?!-)(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$/;
+const FUNNEL_NAMES = { 'email-quiz': 'Email Quiz', 'security-check': 'Security Check' };
 const COMMON_DKIM_SELECTORS = ['selector1', 'selector2', 'google', 'default', 'dkim', 'k1', 'mail', 's1', 's2', 'smtpapi', 'mandrill', 'sendgrid'];
 
 function flattenTxt(records) {
@@ -108,7 +109,9 @@ module.exports = async function handler(req, res) {
   const email = cleanString(body.email, 254).toLowerCase();
   const company = cleanString(body.company, 120);
   const phone = cleanString(body.phone, 32);
-  const fromQuiz = body.source === 'email-quiz';
+  const fromQuiz = Object.prototype.hasOwnProperty.call(FUNNEL_NAMES, body.source);
+  const funnelName = fromQuiz ? FUNNEL_NAMES[body.source] : '';
+  const leadSource = cleanString(body.lead_source, 60).replace(/[^\w.\- ]/g, '') || 'direct';
   const answers = fromQuiz && body.answers && typeof body.answers === 'object' ? body.answers : {};
   const quizConcern = cleanString(answers.concern, 120) || 'No answer';
 
@@ -118,15 +121,15 @@ module.exports = async function handler(req, res) {
   if (fromQuiz && !domain) {
     const recorded = await submitLead({
       origin: 'https://www.ampitsolutions.com',
-      path: 'email-quiz',
-      name: 'Email Quiz',
+      path: body.source,
+      name: funnelName,
       domain: '',
       email,
       company: 'Not provided',
       phone,
       booked: 'no',
       concern: quizConcern,
-      frustration: `${quizConcern} | No domain given, follow up to run the check`,
+      frustration: `${quizConcern} | No domain given${phone ? ', call back' : ', follow up to run the check'} | Source: ${leadSource}`,
       platform: 'Not scanned',
       scan_score: '',
       scan_spf: 'not scanned',
@@ -163,7 +166,7 @@ module.exports = async function handler(req, res) {
 
   const leadRecorded = await submitLead({
     origin: 'https://www.ampitsolutions.com',
-    path: fromQuiz ? 'email-quiz' : 'email-trust-check',
+    path: fromQuiz ? body.source : 'email-trust-check',
     name: 'Email Trust Check',
     domain,
     email,
@@ -178,9 +181,9 @@ module.exports = async function handler(req, res) {
     scan_dmarc: results.dmarc.present ? 'present' : 'missing',
     scan_dkim: results.dkim.found.length ? results.dkim.found.map(x => x.selector).join(',') : 'not found common selectors',
     ...(fromQuiz ? {
-      name: 'Email Quiz',
+      name: funnelName,
       concern: quizConcern,
-      frustration: `${quizConcern} | Score ${results.score}/100 | SPF ${results.spf.present ? 'found' : 'missing'}, DKIM ${results.dkim.found.length ? 'found' : 'not found'}, DMARC ${results.dmarc.present ? 'found' : 'missing'}`
+      frustration: `${quizConcern} | Score ${results.score}/100 | SPF ${results.spf.present ? 'found' : 'missing'}, DKIM ${results.dkim.found.length ? 'found' : 'not found'}, DMARC ${results.dmarc.present ? 'found' : 'missing'} | Source: ${leadSource}`
     } : {})
   });
 

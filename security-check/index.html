@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Is Your Email Reaching Clients? | AMP IT</title>
-<meta name="description" content="Free email check. See in plain English why your business email may be landing in spam.">
+<title>Has Someone Gotten Into Your Email? | AMP IT</title>
+<meta name="description" content="Free security check. Get the exact steps to lock down a compromised email or account, and talk to a Charlotte IT team.">
 <meta name="robots" content="noindex, follow">
-<link rel="canonical" href="https://www.ampitsolutions.com/email-quiz/">
+<link rel="canonical" href="https://www.ampitsolutions.com/security-check/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
 <link rel="stylesheet" href="/styles.css">
@@ -33,8 +33,22 @@
 <div class="q-card" aria-live="polite">
 
   <section class="q-pane" id="p-q">
-    <h1 id="qTitle" tabindex="-1">Are your emails actually <span>reaching your clients?</span></h1>
+    <h1 id="qTitle" tabindex="-1">Has someone gotten into <span>your email or accounts?</span></h1>
     <div class="q-opts" id="qOpts"></div>
+  </section>
+
+  <section class="q-pane" id="p-urgent" hidden>
+    <h2 id="uTitle" tabindex="-1">Call us now.</h2>
+    <a class="q-btn" href="tel:+19803772733" data-cta="call_urgent">Call (980) 377-2733</a>
+    <p class="q-hours">Mon to Fri, 7 AM to 6 PM ET</p>
+    <div class="q-divider">or we call you</div>
+    <form id="uForm" novalidate>
+      <input class="q-input" id="uPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Your phone" aria-label="Phone" required>
+      <input class="q-input" id="uEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" aria-label="Email" required>
+      <div class="q-error" id="uError" role="alert"></div>
+      <button class="q-btn alt" id="uBtn" type="submit">Call me back</button>
+    </form>
+    <div class="q-foot"><p class="q-fine">No spam. <a href="/privacy">Privacy</a></p><button class="q-back" type="button" data-back>&larr; Back</button></div>
   </section>
 
   <section class="q-pane" id="p-contact" hidden>
@@ -43,7 +57,7 @@
       <input class="q-input" id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" aria-label="Email" required>
       <input class="q-input" id="domain" name="domain" type="text" inputmode="url" autocomplete="url" placeholder="Your business website (optional)" aria-label="Your business website, optional" hidden>
       <div class="q-error" id="cError" role="alert"></div>
-      <button class="q-btn" id="cBtn" type="submit">Show my results</button>
+      <button class="q-btn" id="cBtn" type="submit">Show me what to do</button>
     </form>
     <div class="q-foot"><p class="q-fine">One follow-up from a real person. No spam. <a href="/privacy">Privacy</a></p><button class="q-back" type="button" data-back>&larr; Back</button></div>
   </section>
@@ -61,24 +75,29 @@
 
 <script>
 window.FUNNEL={
-  id:'email-quiz',
+  id:'security-check',
   options:[
-    {label:'No, they’re landing in spam'},
-    {label:'No, clients say they never got them'},
-    {label:'Someone is sending emails as me'},
+    {label:'Yes, it’s happening right now',urgent:true},
+    {label:'I got a strange login or password alert'},
+    {label:'Someone sent emails pretending to be me'},
     {label:'Not sure, I want to check'}
   ],
+  steps:{
+    'I got a strange login or password alert':['Change that password now, from a device you trust.','Turn on two-step verification (MFA) for that account.','Sign out of all other sessions in the account’s security settings.','Check your email for forwarding rules you didn’t create.'],
+    'Someone sent emails pretending to be me':['Change your email password and turn on two-step verification (MFA).','Check Sent items and forwarding rules for anything you didn’t do.','Tell clients and vendors to ignore any recent payment or bank change requests.','Make sure your domain blocks spoofed mail. Your check is below.'],
+    'Not sure, I want to check':['Turn on two-step verification (MFA) for email and banking.','Check your email for forwarding rules you didn’t create.','Review recent sign-in activity for places you don’t recognize.','Use a different password for every account.']
+  },
   renderResult:function(d,h){
-    if(d.skipped)return '<h2 id="rTitle" tabindex="-1">Got it. We’ll check and email you.</h2>'+h.ctas;
-    var score=Number(d.score)||0;
-    var label=score>=80?'Looking healthy':score>=50?'Some gaps to fix':'Needs attention';
-    var spf=d.spf.present?(d.spf.multiple?h.row('Sender list','Needs a fix','warn'):h.row('Sender list','Found','good')):h.row('Sender list','Missing','bad');
-    var dkim=d.dkim.found.length?h.row('Signature','Found','good'):h.row('Signature','Not found','warn');
-    var rec=String((d.dmarc&&d.dmarc.record)||'');
-    var dmarc=!d.dmarc.present?h.row('Spoof protection','Missing','bad'):/p\s*=\s*(quarantine|reject)/i.test(rec)?h.row('Spoof protection','Active','good'):h.row('Spoof protection','Watching only','warn');
-    var recs=(d.recommendations||[]).map(function(x){return '<li>'+h.esc(x)+'</li>'}).join('');
-    return '<div class="q-head"><h2 id="rTitle" tabindex="-1">'+h.esc(label)+'</h2><div class="q-score">'+score+'<small>/100</small></div></div>'+
-      '<div class="q-rows">'+spf+dkim+dmarc+'</div><ul class="q-recs">'+recs+'</ul>'+h.ctas;
+    if(h.callback)return '<h2 id="rTitle" tabindex="-1">Got it. We’ll call you back.</h2><p class="q-sub">Mon to Fri, 7 AM to 6 PM ET. Need us sooner?</p><a class="q-btn" href="tel:+19803772733" data-cta="call">Call (980) 377-2733</a>';
+    var steps=this.steps[h.answer]||this.steps['Not sure, I want to check'];
+    var html='<h2 id="rTitle" tabindex="-1">Do this now</h2><ol class="q-steps">'+steps.map(function(s){return '<li>'+h.esc(s)+'</li>'}).join('')+'</ol>';
+    if(!d.skipped){
+      var rec=String((d.dmarc&&d.dmarc.record)||'');
+      var dmarc=!d.dmarc.present?h.row('Spoof protection','Missing','bad'):/p\s*=\s*(quarantine|reject)/i.test(rec)?h.row('Spoof protection','Active','good'):h.row('Spoof protection','Watching only','warn');
+      var spf=d.spf.present?h.row('Sender list','Found','good'):h.row('Sender list','Missing','bad');
+      html+='<p class="q-label">'+h.esc(d.domain)+'</p><div class="q-rows">'+dmarc+spf+'</div>';
+    }
+    return html+h.ctas;
   }
 };
 </script>

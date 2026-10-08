@@ -47,6 +47,11 @@
     gtag('js', new Date());
     gtag('config', 'AW-18009085486');
   </script>
+<!-- PostHog -->
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Ii init Di qi Sr Bi Zi Pi capture calculateEventProperties Yi register register_once register_for_session unregister unregister_for_session Xi getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Ji identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Wi Vi createPersonProfile setInternalOrTestUser Gi Fi Ki opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing $i debug Tr Ui getPageViewId captureTraceFeedback captureTraceMetric Ri".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_ozciDbGuUvtaSnY5tuChmpgR2LaSaQdFwE2DMPY4gAJK', { api_host: 'https://us.i.posthog.com', defaults: '2026-01-30', person_profiles: 'identified_only' });
+</script>
 </head>
 <body>
 
@@ -65,15 +70,15 @@
 <main>
   <div class="page-eyebrow">Legal</div>
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: April 1, 2026</p>
+  <p class="updated">Last updated: October 8, 2026</p>
 
   <p>AMP IT LLC ("AMP IT," "we," "us," or "our") respects your privacy. This Privacy Policy explains what information we collect when you visit <a href="https://www.ampitsolutions.com">ampitsolutions.com</a> or contact us, how we use it, and your rights regarding that information.</p>
 
   <h2>1. Information We Collect</h2>
   <p>We may collect the following types of information:</p>
   <ul>
-    <li><strong>Contact information</strong> — name, business name, email address, phone number, and business domain — when you submit the IT assessment form, use the free email trust check, or contact us directly.</li>
-    <li><strong>Usage data</strong> — pages visited, time on page, referring URL, browser type — collected automatically via analytics tools (e.g., Google Analytics, Cloudflare Web Analytics).</li>
+    <li><strong>Contact information</strong> — name, business name, email address, phone number, and business domain — when you submit the IT assessment form, use the free email trust check, email check, or security check, or contact us directly.</li>
+    <li><strong>Usage data</strong> — pages visited, time on page, referring URL, ad campaign tags, browser type, and recordings of how you scroll and click on our pages — collected automatically via analytics tools (e.g., PostHog, Google Analytics, Cloudflare Web Analytics). Text you type into form fields is masked in these recordings.</li>
     <li><strong>Communications</strong> — emails, messages, or notes you send to us.</li>
   </ul>
   <p>We do not collect payment card information directly. Any billing is handled through third-party processors subject to their own privacy policies.</p>
@@ -98,6 +103,8 @@
     <li><strong>Vercel</strong> — Hosting and deployment platform. Vercel may log server access data.</li>
     <li><strong>Google Analytics</strong> — Aggregated website usage analytics (if enabled).</li>
     <li><strong>Google Ads</strong> — Conversion measurement and remarketing based on site visits.</li>
+    <li><strong>PostHog</strong> — Product analytics and session recordings that show how visitors use our pages. If you submit a form, your visit may be linked to the email address you provide so we can understand how you found us.</li>
+    <li><strong>Meta (Facebook) Pixel</strong> — Advertising measurement based on site visits.</li>
     <li><strong>Google Fonts</strong> — Served from Google's CDN; your browser may connect to Google's servers.</li>
   </ul>
   <p>Each of these services has its own privacy policy. We encourage you to review them.</p>
