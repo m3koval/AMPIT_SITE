@@ -8,6 +8,7 @@
   var source=(function(){
     if(attr.utm_source)return attr.utm_source.toLowerCase();
     if(attr.gclid)return 'google-ads';
+    if(qp.get('oppref'))return 'chatgpt-ads';
     try{var h=document.referrer?new URL(document.referrer).hostname.replace(/^www\./,''):'';if(h&&h.indexOf('ampitsolutions.com')===-1)return h;}catch(e){}
     return 'direct';
   })();
