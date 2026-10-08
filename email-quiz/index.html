@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Is Your Email Reaching Clients? 60-Second Check | AMP IT</title>
+<meta name="description" content="Answer 3 quick questions and see in plain English why your business email may be landing in spam. Free, no passwords, no login.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://www.ampitsolutions.com/email-quiz/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+<link rel="stylesheet" href="/styles.css">
+<style>
+body{background:#050807;color:#f4fff8}
+.q-wrap{max-width:720px;margin:0 auto;padding:120px 20px 80px;min-height:80vh}
+.q-card{border:1px solid rgba(0,240,96,.18);background:radial-gradient(circle at 10% 0%,rgba(0,240,96,.12),transparent 40%),linear-gradient(135deg,#0e1713,#08100c 75%);padding:40px 36px}
+.q-eyebrow{font-family:ui-monospace,Menlo,Consolas,monospace;color:#00f060;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;margin-bottom:16px}
+.q-card h1,.q-card h2{font-family:'Outfit',sans-serif;line-height:1.08;letter-spacing:-.03em;margin:0 0 16px;outline:none}
+.q-card h1{font-size:clamp(2.1rem,6vw,3.2rem)}
+.q-card h1 span{color:#00f060}
+.q-card h2{font-size:clamp(1.6rem,4.5vw,2.2rem)}
+.q-lead{color:#b4c5ba;line-height:1.7;font-size:1.05rem;margin:0 0 22px}
+.q-points{list-style:none;padding:0;margin:0 0 28px;display:grid;gap:8px}
+.q-points li{color:#d8e8dd;font-size:.95rem;display:flex;gap:10px;align-items:flex-start}
+.q-points li::before{content:'\2713';color:#00f060;font-weight:800}
+.q-btn{display:block;width:100%;background:#00f060;color:#001807;border:0;padding:17px 22px;font-family:'Outfit',sans-serif;font-weight:900;font-size:1rem;text-transform:uppercase;letter-spacing:.07em;cursor:pointer;text-align:center;text-decoration:none}
+.q-btn:hover{background:#10ff72}
+.q-btn:disabled{opacity:.55;cursor:not-allowed}
+.q-btn.alt{background:transparent;color:#f4fff8;border:1px solid rgba(255,255,255,.22);margin-top:10px}
+.q-btn.alt:hover{border-color:#00f060;color:#00f060}
+.q-fine{font-size:.78rem;color:#7d9186;line-height:1.55;margin-top:16px}
+.q-fine a{color:#9cf7bc}
+.q-progress{display:flex;gap:6px;margin-bottom:26px}
+.q-progress i{flex:1;height:5px;background:rgba(255,255,255,.1);transition:background .3s}
+.q-progress i.on{background:#00f060}
+.q-step{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.72rem;color:#7d9186;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.q-opts{display:grid;gap:10px;margin-top:6px}
+.q-opt{background:#050807;border:1px solid rgba(255,255,255,.16);color:#f4fff8;padding:17px 18px;font-size:1rem;text-align:left;cursor:pointer;min-height:56px;font-family:inherit;line-height:1.4;transition:border-color .15s,background .15s}
+.q-opt:hover,.q-opt:focus-visible{border-color:#00f060;background:#0a140e;outline:none}
+.q-opt.picked{border-color:#00f060;background:#0d2216}
+.q-ack{min-height:1.6em;color:#00f060;font-size:.92rem;margin-top:14px}
+.q-back{background:none;border:0;color:#7d9186;font-size:.85rem;cursor:pointer;margin-top:18px;padding:6px 0;font-family:inherit}
+.q-back:hover{color:#00f060}
+.q-field{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+.q-field label{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.7rem;color:#00f060;letter-spacing:.12em;text-transform:uppercase}
+.q-field input{background:#050807;border:1px solid rgba(255,255,255,.2);color:#f4fff8;padding:16px;font-size:1rem;outline:none;width:100%}
+.q-field input:focus{border-color:#00f060}
+.q-check{font-size:.9rem;color:#9fb1a6;margin:0 0 16px;min-height:1.4em}
+.q-check strong{color:#f4fff8}
+.q-check button{background:none;border:0;color:#9cf7bc;text-decoration:underline;cursor:pointer;font-size:.9rem;padding:0 0 0 6px;font-family:inherit}
+.q-error{display:none;color:#ff8a8a;font-size:.92rem;margin:0 0 14px;line-height:1.5}
+.q-error.show{display:block}
+.q-load{text-align:center;padding:50px 0}
+.q-load p{color:#b4c5ba;font-size:1.05rem;margin-top:18px}
+.q-spin{width:44px;height:44px;border:3px solid rgba(0,240,96,.2);border-top-color:#00f060;border-radius:50%;margin:0 auto;animation:qspin .8s linear infinite}
+@keyframes qspin{to{transform:rotate(360deg)}}
+.q-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:6px}
+.q-score{font-family:'Outfit',sans-serif;font-weight:900;font-size:3.2rem;color:#00f060;line-height:1;text-align:right}
+.q-score small{display:block;font-size:.72rem;color:#7d9186;font-weight:600;letter-spacing:.06em}
+.q-status{display:grid;gap:10px;margin:22px 0}
+.q-stat{border:1px solid rgba(255,255,255,.1);background:#050807;padding:16px 18px}
+.q-stat b{display:flex;justify-content:space-between;gap:12px;font-family:'Outfit',sans-serif;font-size:1.02rem;margin-bottom:5px}
+.q-stat span.t{font-size:.72rem;font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase}
+.q-stat p{margin:0;color:#aebfb4;font-size:.92rem;line-height:1.6}
+.q-stat.good span.t{color:#00f060}.q-stat.warn span.t{color:#ffd166}.q-stat.bad span.t{color:#ff8a8a}
+.q-recs{margin:6px 0 24px;padding-left:20px;color:#b4c5ba;line-height:1.75;font-size:.95rem}
+.q-next{border-left:3px solid #00f060;background:#08100c;padding:20px 20px 22px;margin-top:8px}
+.q-next h3{font-family:'Outfit',sans-serif;font-size:1.25rem;margin:0 0 8px}
+.q-next p{color:#b4c5ba;line-height:1.7;margin:0 0 16px;font-size:.95rem}
+[hidden]{display:none!important}
+.q-pane{animation:qin .28s ease both}
+@keyframes qin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.q-pane{animation:none}.q-spin{animation-duration:2s}}
+@media(max-width:600px){.q-wrap{padding:96px 14px 60px}.q-card{padding:28px 20px}.q-score{font-size:2.6rem}}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18009085486"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18009085486');
+</script>
+</head>
+<body>
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg"><symbol id="amp-logo" viewBox="0 0 252 231"><path fill-rule="evenodd" clip-rule="evenodd" d="M161.532 109.574L201.942 157.822L188.656 180.754L126.476 170.031L64.2794 180.757L51 157.834L91.4207 109.574L113.034 51H139.918L161.532 109.574ZM66.9185 158.821L71.2594 166.307L116.371 140.374L112.03 132.888L66.9185 158.821ZM136.296 140.374L181.408 166.307L185.749 158.821L140.637 132.888L136.296 140.374ZM122.314 115.833H130.996V63.9666H122.314V115.833Z" fill="#00f060"/></symbol></svg>
+<nav aria-label="Main navigation"><a href="/" class="nav-logo" aria-label="AMP IT home"><svg width="34" height="32" aria-hidden="true"><use href="#amp-logo"/></svg><span class="nav-wordmark"><span class="g">AMP</span> IT</span></a><a href="tel:+19803772733" class="nav-cta">Call (980) 377-2733</a></nav>
+
+<main class="q-wrap">
+<div class="q-card" id="card" aria-live="polite">
+
+  <section class="q-pane" id="p-intro">
+    <div class="q-eyebrow">60-second email check</div>
+    <h1>Is your email actually <span>reaching your clients?</span></h1>
+    <p class="q-lead">Answer 3 quick questions and we'll check your domain. You'll see, in plain English, why your email may be landing in spam &mdash; and what fixes it.</p>
+    <ul class="q-points">
+      <li>Takes about a minute. Mostly just tapping.</li>
+      <li>No passwords, no login, nothing to install.</li>
+      <li>Most owners have never checked this. Email is usually set up once, years ago, and forgotten &mdash; it's not your fault.</li>
+    </ul>
+    <button class="q-btn" id="startBtn" type="button">Start &mdash; 3 quick questions</button>
+    <p class="q-fine">A Charlotte-based IT team. We only read public records &mdash; the same ones every inbox provider reads.</p>
+  </section>
+
+  <section class="q-pane" id="p-q" hidden>
+    <div class="q-progress" id="prog" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="q-step" id="qStep"></div>
+    <h2 id="qTitle" tabindex="-1"></h2>
+    <div class="q-opts" id="qOpts"></div>
+    <div class="q-ack" id="qAck"></div>
+    <button class="q-back" id="qBack" type="button">&larr; Back</button>
+  </section>
+
+  <section class="q-pane" id="p-contact" hidden>
+    <div class="q-progress" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+    <div class="q-step">Last step</div>
+    <h2 id="cTitle" tabindex="-1">What's your work email?</h2>
+    <p class="q-lead">We'll check the domain it uses. Your results appear right here in a few seconds.</p>
+    <form id="cForm" novalidate>
+      <div class="q-field"><label for="email">Work email</label><input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@yourcompany.com" required></div>
+      <div class="q-check" id="domainLine"></div>
+      <div class="q-field" id="domainField" hidden><label for="domain">Business website or email domain</label><input id="domain" name="domain" type="text" inputmode="url" autocomplete="url" placeholder="yourcompany.com"></div>
+      <div class="q-error" id="cError" role="alert"></div>
+      <button class="q-btn" id="cBtn" type="submit">Show my results</button>
+    </form>
+    <ul class="q-points" style="margin-top:20px">
+      <li>Results show instantly on the next screen.</li>
+      <li>Public records only &mdash; we never ask for a password.</li>
+      <li>One real person may follow up once to see if you want help. No newsletter, no spam.</li>
+    </ul>
+    <p class="q-fine">We save your answers and email so we can follow up. See our <a href="/privacy">privacy details</a>.</p>
+    <button class="q-back" id="cBack" type="button">&larr; Back</button>
+  </section>
+
+  <section class="q-pane" id="p-load" hidden>
+    <div class="q-load"><div class="q-spin"></div><p id="loadMsg">Looking up your public mail records&hellip;</p></div>
+  </section>
+
+  <section class="q-pane" id="p-result" hidden></section>
+
+</div>
+</main>
+
+<footer><div class="footer-brand"><svg width="30" height="28"><use href="#amp-logo"/></svg><div><span class="footer-wordmark"><span class="g">AMP</span> IT LLC</span><span class="footer-meta">Part of AMP Dynamic &middot; Charlotte, NC</span></div></div><ul class="footer-links"><li><a href="/cybersecurity/">Cybersecurity</a></li><li><a href="/assessment">Assessment</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li><li><a href="https://www.instagram.com/ampit.clt/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/people/Amp-It/61565270488911/" target="_blank" rel="noopener">Facebook</a></li></ul><span class="footer-meta">&copy; 2026 AMP IT LLC. All rights reserved.</span></footer>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  function track(name,params){try{if(typeof gtag==='function')gtag('event',name,params||{});}catch(e){}}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(m){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'})[m]})}
+
+  var QUESTIONS=[
+    {key:'concern',title:'What have you noticed?',opts:[
+      {label:'My emails land in clients’ spam folders',ack:'That’s the most common one — and usually fixable.'},
+      {label:'Clients say they never got my email',ack:'Frustrating. It often has the same root cause as spam.'},
+      {label:'Someone sent emails pretending to be me',ack:'Good that you’re checking — we’ll look closely at spoof protection.'},
+      {label:'Nothing yet — I just want to be sure',ack:'Smart. Before there’s a problem is the easiest time to fix one.'}
+    ]},
+    {key:'platform',title:'Where does your business email live?',opts:[
+      {label:'Microsoft 365 / Outlook',ack:'Thanks — that helps us read your results.'},
+      {label:'Google Workspace / Gmail',ack:'Thanks — that helps us read your results.'},
+      {label:'My website host (GoDaddy, Bluehost, etc.)',ack:'Thanks — that helps us read your results.'},
+      {label:'Not sure',ack:'No problem — most people aren’t. We’ll figure it out from your domain.'}
+    ]},
+    {key:'support',title:'Who looks after your IT today?',opts:[
+      {label:'Me, or someone in the office',ack:'Very common. No judgment.'},
+      {label:'A friend or part-time contractor',ack:'Very common. No judgment.'},
+      {label:'An IT company',ack:'Good — this is a quick second opinion, nothing more.'},
+      {label:'Not sure / nobody',ack:'You’re in good company — most small firms are here.'}
+    ]}
+  ];
+  var FREE=['gmail.com','googlemail.com','yahoo.com','ymail.com','outlook.com','hotmail.com','live.com','msn.com','icloud.com','me.com','aol.com','proton.me','protonmail.com'];
+  var answers={},qi=0,started=false,domainOverride=false;
+  var panes=['p-intro','p-q','p-contact','p-load','p-result'];
+
+  function show(id,focusId){
+    panes.forEach(function(p){$(p).hidden=(p!==id)});
+    var el=$(focusId||id); if(el&&el.focus){try{el.focus({preventScroll:true})}catch(e){}}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function renderQ(){
+    var q=QUESTIONS[qi];
+    $('qStep').textContent='Question '+(qi+1)+' of 3';
+    $('qTitle').textContent=q.title;
+    $('qAck').textContent='';
+    var bars=$('prog').children;
+    for(var i=0;i<bars.length;i++)bars[i].className=(i<=qi)?'on':'';
+    var box=$('qOpts');box.innerHTML='';
+    q.opts.forEach(function(o){
+      var b=document.createElement('button');
+      b.type='button';b.className='q-opt';b.textContent=o.label;
+      if(answers[q.key]===o.label)b.classList.add('picked');
+      b.addEventListener('click',function(){pick(q,o,b)});
+      box.appendChild(b);
+    });
+    show('p-q','qTitle');
+  }
+
+  var locked=false;
+  function pick(q,o,btn){
+    if(locked)return;locked=true;
+    answers[q.key]=o.label;
+    Array.prototype.forEach.call($('qOpts').children,function(c){c.classList.remove('picked')});
+    btn.classList.add('picked');
+    $('qAck').textContent=o.ack;
+    track('email_quiz_step',{step:qi+1,question:q.key});
+    setTimeout(function(){
+      locked=false;
+      if(qi<QUESTIONS.length-1){qi++;renderQ();}
+      else{show('p-contact','cTitle');track('email_quiz_contact_view');}
+    },650);
+  }
+
+  $('startBtn').addEventListener('click',function(){
+    if(!started){started=true;track('email_quiz_start');}
+    qi=0;renderQ();
+  });
+  $('qBack').addEventListener('click',function(){
+    if(qi>0){qi--;renderQ();}else{show('p-intro');}
+  });
+  $('cBack').addEventListener('click',function(){qi=QUESTIONS.length-1;renderQ();});
+
+  function domainFromEmail(v){
+    var m=String(v||'').trim().toLowerCase().match(/@([a-z0-9.\-]+\.[a-z]{2,})$/);
+    return m?m[1]:'';
+  }
+  function updateDomainLine(){
+    var d=domainFromEmail($('email').value),line=$('domainLine'),field=$('domainField');
+    if(d&&FREE.indexOf(d)!==-1){
+      field.hidden=false;domainOverride=true;
+      line.innerHTML='That looks like a personal address. What’s your <strong>business</strong> website or email domain?';
+    }else if(d&&!domainOverride){
+      line.innerHTML='We’ll check: <strong>'+esc(d)+'</strong><button type="button" id="chg">not right?</button>';
+      var c=$('chg');if(c)c.addEventListener('click',function(){field.hidden=false;domainOverride=true;$('domain').value=d;$('domain').focus();line.textContent='';});
+    }else if(!d&&!domainOverride){line.textContent='';}
+  }
+  $('email').addEventListener('input',updateDomainLine);
+
+  function cleanDomain(v){
+    return String(v||'').trim().toLowerCase().replace(/^https?:\/\//,'').replace(/^www\./,'').split('/')[0].split(':')[0];
+  }
+
+  var loadTimer;
+  function startLoad(){
+    show('p-load');
+    var msgs=['Looking up your public mail records…','Checking who’s allowed to send as you…','Checking for a digital signature…','Checking spoof protection…'],i=0;
+    $('loadMsg').textContent=msgs[0];
+    loadTimer=setInterval(function(){i=(i+1)%msgs.length;$('loadMsg').textContent=msgs[i];},1400);
+  }
+  function stopLoad(){clearInterval(loadTimer);}
+
+  $('cForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var err=$('cError');err.classList.remove('show');
+    var email=$('email').value.trim();
+    var domain=cleanDomain(domainOverride&&$('domain').value?$('domain').value:domainFromEmail(email));
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){err.textContent='Please enter a valid work email, like you@yourcompany.com.';err.classList.add('show');$('email').focus();return;}
+    if(!domain||FREE.indexOf(domain)!==-1){$('domainField').hidden=false;domainOverride=true;err.textContent='Please enter your business website or email domain, like yourcompany.com.';err.classList.add('show');$('domain').focus();return;}
+    $('cBtn').disabled=true;
+    startLoad();
+    var t0=Date.now();
+    fetch('/api/email-trust-check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({domain:domain,email:email,source:'email-quiz',answers:answers})})
+      .then(function(r){return r.json().catch(function(){return {}}).then(function(d){return {ok:r.ok,data:d}})})
+      .then(function(res){
+        if(!res.ok)throw new Error((res.data&&res.data.error)||'Something went wrong. Please try again.');
+        var wait=Math.max(0,2600-(Date.now()-t0));
+        setTimeout(function(){stopLoad();renderResult(res.data);track('email_quiz_lead',{score:res.data.score,lead_recorded:res.data.leadRecorded?'yes':'no'});},wait);
+      })
+      .catch(function(ex){
+        stopLoad();$('cBtn').disabled=false;
+        show('p-contact','cTitle');
+        err.textContent=(ex&&ex.message)||'Something went wrong. Please try again.';err.classList.add('show');
+      });
+  });
+
+  function statusCard(name,tag,cls,text){
+    return '<div class="q-stat '+cls+'"><b><span>'+esc(name)+'</span><span class="t">'+esc(tag)+'</span></b><p>'+esc(text)+'</p></div>';
+  }
+
+  function renderResult(d){
+    var score=Number(d.score)||0;
+    var label=score>=80?'Looking healthy':score>=50?'Some gaps worth fixing':'Needs attention';
+    var spf=d.spf.present
+      ? (d.spf.multiple?statusCard('Sender list (SPF)','Needs a fix','warn','More than one sender list is published, which can make inboxes ignore all of them.')
+                       :statusCard('Sender list (SPF)','Found','good','Your domain publishes a list of who is allowed to send email as you.'))
+      : statusCard('Sender list (SPF)','Missing','bad','No sender list found, so inboxes can’t easily tell your real mail from a fake.');
+    var dkim=d.dkim.found.length
+      ? statusCard('Digital signature (DKIM)','Found','good','Your mail carries a signature that shows it wasn’t altered on the way.')
+      : statusCard('Digital signature (DKIM)','Not found','warn','We didn’t find one in the usual places. It may use a custom setting — worth confirming.');
+    var rec=String((d.dmarc&&d.dmarc.record)||'');
+    var dmarc;
+    if(!d.dmarc.present)dmarc=statusCard('Spoof protection (DMARC)','Missing','bad','Nothing tells inboxes what to do with fake mail sent in your name.');
+    else if(/p\s*=\s*(quarantine|reject)/i.test(rec))dmarc=statusCard('Spoof protection (DMARC)','Active','good','Inboxes are told to quarantine or reject fake mail sent in your name.');
+    else dmarc=statusCard('Spoof protection (DMARC)','Watching only','warn','It’s set up to watch, but it isn’t blocking fake mail yet.');
+
+    var intro=score>=80
+      ? 'Your basics look solid. If email still lands in spam, the cause is more likely your content, sending tools, or reputation — which is worth a closer look.'
+      : 'The good news: these are usually settings on your domain, not new software, and they can be fixed.';
+
+    var recs=(d.recommendations||[]).map(function(x){return '<li>'+esc(x)+'</li>'}).join('');
+
+    $('p-result').innerHTML=
+      '<div class="q-eyebrow">Results for '+esc(d.domain)+'</div>'+
+      '<div class="q-head"><div><h2 id="rTitle" tabindex="-1">'+esc(label)+'</h2></div><div class="q-score">'+score+'<small>OUT OF 100</small></div></div>'+
+      '<p class="q-lead">'+esc(intro)+'</p>'+
+      '<div class="q-status">'+spf+dkim+dmarc+'</div>'+
+      '<h3 style="font-family:Outfit,sans-serif;margin:0 0 6px">What to do next</h3>'+
+      '<ul class="q-recs">'+recs+'</ul>'+
+      '<div class="q-next"><h3>Want us to take this off your plate?</h3>'+
+      '<p>Talk it through with a real person for 15 minutes. You’ll leave with a clear list either way &mdash; no pressure.</p>'+
+      '<a class="q-btn" href="/assessment" id="ctaBook">Book a free 15-minute call</a>'+
+      '<a class="q-btn alt" href="tel:+19803772733" id="ctaCall">Or call (980) 377-2733</a></div>'+
+      '<p class="q-fine">'+esc(d.note||'')+'</p>';
+    show('p-result','rTitle');
+    $('ctaBook').addEventListener('click',function(){track('email_quiz_cta',{cta:'book'})});
+    $('ctaCall').addEventListener('click',function(){track('email_quiz_cta',{cta:'call'})});
+  }
+})();
+</script>
+</body>
+</html>

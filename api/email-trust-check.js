@@ -59,22 +59,24 @@ function recommendations(results) {
 }
 
 async function submitLead(payload) {
-  try {
-    const response = await fetch(SHEETS_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      signal: AbortSignal.timeout(5000)
-    });
-    const data = await response.json().catch(() => null);
-    if (!response.ok || data?.success !== true) {
-      throw new Error(data?.error || `lead sheet returned ${response.status}`);
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      const response = await fetch(SHEETS_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(5000)
+      });
+      const data = await response.json().catch(() => null);
+      if (!response.ok || data?.success !== true) {
+        throw new Error(data?.error || `lead sheet returned ${response.status}`);
+      }
+      return true;
+    } catch (error) {
+      console.error(`[email-trust-check] Lead capture failed (attempt ${attempt}):`, error.message);
     }
-    return true;
-  } catch (error) {
-    console.error('[email-trust-check] Lead capture failed:', error.message);
-    return false;
   }
+  return false;
 }
 
 module.exports = async function handler(req, res) {
@@ -106,6 +108,11 @@ module.exports = async function handler(req, res) {
   const email = cleanString(body.email, 254).toLowerCase();
   const company = cleanString(body.company, 120);
   const phone = cleanString(body.phone, 32);
+  const fromQuiz = body.source === 'email-quiz';
+  const answers = fromQuiz && body.answers && typeof body.answers === 'object' ? body.answers : {};
+  const quizConcern = cleanString(answers.concern, 120);
+  const quizPlatform = cleanString(answers.platform, 80);
+  const quizSupport = cleanString(answers.support, 80);
 
   if (!DOMAIN_RX.test(domain)) return res.status(400).json({ error: 'Enter a valid domain, like example.com.' });
   if (!EMAIL_RX.test(email) || email.length > 254) return res.status(400).json({ error: 'Enter a valid email address.' });
@@ -136,16 +143,16 @@ module.exports = async function handler(req, res) {
 
   const leadRecorded = await submitLead({
     origin: 'https://www.ampitsolutions.com',
-    path: 'email-trust-check',
+    path: fromQuiz ? 'email-quiz' : 'email-trust-check',
     name: 'Email Trust Check',
     domain,
     email,
     company: company || domain,
     phone,
     booked: 'no',
-    concern: 'SPF DKIM DMARC scan request',
-    frustration: 'SPF DKIM DMARC scan request',
-    platform: 'Public DNS check',
+    concern: quizConcern || 'SPF DKIM DMARC scan request',
+    frustration: quizSupport ? 'IT support: ' + quizSupport : 'SPF DKIM DMARC scan request',
+    platform: quizPlatform || 'Public DNS check',
     scan_score: results.score,
     scan_spf: results.spf.present ? 'present' : 'missing',
     scan_dmarc: results.dmarc.present ? 'present' : 'missing',
