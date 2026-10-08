@@ -42,7 +42,8 @@
   <section class="q-pane" id="p-urgent" hidden>
     <h2 id="uTitle" tabindex="-1">Call us now.</h2>
     <a class="q-btn" href="tel:+19803772733" data-cta="call_urgent">Call (980) 377-2733</a>
-    <p class="q-hours">Mon to Fri, 7 AM to 6 PM ET</p>
+    <a class="q-btn alt" href="sms:+19803772733" data-cta="text_urgent">Text (980) 377-2733</a>
+    <p class="q-hours">Calls Mon to Fri, 7 AM to 6 PM ET. Texts anytime, we reply as soon as we can.</p>
     <div class="q-divider">or we call you</div>
     <form id="uForm" novalidate>
       <input class="q-input" id="uPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Your phone" aria-label="Phone" required>
@@ -112,7 +113,7 @@ window.FUNNEL={
   },
   renderResult:function(d,h){
     var call='<a class="q-btn" href="tel:+19803772733" data-cta="call">Call (980) 377-2733</a>';
-    if(h.callback)return '<h2 id="rTitle" tabindex="-1">Got it. We’ll call you back.</h2><p class="q-sub">Mon to Fri, 7 AM to 6 PM ET. Need us sooner?</p>'+call;
+    if(h.callback)return '<h2 id="rTitle" tabindex="-1">Got it. We’ll call you back.</h2><p class="q-sub">Calls Mon to Fri, 7 AM to 6 PM ET. Need us sooner?</p>'+call;
     var a=h.answers||{},urgent=a.risk!=='Check',steps=[];
     if(a.payment==='Yes, recently')steps.push('Don’t pay anything with changed bank details. Confirm by phone, using a number you already had.');
     if(a.account==='Bank or payments')steps.push('Call your bank’s fraud line now and ask them to lock the account.');

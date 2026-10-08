@@ -61,3 +61,4 @@ body{background:#050807;color:#f4fff8}
 .q-opts+.q-back{margin-top:16px}
 .q-src{display:block;margin-top:6px;font-size:.74rem;color:#6d8177;font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.02em}
 .hp{position:absolute!important;left:-10000px!important;width:1px;height:1px;opacity:0}
+.q-text{text-align:center;margin-top:16px}

@@ -74,7 +74,7 @@
     if($('p-urgent')&&!$('p-urgent').hidden){qi=0;}else{qi=nextIndex(Q.length,-1);}
     renderQ();
   })});
-  document.querySelectorAll('a[href^="tel:"]').forEach(function(a){a.addEventListener('click',function(){track('funnel_cta_clicked',{cta:a.getAttribute('data-cta')||'call'})})});
+  document.querySelectorAll('a[href^="tel:"],a[href^="sms:"]').forEach(function(a){a.addEventListener('click',function(){track('funnel_cta_clicked',{cta:a.getAttribute('data-cta')||'call'})})});
 
   if($('email')&&$('domain')){
     $('email').addEventListener('input',function(){
@@ -102,6 +102,7 @@
         if(data.leadRecorded){try{if(typeof gtag==='function')gtag('event','conversion',{send_to:CONVERSION});}catch(e){}}
         setTimeout(function(){
           $('p-result').innerHTML=C.renderResult(data,{answer:answers.concern||'',answers:cleanAnswers(),callback:!!opts.callback,esc:esc,row:row,ctas:CTAS});
+          $('p-result').insertAdjacentHTML('beforeend','<p class="q-fine q-text">Or text <a href="sms:+19803772733" data-cta="text">(980) 377-2733</a> anytime. We reply as soon as we can.</p>');
           show('p-result','rTitle');
           $('p-result').querySelectorAll('[data-cta]').forEach(function(a){a.addEventListener('click',function(){track('funnel_cta_clicked',{cta:a.getAttribute('data-cta')})})});
         },opts.callback?300:Math.max(0,1800-(Date.now()-t0)));

@@ -86,6 +86,17 @@ Use this longer version for pricing/FAQ/llms.txt:
 
 > AMP IT provides 24/7 automated monitoring for covered systems. Human helpdesk and account support are available Monday–Friday, 7 AM–6 PM ET. Emergency response options and the 1-hour emergency response SLA apply to qualifying plans and covered urgent issues, with the 1-hour SLA reserved for Best.
 
+## Texting
+
+Confirmed by Mikhail 2026-10-08: people can text (980) 377-2733 at any time, and AMP IT replies as soon as it can.
+
+Approved:
+
+- Text us anytime. We reply as soon as we can.
+- Calls Mon to Fri, 7 AM to 6 PM ET. Texts anytime.
+
+Avoid: implying a human answers 24/7 or promising a response time for texts.
+
 ## Salary anchor math
 
 Approved anchor:
