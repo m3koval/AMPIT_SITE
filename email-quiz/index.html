@@ -162,6 +162,7 @@ body{background:#050807;color:#f4fff8}
         setTimeout(function(){
           renderResult(res.data);
           track('email_quiz_lead',{score:res.data.score||0,scanned:res.data.skipped?'no':'yes',lead_recorded:res.data.leadRecorded?'yes':'no'});
+          if(res.data.leadRecorded)track('conversion',{send_to:'AW-18009085486/ILlTCJPv85UdEK6ss4tD'});
         },Math.max(0,1800-(Date.now()-t0)));
       })
       .catch(function(ex){
