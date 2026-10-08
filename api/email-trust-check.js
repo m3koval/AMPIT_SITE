@@ -119,7 +119,7 @@ module.exports = async function handler(req, res) {
   const quizMfa = cleanString(answers.mfa, 40);
   const quizRisk = cleanString(answers.risk, 10);
   const quizDetails = [
-    quizRisk && `Risk: ${quizRisk}`,
+    quizRisk && `Priority: ${quizRisk}`,
     answers.account && `Account: ${cleanString(answers.account, 40)}`,
     answers.when && `Noticed: ${cleanString(answers.when, 40)}`,
     answers.payment && `Payment change asked: ${cleanString(answers.payment, 20)}`,

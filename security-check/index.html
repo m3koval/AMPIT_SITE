@@ -102,15 +102,7 @@ window.FUNNEL={
     ]}
   ],
   risk:function(a){
-    if(a.concern==='Yes, it’s happening right now'||a.payment==='Yes, recently')return 'High';
-    var s=0;
-    if(a.when==='Today')s+=2;else if(a.when==='In the last few days')s+=1;
-    if(a.mfa==='No')s+=2;else if(a.mfa==='On some accounts'||a.mfa==='Not sure')s+=1;
-    if(a.concern==='Someone sent emails pretending to be me')s+=1;
-    if(a.account==='More than one account'||a.account==='Bank or payments')s+=1;
-    if(a.payment==='Not sure')s+=1;
-    if(a.concern==='Not sure, I want to check')s-=1;
-    return s>=4?'High':s>=2?'Medium':'Low';
+    return a.concern==='Not sure, I want to check'&&a.payment!=='Yes, recently'?'Check':'Urgent';
   },
   steps:{
     'I got a strange login or password alert':['Change that password now, from a device you trust.','Turn on two-step verification (MFA) for that account.','Sign out of all other sessions in the account’s security settings.','Check your email for forwarding rules you didn’t create.'],
@@ -120,7 +112,7 @@ window.FUNNEL={
   renderResult:function(d,h){
     var call='<a class="q-btn" href="tel:+19803772733" data-cta="call">Call (980) 377-2733</a>';
     if(h.callback)return '<h2 id="rTitle" tabindex="-1">Got it. We’ll call you back.</h2><p class="q-sub">Mon to Fri, 7 AM to 6 PM ET. Need us sooner?</p>'+call;
-    var a=h.answers||{},risk=a.risk||'Medium',steps=[];
+    var a=h.answers||{},urgent=a.risk!=='Check',steps=[];
     if(a.payment==='Yes, recently')steps.push('Don’t pay anything with changed bank details. Confirm by phone, using a number you already had.');
     if(a.account==='Bank or payments')steps.push('Call your bank’s fraud line now and ask them to lock the account.');
     steps=steps.concat(this.steps[a.concern]||this.steps['Not sure, I want to check']);
@@ -129,9 +121,9 @@ window.FUNNEL={
     if(d.skipped)steps=steps.filter(function(x){return !/Your check is below/.test(x)});
     steps=steps.slice(0,4);
     if(a.plan)steps.push(a.plan==='Yes, we have one'?'Follow your response plan and write down what you’ve done so far, with times.':'Start a simple log now: what happened, when, which accounts, and who you told. Insurers and banks often ask for it.');
-    var title=risk==='High'?'Act on this today':risk==='Medium'?'Do this now':'Good call checking';
+    var title=urgent?'Treat this as urgent':'Here’s how to check';
     var recap=[a.account&&a.account!=='Not sure'?a.account:'',a.when==='Today'?'Noticed today':a.when==='In the last few days'?'Noticed this week':a.when==='Over a week ago'?'Noticed over a week ago':'',a.mfa==='No'?'Two-step off':a.mfa==='On some accounts'?'Two-step on some accounts':a.mfa==='Yes, on everything'?'Two-step on':'',a.payment==='Yes, recently'?'Payment change requested':''].filter(Boolean).join(' · ');
-    var html=(recap?'<p class="q-label">'+h.esc(recap)+'</p>':'')+'<div class="q-head"><h2 id="rTitle" tabindex="-1">'+title+'</h2><span class="q-risk '+risk.toLowerCase()+'">'+risk+' risk</span></div>'+
+    var html=(recap?'<p class="q-label">'+h.esc(recap)+'</p>':'')+'<h2 id="rTitle" tabindex="-1">'+title+'</h2>'+
       '<ol class="q-steps">'+steps.map(function(s){return '<li>'+h.esc(s)+'</li>'}).join('')+'</ol>';
     if(!d.skipped){
       var rec=String((d.dmarc&&d.dmarc.record)||'');
@@ -139,8 +131,8 @@ window.FUNNEL={
       var spf=d.spf.present?h.row('Sender list','Found','good'):h.row('Sender list','Missing','bad');
       html+='<p class="q-label">'+h.esc(d.domain)+'</p><div class="q-rows">'+dmarc+spf+'</div>';
     }
-    var book='<a class="q-btn'+(risk==='High'?' alt':'')+'" href="/assessment" data-cta="book">'+(a.plan==='No, we’d like help building one'?'Get help with your response plan':'Book a free 15-minute call')+'</a>';
-    return html+(risk==='High'?call+book:book+call.replace('class="q-btn"','class="q-btn alt"'));
+    var book='<a class="q-btn'+(urgent?' alt':'')+'" href="/assessment" data-cta="book">'+(a.plan==='No, we’d like help building one'?'Get help with your response plan':'Book a free 15-minute call')+'</a>';
+    return html+(urgent?call+book:book+call.replace('class="q-btn"','class="q-btn alt"'));
   }
 };
 </script>
