@@ -31,10 +31,12 @@
 
 <main class="q-wrap">
 <div class="q-card" aria-live="polite">
+  <div class="q-prog" id="prog" aria-hidden="true" hidden></div>
 
   <section class="q-pane" id="p-q">
     <h1 id="qTitle" tabindex="-1">Has someone gotten into <span>your email or accounts?</span></h1>
     <div class="q-opts" id="qOpts"></div>
+    <button class="q-back" id="qBack" type="button" hidden>&larr; Back</button>
   </section>
 
   <section class="q-pane" id="p-urgent" hidden>
@@ -76,11 +78,19 @@
 <script>
 window.FUNNEL={
   id:'security-check',
-  options:[
-    {label:'Yes, it’s happening right now',urgent:true},
-    {label:'I got a strange login or password alert'},
-    {label:'Someone sent emails pretending to be me'},
-    {label:'Not sure, I want to check'}
+  questions:[
+      {key:'concern',title:'Has someone gotten into <span>your email or accounts?</span>',options:[
+        {label:'Yes, it’s happening right now',urgent:true},
+        {label:'I got a strange login or password alert'},
+        {label:'Someone sent emails pretending to be me'},
+        {label:'Not sure, I want to check'}
+      ]},
+      {key:'mfa',title:'Is two-step verification <span>turned on?</span>',options:[
+        {label:'Yes, on everything'},{label:'On some accounts'},{label:'No'},{label:'Not sure'}
+      ]},
+      {key:'size',title:'How many people are <span>on your team?</span>',options:[
+        {label:'Just me'},{label:'2 to 10'},{label:'11 to 50'},{label:'More than 50'}
+      ]}
   ],
   steps:{
     'I got a strange login or password alert':['Change that password now, from a device you trust.','Turn on two-step verification (MFA) for that account.','Sign out of all other sessions in the account’s security settings.','Check your email for forwarding rules you didn’t create.'],
@@ -90,6 +100,7 @@ window.FUNNEL={
   renderResult:function(d,h){
     if(h.callback)return '<h2 id="rTitle" tabindex="-1">Got it. We’ll call you back.</h2><p class="q-sub">Mon to Fri, 7 AM to 6 PM ET. Need us sooner?</p><a class="q-btn" href="tel:+19803772733" data-cta="call">Call (980) 377-2733</a>';
     var steps=this.steps[h.answer]||this.steps['Not sure, I want to check'];
+    if(h.answers&&h.answers.mfa==='Yes, on everything')steps=steps.map(function(x){return /two-step/.test(x)?'Check which phones and devices are approved for two-step verification and remove any you don’t recognize.':x});
     var html='<h2 id="rTitle" tabindex="-1">Do this now</h2><ol class="q-steps">'+steps.map(function(s){return '<li>'+h.esc(s)+'</li>'}).join('')+'</ol>';
     if(!d.skipped){
       var rec=String((d.dmarc&&d.dmarc.record)||'');

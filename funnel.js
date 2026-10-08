@@ -12,7 +12,8 @@
     try{var h=document.referrer?new URL(document.referrer).hostname.replace(/^www\./,''):'';if(h&&h.indexOf('ampitsolutions.com')===-1)return h;}catch(e){}
     return 'direct';
   })();
-  var answer='',panes=['p-q','p-urgent','p-contact','p-load','p-result'].filter(function(id){return $(id)}),locked=false;
+  var answers={},qi=0,panes=['p-q','p-urgent','p-contact','p-load','p-result'].filter(function(id){return $(id)}),locked=false;
+  var Q=C.questions,total=Q.length+1;
 
   function track(name,props){
     var p=Object.assign({funnel:C.id,lead_source:source},attr,props||{});
@@ -20,8 +21,16 @@
     try{if(window.posthog&&posthog.capture)posthog.capture(name,p);}catch(e){}
   }
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(m){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'})[m]})}
+  function progress(n){
+    var bar=$('prog');if(!bar)return;
+    if(n<0){bar.hidden=true;return;}
+    bar.hidden=false;
+    if(bar.children.length!==total){bar.innerHTML='';for(var i=0;i<total;i++)bar.appendChild(document.createElement('i'));}
+    for(var j=0;j<total;j++)bar.children[j].className=j<=n?'on':'';
+  }
   function show(id,focusId){
     panes.forEach(function(p){$(p).hidden=(p!==id)});
+    progress(id==='p-q'?qi:id==='p-contact'?Q.length:-1);
     var el=$(focusId||id);if(el&&el.focus){try{el.focus({preventScroll:true})}catch(e){}}
     window.scrollTo({top:0,behavior:'smooth'});
   }
@@ -29,24 +38,37 @@
   function cleanDomain(v){return String(v||'').trim().toLowerCase().replace(/^https?:\/\//,'').replace(/^www\./,'').split('/')[0].split(':')[0];}
   function isEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);}
 
-  C.options.forEach(function(o){
-    var b=document.createElement('button');
-    b.type='button';b.className='q-opt';b.textContent=o.label;
-    b.addEventListener('click',function(){
-      if(locked)return;locked=true;
-      answer=o.label;b.classList.add('picked');
-      track('funnel_answered',{answer:o.label,urgent:!!o.urgent});
-      setTimeout(function(){
-        locked=false;b.classList.remove('picked');
-        if(o.urgent&&$('p-urgent')){show('p-urgent','uTitle');track('funnel_urgent_viewed');}
-        else{show('p-contact','email');track('funnel_contact_viewed');}
-      },220);
+  function renderQ(){
+    var q=Q[qi];
+    $('qTitle').innerHTML=q.title;
+    var box=$('qOpts');box.innerHTML='';
+    q.options.forEach(function(o){
+      var b=document.createElement('button');
+      b.type='button';b.className='q-opt';b.textContent=o.label;
+      b.addEventListener('click',function(){
+        if(locked)return;locked=true;
+        answers[q.key]=o.label;b.classList.add('picked');
+        track('funnel_answered',{question:q.key,step:qi+1,answer:o.label,urgent:!!o.urgent});
+        setTimeout(function(){
+          locked=false;
+          if(o.urgent&&$('p-urgent')){show('p-urgent','uTitle');track('funnel_urgent_viewed');}
+          else if(qi<Q.length-1){qi++;renderQ();}
+          else{show('p-contact','email');track('funnel_contact_viewed');}
+        },220);
+      });
+      box.appendChild(b);
     });
-    $('qOpts').appendChild(b);
-  });
+    if($('qBack'))$('qBack').hidden=qi===0;
+    show('p-q','qTitle');
+  }
+  renderQ();
   track('funnel_viewed');
 
-  document.querySelectorAll('[data-back]').forEach(function(b){b.addEventListener('click',function(){show('p-q','qTitle');})});
+  if($('qBack'))$('qBack').addEventListener('click',function(){if(qi>0){qi--;renderQ();}});
+  document.querySelectorAll('[data-back]').forEach(function(b){b.addEventListener('click',function(){
+    if($('p-urgent')&&!$('p-urgent').hidden){qi=0;}else{qi=Q.length-1;}
+    renderQ();
+  })});
   document.querySelectorAll('a[href^="tel:"]').forEach(function(a){a.addEventListener('click',function(){track('funnel_cta_clicked',{cta:a.getAttribute('data-cta')||'call'})})});
 
   if($('email')&&$('domain')){
@@ -65,16 +87,16 @@
     opts.btn.disabled=true;
     var back=opts.pane;show('p-load');
     var t0=Date.now();
-    fetch('/api/email-trust-check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({domain:domain,email:opts.email,phone:opts.phone||'',source:C.id,lead_source:source,answers:{concern:answer}})})
+    fetch('/api/email-trust-check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({domain:domain,email:opts.email,phone:opts.phone||'',source:C.id,lead_source:source,answers:answers})})
       .then(function(r){return r.json().catch(function(){return {}}).then(function(j){return {ok:r.ok,data:j}})})
       .then(function(res){
         if(!res.ok)throw new Error((res.data&&res.data.error)||'Something went wrong. Please try again.');
         var data=res.data;
         try{if(window.posthog&&posthog.identify)posthog.identify(opts.email.toLowerCase(),{email:opts.email.toLowerCase(),lead_source:source,first_funnel:C.id});}catch(e){}
-        track('funnel_lead_submitted',{answer:answer,callback:!!opts.callback,scanned:!data.skipped,score:data.score||0,lead_recorded:!!data.leadRecorded});
+        track('funnel_lead_submitted',{answer:answers.concern||'',callback:!!opts.callback,scanned:!data.skipped,score:data.score||0,lead_recorded:!!data.leadRecorded});
         if(data.leadRecorded){try{if(typeof gtag==='function')gtag('event','conversion',{send_to:CONVERSION});}catch(e){}}
         setTimeout(function(){
-          $('p-result').innerHTML=C.renderResult(data,{answer:answer,callback:!!opts.callback,esc:esc,row:row,ctas:CTAS});
+          $('p-result').innerHTML=C.renderResult(data,{answer:answers.concern||'',answers:answers,callback:!!opts.callback,esc:esc,row:row,ctas:CTAS});
           show('p-result','rTitle');
           $('p-result').querySelectorAll('[data-cta]').forEach(function(a){a.addEventListener('click',function(){track('funnel_cta_clicked',{cta:a.getAttribute('data-cta')})})});
         },opts.callback?300:Math.max(0,1800-(Date.now()-t0)));

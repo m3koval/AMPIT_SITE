@@ -31,10 +31,12 @@
 
 <main class="q-wrap">
 <div class="q-card" aria-live="polite">
+  <div class="q-prog" id="prog" aria-hidden="true" hidden></div>
 
   <section class="q-pane" id="p-q">
     <h1 id="qTitle" tabindex="-1">Are your emails actually <span>reaching your clients?</span></h1>
     <div class="q-opts" id="qOpts"></div>
+    <button class="q-back" id="qBack" type="button" hidden>&larr; Back</button>
   </section>
 
   <section class="q-pane" id="p-contact" hidden>
@@ -62,11 +64,19 @@
 <script>
 window.FUNNEL={
   id:'email-quiz',
-  options:[
-    {label:'No, they’re landing in spam'},
-    {label:'No, clients say they never got them'},
-    {label:'Someone is sending emails as me'},
-    {label:'Not sure, I want to check'}
+  questions:[
+      {key:'concern',title:'Are your emails actually <span>reaching your clients?</span>',options:[
+        {label:'No, they’re landing in spam'},
+        {label:'No, clients say they never got them'},
+        {label:'Someone is sending emails as me'},
+        {label:'Not sure, I want to check'}
+      ]},
+      {key:'platform',title:'Where does your <span>business email</span> live?',options:[
+        {label:'Microsoft 365 / Outlook'},{label:'Google Workspace / Gmail'},{label:'GoDaddy or my web host'},{label:'Not sure'}
+      ]},
+      {key:'size',title:'How many people are <span>on your team?</span>',options:[
+        {label:'Just me'},{label:'2 to 10'},{label:'11 to 50'},{label:'More than 50'}
+      ]}
   ],
   renderResult:function(d,h){
     if(d.skipped)return '<h2 id="rTitle" tabindex="-1">Got it. We’ll check and email you.</h2>'+h.ctas;

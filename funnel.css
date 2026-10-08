@@ -55,3 +55,7 @@ body{background:#050807;color:#f4fff8}
 .q-steps li{counter-increment:qs;display:flex;gap:14px;align-items:flex-start;background:#0b120f;border:1px solid #1d2a23;padding:15px 18px;color:#d8e8dd;line-height:1.5;font-size:.98rem}
 .q-steps li::before{content:counter(qs);flex:none;width:24px;height:24px;display:grid;place-items:center;background:#00f060;color:#001807;font-family:'Outfit',sans-serif;font-weight:800;font-size:.8rem}
 .q-label{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.72rem;color:#6d8177;letter-spacing:.1em;text-transform:uppercase;margin:0 0 10px}
+.q-prog{display:flex;gap:6px;margin-bottom:30px}
+.q-prog i{flex:1;height:4px;background:#1d2a23;transition:background .25s}
+.q-prog i.on{background:#00f060}
+.q-opts+.q-back{margin-top:16px}

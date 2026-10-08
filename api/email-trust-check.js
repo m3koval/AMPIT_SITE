@@ -114,6 +114,9 @@ module.exports = async function handler(req, res) {
   const leadSource = cleanString(body.lead_source, 60).replace(/[^\w.\- ]/g, '') || 'direct';
   const answers = fromQuiz && body.answers && typeof body.answers === 'object' ? body.answers : {};
   const quizConcern = cleanString(answers.concern, 120) || 'No answer';
+  const quizPlatform = cleanString(answers.platform, 60);
+  const quizSize = cleanString(answers.size, 30);
+  const quizMfa = cleanString(answers.mfa, 40);
 
   if (!EMAIL_RX.test(email) || email.length > 254) return res.status(400).json({ error: 'Enter a valid email address.' });
   if (company.length > 120 || phone.length > 32) return res.status(400).json({ error: 'One or more fields are too long.' });
@@ -130,7 +133,9 @@ module.exports = async function handler(req, res) {
       booked: 'no',
       concern: quizConcern,
       frustration: `${quizConcern} | No domain given${phone ? ', call back' : ', follow up to run the check'} | Source: ${leadSource}`,
-      platform: 'Not scanned',
+      platform: quizPlatform || 'Not provided',
+      size: quizSize,
+      setup: quizMfa ? `MFA: ${quizMfa}` : '',
       scan_score: '',
       scan_spf: 'not scanned',
       scan_dmarc: 'not scanned',
@@ -183,6 +188,9 @@ module.exports = async function handler(req, res) {
     ...(fromQuiz ? {
       name: funnelName,
       concern: quizConcern,
+      platform: quizPlatform || 'Public DNS check',
+      size: quizSize,
+      setup: quizMfa ? `MFA: ${quizMfa}` : '',
       frustration: `${quizConcern} | Score ${results.score}/100 | SPF ${results.spf.present ? 'found' : 'missing'}, DKIM ${results.dkim.found.length ? 'found' : 'not found'}, DMARC ${results.dmarc.present ? 'found' : 'missing'} | Source: ${leadSource}`
     } : {})
   });
