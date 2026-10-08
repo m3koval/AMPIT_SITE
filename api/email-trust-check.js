@@ -110,9 +110,7 @@ module.exports = async function handler(req, res) {
   const phone = cleanString(body.phone, 32);
   const fromQuiz = body.source === 'email-quiz';
   const answers = fromQuiz && body.answers && typeof body.answers === 'object' ? body.answers : {};
-  const quizConcern = cleanString(answers.concern, 120);
-  const quizPlatform = cleanString(answers.platform, 80);
-  const quizSupport = cleanString(answers.support, 80);
+  const quizConcern = cleanString(answers.concern, 120) || 'No answer';
 
   if (!EMAIL_RX.test(email) || email.length > 254) return res.status(400).json({ error: 'Enter a valid email address.' });
   if (company.length > 120 || phone.length > 32) return res.status(400).json({ error: 'One or more fields are too long.' });
@@ -121,15 +119,15 @@ module.exports = async function handler(req, res) {
     const recorded = await submitLead({
       origin: 'https://www.ampitsolutions.com',
       path: 'email-quiz',
-      name: 'Email Trust Check',
+      name: 'Email Quiz',
       domain: '',
       email,
       company: 'Not provided',
       phone,
       booked: 'no',
-      concern: quizConcern || 'SPF DKIM DMARC scan request',
-      frustration: 'Domain not provided, follow up to run the check',
-      platform: quizPlatform || 'Not provided',
+      concern: quizConcern,
+      frustration: `${quizConcern} | No domain given, follow up to run the check`,
+      platform: 'Not scanned',
       scan_score: '',
       scan_spf: 'not scanned',
       scan_dmarc: 'not scanned',
@@ -172,13 +170,18 @@ module.exports = async function handler(req, res) {
     company: company || domain,
     phone,
     booked: 'no',
-    concern: quizConcern || 'SPF DKIM DMARC scan request',
-    frustration: quizSupport ? 'IT support: ' + quizSupport : 'SPF DKIM DMARC scan request',
-    platform: quizPlatform || 'Public DNS check',
+    concern: 'SPF DKIM DMARC scan request',
+    frustration: 'SPF DKIM DMARC scan request',
+    platform: 'Public DNS check',
     scan_score: results.score,
     scan_spf: results.spf.present ? 'present' : 'missing',
     scan_dmarc: results.dmarc.present ? 'present' : 'missing',
-    scan_dkim: results.dkim.found.length ? results.dkim.found.map(x => x.selector).join(',') : 'not found common selectors'
+    scan_dkim: results.dkim.found.length ? results.dkim.found.map(x => x.selector).join(',') : 'not found common selectors',
+    ...(fromQuiz ? {
+      name: 'Email Quiz',
+      concern: quizConcern,
+      frustration: `${quizConcern} | Score ${results.score}/100 | SPF ${results.spf.present ? 'found' : 'missing'}, DKIM ${results.dkim.found.length ? 'found' : 'not found'}, DMARC ${results.dmarc.present ? 'found' : 'missing'}`
+    } : {})
   });
 
   results.leadRecorded = leadRecorded;
