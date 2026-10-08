@@ -128,7 +128,7 @@ module.exports = async function handler(req, res) {
       phone,
       booked: 'no',
       concern: quizConcern || 'SPF DKIM DMARC scan request',
-      frustration: 'Domain not provided — follow up to run the check',
+      frustration: 'Domain not provided, follow up to run the check',
       platform: quizPlatform || 'Not provided',
       scan_score: '',
       scan_spf: 'not scanned',
