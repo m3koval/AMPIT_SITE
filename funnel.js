@@ -13,7 +13,7 @@
     return 'direct';
   })();
   var answers={},qi=0,panes=['p-q','p-urgent','p-contact','p-load','p-result'].filter(function(id){return $(id)}),locked=false;
-  var Q=C.questions;
+  var Q=C.questions,loadedAt=Date.now();
   function isVisible(q){return !q.showIf||q.showIf(answers);}
   function visibleQs(){return Q.filter(isVisible);}
   function nextIndex(from,dir){for(var j=from+dir;j>=0&&j<Q.length;j+=dir){if(isVisible(Q[j]))return j;}return -1;}
@@ -27,7 +27,7 @@
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(m){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'})[m]})}
   function progress(n){
     var bar=$('prog');if(!bar)return;
-    if(n<0||Q.length<2){bar.hidden=true;return;}
+    if(n<0||Q.length<2||C.progress===false){bar.hidden=true;return;}
     bar.hidden=false;
     var total=visibleQs().length+1;
     if(bar.children.length!==total){bar.innerHTML='';for(var i=0;i<total;i++)bar.appendChild(document.createElement('i'));}
@@ -45,7 +45,7 @@
 
   function renderQ(){
     var q=Q[qi];
-    $('qTitle').innerHTML=q.title;
+    $('qTitle').innerHTML=typeof q.title==='function'?q.title(answers):q.title;
     var box=$('qOpts');box.innerHTML='';
     q.options.forEach(function(o){
       var b=document.createElement('button');
@@ -92,7 +92,7 @@
     opts.btn.disabled=true;
     var back=opts.pane;show('p-load');
     var t0=Date.now();
-    fetch('/api/email-trust-check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({domain:domain,email:opts.email,phone:opts.phone||'',source:C.id,lead_source:source,answers:cleanAnswers()})})
+    fetch('/api/email-trust-check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({hp:(document.getElementById('hp')||{}).value||'',elapsed:Date.now()-loadedAt,domain:domain,email:opts.email,phone:opts.phone||'',source:C.id,lead_source:source,answers:cleanAnswers()})})
       .then(function(r){return r.json().catch(function(){return {}}).then(function(j){return {ok:r.ok,data:j}})})
       .then(function(res){
         if(!res.ok)throw new Error((res.data&&res.data.error)||'Something went wrong. Please try again.');

@@ -10,7 +10,8 @@ const {
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzVSYcjWLFPz8P4HfusgA7obD2ikdRH7wCcRS91hFY-Vl7rko5P0EVGszSAzCzTocv45g/exec';
 const EMAIL_RX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
 const DOMAIN_RX = /^(?!-)(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$/;
-const FUNNEL_NAMES = { 'email-quiz': 'Email Quiz', 'security-check': 'Security Check' };
+const FUNNEL_NAMES = { 'email-quiz': 'Email Quiz', 'security-check': 'Security Check', 'law-firm-check': 'Law Firm Check', 'cpa-check': 'CPA Check' };
+const FUNNEL_INDUSTRY = { 'law-firm-check': 'Law firm / legal services' };
 const COMMON_DKIM_SELECTORS = ['selector1', 'selector2', 'google', 'default', 'dkim', 'k1', 'mail', 's1', 's2', 'smtpapi', 'mandrill', 'sendgrid'];
 
 function flattenTxt(records) {
@@ -117,16 +118,24 @@ module.exports = async function handler(req, res) {
   const quizPlatform = cleanString(answers.platform, 60);
   const quizSize = cleanString(answers.size, 30);
   const quizMfa = cleanString(answers.mfa, 40);
+  const quizIndustry = FUNNEL_INDUSTRY[body.source] || cleanString(answers.firm, 60);
   const quizRisk = cleanString(answers.risk, 10);
   const quizDetails = [
     quizRisk && `Priority: ${quizRisk}`,
     answers.account && `Account: ${cleanString(answers.account, 40)}`,
     answers.when && `Noticed: ${cleanString(answers.when, 40)}`,
     answers.payment && `Payment change asked: ${cleanString(answers.payment, 20)}`,
-    answers.plan && `Response plan: ${cleanString(answers.plan, 40)}`
+    answers.plan && `Response plan: ${cleanString(answers.plan, 40)}`,
+    answers.wires && `Wires: ${cleanString(answers.wires, 40)}`,
+    answers.records && `Records held: ${cleanString(answers.records, 20)}`,
+    answers.irplan && `Breach plan: ${cleanString(answers.irplan, 30)}`
   ].filter(Boolean).map(x => ` | ${x}`).join('');
 
   if (!EMAIL_RX.test(email) || email.length > 254) return res.status(400).json({ error: 'Enter a valid email address.' });
+  if (fromQuiz && (cleanString(body.hp, 200) || Number(body.elapsed) < 2000)) {
+    console.warn('[email-trust-check] Dropped likely bot submission for', body.source);
+    return res.status(200).json({ skipped: true, leadRecorded: false });
+  }
   if (company.length > 120 || phone.length > 32) return res.status(400).json({ error: 'One or more fields are too long.' });
 
   if (fromQuiz && !domain) {
@@ -143,6 +152,7 @@ module.exports = async function handler(req, res) {
       frustration: `${quizConcern}${quizDetails} | No domain given${phone ? ', call back' : ', follow up to run the check'} | Source: ${leadSource}`,
       platform: quizPlatform || 'Not provided',
       size: quizSize,
+      industry: quizIndustry,
       setup: quizMfa ? `MFA: ${quizMfa}` : '',
       scan_score: '',
       scan_spf: 'not scanned',
@@ -198,6 +208,7 @@ module.exports = async function handler(req, res) {
       concern: quizConcern,
       platform: quizPlatform || 'Public DNS check',
       size: quizSize,
+      industry: quizIndustry,
       setup: quizMfa ? `MFA: ${quizMfa}` : '',
       frustration: `${quizConcern}${quizDetails} | Score ${results.score}/100 | SPF ${results.spf.present ? 'found' : 'missing'}, DKIM ${results.dkim.found.length ? 'found' : 'not found'}, DMARC ${results.dmarc.present ? 'found' : 'missing'} | Source: ${leadSource}`
     } : {})
