@@ -114,9 +114,31 @@ module.exports = async function handler(req, res) {
   const quizPlatform = cleanString(answers.platform, 80);
   const quizSupport = cleanString(answers.support, 80);
 
-  if (!DOMAIN_RX.test(domain)) return res.status(400).json({ error: 'Enter a valid domain, like example.com.' });
   if (!EMAIL_RX.test(email) || email.length > 254) return res.status(400).json({ error: 'Enter a valid email address.' });
   if (company.length > 120 || phone.length > 32) return res.status(400).json({ error: 'One or more fields are too long.' });
+
+  if (fromQuiz && !domain) {
+    const recorded = await submitLead({
+      origin: 'https://www.ampitsolutions.com',
+      path: 'email-quiz',
+      name: 'Email Trust Check',
+      domain: '',
+      email,
+      company: 'Not provided',
+      phone,
+      booked: 'no',
+      concern: quizConcern || 'SPF DKIM DMARC scan request',
+      frustration: 'Domain not provided — follow up to run the check',
+      platform: quizPlatform || 'Not provided',
+      scan_score: '',
+      scan_spf: 'not scanned',
+      scan_dmarc: 'not scanned',
+      scan_dkim: 'not scanned'
+    });
+    return res.status(200).json({ skipped: true, leadRecorded: recorded });
+  }
+
+  if (!DOMAIN_RX.test(domain)) return res.status(400).json({ error: 'Enter a valid domain, like example.com.' });
 
   const txt = await resolveTxtSafe(domain);
   const spfRecords = txt.filter(r => /^v=spf1\b/i.test(r));
