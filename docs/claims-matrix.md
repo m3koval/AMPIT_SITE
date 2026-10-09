@@ -86,6 +86,17 @@ Use this longer version for pricing/FAQ/llms.txt:
 
 > AMP IT provides 24/7 automated monitoring for covered systems. Human helpdesk and account support are available Monday–Friday, 7 AM–6 PM ET. Emergency response options and the 1-hour emergency response SLA apply to qualifying plans and covered urgent issues, with the 1-hour SLA reserved for Best.
 
+## Incident proof point
+
+Confirmed by Mikhail 2026-10-09: for a real AMP IT client, an attack trying to steal information was stopped by blocking known malicious sites and isolating the affected device within minutes, which prevented reputation damage. Other businesses (not AMP IT clients) have had sites hacked and gone unnoticed for weeks, with reputation damage and rebuild costs.
+
+Approved (anonymized only):
+
+- Stopped in minutes. Not weeks.
+- Blocked the malicious sites. Isolated the device within minutes. Stopped the attack before it spread.
+
+Avoid: naming or identifying the client without written permission, inventing numbers (dollars saved, records protected), or implying every attack can be stopped.
+
 ## Texting
 
 Confirmed by Mikhail 2026-10-08: people can text (980) 377-2733 at any time, and AMP IT replies as soon as it can.
