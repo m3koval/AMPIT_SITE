@@ -99,7 +99,7 @@
         var data=res.data;
         try{if(window.posthog&&posthog.identify)posthog.identify(opts.email.toLowerCase(),{email:opts.email.toLowerCase(),lead_source:source,first_funnel:C.id});}catch(e){}
         track('funnel_lead_submitted',{answer:answers.concern||'',risk:cleanAnswers().risk||'',callback:!!opts.callback,scanned:!data.skipped,score:data.score||0,lead_recorded:!!data.leadRecorded});
-        if(data.leadRecorded){try{if(typeof gtag==='function')gtag('event','conversion',{send_to:CONVERSION});}catch(e){}}
+        if(data.leadRecorded){try{if(typeof gtag==='function')gtag('event','conversion',{send_to:CONVERSION});}catch(e){}try{if(typeof oaiq==='function')oaiq('measure','lead_created',{type:'customer_action'});}catch(e){}}
         setTimeout(function(){
           $('p-result').innerHTML=C.renderResult(data,{answer:answers.concern||'',answers:cleanAnswers(),callback:!!opts.callback,esc:esc,row:row,ctas:CTAS});
           $('p-result').insertAdjacentHTML('beforeend','<p class="q-fine q-text">Or text <a href="sms:+19803772733" data-cta="text">(980) 377-2733</a> anytime. We reply as soon as we can.</p>');
