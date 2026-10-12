@@ -114,7 +114,7 @@ window.FUNNEL={
   },
   renderResult:function(d,h){
     var call='<a class="q-btn" href="tel:+19803772733" data-cta="call">Call (980) 377-2733</a>';
-    if(h.callback)return '<h2 id="rTitle" tabindex="-1">Got it. We’ll call you back.</h2><p class="q-sub">Calls Mon to Fri, 7 AM to 6 PM ET. Need us sooner?</p>'+call;
+    if(h.callback)return '<h2 id="rTitle" tabindex="-1">Got it. We’ll call you back.</h2><p class="q-sub">Mikhail from AMP IT will call from (980) 377-2733. Save it so you know it’s us. Calls Mon to Fri, 7 AM to 6 PM ET.</p>'+call;
     var a=h.answers||{},urgent=a.risk!=='Check',steps=[];
     if(a.payment==='Yes, recently')steps.push('Don’t pay anything with changed bank details. Confirm by phone, using a number you already had.');
     if(a.account==='Bank or payments')steps.push('Call your bank’s fraud line now and ask them to lock the account.');
