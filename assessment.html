@@ -675,7 +675,6 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
 </footer>
 
 <script>
-  const SCRIPT_URL        = "https://script.google.com/macros/s/AKfycbzVSYcjWLFPz8P4HfusgA7obD2ikdRH7wCcRS91hFY-Vl7rko5P0EVGszSAzCzTocv45g/exec";
   const EMAIL_RX          = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
   const TOTAL             = 3;
   const GOOGLE_PLACES_KEY = 'AIzaSyCVcTFSwb73i8DjqRgZ72Jldffzj2yFXT0';
@@ -1064,8 +1063,8 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
   async function submitToSheets(extra) {
     sheetsSubmitted = true;
     try {
-      await fetch(SCRIPT_URL, {
-        method: 'POST', mode: 'no-cors',
+      await fetch('/api/lead', {
+        method: 'POST', keepalive: true,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           origin:      window.location.origin,
@@ -1091,7 +1090,7 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
           frustration: extra.concern || ''
         })
       });
-    } catch (e) { /* no-cors */ }
+    } catch (e) { /* lead capture must never block the booking flow */ }
   }
 
   function showBookingSuccess() {
@@ -1224,9 +1223,10 @@ src="https://www.facebook.com/tr?id=2176447043191960&ev=PageView&noscript=1"
       setup:       prepAns.setup    || '',
       concern:     prepAns.concern  || '',
       platform:    prepAns.platform || '',
-      frustration: prepAns.concern || ''
+      frustration: prepAns.concern || '',
+      left:        true
     });
-    navigator.sendBeacon(SCRIPT_URL, new Blob([payload], { type: 'application/json' }));
+    navigator.sendBeacon('/api/lead', new Blob([payload], { type: 'application/json' }));
   });
 
   // ── Init ──────────────────────────────────────────────────────
