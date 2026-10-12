@@ -7,6 +7,7 @@ const {
   rateLimit,
   setNoStore
 } = require('../lib/http-security');
+const { sendLeadAlert } = require('../lib/lead-alert');
 
 const EMAIL_RX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
 const EVENT_TYPES = new Set(['intro-call', 'onsite-audit']);
@@ -174,6 +175,14 @@ module.exports = async function handler(req, res) {
         name,
         eventId: booking.uid || booking.id
       }).catch(error => console.error('Meta CAPI Schedule error:', error.message));
+      const when = new Date(startMs).toLocaleString('en-US', { timeZone: 'America/New_York', weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+      await sendLeadAlert([
+        `📅 *New booking: ${isAudit ? 'On-site audit' : 'Intro call'}*`,
+        `${name} · ${when} ET`,
+        `Email: ${email}${phone ? ` · Phone: ${phone}` : ''}`,
+        address ? `Address: ${address}` : '',
+        note ? `Note: ${note}` : ''
+      ]);
     }
 
     return res.status(calRes.status).json(data);

@@ -6,6 +6,7 @@ const {
   setNoStore,
   setSameOriginCors
 } = require('../lib/http-security');
+const { sendLeadAlert } = require('../lib/lead-alert');
 
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzVSYcjWLFPz8P4HfusgA7obD2ikdRH7wCcRS91hFY-Vl7rko5P0EVGszSAzCzTocv45g/exec';
 const EMAIL_RX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
@@ -161,6 +162,13 @@ module.exports = async function handler(req, res) {
       scan_dmarc: 'not scanned',
       scan_dkim: 'not scanned'
     });
+    await sendLeadAlert([
+      `🔔 *New lead: ${funnelName}*${quizRisk === 'Urgent' ? ' (URGENT)' : ''}`,
+      `${quizConcern}${quizDetails}`,
+      `Email: ${email}${phone ? ` · Phone: ${phone} (wants a call back)` : ''}`,
+      `Source: ${leadSource} · ${personalEmail ? 'PERSONAL EMAIL' : 'Business email'}`,
+      recorded ? '' : '⚠️ Sheet write failed, this lead is only in this alert.'
+    ]);
     return res.status(200).json({ skipped: true, leadRecorded: recorded });
   }
 
@@ -217,5 +225,12 @@ module.exports = async function handler(req, res) {
   });
 
   results.leadRecorded = leadRecorded;
+  await sendLeadAlert([
+    `🔔 *New lead: ${fromQuiz ? funnelName : 'Email Trust Check'}*${quizRisk === 'Urgent' ? ' (URGENT)' : ''}`,
+    fromQuiz ? `${quizConcern}${quizDetails}` : 'Ran the email trust check',
+    `Email: ${email}${phone ? ` · Phone: ${phone}` : ''} · Domain: ${domain} (score ${results.score}/100)`,
+    `Source: ${fromQuiz ? leadSource : 'email-trust-check page'}`,
+    leadRecorded ? '' : '⚠️ Sheet write failed, this lead is only in this alert.'
+  ]);
   return res.status(200).json(results);
 };
