@@ -2,7 +2,7 @@
   var C=window.FUNNEL;if(!C)return;
   var $=function(id){return document.getElementById(id)};
   var CONVERSION='AW-18009085486/ILlTCJPv85UdEK6ss4tD';
-  var FREE=['gmail.com','googlemail.com','yahoo.com','ymail.com','outlook.com','hotmail.com','live.com','msn.com','icloud.com','me.com','aol.com','proton.me','protonmail.com'];
+  var FREE=['gmail.com','googlemail.com','yahoo.com','ymail.com','rocketmail.com','outlook.com','hotmail.com','live.com','msn.com','icloud.com','me.com','mac.com','aol.com','proton.me','protonmail.com','att.net','sbcglobal.net','bellsouth.net','comcast.net','verizon.net','charter.net','spectrum.net','rr.com','cox.net','earthlink.net','frontier.com','windstream.net','mail.com','gmx.com'];
   var qp=new URLSearchParams(location.search);
   var attr={utm_source:qp.get('utm_source')||'',utm_medium:qp.get('utm_medium')||'',utm_campaign:qp.get('utm_campaign')||'',utm_content:qp.get('utm_content')||'',gclid:qp.get('gclid')||''};
   var source=(function(){
@@ -89,6 +89,7 @@
     if(opts.requirePhone&&String(opts.phone).replace(/\D/g,'').length<10){err.textContent='Please enter a phone number we can call.';err.classList.add('show');return;}
     var d=domainFromEmail(opts.email);
     var domain=FREE.indexOf(d)!==-1?cleanDomain(opts.website||''):d;
+    var personal=FREE.indexOf(d)!==-1&&!domain;
     opts.btn.disabled=true;
     var back=opts.pane;show('p-load');
     var t0=Date.now();
@@ -98,8 +99,9 @@
         if(!res.ok)throw new Error((res.data&&res.data.error)||'Something went wrong. Please try again.');
         var data=res.data;
         try{if(window.posthog&&posthog.identify)posthog.identify(opts.email.toLowerCase(),{email:opts.email.toLowerCase(),lead_source:source,first_funnel:C.id});}catch(e){}
-        track('funnel_lead_submitted',{answer:answers.concern||'',risk:cleanAnswers().risk||'',callback:!!opts.callback,scanned:!data.skipped,score:data.score||0,lead_recorded:!!data.leadRecorded});
-        if(data.leadRecorded){try{if(typeof gtag==='function')gtag('event','conversion',{send_to:CONVERSION});}catch(e){}try{if(typeof oaiq==='function')oaiq('measure','lead_created',{type:'customer_action'});}catch(e){}}
+        track('funnel_lead_submitted',{answer:answers.concern||'',risk:cleanAnswers().risk||'',callback:!!opts.callback,scanned:!data.skipped,score:data.score||0,lead_recorded:!!data.leadRecorded,personal_email:personal});
+        // Personal-email leads still get recorded and helped, but are not reported to ad platforms so bidding favors business leads.
+        if(data.leadRecorded&&!personal){try{if(typeof gtag==='function')gtag('event','conversion',{send_to:CONVERSION});}catch(e){}try{if(typeof oaiq==='function')oaiq('measure','lead_created',{type:'customer_action'});}catch(e){}}
         setTimeout(function(){
           $('p-result').innerHTML=C.renderResult(data,{answer:answers.concern||'',answers:cleanAnswers(),callback:!!opts.callback,esc:esc,row:row,ctas:CTAS});
           $('p-result').insertAdjacentHTML('beforeend','<p class="q-fine q-text">Or text <a href="sms:+19803772733" data-cta="text">(980) 377-2733</a> anytime. We reply as soon as we can.</p>');

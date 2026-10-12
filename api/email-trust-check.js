@@ -12,6 +12,7 @@ const EMAIL_RX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
 const DOMAIN_RX = /^(?!-)(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$/;
 const FUNNEL_NAMES = { 'email-quiz': 'Email Quiz', 'security-check': 'Security Check', 'law-firm-check': 'Law Firm Check', 'cpa-check': 'CPA Check' };
 const FUNNEL_INDUSTRY = { 'law-firm-check': 'Law firm / legal services' };
+const PERSONAL_EMAIL_DOMAINS = new Set(['gmail.com','googlemail.com','yahoo.com','ymail.com','rocketmail.com','outlook.com','hotmail.com','live.com','msn.com','icloud.com','me.com','mac.com','aol.com','proton.me','protonmail.com','att.net','sbcglobal.net','bellsouth.net','comcast.net','verizon.net','charter.net','spectrum.net','rr.com','cox.net','earthlink.net','frontier.com','windstream.net','mail.com','gmx.com']);
 const COMMON_DKIM_SELECTORS = ['selector1', 'selector2', 'google', 'default', 'dkim', 'k1', 'mail', 's1', 's2', 'smtpapi', 'mandrill', 'sendgrid'];
 
 function flattenTxt(records) {
@@ -139,6 +140,7 @@ module.exports = async function handler(req, res) {
   if (company.length > 120 || phone.length > 32) return res.status(400).json({ error: 'One or more fields are too long.' });
 
   if (fromQuiz && !domain) {
+    const personalEmail = PERSONAL_EMAIL_DOMAINS.has(email.split('@')[1] || '');
     const recorded = await submitLead({
       origin: 'https://www.ampitsolutions.com',
       path: body.source,
@@ -149,10 +151,10 @@ module.exports = async function handler(req, res) {
       phone,
       booked: 'no',
       concern: quizConcern,
-      frustration: `${quizConcern}${quizDetails} | No domain given${phone ? ', call back' : ', follow up to run the check'} | Source: ${leadSource}`,
+      frustration: `${personalEmail ? 'PERSONAL EMAIL | ' : ''}${quizConcern}${quizDetails} | No domain given${phone ? ', call back' : ', follow up to run the check'} | Source: ${leadSource}`,
       platform: quizPlatform || 'Not provided',
       size: quizSize,
-      industry: quizIndustry,
+      industry: quizIndustry || (personalEmail ? 'Personal email' : ''),
       setup: quizMfa ? `MFA: ${quizMfa}` : '',
       scan_score: '',
       scan_spf: 'not scanned',
