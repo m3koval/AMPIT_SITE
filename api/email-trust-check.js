@@ -11,7 +11,7 @@ const { sendLeadAlert } = require('../lib/lead-alert');
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzVSYcjWLFPz8P4HfusgA7obD2ikdRH7wCcRS91hFY-Vl7rko5P0EVGszSAzCzTocv45g/exec';
 const EMAIL_RX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
 const DOMAIN_RX = /^(?!-)(?:[a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,}$/;
-const FUNNEL_NAMES = { 'email-quiz': 'Email Quiz', 'security-check': 'Security Check', 'law-firm-check': 'Law Firm Check', 'cpa-check': 'CPA Check' };
+const FUNNEL_NAMES = { 'email-quiz': 'Email Quiz', 'security-check': 'Security Check', 'law-firm-check': 'Law Firm Check', 'cpa-check': 'CPA Check', 'accounting-software': 'Accounting Software Check' };
 const FUNNEL_INDUSTRY = { 'law-firm-check': 'Law firm / legal services' };
 const PERSONAL_EMAIL_DOMAINS = new Set(['gmail.com','googlemail.com','yahoo.com','ymail.com','rocketmail.com','outlook.com','hotmail.com','live.com','msn.com','icloud.com','me.com','mac.com','aol.com','proton.me','protonmail.com','att.net','sbcglobal.net','bellsouth.net','comcast.net','verizon.net','charter.net','spectrum.net','rr.com','cox.net','earthlink.net','frontier.com','windstream.net','mail.com','gmx.com']);
 const COMMON_DKIM_SELECTORS = ['selector1', 'selector2', 'google', 'default', 'dkim', 'k1', 'mail', 's1', 's2', 'smtpapi', 'mandrill', 'sendgrid'];
@@ -130,7 +130,8 @@ module.exports = async function handler(req, res) {
     answers.plan && `Response plan: ${cleanString(answers.plan, 40)}`,
     answers.wires && `Wires: ${cleanString(answers.wires, 40)}`,
     answers.records && `Records held: ${cleanString(answers.records, 20)}`,
-    answers.irplan && `Breach plan: ${cleanString(answers.irplan, 30)}`
+    answers.irplan && `Breach plan: ${cleanString(answers.irplan, 30)}`,
+    answers.where && `Runs on: ${cleanString(answers.where, 40)}`
   ].filter(Boolean).map(x => ` | ${x}`).join('');
 
   if (!EMAIL_RX.test(email) || email.length > 254) return res.status(400).json({ error: 'Enter a valid email address.' });
