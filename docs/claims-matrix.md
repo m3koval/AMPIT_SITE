@@ -97,6 +97,18 @@ Approved (anonymized only):
 
 Avoid: naming or identifying the client without written permission, inventing numbers (dollars saved, records protected), or implying every attack can be stopped.
 
+## Software vendor support
+
+Confirmed by Mikhail 2026-10-14: AMP IT supports the business software clients already run (accounting such as QuickBooks and Sage, tax software, and law-firm software such as Clio, PCLaw, Time Matters, Tabs3, Worldox, Juris, SoftPro), learning what is needed and working directly with the software company's support team on the client's behalf.
+
+Approved:
+
+- Works with the software your firm already runs.
+- We work with the software company's support team so you don't have to.
+- We set up and support the computers, servers and remote access your software runs on.
+
+Avoid: claiming certification, official partnership or authorized hosting with any software vendor unless confirmed, and using vendor brand names in ad text.
+
 ## Texting
 
 Confirmed by Mikhail 2026-10-08: people can text (980) 377-2733 at any time, and AMP IT replies as soon as it can.
