@@ -88,6 +88,7 @@ window.FUNNEL=(function(){
   };
   return {
     id:'law-firm-check',
+    keywordHints:[[/wire|closing/i,'Email and wire safety'],[/insurance|questionnaire/i,'Insurance or client security forms'],[/\bai\b|chatgpt|artificial/i,'AI rules for staff'],[/microsoft 365|office 365|m365|outlook/i,'Moving to Microsoft 365'],[/pclaw|worldox|tabs3|time matters|juris|softpro|clio|server|software/i,'Old computers or server']],
     progress:false,
     questions:[
       {key:'concern',title:'Which IT project <span>keeps getting put off?</span>',options:[

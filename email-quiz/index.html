@@ -66,6 +66,7 @@
 <script>
 window.FUNNEL={
   id:'email-quiz',
+  keywordHints:[[/spam|junk/i,'No, they’re landing in spam'],[/never got|not receiv|not arriv|bounc|not deliver|not getting/i,'No, clients say they never got them'],[/spoof|pretend|imperson|as me/i,'Someone is sending emails as me']],
   questions:[
       {key:'concern',title:'Are your emails actually <span>reaching your clients?</span>',options:[
         {label:'No, they’re landing in spam'},

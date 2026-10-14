@@ -95,6 +95,7 @@ window.FUNNEL=(function(){
   var SEC='Investment advice, SEC-registered';
   return {
     id:'cpa-check',
+    keywordHints:[[/wisp|written information|safeguards|5708|security plan/i,'Finish our WISP'],[/remote/i,'Remote access for staff'],[/hosting|cloud|microsoft 365|office 365/i,'Moving to Microsoft 365 or the cloud'],[/insurance|questionnaire/i,'Insurance security form']],
     progress:false,
     questions:[
       {key:'concern',title:function(){var s=season();return s==='before'?'What needs to get done <span>before tax season?</span>':s==='after'?'What got put off <span>during tax season?</span>':'Which IT project <span>keeps getting put off?</span>';},options:[

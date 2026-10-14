@@ -122,6 +122,7 @@ module.exports = async function handler(req, res) {
   const quizMfa = cleanString(answers.mfa, 40);
   const quizIndustry = FUNNEL_INDUSTRY[body.source] || cleanString(answers.firm, 60);
   const quizRisk = cleanString(answers.risk, 10);
+  const searchTerm = cleanString(body.keyword, 80);
   const quizDetails = [
     quizRisk && `Priority: ${quizRisk}`,
     answers.account && `Account: ${cleanString(answers.account, 40)}`,
@@ -131,7 +132,8 @@ module.exports = async function handler(req, res) {
     answers.wires && `Wires: ${cleanString(answers.wires, 40)}`,
     answers.records && `Records held: ${cleanString(answers.records, 20)}`,
     answers.irplan && `Breach plan: ${cleanString(answers.irplan, 30)}`,
-    answers.where && `Runs on: ${cleanString(answers.where, 40)}`
+    answers.where && `Runs on: ${cleanString(answers.where, 40)}`,
+    searchTerm && `Search: ${searchTerm}`
   ].filter(Boolean).map(x => ` | ${x}`).join('');
 
   if (!EMAIL_RX.test(email) || email.length > 254) return res.status(400).json({ error: 'Enter a valid email address.' });

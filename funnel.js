@@ -5,6 +5,8 @@
   var FREE=['gmail.com','googlemail.com','yahoo.com','ymail.com','rocketmail.com','outlook.com','hotmail.com','live.com','msn.com','icloud.com','me.com','mac.com','aol.com','proton.me','protonmail.com','att.net','sbcglobal.net','bellsouth.net','comcast.net','verizon.net','charter.net','spectrum.net','rr.com','cox.net','earthlink.net','frontier.com','windstream.net','mail.com','gmx.com'];
   var qp=new URLSearchParams(location.search);
   var attr={utm_source:qp.get('utm_source')||'',utm_medium:qp.get('utm_medium')||'',utm_campaign:qp.get('utm_campaign')||'',utm_content:qp.get('utm_content')||'',gclid:qp.get('gclid')||''};
+  var kw=(qp.get('kw')||'').slice(0,80).replace(/[^\w .+&'\-]/g,'').trim();
+  if(kw)attr.keyword=kw;
   var source=(function(){
     if(attr.utm_source)return attr.utm_source.toLowerCase();
     if(attr.gclid)return 'google-ads';
@@ -47,9 +49,12 @@
     var q=Q[qi];
     $('qTitle').innerHTML=typeof q.title==='function'?q.title(answers):q.title;
     var box=$('qOpts');box.innerHTML='';
-    q.options.forEach(function(o){
+    var opts=q.options.slice(),hint='';
+    if(qi===0&&kw&&C.keywordHints){for(var h=0;h<C.keywordHints.length;h++){if(C.keywordHints[h][0].test(kw)){hint=C.keywordHints[h][1];break;}}}
+    if(hint){for(var k=0;k<opts.length;k++){if(opts[k].label===hint){opts.unshift(opts.splice(k,1)[0]);break;}}}
+    opts.forEach(function(o){
       var b=document.createElement('button');
-      b.type='button';b.className='q-opt';b.textContent=o.label;
+      b.type='button';b.className='q-opt'+(o.label===hint?' hint':'');b.textContent=o.label;
       b.addEventListener('click',function(){
         if(locked)return;locked=true;
         answers[q.key]=o.label;b.classList.add('picked');
@@ -93,7 +98,7 @@
     opts.btn.disabled=true;
     var back=opts.pane;show('p-load');
     var t0=Date.now();
-    fetch('/api/email-trust-check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({hp:(document.getElementById('hp')||{}).value||'',elapsed:Date.now()-loadedAt,domain:domain,email:opts.email,phone:opts.phone||'',source:C.id,lead_source:source,answers:cleanAnswers()})})
+    fetch('/api/email-trust-check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({hp:(document.getElementById('hp')||{}).value||'',elapsed:Date.now()-loadedAt,domain:domain,email:opts.email,phone:opts.phone||'',source:C.id,lead_source:source,keyword:kw,answers:cleanAnswers()})})
       .then(function(r){return r.json().catch(function(){return {}}).then(function(j){return {ok:r.ok,data:j}})})
       .then(function(res){
         if(!res.ok)throw new Error((res.data&&res.data.error)||'Something went wrong. Please try again.');
@@ -106,6 +111,7 @@
           $('p-result').innerHTML=C.renderResult(data,{answer:answers.concern||'',answers:cleanAnswers(),callback:!!opts.callback,esc:esc,row:row,ctas:CTAS});
           $('p-result').insertAdjacentHTML('beforeend','<p class="q-fine q-text">Or text <a href="sms:+19803772733" data-cta="text">(980) 377-2733</a> anytime. We reply as soon as we can.</p>');
           show('p-result','rTitle');
+          if(!opts.callback&&C.booking!==false)renderBooking(opts.email.trim(),personal);
           $('p-result').querySelectorAll('[data-cta]').forEach(function(a){a.addEventListener('click',function(){track('funnel_cta_clicked',{cta:a.getAttribute('data-cta')})})});
         },opts.callback?300:Math.max(0,1800-(Date.now()-t0)));
       })
@@ -123,6 +129,64 @@
     e.preventDefault();
     submitLead({email:$('uEmail').value.trim(),phone:$('uPhone').value.trim(),requirePhone:true,callback:true,btn:$('uBtn'),err:$('uError'),pane:'p-urgent'});
   });
+
+  var BOOK_CONVERSION='AW-18009085486/ZIP4CKuYzJscEK6ss4tD';
+  function nameFromEmail(email){var p=String(email).split('@')[0].replace(/\+.*$/,'').split(/[._\-]+/).filter(Boolean).map(function(x){return x.charAt(0).toUpperCase()+x.slice(1)}).join(' ').trim();return p.length>=2?p.slice(0,100):'Guest';}
+  function ymd(d){return d.toLocaleDateString('en-CA',{timeZone:'America/New_York'});}
+  function whenLabel(iso){return new Date(iso).toLocaleString('en-US',{timeZone:'America/New_York',weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});}
+  // Lets people book the 15-minute intro call right under their result instead of starting over on /assessment.
+  function renderBooking(email,personal){
+    var res=$('p-result'),bookLink=res.querySelector('[data-cta="book"]'),box=document.createElement('div');
+    box.className='q-book';
+    box.innerHTML='<p class="q-label">Pick a time for a free 15-minute call</p><div class="q-slots"><span class="q-fine">Loading open times…</span></div>';
+    if(bookLink)bookLink.parentNode.insertBefore(box,bookLink);else res.appendChild(box);
+    fetch('/api/cal-slots?type=intro-call&from='+ymd(new Date())+'&to='+ymd(new Date(Date.now()+14*864e5)))
+      .then(function(r){return r.ok?r.json():{}})
+      .then(function(data){
+        var picks=[],soon=Date.now()+2*36e5;
+        Object.keys(data||{}).sort().some(function(day){
+          var t=(data[day]||[]).filter(function(x){return Date.parse(x)>soon});
+          if(!t.length)return false;
+          picks.push(t[0]);if(t.length>2)picks.push(t[Math.floor(t.length/2)]);
+          return picks.length>=6;
+        });
+        if(!picks.length){box.remove();return;}
+        if(bookLink)bookLink.style.display='none';
+        var slots=box.querySelector('.q-slots');slots.innerHTML='';
+        picks.slice(0,6).forEach(function(iso){
+          var b=document.createElement('button');b.type='button';b.className='q-slot';b.textContent=whenLabel(iso);
+          b.addEventListener('click',function(){pick(iso,b)});slots.appendChild(b);
+        });
+        track('funnel_booking_shown',{slots:picks.length});
+      })
+      .catch(function(){box.remove();});
+    function pick(iso,btn){
+      box.querySelectorAll('.q-slot').forEach(function(x){x.classList.toggle('sel',x===btn)});
+      var c=box.querySelector('.q-book-confirm');
+      if(!c){c=document.createElement('div');c.className='q-book-confirm';box.appendChild(c);}
+      c.innerHTML='<input class="q-input" type="text" autocomplete="name" placeholder="Your name" aria-label="Your name" maxlength="100"><div class="q-error" role="alert"></div><button class="q-btn" type="button">Book '+esc(whenLabel(iso))+' ET</button>';
+      var go=c.querySelector('.q-btn'),err=c.querySelector('.q-error'),nm=c.querySelector('input');
+      track('funnel_booking_slot_picked',{slot:iso});
+      go.addEventListener('click',function(){
+        go.disabled=true;err.classList.remove('show');
+        var name=nm.value.trim().length>=2?nm.value.trim():nameFromEmail(email);
+        var a=cleanAnswers(),note=('From the '+C.id+' check. '+Object.keys(a).map(function(k){return k+': '+a[k]}).join('; ')+(kw?'; search: '+kw:'')).slice(0,1000);
+        fetch('/api/cal-book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'intro-call',start:iso,name:name,email:email,phone:'',address:'',note:note})})
+          .then(function(r){return r.json().catch(function(){return {}}).then(function(j){return {ok:r.ok,data:j}})})
+          .then(function(r){
+            var bk=(r.data&&(r.data.data||r.data))||{};
+            if(!(r.ok&&r.data&&r.data.status==='success'&&(bk.uid||bk.id)))throw new Error('book');
+            track('funnel_meeting_booked',{slot:iso,personal_email:personal});
+            if(!personal){try{if(typeof gtag==='function')gtag('event','conversion',{send_to:BOOK_CONVERSION});}catch(e){}}
+            box.innerHTML='<h3 class="q-booked">You’re booked.</h3><p class="q-sub">'+esc(whenLabel(iso))+' ET, 15 minutes on Google Meet. The invite is on its way to '+esc(email)+'.</p>';
+          })
+          .catch(function(){
+            go.disabled=false;err.textContent='That time didn’t go through. Pick another, or call (980) 377-2733.';err.classList.add('show');
+          });
+      });
+      try{nm.focus({preventScroll:true})}catch(e){}
+    }
+  }
 
   function row(name,tag,cls){return '<div class="q-row '+cls+'"><span>'+esc(name)+'</span><span class="t">'+esc(tag)+'</span></div>';}
   var CTAS='<a class="q-btn" href="/assessment" data-cta="book">Book a free 15-minute call</a><a class="q-btn alt" href="tel:+19803772733" data-cta="call">Call (980) 377-2733</a>';

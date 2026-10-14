@@ -82,6 +82,7 @@ window.FUNNEL=(function(){
   };
   return {
     id:'accounting-software',
+    keywordHints:[[/multi.?user|database server|server manager|single user/i,'Only one person can use it at a time'],[/slow|freez|crash|lock/i,'It’s slow or keeps freezing'],[/remote|anywhere|home|cloud|host/i,'We need it from home or on the road'],[/end of life|discontinu|unsupported|upgrade|old version/i,'Our version is old or losing support'],[/migrat|switch|convert|moving|move to/i,'Moving to new software']],
     progress:false,
     questions:[
       {key:'concern',title:'What’s getting in the way <span>with your accounting software?</span>',options:[

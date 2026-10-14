@@ -81,6 +81,7 @@
 <script>
 window.FUNNEL={
   id:'security-check',
+  keywordHints:[[/login|alert|password|sign.?in/i,'I got a strange login or password alert'],[/spoof|pretend|imperson|as me/i,'Someone sent emails pretending to be me']],
   questions:[
     {key:'concern',title:'Has someone gotten into <span>your email or accounts?</span>',options:[
       {label:'Yes, it’s happening right now',urgent:true},
