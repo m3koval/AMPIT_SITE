@@ -21,3 +21,19 @@ jobs:
       - run: python tests/search-consistency.test.py
       - run: python scripts/sync-search-plans.py --check
       - run: git diff --check
+  indexnow:
+    # Tells Bing (and other IndexNow engines) about site pages after each push to main.
+    # ChatGPT search leans on Bing's index, so fresh pages get picked up sooner.
+    needs: checks
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for Vercel deploy
+        run: sleep 150
+      - name: Submit sitemap URLs to IndexNow
+        run: |
+          URLS=$(grep -o '<loc>[^<]*</loc>' sitemap.xml | sed 's/<\/\?loc>//g' | python3 -c "import sys,json;print(json.dumps([l.strip() for l in sys.stdin if l.strip()]))")
+          curl -sS -o /dev/null -w "IndexNow HTTP %{http_code}\n" -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            -d "{\"host\":\"www.ampitsolutions.com\",\"key\":\"401f797bde80e9494cd6fd48629423d0\",\"keyLocation\":\"https://www.ampitsolutions.com/401f797bde80e9494cd6fd48629423d0.txt\",\"urlList\":$URLS}"
