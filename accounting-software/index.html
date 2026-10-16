@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Accounting Software Slow or Locked? | AMP IT</title>
-<meta name="description" content="Free 2-tap check for businesses running QuickBooks, Sage or other accounting software. Get a plan for multi-user, slow, remote access and old setups.">
+<meta name="description" content="QuickBooks, Sage or other accounting software stuck on one computer, slow, or hard to reach from home? Tell us what’s wrong and talk with a Charlotte IT team for 15 minutes.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://www.ampitsolutions.com/accounting-software/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -40,23 +40,8 @@
     <button class="q-back" id="qBack" type="button" hidden>&larr; Back</button>
   </section>
 
-  <section class="q-pane" id="p-contact" hidden>
-    <h2 id="cTitle" tabindex="-1">Where should we send <span>your plan?</span></h2>
-    <form id="cForm" novalidate>
-      <input class="q-input" id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@yourcompany.com" aria-label="Email" required>
-      <input class="q-input" id="domain" name="domain" type="text" inputmode="url" autocomplete="url" placeholder="Your company website (optional)" aria-label="Your company website, optional" hidden>
-      <input class="hp" id="hp" name="website_url" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <div class="q-error" id="cError" role="alert"></div>
-      <button class="q-btn" id="cBtn" type="submit">Show my plan</button>
-    </form>
-    <div class="q-foot"><p class="q-fine">No sales call unless you book one. <a href="/privacy">Privacy</a></p><button class="q-back" type="button" data-back>&larr; Back</button></div>
-  </section>
 
-  <section class="q-pane" id="p-load" hidden>
-    <div class="q-load"><div class="q-spin" role="status" aria-label="Checking"></div></div>
-  </section>
 
-  <section class="q-pane" id="p-result" hidden></section>
 
 </div>
 </main>
@@ -65,20 +50,13 @@
 
 <script>
 window.FUNNEL=(function(){
-  function li(h,text){return '<li><span>'+h.esc(text)+'</span></li>';}
-  var FIX1={
-    'Only one person can use it at a time':'Shared-use problems usually come from where the company file lives. Keep it on one always-on computer or server, and keep everyone on the same version.',
-    'It’s slow or keeps freezing':'Slowness usually comes from the computer or network holding the company file, not the software. Check free disk space, the network connection, and that backups are not running during work hours.',
-    'We need it from home or on the road':'Don’t email the company file around or keep copies on personal laptops. Use one secure remote connection to the office copy, with two-step login.',
-    'Our version is old or losing support':'Find out when your version stops getting updates and security fixes. Plan the move before then, not during month-end or tax season.',
-    'Moving to new software':'Before you switch, take a clean backup, export your history, and run old and new side by side through one month-end close.',
+  var WHY={
+    'Only one person can use it at a time':'This usually comes down to where the company file lives and how it’s shared, not the software.',
+    'It’s slow or keeps freezing':'Slowness usually comes from the computer or network holding the company file, not the software.',
+    'We need it from home or on the road':'The safe way is one secure connection to the office copy, not emailed copies of the company file.',
+    'Our version is old or losing support':'Plan the move before your version stops getting security fixes, not during month-end.',
+    'Moving to new software':'A clean switch means a tested backup, your history exported, and one month-end run side by side.',
     'Not sure, it just needs to work':'Start with a backup you have actually restored. Accounting history is hard to rebuild.'
-  };
-  var FIX2={
-    'One office computer':'That computer has quietly become your server. Back it up every night, keep it on, and make sure it is not someone’s everyday machine.',
-    'A server in the office':'Check the server’s age and warranty. Older servers are a common cause of slowdowns and surprise outages.',
-    'Someone hosts it for us':'Confirm who backs up your data, how often, and how you would get it back if you ever switched providers.',
-    'Not sure':'Find out where your company file actually lives. If nobody knows, that is the first thing to fix.'
   };
   return {
     id:'accounting-software',
@@ -88,20 +66,11 @@ window.FUNNEL=(function(){
       {key:'concern',title:'What’s getting in the way <span>with your accounting software?</span>',options:[
         {label:'Only one person can use it at a time'},{label:'It’s slow or keeps freezing'},{label:'We need it from home or on the road'},
         {label:'Our version is old or losing support'},{label:'Moving to new software'},{label:'Not sure, it just needs to work'}
-      ]},
-      {key:'where',title:'Where does it <span>run today?</span>',options:[
-        {label:'One office computer'},{label:'A server in the office'},{label:'Someone hosts it for us'},{label:'Not sure'}
       ]}
     ],
-    renderResult:function(d,h){
-      var a=h.answers||{},fixes=[FIX1[a.concern]||FIX1['Not sure, it just needs to work'],FIX2[a.where]||FIX2['Not sure'],'Turn on two-step login for everyone who can open the books.'];
-      var call='<a class="q-btn alt" href="tel:+19803772733" data-cta="call">Call (980) 377-2733</a>';
-      var book='<a class="q-btn" href="/assessment" data-cta="book">Book a free 15-minute call</a>';
-      var recap=[a.concern,a.where].filter(Boolean).join(' · ');
-      return (recap?'<p class="q-label">'+h.esc(recap)+'</p>':'')+
-        '<h2 id="rTitle" tabindex="-1">Your plan: 3 steps</h2>'+
-        '<ol class="q-steps">'+fixes.map(function(f){return li(h,f)}).join('')+'</ol>'+
-        '<p class="q-sub">Want us to set it up? One-time projects welcome. We work with your software company’s support team so you don’t have to.</p>'+book+call;
+    talk:{
+      title:'We can help <span>with that.</span>',
+      line:function(a){return (WHY[a.concern]||WHY['Not sure, it just needs to work'])+' On a free 15-minute call we’ll look at your setup and tell you what we’d do first. We work with your software company’s support team so you don’t have to.';}
     }
   };
 })();

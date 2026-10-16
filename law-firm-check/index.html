@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IT Plan for Law Firms | AMP IT</title>
-<meta name="description" content="Three taps to a short IT and security plan for your law firm, with the ethics rules and insurance questions that apply. Charlotte NC.">
+<meta name="description" content="Tell us which IT project your law firm keeps putting off, then talk with a Charlotte IT team for 15 minutes. Email, wire fraud, Microsoft 365, insurance forms and AI rules.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://www.ampitsolutions.com/law-firm-check/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -40,23 +40,8 @@
     <button class="q-back" id="qBack" type="button" hidden>&larr; Back</button>
   </section>
 
-  <section class="q-pane" id="p-contact" hidden>
-    <h2 id="cTitle" tabindex="-1">Where should we send <span>your plan?</span></h2>
-    <form id="cForm" novalidate>
-      <input class="q-input" id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@yourfirm.com" aria-label="Email" required>
-      <input class="q-input" id="domain" name="domain" type="text" inputmode="url" autocomplete="url" placeholder="Your firm's website (optional)" aria-label="Your firm's website, optional" hidden>
-      <input class="hp" id="hp" name="website_url" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <div class="q-error" id="cError" role="alert"></div>
-      <button class="q-btn" id="cBtn" type="submit">Show my plan</button>
-    </form>
-    <div class="q-foot"><p class="q-fine">No sales call unless you book one. <a href="/privacy">Privacy</a></p><button class="q-back" type="button" data-back>&larr; Back</button></div>
-  </section>
 
-  <section class="q-pane" id="p-load" hidden>
-    <div class="q-load"><div class="q-spin" role="status" aria-label="Checking"></div></div>
-  </section>
 
-  <section class="q-pane" id="p-result" hidden></section>
 
 </div>
 </main>
@@ -65,26 +50,14 @@
 
 <script>
 window.FUNNEL=(function(){
-  function li(h,text,src){return '<li><span>'+h.esc(text)+(src?'<small class="q-src">'+h.esc(src)+'</small>':'')+'</span></li>';}
-  function plan(h,fixes,recap,extra){
-    var call='<a class="q-btn alt" href="tel:+19803772733" data-cta="call">Call (980) 377-2733</a>';
-    var book='<a class="q-btn" href="/assessment" data-cta="book">Book a free 15-minute call</a>';
-    return (recap?'<p class="q-label">'+h.esc(recap)+'</p>':'')+
-      '<h2 id="rTitle" tabindex="-1">Your plan: '+fixes.length+' fixes</h2>'+
-      '<ol class="q-steps">'+fixes.map(function(f){return li(h,f[0],f[1])}).join('')+'</ol>'+
-      (extra?'<p class="q-sub">'+h.esc(extra)+'</p>':'')+
-      '<p class="q-sub">Want us to do these? One-time projects welcome.</p>'+book+call;
-  }
-  var SC=/[?&]state=sc\b/i.test(location.search);
-
-  var FIX1={
-    'Old computers or server':['Replace anything that no longer gets security updates. Insurance and client security forms commonly ask about it.',''],
-    'Moving to Microsoft 365':['Before you move, get three things in writing: confidentiality terms, how you get your data back, and how often it is backed up.',SC?'SC Rule 1.6: reasonable efforts to protect client information':'NC State Bar 2011 FEO 6'],
-    'Email and wire safety':['Lock down firm email first. Wire fraud usually starts with a hacked or spoofed email account.',''],
-    'Website':['Send your contact form to a firm email account with two-step login, not a free inbox.',''],
-    'Insurance or client security forms':['Most forms ask about two-step login on email and remote access, endpoint protection, a tested offline backup, current updates, and calling to verify wires. Answer only what is true.','Common insurer and client questions'],
-    'AI rules for staff':['Write a one-page AI policy. Get client consent before client details go into AI tools that learn from what you type.','ABA Formal Opinion 512 (guidance)'],
-    'Not sure where to start':['Write down what you would do on a ransomware day. The ABA recommends having a plan.','ABA Formal Opinion 483']
+  var WHY={
+    'Old computers or server':'Insurance and client security forms commonly ask whether every computer still gets security updates.',
+    'Moving to Microsoft 365':'Before you move, get confidentiality terms, how you get your data back, and backups in writing.',
+    'Email and wire safety':'Wire fraud usually starts with a hacked or spoofed email account.',
+    'Website':'Your contact form should land in a firm inbox with two-step login, not a free account.',
+    'Insurance or client security forms':'Most forms ask about two-step login, endpoint protection, tested backups and calling to verify wires. Answer only what is true.',
+    'AI rules for staff':'Firms need a short AI policy, and client consent before client details go into AI tools that learn from what you type.',
+    'Not sure where to start':'Most firms start with email security and a written plan for a ransomware day.'
   };
   return {
     id:'law-firm-check',
@@ -94,28 +67,11 @@ window.FUNNEL=(function(){
       {key:'concern',title:'Which IT project <span>keeps getting put off?</span>',options:[
         {label:'Old computers or server'},{label:'Moving to Microsoft 365'},{label:'Email and wire safety'},{label:'Website'},
         {label:'Insurance or client security forms'},{label:'AI rules for staff'},{label:'Not sure where to start'}
-      ]},
-      {key:'wires',title:'Does client money <span>move by wire?</span>',options:[
-        {label:'Yes, closings or settlements'},{label:'Sometimes'},{label:'No'}
-      ]},
-      {key:'mfa',title:'Is two-step login on for <span>every email account?</span>',options:[
-        {label:'Yes, partners included'},{label:'Some people'},{label:'No'},{label:'Not sure'}
       ]}
     ],
-    renderResult:function(d,h){
-      var a=h.answers||{},fixes=[];
-      fixes.push(FIX1[a.concern]||FIX1['Not sure where to start']);
-      if(a.wires==='No'){
-        fixes.push(SC?['Know who you would have to tell after a breach. SC law requires notice without unreasonable delay, and larger breaches also go to SC Consumer Affairs.','S.C. Code 39-1-90']
-                     :['Know who you would have to tell after a breach: affected people without unreasonable delay, and the NC Attorney General every time. Over 1,000 people, the credit bureaus too.','N.C.G.S. 75-65']);
-      }else if(a.wires){
-        fixes.push(SC?['Give every client a written warning to call and verify wire instructions. Check your malpractice carrier’s wire fraud terms.','']
-                     :['Give every client a written wire fraud warning at engagement and point them to it. For closings, the NC State Bar says not warning clients about wire fraud breaks the ethics rules, and a footer alone is not enough. If Lawyers Mutual insures you, check its wire fraud Safe Harbor steps.','NC State Bar 2020 FEO 5']);
-      }
-      fixes.push(a.mfa==='Yes, partners included'?['Good. Next, confirm two-step login also covers remote access and admin accounts.','']
-                  :['Turn on two-step login for everyone this week, partners included. Insurance and client security forms commonly ask about it.','']);
-      var recap=[a.concern&&a.concern!=='Not sure where to start'?a.concern:'',a.wires==='No'?'No wires':a.wires?'Client wires':'',a.mfa==='Yes, partners included'?'Two-step on':a.mfa?'Two-step not on for everyone':''].filter(Boolean).join(' · ');
-      return plan(h,fixes,recap,'');
+    talk:{
+      title:function(a){return a.concern==='Not sure where to start'?'Let’s find <span>where to start.</span>':'We can help <span>with that.</span>';},
+      line:function(a){return (WHY[a.concern]||WHY['Not sure where to start'])+' On a free 15-minute call we’ll look at your setup and tell you what we’d do first.';}
     }
   };
 })();

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IT Plan for CPAs and Tax Preparers | AMP IT</title>
-<meta name="description" content="Three taps to a short IT and security plan for your CPA, tax or advisory firm, with the FTC, IRS and SEC rules that apply. Charlotte NC.">
+<meta name="description" content="Tell us which IT project your CPA, tax or advisory firm keeps putting off, then talk with a Charlotte IT team for 15 minutes. WISP, remote access, Microsoft 365 and insurance forms.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://www.ampitsolutions.com/cpa-check/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -40,23 +40,8 @@
     <button class="q-back" id="qBack" type="button" hidden>&larr; Back</button>
   </section>
 
-  <section class="q-pane" id="p-contact" hidden>
-    <h2 id="cTitle" tabindex="-1">Where should we send <span>your plan?</span></h2>
-    <form id="cForm" novalidate>
-      <input class="q-input" id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@yourfirm.com" aria-label="Email" required>
-      <input class="q-input" id="domain" name="domain" type="text" inputmode="url" autocomplete="url" placeholder="Your firm's website (optional)" aria-label="Your firm's website, optional" hidden>
-      <input class="hp" id="hp" name="website_url" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <div class="q-error" id="cError" role="alert"></div>
-      <button class="q-btn" id="cBtn" type="submit">Show my plan</button>
-    </form>
-    <div class="q-foot"><p class="q-fine">No sales call unless you book one. <a href="/privacy">Privacy</a></p><button class="q-back" type="button" data-back>&larr; Back</button></div>
-  </section>
 
-  <section class="q-pane" id="p-load" hidden>
-    <div class="q-load"><div class="q-spin" role="status" aria-label="Checking"></div></div>
-  </section>
 
-  <section class="q-pane" id="p-result" hidden></section>
 
 </div>
 </main>
@@ -65,34 +50,21 @@
 
 <script>
 window.FUNNEL=(function(){
-  function li(h,text,src){return '<li><span>'+h.esc(text)+(src?'<small class="q-src">'+h.esc(src)+'</small>':'')+'</span></li>';}
-  function plan(h,fixes,recap,extra){
-    var call='<a class="q-btn alt" href="tel:+19803772733" data-cta="call">Call (980) 377-2733</a>';
-    var book='<a class="q-btn" href="/assessment" data-cta="book">Book a free 15-minute call</a>';
-    return (recap?'<p class="q-label">'+h.esc(recap)+'</p>':'')+
-      '<h2 id="rTitle" tabindex="-1">Your plan: '+fixes.length+' fixes</h2>'+
-      '<ol class="q-steps">'+fixes.map(function(f){return li(h,f[0],f[1])}).join('')+'</ol>'+
-      (extra?'<p class="q-sub">'+h.esc(extra)+'</p>':'')+
-      '<p class="q-sub">Want us to do these? One-time projects welcome.</p>'+book+call;
-  }
-  var SC=/[?&]state=sc\b/i.test(location.search);
-
   function season(){
     var n=new Date(),m=n.getMonth()+1,d=n.getDate();
     if(m>=10)return 'before';
     if((m===4&&d>=16)||(m>=5&&m<=8))return 'after';
     return '';
   }
-  var FIX1={
-    'Finish our WISP':['Start from IRS Publication 5708, the free IRS template. Then make it match what you actually do: who has access, where client files live, and what you do on a breach day.','IRS IR-2026-92'],
-    'Old computers':['Replace anything past security updates before tax season. The IRS baseline: antivirus, firewall, backups, encrypted drives, two-step login and a VPN.','IRS Security Six'],
-    'Moving to Microsoft 365 or the cloud':['Turn on two-step login and encryption as part of the move, not after.','FTC Safeguards Rule'],
-    'Remote access for staff':['Every remote login needs two-step login and a VPN or a secured remote setup.','IRS Security Six'],
-    'Website or client portal':['Use a secure portal for client uploads instead of email attachments. Fake “new client” emails with infected files are a top IRS warning.','IRS Security Summit'],
-    'Insurance security form':['These forms commonly ask about two-step login everywhere, endpoint protection, tested backups including Microsoft 365, a written incident plan and a WISP. Answer only what is true.','Common insurer questions'],
-    'Not sure where to start':['Start with the IRS Security Six: antivirus, firewall, backups, encrypted drives, two-step login and a VPN.','IRS Security Six']
+  var WHY={
+    'Finish our WISP':'The IRS template is free. The work is making it match what your firm actually does.',
+    'Old computers':'Replace anything past security updates before tax season, not during it.',
+    'Moving to Microsoft 365 or the cloud':'Turn on two-step login and encryption as part of the move, not after.',
+    'Remote access for staff':'Every remote login needs two-step login and a secured connection.',
+    'Website or client portal':'A secure upload portal beats email attachments. Fake new-client emails with infected files are a top IRS warning.',
+    'Insurance security form':'Most forms ask about two-step login, endpoint protection, tested backups, an incident plan and a WISP. Answer only what is true.',
+    'Not sure where to start':'Most firms start with the IRS Security Six: antivirus, firewall, backups, encryption, two-step login and a VPN.'
   };
-  var SEC='Investment advice, SEC-registered';
   return {
     id:'cpa-check',
     keywordHints:[[/wisp|written information|safeguards|5708|security plan/i,'Finish our WISP'],[/remote/i,'Remote access for staff'],[/hosting|cloud|microsoft 365|office 365/i,'Moving to Microsoft 365 or the cloud'],[/insurance|questionnaire/i,'Insurance security form']],
@@ -101,40 +73,11 @@ window.FUNNEL=(function(){
       {key:'concern',title:function(){var s=season();return s==='before'?'What needs to get done <span>before tax season?</span>':s==='after'?'What got put off <span>during tax season?</span>':'Which IT project <span>keeps getting put off?</span>';},options:[
         {label:'Finish our WISP'},{label:'Old computers'},{label:'Moving to Microsoft 365 or the cloud'},{label:'Remote access for staff'},
         {label:'Website or client portal'},{label:'Insurance security form'},{label:'Not sure where to start'}
-      ]},
-      {key:'firm',title:'What does <span>your firm do?</span>',options:[
-        {label:'Tax returns'},{label:'Accounting or bookkeeping, no tax returns'},{label:SEC},{label:'Investment advice, state-registered'}
-      ]},
-      {key:'records',title:'How many people’s records do you keep, <span>past clients included?</span>',showIf:function(a){return a.firm!==SEC},options:[
-        {label:'Under 5,000'},{label:'5,000 or more'},{label:'Not sure'}
-      ]},
-      {key:'irplan',title:'Do you have a written plan <span>for a data breach?</span>',showIf:function(a){return a.firm===SEC},options:[
-        {label:'Yes, and we tested it'},{label:'Yes, never tested'},{label:'No'}
       ]}
     ],
-    renderResult:function(d,h){
-      var a=h.answers||{},fixes=[],extra='';
-      fixes.push(FIX1[a.concern]||FIX1['Not sure where to start']);
-      if(a.firm!=='Tax returns'&&/IRS/.test(fixes[0][1]))fixes[0]=[fixes[0][0],''];
-      if(a.firm===SEC){
-        var next=a.irplan==='No'?'Write your plan now.':a.irplan==='Yes, never tested'?'Run a one-hour walkthrough and keep notes.':'Next, make sure your vendors must tell you quickly about a breach.';
-        fixes.push(['Regulation S-P requires a written incident response program and client notice within 30 days. Smaller advisers had to comply by June 3, 2026. '+next,'SEC Regulation S-P']);
-      }else{
-        var small='At your size the FTC Safeguards Rule still requires a named Qualified Individual, two-step login, encryption, staff training, vendor oversight and a written security plan. Your Qualified Individual can be an outside provider.';
-        var big='The FTC Safeguards Rule requires a Qualified Individual, two-step login, encryption, training, vendor oversight and a written security plan, plus a written risk assessment, regular testing, a written incident response plan and an annual report.';
-        var unsure='Count every person whose records you still hold, past clients included. The small-firm exemption depends on that number.';
-        var size=a.records==='Under 5,000'?small:a.records==='5,000 or more'?big:unsure;
-        if(a.firm==='Accounting or bookkeeping, no tax returns')fixes.push(['The FTC Safeguards Rule may apply. It depends on whether your services count as financial activities. Tax preparation does. If it applies: '+size,'FTC guidance']);
-        else if(a.firm==='Investment advice, state-registered')fixes.push(['The FTC Safeguards Rule applies to advisers not registered with the SEC. '+size,'16 CFR 314']);
-        else fixes.push([size,'16 CFR 314.6']);
-        var breach=['If a breach reaches 500 or more people, report it to the FTC within 30 days.'];
-        if(a.firm==='Tax returns')breach.push('Call your IRS Stakeholder Liaison right away so the IRS can block fake returns.');
-        breach.push(SC?'In SC, larger breaches also go to SC Consumer Affairs.':'In NC, any notice to clients also goes to the Attorney General.');
-        fixes.push([breach.join(' '),SC?'FTC Safeguards Rule; S.C. Code 39-1-90':'FTC Safeguards Rule; N.C.G.S. 75-65']);
-        if(a.firm==='Tax returns')extra='Your PTIN renewal form asks you to acknowledge this data security duty.';
-      }
-      var recap=[a.concern&&a.concern!=='Not sure where to start'?a.concern:'',a.firm||'',a.records&&a.records!=='Not sure'?a.records+' records':''].filter(Boolean).join(' · ');
-      return plan(h,fixes,recap,extra);
+    talk:{
+      title:function(a){return a.concern==='Not sure where to start'?'Let’s find <span>where to start.</span>':'We can help <span>with that.</span>';},
+      line:function(a){return (WHY[a.concern]||WHY['Not sure where to start'])+' On a free 15-minute call we’ll look at your setup and tell you what we’d do first.';}
     }
   };
 })();

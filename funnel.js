@@ -14,7 +14,9 @@
     try{var h=document.referrer?new URL(document.referrer).hostname.replace(/^www\./,''):'';if(h&&h.indexOf('ampitsolutions.com')===-1)return h;}catch(e){}
     return 'direct';
   })();
-  var answers={},qi=0,panes=['p-q','p-urgent','p-contact','p-load','p-result'].filter(function(id){return $(id)}),locked=false;
+  // Business funnels (C.talk) skip the email gate and the canned plan: one tap, then a 15-minute call or an email.
+  if(C.talk&&!$('p-talk')){var tp=document.createElement('section');tp.className='q-pane';tp.id='p-talk';tp.hidden=true;$('p-q').parentNode.appendChild(tp);}
+  var answers={},qi=0,panes=['p-q','p-urgent','p-contact','p-load','p-result','p-talk'].filter(function(id){return $(id)}),locked=false;
   var Q=C.questions,loadedAt=Date.now();
   function isVisible(q){return !q.showIf||q.showIf(answers);}
   function visibleQs(){return Q.filter(isVisible);}
@@ -37,7 +39,7 @@
   }
   function show(id,focusId){
     panes.forEach(function(p){$(p).hidden=(p!==id)});
-    progress(id==='p-q'?visibleQs().indexOf(Q[qi]):id==='p-contact'?visibleQs().length:-1);
+    progress(id==='p-q'?visibleQs().indexOf(Q[qi]):id==='p-contact'||id==='p-talk'?visibleQs().length:-1);
     var el=$(focusId||id);if(el&&el.focus){try{el.focus({preventScroll:true})}catch(e){}}
     window.scrollTo({top:0,behavior:'smooth'});
   }
@@ -63,6 +65,7 @@
           locked=false;
           if(o.urgent&&$('p-urgent')){show('p-urgent','uTitle');track('funnel_urgent_viewed');}
           else if(nextIndex(qi,1)>=0){qi=nextIndex(qi,1);renderQ();}
+          else if(C.talk){renderTalk();}
           else{show('p-contact','email');track('funnel_contact_viewed');}
         },220);
       });
@@ -179,6 +182,103 @@
             track('funnel_meeting_booked',{slot:iso,personal_email:personal});
             if(!personal){try{if(typeof gtag==='function')gtag('event','conversion',{send_to:BOOK_CONVERSION});}catch(e){}}
             box.innerHTML='<h3 class="q-booked">You’re booked.</h3><p class="q-sub">'+esc(whenLabel(iso))+' ET, 15 minutes on Google Meet. The invite is on its way to '+esc(email)+'.</p>';
+          })
+          .catch(function(){
+            go.disabled=false;err.textContent='That time didn’t go through. Pick another, or call (980) 377-2733.';err.classList.add('show');
+          });
+      });
+      try{nm.focus({preventScroll:true})}catch(e){}
+    }
+  }
+
+  function postLead(email){
+    var d=domainFromEmail(email),personal=FREE.indexOf(d)!==-1;
+    return fetch('/api/email-trust-check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({hp:($('hp')||{}).value||'',elapsed:Date.now()-loadedAt,domain:personal?'':d,email:email,phone:'',source:C.id,lead_source:source,keyword:kw,answers:cleanAnswers()})})
+      .then(function(r){return r.json().catch(function(){return {}}).then(function(j){return {ok:r.ok,data:j}})})
+      .then(function(res){
+        if(!res.ok)throw new Error((res.data&&res.data.error)||'Something went wrong. Please try again.');
+        var data=res.data;
+        try{if(window.posthog&&posthog.identify)posthog.identify(email.toLowerCase(),{email:email.toLowerCase(),lead_source:source,first_funnel:C.id});}catch(e){}
+        track('funnel_lead_submitted',{answer:answers.concern||'',lead_recorded:!!data.leadRecorded,personal_email:personal,mode:'talk'});
+        if(data.leadRecorded&&!personal){try{if(typeof gtag==='function')gtag('event','conversion',{send_to:CONVERSION});}catch(e){}try{if(typeof oaiq==='function')oaiq('measure','lead_created',{type:'customer_action'});}catch(e){}}
+        return {personal:personal};
+      });
+  }
+
+  function renderTalk(){
+    var a=cleanAnswers(),T=C.talk,p=$('p-talk');
+    p.innerHTML=(a.concern?'<p class="q-label">'+esc(a.concern)+'</p>':'')+
+      '<h2 id="tTitle" tabindex="-1">'+(typeof T.title==='function'?T.title(a):T.title)+'</h2>'+
+      '<p class="q-sub">'+esc(T.line(a))+'</p>'+
+      '<input class="hp" id="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">'+
+      '<div class="q-book q-book-top"><p class="q-label">Pick a time for a free 15-minute call</p><div class="q-slots"><span class="q-fine">Loading open times…</span></div></div>'+
+      '<div class="q-divider">or</div>'+
+      '<form class="q-mail" novalidate><p class="q-label">Rather email? We’ll write you.</p><input class="q-input" type="email" inputmode="email" autocomplete="email" placeholder="you@yourcompany.com" aria-label="Email"><div class="q-error" role="alert"></div><button class="q-btn alt" type="submit">Email me</button></form>'+
+      '<p class="q-fine q-text">Or call or text <a href="tel:+19803772733" data-cta="call">(980) 377-2733</a>.</p>'+
+      '<div class="q-foot"><span></span><button class="q-back" type="button">&larr; Back</button></div>';
+    show('p-talk','tTitle');
+    track('funnel_contact_viewed',{mode:'talk'});
+    p.querySelector('.q-back').addEventListener('click',function(){qi=nextIndex(Q.length,-1);renderQ();});
+    p.querySelectorAll('[data-cta]').forEach(function(x){x.addEventListener('click',function(){track('funnel_cta_clicked',{cta:x.getAttribute('data-cta')})})});
+
+    var mail=p.querySelector('.q-mail');
+    mail.addEventListener('submit',function(e){
+      e.preventDefault();
+      var inp=mail.querySelector('input'),err=mail.querySelector('.q-error'),btn=mail.querySelector('button'),email=inp.value.trim();
+      err.classList.remove('show');
+      if(!isEmail(email)){err.textContent='Please enter a valid email.';err.classList.add('show');return;}
+      btn.disabled=true;
+      postLead(email).then(function(){
+        mail.innerHTML='<h3 class="q-booked">Got it.</h3><p class="q-sub">We’ll email you at '+esc(email)+'.</p>';
+      }).catch(function(ex){btn.disabled=false;err.textContent=(ex&&ex.message)||'Something went wrong. Please try again.';err.classList.add('show');});
+    });
+
+    var box=p.querySelector('.q-book'),slots=box.querySelector('.q-slots');
+    fetch('/api/cal-slots?type=intro-call&from='+ymd(new Date())+'&to='+ymd(new Date(Date.now()+14*864e5)))
+      .then(function(r){return r.ok?r.json():{}})
+      .then(function(data){
+        var picks=[],soon=Date.now()+2*36e5;
+        Object.keys(data||{}).sort().some(function(day){
+          var t=(data[day]||[]).filter(function(x){return Date.parse(x)>soon});
+          if(!t.length)return false;
+          picks.push(t[0]);if(t.length>2)picks.push(t[Math.floor(t.length/2)]);
+          return picks.length>=6;
+        });
+        if(!picks.length)throw new Error('none');
+        slots.innerHTML='';
+        picks.slice(0,6).forEach(function(iso){
+          var b=document.createElement('button');b.type='button';b.className='q-slot';b.textContent=whenLabel(iso);
+          b.addEventListener('click',function(){pick(iso,b)});slots.appendChild(b);
+        });
+        track('funnel_booking_shown',{slots:picks.length,mode:'talk'});
+      })
+      .catch(function(){box.remove();var dv=p.querySelector('.q-divider');if(dv)dv.remove();});
+
+    function pick(iso,btn){
+      box.querySelectorAll('.q-slot').forEach(function(x){x.classList.toggle('sel',x===btn)});
+      var c=box.querySelector('.q-book-confirm');
+      if(!c){c=document.createElement('div');c.className='q-book-confirm';box.appendChild(c);}
+      c.innerHTML='<input class="q-input" type="text" autocomplete="name" placeholder="Your name" aria-label="Your name" maxlength="100"><input class="q-input" type="email" inputmode="email" autocomplete="email" placeholder="you@yourcompany.com" aria-label="Email for the invite"><div class="q-error" role="alert"></div><button class="q-btn" type="button">Book '+esc(whenLabel(iso))+' ET</button>';
+      var ins=c.querySelectorAll('input'),nm=ins[0],em=ins[1],go=c.querySelector('.q-btn'),err=c.querySelector('.q-error');
+      track('funnel_booking_slot_picked',{slot:iso,mode:'talk'});
+      go.addEventListener('click',function(){
+        var email=em.value.trim();err.classList.remove('show');
+        if(!isEmail(email)){err.textContent='Please enter a valid email for the invite.';err.classList.add('show');return;}
+        go.disabled=true;
+        var name=nm.value.trim().length>=2?nm.value.trim():nameFromEmail(email);
+        var note=('From the '+C.id+' check. '+Object.keys(a).map(function(k){return k+': '+a[k]}).join('; ')+(kw?'; search: '+kw:'')).slice(0,1000);
+        var personal=FREE.indexOf(domainFromEmail(email))!==-1;
+        postLead(email).catch(function(){}).then(function(){
+          return fetch('/api/cal-book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'intro-call',start:iso,name:name,email:email,phone:'',address:'',note:note})});
+        })
+          .then(function(r){return r.json().catch(function(){return {}}).then(function(j){return {ok:r.ok,data:j}})})
+          .then(function(r){
+            var bk=(r.data&&(r.data.data||r.data))||{};
+            if(!(r.ok&&r.data&&r.data.status==='success'&&(bk.uid||bk.id)))throw new Error('book');
+            track('funnel_meeting_booked',{slot:iso,personal_email:personal,mode:'talk'});
+            if(!personal){try{if(typeof gtag==='function')gtag('event','conversion',{send_to:BOOK_CONVERSION});}catch(e){}}
+            box.innerHTML='<h3 class="q-booked">You’re booked.</h3><p class="q-sub">'+esc(whenLabel(iso))+' ET, 15 minutes on Google Meet. The invite is on its way to '+esc(email)+'.</p>';
+            ['.q-divider','.q-mail'].forEach(function(s){var x=p.querySelector(s);if(x)x.remove();});
           })
           .catch(function(){
             go.disabled=false;err.textContent='That time didn’t go through. Pick another, or call (980) 377-2733.';err.classList.add('show');

@@ -71,3 +71,5 @@ body{background:#050807;color:#f4fff8}
 .q-slot.sel{border-color:#00f060;background:#0f2017}
 .q-book-confirm{margin-top:14px;display:grid;gap:10px}
 .q-booked{margin:0 0 6px}
+.q-book.q-book-top{margin:0 0 6px;padding-top:0;border-top:0}
+.q-mail .q-label{margin-top:2px}
