@@ -73,3 +73,10 @@ body{background:#050807;color:#f4fff8}
 .q-booked{margin:0 0 6px}
 .q-book.q-book-top{margin:0 0 6px;padding-top:0;border-top:0}
 .q-mail .q-label{margin-top:2px}
+.q-offer{border:1px solid #00f060;background:#0f2017;padding:18px 20px;margin:0 0 22px}
+.q-offer p{margin:0 0 8px;color:#f4fff8;font-size:1.02rem;line-height:1.5}
+.q-offer .q-label{color:#00f060;margin-bottom:8px}
+.q-offer p.q-fine{margin:0;color:#6d8177;font-size:.8rem}
+.q-who{display:flex;align-items:center;gap:14px;margin:0 0 24px}
+.q-who img{width:120px;height:84px;object-fit:cover;object-position:50% 68%;flex:none;filter:grayscale(1) contrast(1.04)}
+.q-who p{margin:0;color:#9fb1a6;font-size:.92rem;line-height:1.45}

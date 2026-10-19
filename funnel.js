@@ -210,6 +210,8 @@
     p.innerHTML=(a.concern?'<p class="q-label">'+esc(a.concern)+'</p>':'')+
       '<h2 id="tTitle" tabindex="-1">'+(typeof T.title==='function'?T.title(a):T.title)+'</h2>'+
       '<p class="q-sub">'+esc(T.line(a))+'</p>'+
+      (T.offer?'<div class="q-offer"><p class="q-label">Free first automation</p><p>'+T.offer+'</p><p class="q-fine">Microsoft 365 or Google Workspace. One per business. We take 4 a month.</p></div>':'')+
+      '<div class="q-who"><img src="/images/amp-it-founders-square.jpg" alt="AMP IT founders Mikhail Koval and Nik Kotov" loading="lazy"><p>You’ll talk with Mike or Nik, AMP IT’s founders.</p></div>'+
       '<input class="hp" id="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">'+
       '<div class="q-book q-book-top"><p class="q-label">Pick a time for a free 15-minute call</p><div class="q-slots"><span class="q-fine">Loading open times…</span></div></div>'+
       '<div class="q-divider">or</div>'+

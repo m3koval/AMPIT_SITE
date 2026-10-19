@@ -147,3 +147,16 @@ Never put competitor names in page titles, metadata, alt text, or structured dat
 ## Licensed-IP guardrail
 
 Do not use named or recognizable movie/brand/game characters or assets in commercial sections. The homepage poll must use original AMP IT-owned art/icons only.
+
+## Free first automation (approved 2026-10-19)
+
+Approved copy: "Bring one task your team repeats. If we can automate it in under an hour, we'll build it for free." Short forms for ads: "We Automate One Task Free", "First Automation Free".
+
+Terms that must stay true wherever the offer appears:
+- One per business. AMP IT takes 4 a month.
+- The business must already use Microsoft 365 or Google Workspace. Built with tools included in their plan (Power Automate standard connectors, Microsoft Forms, Outlook rules, Gmail filters, Google Forms). No premium connectors, AI Builder, custom code or new licenses.
+- One trigger and no more than three steps, inside the client's own account.
+- Built live on a screen share with the client's admin signed in. AMP IT does not hold their passwords.
+- Done means it ran once in front of them. No ongoing support, changes or maintenance included; those are paid.
+- If the task will not fit in an hour, AMP IT quotes it instead. Never say "guaranteed" or promise a specific time saving.
+- The 15-minute call decides whether a task qualifies, so copy must keep the "if" ("If we can automate it in under an hour").
