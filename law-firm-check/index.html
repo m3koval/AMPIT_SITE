@@ -53,6 +53,7 @@ window.FUNNEL=(function(){
   var WHY={
     'Old computers or server':'Insurance and client security forms commonly ask whether every computer still gets security updates.',
     'Moving to Microsoft 365':'Before you move, get confidentiality terms, how you get your data back, and backups in writing.',
+    'Moving to new practice software':'A clean switch means a full export, documents that keep their folders, and a cutover that doesn’t stop billing. We work with the software company’s support team so you don’t have to.',
     'Email and wire safety':'Wire fraud usually starts with a hacked or spoofed email account.',
     'Website':'Your contact form should land in a firm inbox with two-step login, not a free account.',
     'Insurance or client security forms':'Most forms ask about two-step login, endpoint protection, tested backups and calling to verify wires. Answer only what is true.',
@@ -61,11 +62,11 @@ window.FUNNEL=(function(){
   };
   return {
     id:'law-firm-check',
-    keywordHints:[[/wire|closing/i,'Email and wire safety'],[/insurance|questionnaire/i,'Insurance or client security forms'],[/\bai\b|chatgpt|artificial/i,'AI rules for staff'],[/microsoft 365|office 365|m365|outlook/i,'Moving to Microsoft 365'],[/pclaw|worldox|tabs3|time matters|juris|softpro|clio|server|software/i,'Old computers or server']],
+    keywordHints:[[/wire|closing/i,'Email and wire safety'],[/insurance|questionnaire/i,'Insurance or client security forms'],[/\bai\b|chatgpt|artificial/i,'AI rules for staff'],[/microsoft 365|office 365|m365|outlook/i,'Moving to Microsoft 365'],[/migrat|switch|moving|convert|filevine|mycase|practicepanther|smokeball|netdocuments|imanage|clio|cosmolex|lawmatics/i,'Moving to new practice software'],[/pclaw|worldox|tabs3|time matters|juris|softpro|server|software/i,'Old computers or server']],
     progress:false,
     questions:[
       {key:'concern',title:'Which IT project <span>keeps getting put off?</span>',options:[
-        {label:'Old computers or server'},{label:'Moving to Microsoft 365'},{label:'Email and wire safety'},{label:'Website'},
+        {label:'Old computers or server'},{label:'Moving to Microsoft 365'},{label:'Moving to new practice software'},{label:'Email and wire safety'},{label:'Website'},
         {label:'Insurance or client security forms'},{label:'AI rules for staff'},{label:'Not sure where to start'}
       ]}
     ],
