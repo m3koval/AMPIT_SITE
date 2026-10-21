@@ -123,7 +123,7 @@ async function introTimes(base) {
   return text('Open times for a free 15-minute call with AMP IT:\n' + slots.map(s => `- ${s.label} (start: ${s.start})`).join('\n'), { slots });
 }
 
-async function bookCall(args, base) {
+async function bookCall(args, base, req) {
   const start = cleanString(args.start, 40);
   const name = cleanString(args.name, 100);
   const email = cleanString(args.email, 254).toLowerCase();
@@ -133,6 +133,13 @@ async function bookCall(args, base) {
   if (!Number.isFinite(when) || when < Date.now() + 36e5 || when > Date.now() + 21 * 864e5) return toolError('Pick a start time from get_intro_call_times.');
   if (name.length < 2 || name.length > 100) return toolError('Please include the person’s name.');
   if (!EMAIL_RX.test(email) || email.length > 254) return toolError('Please include a valid email for the calendar invite.');
+
+  // Limits apply only to valid requests, so junk calls can't use up real bookings.
+  // One invite per address per day stops anyone using our calendar to spam a third party.
+  const perCaller = await rateLimit(req, 'mcp-book', 5, 3600);
+  const perInvitee = await rateLimit(keyed(email), 'mcp-book-email', 1, 86400);
+  const overall = await rateLimit(keyed('all'), 'mcp-book-all', 10, 86400);
+  if (!(perCaller.allowed && perInvitee.allowed && overall.allowed)) return toolError('Bookings through this app are paused for today. Book at ' + SITE + '/assessment, or call or text (980) 377-2733.');
 
   const note = (`Booked through the AMP IT app in ChatGPT.${company ? ' Company: ' + company + '.' : ''}${topic ? ' Topic: ' + topic : ''}`).slice(0, 1000);
   const response = await fetch(`${base}/api/cal-book`, {
@@ -156,7 +163,19 @@ async function bookCall(args, base) {
   return text(`Booked: ${etLabel(start)}, 15 minutes on Google Meet with AMP IT. The invite is on its way to ${email}.`, { booked: true, start, email });
 }
 
-async function handle(message, base) {
+// Keys a rate limit on something other than the caller's IP (a whole tool, or one invite address).
+function keyed(value) {
+  return { headers: { 'x-real-ip': String(value).slice(0, 80) }, socket: {} };
+}
+
+async function limited(req, args, name) {
+  if (name === 'check_business_email_security') {
+    return !(await rateLimit(req, 'mcp-email', 30, 3600)).allowed;
+  }
+  return false;
+}
+
+async function handle(message, base, req) {
   const { id, method, params } = message || {};
   const isNotification = id === undefined || id === null;
   const reply = result => (isNotification ? null : { jsonrpc: '2.0', id, result });
@@ -179,10 +198,11 @@ async function handle(message, base) {
     const name = params && params.name;
     const args = (params && typeof params.arguments === 'object' && params.arguments) || {};
     try {
+      if (await limited(req, args, name)) return reply(toolError('That has been used a lot recently. Please try again later, or call or text (980) 377-2733.'));
       if (name === 'check_business_email_security') return reply(await emailCheck(args));
       if (name === 'about_amp_it') return reply(text(JSON.stringify(ABOUT, null, 2), ABOUT));
       if (name === 'get_intro_call_times') return reply(await introTimes(base));
-      if (name === 'book_intro_call') return reply(await bookCall(args, base));
+      if (name === 'book_intro_call') return reply(await bookCall(args, base, req));
     } catch (error) {
       console.error('[mcp] tool failed:', name, error.message);
       return reply(toolError('Something went wrong. Call or text (980) 377-2733.'));
@@ -194,12 +214,8 @@ async function handle(message, base) {
 
 module.exports = async function handler(req, res) {
   setNoStore(res);
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept, Mcp-Session-Id, Mcp-Protocol-Version, Authorization');
-  if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST, OPTIONS');
+    res.setHeader('Allow', 'POST');
     return res.status(405).json({ jsonrpc: '2.0', id: null, error: { code: -32000, message: 'This is the AMP IT Office IT Check app server for ChatGPT, not a web page. Add this address in ChatGPT (Settings > Apps & Connectors > Developer mode). It only answers MCP POST requests.' } });
   }
   const throttle = await rateLimit(req, 'mcp', 60, 60);
@@ -213,10 +229,8 @@ module.exports = async function handler(req, res) {
   } catch (error) {
     return res.status(400).json({ jsonrpc: '2.0', id: null, error: { code: -32700, message: 'Parse error' } });
   }
-  const host = String(req.headers.host || '');
-  const base = /^(www\.)?ampitsolutions\.com$/.test(host) || /\.vercel\.app$/.test(host) ? `https://${host}` : SITE;
   const batch = Array.isArray(body) ? body.slice(0, 20) : [body];
-  const results = (await Promise.all(batch.map(m => handle(m, base)))).filter(Boolean);
+  const results = (await Promise.all(batch.map(m => handle(m, SITE, req)))).filter(Boolean);
   if (!results.length) return res.status(202).end();
   res.setHeader('Content-Type', 'application/json');
   return res.status(200).json(Array.isArray(body) ? results : results[0]);
