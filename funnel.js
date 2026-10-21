@@ -74,7 +74,8 @@
     if($('qBack'))$('qBack').hidden=qi===0;
     show('p-q','qTitle');
   }
-  renderQ();
+  // A page with no questions (e.g. /handoff/) opens straight on the talk screen.
+  if(Q.length)renderQ();else if(C.talk)renderTalk();
   track('funnel_viewed');
 
   if($('qBack'))$('qBack').addEventListener('click',function(){var p=nextIndex(qi,-1);if(p>=0){qi=p;renderQ();}});
@@ -220,7 +221,7 @@
       '<div class="q-foot"><span></span><button class="q-back" type="button">&larr; Back</button></div>';
     show('p-talk','tTitle');
     track('funnel_contact_viewed',{mode:'talk'});
-    p.querySelector('.q-back').addEventListener('click',function(){qi=nextIndex(Q.length,-1);renderQ();});
+    var bk=p.querySelector('.q-back');if(Q.length)bk.addEventListener('click',function(){qi=nextIndex(Q.length,-1);renderQ();});else bk.remove();
     p.querySelectorAll('[data-cta]').forEach(function(x){x.addEventListener('click',function(){track('funnel_cta_clicked',{cta:x.getAttribute('data-cta')})})});
 
     var mail=p.querySelector('.q-mail');
