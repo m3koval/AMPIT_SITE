@@ -253,3 +253,48 @@ test('rate-limit keys ignore caller-supplied x-forwarded-for', async () => {
     else process.env.UPSTASH_REDIS_REST_TOKEN = oldToken;
   }
 });
+
+const mcp = require('../api/mcp');
+function mcpCall(body) {
+  const res = responseMock();
+  return mcp(request({ method: 'POST', headers: { 'content-type': 'application/json', host: 'www.ampitsolutions.com' }, body }), res).then(() => res);
+}
+
+test('MCP server answers initialize with a supported protocol version', async () => {
+  const res = await mcpCall({ jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 't', version: '1' } } });
+  assert.equal(res.code, 200);
+  assert.equal(res.payload.result.protocolVersion, '2025-06-18');
+  assert.ok(res.payload.result.capabilities.tools);
+});
+
+test('MCP server lists its four tools with read-only hints set correctly', async () => {
+  const res = await mcpCall({ jsonrpc: '2.0', id: 2, method: 'tools/list' });
+  const tools = Object.fromEntries(res.payload.result.tools.map(t => [t.name, t]));
+  assert.deepEqual(Object.keys(tools).sort(), ['about_amp_it', 'book_intro_call', 'check_business_email_security', 'get_intro_call_times']);
+  assert.equal(tools.book_intro_call.annotations.readOnlyHint, false);
+  assert.equal(tools.check_business_email_security.annotations.readOnlyHint, true);
+});
+
+test('MCP notifications get 202 with no body', async () => {
+  const res = await mcpCall({ jsonrpc: '2.0', method: 'notifications/initialized' });
+  assert.equal(res.code, 202);
+});
+
+test('MCP email check refuses free email providers without DNS lookups', async () => {
+  const res = await mcpCall({ jsonrpc: '2.0', id: 3, method: 'tools/call', params: { name: 'check_business_email_security', arguments: { domain: 'gmail.com' } } });
+  assert.equal(res.payload.result.isError, true);
+});
+
+test('MCP booking validates email and start before calling the calendar', async () => {
+  const res = await mcpCall({ jsonrpc: '2.0', id: 4, method: 'tools/call', params: { name: 'book_intro_call', arguments: { start: new Date(Date.now() + 2 * 86400000).toISOString(), name: 'Test User', email: 'not-an-email' } } });
+  assert.equal(res.payload.result.isError, true);
+  assert.match(res.payload.result.content[0].text, /valid email/);
+});
+
+test('MCP rejects unknown methods and GET requests', async () => {
+  const res = await mcpCall({ jsonrpc: '2.0', id: 5, method: 'resources/list' });
+  assert.equal(res.payload.error.code, -32601);
+  const getRes = responseMock();
+  await mcp(request({ method: 'GET' }), getRes);
+  assert.equal(getRes.code, 405);
+});
