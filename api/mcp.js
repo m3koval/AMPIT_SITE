@@ -200,7 +200,7 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST, OPTIONS');
-    return res.status(405).json({ jsonrpc: '2.0', id: null, error: { code: -32000, message: 'Use POST.' } });
+    return res.status(405).json({ jsonrpc: '2.0', id: null, error: { code: -32000, message: 'This is the AMP IT Office IT Check app server for ChatGPT, not a web page. Add this address in ChatGPT (Settings > Apps & Connectors > Developer mode). It only answers MCP POST requests.' } });
   }
   const throttle = await rateLimit(req, 'mcp', 60, 60);
   if (!throttle.allowed) {
