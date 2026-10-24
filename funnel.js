@@ -192,31 +192,35 @@
     }
   }
 
-  function postLead(email){
-    var d=domainFromEmail(email),personal=FREE.indexOf(d)!==-1;
-    return fetch('/api/email-trust-check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({hp:($('hp')||{}).value||'',elapsed:Date.now()-loadedAt,domain:personal?'':d,email:email,phone:'',source:C.id,lead_source:source,keyword:kw,answers:cleanAnswers()})})
+  function postLead(email,extra){
+    extra=extra||{};
+    var d=domainFromEmail(email),site=FREE.indexOf(d)!==-1?cleanDomain(extra.website||''):d,personal=!site,ans=cleanAnswers();
+    if(extra.request)ans.request=extra.request;
+    return fetch('/api/email-trust-check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({hp:($('hp')||{}).value||'',elapsed:Date.now()-loadedAt,domain:site,email:email,phone:'',source:C.id,lead_source:source,keyword:kw,answers:ans})})
       .then(function(r){return r.json().catch(function(){return {}}).then(function(j){return {ok:r.ok,data:j}})})
       .then(function(res){
         if(!res.ok)throw new Error((res.data&&res.data.error)||'Something went wrong. Please try again.');
         var data=res.data;
         try{if(window.posthog&&posthog.identify)posthog.identify(email.toLowerCase(),{email:email.toLowerCase(),lead_source:source,first_funnel:C.id});}catch(e){}
-        track('funnel_lead_submitted',{answer:answers.concern||'',lead_recorded:!!data.leadRecorded,personal_email:personal,mode:'talk'});
+        track('funnel_lead_submitted',{answer:answers.concern||'',lead_recorded:!!data.leadRecorded,personal_email:personal,mode:'talk',request:extra.request||''});
         if(data.leadRecorded&&!personal){try{if(typeof gtag==='function')gtag('event','conversion',{send_to:CONVERSION});}catch(e){}try{if(typeof oaiq==='function')oaiq('measure','lead_created',{type:'customer_action'});}catch(e){}}
         return {personal:personal};
       });
   }
 
   function renderTalk(){
-    var a=cleanAnswers(),T=C.talk,p=$('p-talk');
+    var a=cleanAnswers(),T=C.talk,S=T.send,p=$('p-talk');
+    // T.send asks for an email first in exchange for something we write and send (e.g. a free AI review); the call becomes the second option.
     p.innerHTML=(a.concern?'<p class="q-label">'+esc(a.concern)+'</p>':'')+
       '<h2 id="tTitle" tabindex="-1">'+(typeof T.title==='function'?T.title(a):T.title)+'</h2>'+
       '<p class="q-sub">'+esc(T.line(a))+'</p>'+
+      '<input class="hp" id="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">'+
+      (S?'<form class="q-offer q-send" novalidate><p class="q-label">'+S.label+'</p><p>'+S.line+'</p><input class="q-input" type="email" inputmode="email" autocomplete="email" placeholder="you@yourcompany.com" aria-label="Work email"><input class="q-input q-site" type="text" inputmode="url" autocomplete="url" placeholder="Your company website" aria-label="Company website" hidden><div class="q-error" role="alert"></div><button class="q-btn" type="submit">'+S.cta+'</button>'+(S.fine?'<p class="q-fine">'+S.fine+'</p>':'')+'</form>':'')+
       (T.offer?'<div class="q-offer"><p class="q-label">Free first automation</p><p>'+T.offer+'</p><p class="q-fine">Microsoft 365 or Google Workspace. One per business. We take 4 a month.</p></div>':'')+
       '<div class="q-who"><img src="/images/amp-it-founders-square.jpg" alt="AMP IT founders Mikhail Koval and Nik Kotov" loading="lazy"><p>You’ll talk with Mike or Nik, AMP IT’s founders.</p></div>'+
-      '<input class="hp" id="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">'+
-      '<div class="q-book q-book-top"><p class="q-label">Pick a time for a free 15-minute call</p><div class="q-slots"><span class="q-fine">Loading open times…</span></div></div>'+
-      '<div class="q-divider">or</div>'+
-      '<form class="q-mail" novalidate><p class="q-label">Rather email? We’ll write you.</p><input class="q-input" type="email" inputmode="email" autocomplete="email" placeholder="you@yourcompany.com" aria-label="Email"><div class="q-error" role="alert"></div><button class="q-btn alt" type="submit">Email me</button></form>'+
+      '<div class="q-book q-book-top"><p class="q-label">'+(T.bookLabel||'Pick a time for a free 15-minute call')+'</p><div class="q-slots"><span class="q-fine">Loading open times…</span></div></div>'+
+      (S?'':'<div class="q-divider">or</div>'+
+      '<form class="q-mail" novalidate><p class="q-label">Rather email? We’ll write you.</p><input class="q-input" type="email" inputmode="email" autocomplete="email" placeholder="you@yourcompany.com" aria-label="Email"><div class="q-error" role="alert"></div><button class="q-btn alt" type="submit">Email me</button></form>')+
       '<p class="q-fine q-text">Or call or text <a href="tel:+19803772733" data-cta="call">(980) 377-2733</a>.</p>'+
       '<div class="q-foot"><span></span><button class="q-back" type="button">&larr; Back</button></div>';
     show('p-talk','tTitle');
@@ -224,8 +228,25 @@
     var bk=p.querySelector('.q-back');if(Q.length)bk.addEventListener('click',function(){qi=nextIndex(Q.length,-1);renderQ();});else bk.remove();
     p.querySelectorAll('[data-cta]').forEach(function(x){x.addEventListener('click',function(){track('funnel_cta_clicked',{cta:x.getAttribute('data-cta')})})});
 
+    var send=p.querySelector('.q-send');
+    if(send){
+      var se=send.querySelector('[type=email]'),ss=send.querySelector('.q-site');
+      se.addEventListener('input',function(){if(FREE.indexOf(domainFromEmail(se.value))!==-1)ss.hidden=false;});
+      send.addEventListener('submit',function(e){
+        e.preventDefault();
+        var err=send.querySelector('.q-error'),btn=send.querySelector('button'),email=se.value.trim(),site=cleanDomain(ss.value);
+        err.classList.remove('show');
+        if(!isEmail(email)){err.textContent='Please enter a valid email.';err.classList.add('show');return;}
+        if(FREE.indexOf(domainFromEmail(email))!==-1&&!/^[a-z0-9.\-]+\.[a-z]{2,}$/.test(site)){ss.hidden=false;err.textContent='Add your company website so we know what to look at.';err.classList.add('show');try{ss.focus()}catch(x){}return;}
+        btn.disabled=true;
+        postLead(email,{website:site,request:S.request}).then(function(){
+          send.innerHTML='<p class="q-label">'+S.label+'</p><h3 class="q-booked">You’re on the list.</h3><p>'+S.done.replace('{email}',esc(email))+'</p>';
+        }).catch(function(ex){btn.disabled=false;err.textContent=(ex&&ex.message)||'Something went wrong. Please try again.';err.classList.add('show');});
+      });
+    }
+
     var mail=p.querySelector('.q-mail');
-    mail.addEventListener('submit',function(e){
+    if(mail)mail.addEventListener('submit',function(e){
       e.preventDefault();
       var inp=mail.querySelector('input'),err=mail.querySelector('.q-error'),btn=mail.querySelector('button'),email=inp.value.trim();
       err.classList.remove('show');

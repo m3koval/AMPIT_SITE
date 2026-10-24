@@ -160,3 +160,17 @@ Terms that must stay true wherever the offer appears:
 - Done means it ran once in front of them. No ongoing support, changes or maintenance included; those are paid.
 - If the task will not fit in an hour, AMP IT quotes it instead. Never say "guaranteed" or promise a specific time saving.
 - The 15-minute call decides whether a task qualifies, so copy must keep the "if" ("If we can automate it in under an hour").
+
+## Free AI review (approved 2026-10-24)
+
+Mikhail chose a written review over a ready-made AI policy, because a policy is a legal document. Offered on /ai-check/ after three taps: where they are with AI, whether they have a written AI policy, and whether they know what staff upload to AI chats.
+
+Approved copy: "We'll look at your business and email you where AI can save your team time, what to watch with client data, and how we'd set it up for you." Fine print: "Written by Mike or Nik, AMP IT's founders. One per business." Confirmation: "We'll email your review to {email} within 2 business days."
+
+What the review is built from: their three answers, their website, and the public email-security check (SPF, DKIM, DMARC) the lead API runs on their domain. Each review closes by offering setup and integration, and asks about their current AI policy and how they track what staff upload to AI chats. It must not read as legal advice or a finished policy, and must not claim to know how their staff actually use AI.
+
+Commitment: emailed within 2 business days of the request (the lead arrives in Google Chat with "Wants: AI review").
+
+## Quote by email (approved 2026-10-24)
+
+On /pricing/managed-it/ below the plans: "Get your monthly price by email. No call needed." Asks for the number of people (1–4, 5–10, 11–25, 26–50, 50+) and an email. Confirmation: "We'll email your quote within one business day." Quotes use the published per-user rates (5-user minimum on Essential; under 5 people points to the Starter Track). Leads arrive as "Pricing Quote" with "People: ...".

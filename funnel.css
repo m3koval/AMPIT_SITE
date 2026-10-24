@@ -80,3 +80,4 @@ body{background:#050807;color:#f4fff8}
 .q-who{display:flex;align-items:center;gap:14px;margin:0 0 24px}
 .q-who img{width:120px;height:84px;object-fit:cover;object-position:50% 68%;flex:none;filter:grayscale(1) contrast(1.04)}
 .q-who p{margin:0;color:#9fb1a6;font-size:.92rem;line-height:1.45}
+.q-send+.q-offer{border-color:#1d2a23;background:transparent}

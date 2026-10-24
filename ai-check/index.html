@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Put AI to Work Safely | AMP IT</title>
-<meta name="description" content="Tell us where your business is with AI, then talk with a Charlotte IT team for 15 minutes about using ChatGPT, Copilot or Gemini without leaking client data.">
+<meta name="description" content="Three quick taps, then a free AI review from a Charlotte IT team: where AI can save your staff time, what to watch with client data, and how to set it up.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://www.ampitsolutions.com/ai-check/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -60,17 +60,31 @@ window.FUNNEL=(function(){
   return {
     id:'ai-check',
     keywordHints:[[/policy|governance|insurance|compliance/i,'Clients or insurance are asking about our AI rules'],[/automat|workflow|agent/i,'We want to automate one specific task'],[/training|adoption/i,'We pay for AI tools but they barely get used'],[/consult|integrat|implement|for business|small business|copilot|chatgpt|readiness/i,'We want to use AI but don’t know where to start']],
-    progress:false,
     questions:[
       {key:'concern',title:'Where is your business <span>with AI?</span>',options:[
         {label:'Staff use ChatGPT or Copilot on their own'},{label:'We want to use AI but don’t know where to start'},{label:'We pay for AI tools but they barely get used'},
         {label:'Clients or insurance are asking about our AI rules'},{label:'We want to automate one specific task'}
+      ]},
+      {key:'policy',title:'Do you have a written <span>AI policy?</span>',options:[
+        {label:'Yes, and staff have signed it'},{label:'Yes, but nobody really follows it'},{label:'No'},{label:'Not sure'}
+      ]},
+      {key:'uploads',title:'Do you know what staff <span>upload to AI chats?</span>',options:[
+        {label:'Yes, we control and track it'},{label:'We told them what not to share'},{label:'No idea'}
       ]}
     ],
     talk:{
       title:'We can help <span>with that.</span>',
-      line:function(a){return (WHY[a.concern]||WHY['We want to use AI but don’t know where to start'])+' On a free 15-minute call we’ll look at your setup and tell you what we’d do first.';},
-      offer:'Bring one task your team repeats. If we can automate it in under an hour, we’ll build it for free.'
+      line:function(a){return WHY[a.concern]||WHY['We want to use AI but don’t know where to start'];},
+      send:{
+        label:'Free AI review',
+        line:'We’ll look at your business and email you where AI can save your team time, what to watch with client data, and how we’d set it up for you.',
+        cta:'Send my review',
+        fine:'Written by Mike or Nik, AMP IT’s founders. One per business.',
+        done:'We’ll email your review to {email} within 2 business days.',
+        request:'AI review'
+      },
+      offer:'Bring one task your team repeats. If we can automate it in under an hour, we’ll build it for free.',
+      bookLabel:'Rather talk it through? Pick a time for a free 15-minute call'
     }
   };
 })();

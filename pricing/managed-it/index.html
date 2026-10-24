@@ -343,6 +343,23 @@
   }
   .starter-callout a.link-arrow:hover { gap: 12px; }
   .starter-callout a.link-arrow::after { content: '→'; }
+  .quote-box { background: var(--bg-card); border: 1px solid var(--border-strong); padding: 40px 48px; margin: 8px 0 12px; }
+  .quote-box h3 { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.5rem; margin-bottom: 6px; }
+  .quote-box h3 span { color: var(--green); }
+  .quote-box > p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 22px; }
+  .quote-label { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+  .quote-sizes { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .quote-sizes button { background: transparent; border: 1px solid var(--border-strong); color: var(--text); font: inherit; font-size: 0.95rem; padding: 12px 18px; cursor: pointer; min-width: 76px; }
+  .quote-sizes button:hover { border-color: var(--green); }
+  .quote-sizes button.sel { background: var(--green); border-color: var(--green); color: var(--btn-text); font-weight: 700; }
+  .quote-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .quote-row input { flex: 1 1 260px; background: var(--bg); border: 1px solid var(--border-strong); color: var(--text); font: inherit; font-size: 1rem; padding: 16px; outline: none; }
+  .quote-row input:focus { border-color: var(--green); }
+  .quote-row button { flex: 0 0 auto; background: var(--green); color: var(--btn-text); border: 0; font-family: 'Outfit', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.9rem; padding: 16px 26px; cursor: pointer; }
+  .quote-row button:disabled { opacity: 0.55; cursor: not-allowed; }
+  .quote-err { color: #ff6b6b; font-size: 0.85rem; margin-top: 10px; display: none; }
+  .quote-err.show { display: block; }
+  .quote-box .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 
   /* RIGHT PLAN GUIDE */
   .guide-section { padding: 80px 0; border-bottom: 1px solid var(--border); }
@@ -419,6 +436,8 @@
     .plan.featured { margin: 0; border: 2px solid var(--green); }
     .plan { border: 1px solid var(--border); }
     .starter-callout { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
+    .quote-box { padding: 28px 20px; }
+    .quote-row button { flex: 1 1 100%; }
     .guide-grid { grid-template-columns: 1fr; gap: 2px; }
     .contact-info { flex-direction: column; gap: 20px; }
     h2 { font-size: clamp(1.6rem, 6vw, 2.2rem); }
@@ -652,6 +671,24 @@
       </div>
     </div>
 
+    <!-- Quote by email: for visitors comparing prices who aren't ready for a call -->
+    <div class="quote-box fade-up" id="quote">
+      <h3>Get your monthly price <span>by email.</span></h3>
+      <p>No call needed.</p>
+      <form id="quoteForm" novalidate>
+        <p class="quote-label">How many people need IT?</p>
+        <div class="quote-sizes" role="group" aria-label="How many people need IT">
+          <button type="button">1–4</button><button type="button">5–10</button><button type="button">11–25</button><button type="button">26–50</button><button type="button">50+</button>
+        </div>
+        <input class="hp" id="quoteHp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="quote-row">
+          <input id="quoteEmail" type="email" inputmode="email" autocomplete="email" placeholder="you@yourcompany.com" aria-label="Work email">
+          <button id="quoteBtn" type="submit">Email my quote</button>
+        </div>
+        <div class="quote-err" id="quoteErr" role="alert"></div>
+      </form>
+    </div>
+
     <!-- Starter callout -->
     <div class="starter-callout fade-up">
       <div>
@@ -800,6 +837,40 @@
     { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
   );
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  (function () {
+    const form = document.getElementById('quoteForm');
+    if (!form) return;
+    const loadedAt = Date.now(), qp = new URLSearchParams(location.search), err = document.getElementById('quoteErr');
+    const FREE = ['gmail.com','googlemail.com','yahoo.com','ymail.com','outlook.com','hotmail.com','live.com','msn.com','icloud.com','me.com','mac.com','aol.com','proton.me','protonmail.com','att.net','sbcglobal.net','bellsouth.net','comcast.net','verizon.net','charter.net','spectrum.net'];
+    const source = qp.get('utm_source') || (qp.get('gclid') ? 'google-ads' : '') || (document.referrer && !/ampitsolutions\.com/.test(document.referrer) ? new URL(document.referrer).hostname.replace(/^www\./, '') : 'direct');
+    let size = '';
+    const capture = (name, props) => { try { if (window.posthog && posthog.capture) posthog.capture(name, Object.assign({ funnel: 'pricing-quote', lead_source: source }, props || {})); } catch (e) {} };
+    form.querySelectorAll('.quote-sizes button').forEach(b => b.addEventListener('click', () => {
+      size = b.textContent;
+      form.querySelectorAll('.quote-sizes button').forEach(x => x.classList.toggle('sel', x === b));
+      capture('quote_size_picked', { size });
+    }));
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('quoteEmail').value.trim(), btn = document.getElementById('quoteBtn');
+      const domain = (email.toLowerCase().match(/@([a-z0-9.\-]+\.[a-z]{2,})$/) || [])[1] || '';
+      err.classList.remove('show');
+      if (!size) { err.textContent = 'Pick how many people need IT.'; err.classList.add('show'); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { err.textContent = 'Please enter a valid email.'; err.classList.add('show'); return; }
+      const personal = FREE.indexOf(domain) !== -1;
+      btn.disabled = true;
+      fetch('/api/email-trust-check', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ hp: document.getElementById('quoteHp').value, elapsed: Date.now() - loadedAt, domain: personal ? '' : domain, email, phone: '', source: 'pricing-quote', lead_source: source, keyword: '', answers: { concern: 'Quote request', size, request: 'Quote by email' } }) })
+        .then(r => r.json().catch(() => ({})).then(j => ({ ok: r.ok, data: j })))
+        .then(res => {
+          if (!res.ok) throw new Error((res.data && res.data.error) || 'Something went wrong. Please try again.');
+          try { if (window.posthog && posthog.identify) posthog.identify(email.toLowerCase(), { email: email.toLowerCase(), lead_source: source, first_funnel: 'pricing-quote' }); } catch (e) {}
+          capture('quote_requested', { size, personal_email: personal, lead_recorded: !!res.data.leadRecorded });
+          if (res.data.leadRecorded && !personal) { try { if (typeof gtag === 'function') gtag('event', 'conversion', { send_to: 'AW-18009085486/ILlTCJPv85UdEK6ss4tD' }); } catch (e) {} }
+          form.innerHTML = '<p class="quote-label">' + size + ' people</p><h3>Got it.</h3><p style="color:var(--text-muted)">We’ll email your quote within one business day.</p>';
+        })
+        .catch(ex => { btn.disabled = false; err.textContent = ex.message || 'Something went wrong. Please try again.'; err.classList.add('show'); });
+    });
+  })();
   const hamburger = document.getElementById('navHamburger');
   const mobileMenu = document.getElementById('navMobileMenu');
   if (hamburger && mobileMenu) {

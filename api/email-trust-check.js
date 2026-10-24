@@ -10,7 +10,7 @@ const { DOMAIN_RX, PERSONAL_EMAIL_DOMAINS, normalizeDomain, checkDomain } = requ
 
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzVSYcjWLFPz8P4HfusgA7obD2ikdRH7wCcRS91hFY-Vl7rko5P0EVGszSAzCzTocv45g/exec';
 const EMAIL_RX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
-const FUNNEL_NAMES = { 'email-quiz': 'Email Quiz', 'security-check': 'Security Check', 'law-firm-check': 'Law Firm Check', 'cpa-check': 'CPA Check', 'accounting-software': 'Accounting Software Check', 'ai-check': 'AI Check', 'handoff': 'IT Hand-off', 'chatgpt-app': 'ChatGPT App' };
+const FUNNEL_NAMES = { 'email-quiz': 'Email Quiz', 'security-check': 'Security Check', 'law-firm-check': 'Law Firm Check', 'cpa-check': 'CPA Check', 'accounting-software': 'Accounting Software Check', 'ai-check': 'AI Check', 'handoff': 'IT Hand-off', 'chatgpt-app': 'ChatGPT App', 'pricing-quote': 'Pricing Quote' };
 const FUNNEL_INDUSTRY = { 'law-firm-check': 'Law firm / legal services' };
 
 async function submitLead(payload) {
@@ -84,6 +84,10 @@ module.exports = async function handler(req, res) {
     answers.records && `Records held: ${cleanString(answers.records, 20)}`,
     answers.irplan && `Breach plan: ${cleanString(answers.irplan, 30)}`,
     answers.where && `Runs on: ${cleanString(answers.where, 40)}`,
+    answers.policy && `AI policy: ${cleanString(answers.policy, 40)}`,
+    answers.uploads && `AI uploads: ${cleanString(answers.uploads, 40)}`,
+    answers.size && body.source === 'pricing-quote' && `People: ${cleanString(answers.size, 20)}`,
+    answers.request && `Wants: ${cleanString(answers.request, 40)}`,
     searchTerm && `Search: ${searchTerm}`
   ].filter(Boolean).map(x => ` | ${x}`).join('');
 
