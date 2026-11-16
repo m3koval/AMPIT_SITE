@@ -30,7 +30,7 @@ Approved:
 Approved language:
 
 - all-inclusive per-user pricing
-- published per-user rates
+- clear, straightforward pricing with a tailored proposal before committing
 - one predictable monthly invoice
 - no surprise support invoices
 - no per-ticket billing for standard covered support
@@ -72,9 +72,9 @@ Public references are linked, not represented as new case studies or endorsement
 
 | Plan | Price | Fit | Agreement | Monitoring | Human support | Emergency/SLA language |
 |---|---:|---|---|---|---|---|
-| Essential | $319/user/month, 5-user minimum | Small firms that need managed IT, baseline security, and dependable support | 12-month standard managed IT agreement | 24/7 automated remote monitoring for covered systems | Mon–Fri 7 AM–6 PM ET | Standard support queue; no 1-hour emergency SLA claim |
-| Better | $445/user/month, ideal 10–40 users | Firms that need stronger security, documentation, and planning cadence | 12-month standard managed IT agreement | 24/7 automated remote monitoring for covered systems | Mon–Fri 7 AM–6 PM ET | Priority support language allowed if included in plan copy; no 1-hour emergency SLA claim unless contract says it |
-| Best | $499/user/month, ideal 15–50 users | Firms that need highest-touch support, strategic planning, and faster emergency response | 12-month standard managed IT agreement | 24/7 automated remote monitoring for covered systems | Mon–Fri 7 AM–6 PM ET | 1-hour emergency response SLA for covered urgent issues |
+| Essential | Tailored quote; 5-user minimum | Small firms that need managed IT, baseline security, and dependable support | 12-month standard managed IT agreement | 24/7 automated remote monitoring for covered systems | Mon–Fri 7 AM–6 PM ET | Standard support queue; no 1-hour emergency SLA claim |
+| Better | Tailored quote; ideal 10–40 users | Firms that need stronger security, documentation, and planning cadence | 12-month standard managed IT agreement | 24/7 automated remote monitoring for covered systems | Mon–Fri 7 AM–6 PM ET | Priority support language allowed if included in plan copy; no 1-hour emergency SLA claim unless contract says it |
+| Best | Tailored quote; ideal 15–50 users | Firms that need highest-touch support, strategic planning, and faster emergency response | 12-month standard managed IT agreement | 24/7 automated remote monitoring for covered systems | Mon–Fri 7 AM–6 PM ET | 1-hour emergency response SLA for covered urgent issues |
 
 ## Canonical support/monitoring copy
 
@@ -171,6 +171,6 @@ What the review is built from: their three answers, their website, and the publi
 
 Commitment: emailed within 2 business days of the request (the lead arrives in Google Chat with "Wants: AI review").
 
-## Quote by email (approved 2026-10-24)
+## Quote by email
 
-On /pricing/managed-it/ below the plans: "Get your monthly price by email. No call needed." Asks for the number of people (1–4, 5–10, 11–25, 26–50, 50+) and an email. Confirmation: "We'll email your quote within one business day." Quotes use the published per-user rates (5-user minimum on Essential; under 5 people points to the Starter Track). Leads arrive as "Pricing Quote" with "People: ...".
+On /pricing/managed-it/ below the plans: "Request a tailored quote by email." Asks for the number of people (1–4, 5–10, 11–25, 26–50, 50+) and an email. Confirmation: "We’ll follow up by email within one business day to confirm your needs and prepare your quote." Proposals explain the included scope, cost, and terms before committing (5-user minimum on Essential; under 5 people points to the Starter Track). Leads arrive as "Pricing Quote" with "People: ...".

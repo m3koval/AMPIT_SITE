@@ -23,7 +23,6 @@ class SearchConsistency(unittest.TestCase):
             'terms.html': {'$100'},
             'cybersecurity/index.html': {'$120,000', '$120k'},
             'industries/other-industries/index.html': {'$120,000'},
-            'pricing/managed-it/index.html': {'$97–123k', '$120k'},
             'blog/your-team-is-already-using-ai.html': {'$20', '$20–$200'},
         }
         for path in list(ROOT.rglob('*.html')) + [ROOT / 'llms.txt', ROOT / 'api/mcp.js']:
@@ -45,6 +44,24 @@ class SearchConsistency(unittest.TestCase):
                                 for value in obj:
                                     check_prices(value)
                         check_prices(data)
+
+    def test_quote_based_wording(self):
+        paths = list(ROOT.rglob('*.html')) + list((ROOT / 'docs').glob('*.md'))
+        paths += [ROOT / 'llms.txt', ROOT / 'api/mcp.js', ROOT / 'scripts/sync-search-plans.py']
+        forbidden = re.compile(
+            r'published (?:per-user |monthly |IT )*(?:prices|pricing|rates)|'
+            r'context before you see the price|full pricing breakdown|real 2026 prices|'
+            r'(?:see|view) (?:our |starting a business )?pricing|'
+            r'no quote needed|price before (?:a |the )?call|no call needed', re.I)
+        for path in paths:
+            with self.subTest(page=str(path.relative_to(ROOT))):
+                self.assertNotRegex(path.read_text(), forbidden)
+        pricing = soup('pricing/managed-it/index.html')
+        fit, quote = pricing.select_one('.value-section'), pricing.select_one('#quote')
+        assert fit is not None and quote is not None
+        self.assertIn('before committing', fit.get_text())
+        self.assertIn('Request a tailored quote', quote.get_text())
+        self.assertNotIn('$', fit.get_text())
 
     def test_all_jsonld_parses(self):
         for path in ROOT.rglob('*.html'):

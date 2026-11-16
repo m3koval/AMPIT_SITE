@@ -23,7 +23,7 @@ const ABOUT = {
     { name: 'Better', note: 'ideal for 10 to 40 users' },
     { name: 'Best', note: 'ideal for 15 to 50 users; includes a 1-hour emergency response SLA for covered urgent issues' }
   ],
-  pricing: 'Clear, straightforward pricing. Support that fits your business.',
+  pricing: 'Clear, straightforward pricing. Support that fits your business. Request a tailored proposal with scope, cost, and terms before committing.',
   included: ['Microsoft 365 or Google Workspace licensing is included in every plan', '24/7 automated monitoring of covered systems', 'Human support Monday to Friday, 7 AM to 6 PM ET', '12-month standard managed IT agreement'],
   freeFirstAutomation: 'Bring one task your team repeats. If AMP IT can automate it in under an hour, they build it for free. Microsoft 365 or Google Workspace only, one per business, 4 a month, built live on a screen share, no ongoing support included. The 15-minute call decides whether a task qualifies.',
   contact: { phone: '(980) 377-2733 (call or text)', website: SITE, book: SITE + '/assessment' }

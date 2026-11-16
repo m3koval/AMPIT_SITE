@@ -16,7 +16,7 @@ Server: `https://www.ampitsolutions.com/api/mcp` (MCP, Streamable HTTP, no auth)
 
 > Check whether your company email is set up so nobody can send email pretending to be you, and get plain-English next steps. AMP IT Office IT Check reads your domain's public SPF, DKIM and DMARC records, the settings that keep business email out of spam and stop spoofed invoices. No login needed.
 >
-> Want help? Ask about AMP IT's services, published pricing, or the free first automation offer: bring one task your team repeats, and if AMP IT can automate it in under an hour, they build it for free. When you're ready, the app shows open times and books a free 15-minute Google Meet with AMP IT's founders in Charlotte, NC.
+> Want help? Ask about AMP IT's services, tailored quote options, or the free first automation offer: bring one task your team repeats, and if AMP IT can automate it in under an hour, they build it for free. When you're ready, the app shows open times and books a free 15-minute Google Meet with AMP IT's founders in Charlotte, NC.
 >
 > For small businesses, law firms and CPA firms in North and South Carolina.
 
@@ -25,7 +25,7 @@ Server: `https://www.ampitsolutions.com/api/mcp` (MCP, Streamable HTTP, no auth)
 | Tool | What it does | Read-only |
 |---|---|---|
 | check_business_email_security | Public DNS check of SPF, DKIM, DMARC for a company domain; refuses free email providers | Yes |
-| about_amp_it | Services, plans and published pricing, support hours, free first automation terms, contact | Yes |
+| about_amp_it | Services, plans and tailored quote options, support hours, free first automation terms, contact | Yes |
 | get_intro_call_times | Up to 8 open 15-minute intro-call times over the next two weeks (via /api/cal-slots) | Yes |
 | book_intro_call | Books a chosen time (via /api/cal-book), then records the lead (source "ChatGPT App") and alerts Google Chat | No |
 

@@ -536,30 +536,30 @@
   </div>
 </section>
 
-<!-- VALUE ANCHORS -->
+<!-- FIND THE RIGHT FIT -->
 <section class="value-section">
   <div class="container">
-    <div class="section-label fade-up">Context Before You See the Price</div>
-    <h2 class="fade-up d1" style="margin-bottom: 40px;">The real cost of<br><span>not having IT.</span></h2>
+    <div class="section-label fade-up">Find the Right Fit</div>
+    <h2 class="fade-up d1" style="margin-bottom: 40px;">Support that fits<br><span>your business.</span></h2>
     <div class="value-anchor fade-up d2">
       <div class="value-anchor-comparisons">
         <div class="anchor-item">
-          <div class="anchor-label">Internal IT hire</div>
-          <div class="anchor-value">$97–123k</div>
-          <div class="anchor-sub">Fully-loaded salary + benefits + tools — one person</div>
+          <div class="anchor-label">Your team</div>
+          <div class="anchor-value">People</div>
+          <div class="anchor-sub">Tell us how many people and locations need support.</div>
         </div>
         <div class="anchor-item">
-          <div class="anchor-label">One security incident</div>
-          <div class="anchor-value">$120k avg</div>
-          <div class="anchor-sub">Downtime, recovery, and legal fees for an SMB</div>
+          <div class="anchor-label">Your setup</div>
+          <div class="anchor-value">Systems</div>
+          <div class="anchor-sub">We review your tools, security needs, and existing IT setup.</div>
         </div>
         <div class="anchor-item">
-          <div class="anchor-label">Break-fix rate</div>
-          <div class="anchor-value">Hourly bills</div>
-          <div class="anchor-sub">When something breaks and you don't have a retainer</div>
+          <div class="anchor-label">Your proposal</div>
+          <div class="anchor-value">Clear scope</div>
+          <div class="anchor-sub">Review included services, monthly cost, and terms before committing.</div>
         </div>
       </div>
-      <p class="anchor-statement">Choose the support your team needs, with <span class="green">a clear scope and a straightforward quote.</span></p>
+      <p class="anchor-statement">Compare the options below. <span class="green">We’ll help you choose the right fit and provide a clear proposal.</span></p>
     </div>
   </div>
 </section>
@@ -646,8 +646,8 @@
 
     <!-- Quote by email: for visitors comparing prices who aren't ready for a call -->
     <div class="quote-box fade-up" id="quote">
-      <h3>Get your monthly price <span>by email.</span></h3>
-      <p>No call needed.</p>
+      <h3>Request a tailored quote <span>by email.</span></h3>
+      <p>Start with your team size. We’ll follow up by email to understand your setup and provide a clear proposal before you commit.</p>
       <form id="quoteForm" novalidate>
         <p class="quote-label">How many people need IT?</p>
         <div class="quote-sizes" role="group" aria-label="How many people need IT">
@@ -668,7 +668,7 @@
         <h3>Just getting started? <span>Under 5 employees?</span></h3>
         <p>We have a Starter Track built for contractors, tradespeople, and new businesses. Professional email, local Charlotte phone number, and IT foundation — without a managed IT contract.</p>
       </div>
-      <a href="/pricing/starting-a-business/" class="link-arrow">See Starting a Business Pricing</a>
+      <a href="/pricing/starting-a-business/" class="link-arrow">Explore the Starter Track</a>
     </div>
 
     <!-- Project-based work callout -->
@@ -839,7 +839,7 @@
           try { if (window.posthog && posthog.identify) posthog.identify(email.toLowerCase(), { email: email.toLowerCase(), lead_source: source, first_funnel: 'pricing-quote' }); } catch (e) {}
           capture('quote_requested', { size, personal_email: personal, lead_recorded: !!res.data.leadRecorded });
           if (res.data.leadRecorded && !personal) { try { if (typeof gtag === 'function') gtag('event', 'conversion', { send_to: 'AW-18009085486/ILlTCJPv85UdEK6ss4tD' }); } catch (e) {} }
-          form.innerHTML = '<p class="quote-label">' + size + ' people</p><h3>Got it.</h3><p style="color:var(--text-muted)">We’ll email your quote within one business day.</p>';
+          form.innerHTML = '<p class="quote-label">' + size + ' people</p><h3>Got it.</h3><p style="color:var(--text-muted)">We’ll follow up by email within one business day to confirm your needs and prepare your quote.</p>';
         })
         .catch(ex => { btn.disabled = false; err.textContent = ex.message || 'Something went wrong. Please try again.'; err.classList.add('show'); });
     });

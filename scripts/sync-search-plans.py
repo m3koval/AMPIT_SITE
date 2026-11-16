@@ -52,7 +52,7 @@ for name in ['index.html', 'pricing/managed-it/index.html']:
 
 name = 'llms.txt'
 original = (ROOT / name).read_text()
-lines = ['## Pricing', '', 'Clear, straightforward pricing. Support that fits your business. Contact us for a quote based on your team and support needs. Essential has a 5-user minimum. Standard managed IT agreements are 12 months.', '', HOURS, '', f'Current plan details: {URL}', '']
+lines = ['## Pricing', '', 'Clear, straightforward pricing. Support that fits your business. Contact us for a proposal based on your team and support needs, with scope, cost, and terms explained before committing. Essential has a 5-user minimum. Standard managed IT agreements are 12 months.', '', HOURS, '', f'Current plan details: {URL}', '']
 for p in plans:
     lines += [f'- **{p["name"]}** — {p["fit"]}']
     lines += ['  - ' + f for f in p['features']]
