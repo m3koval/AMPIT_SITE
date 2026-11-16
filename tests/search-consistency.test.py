@@ -16,6 +16,36 @@ def schemas(page):
     return [json.loads(x.get_text()) for x in page.select('script[type="application/ld+json"]')]
 
 class SearchConsistency(unittest.TestCase):
+    def test_no_published_service_amounts(self):
+        # Preserve non-service figures (risk/salary context, legal terms and
+        # third-party software comparisons), not AMP IT rates or plan totals.
+        allowed = {
+            'terms.html': {'$100'},
+            'cybersecurity/index.html': {'$120,000', '$120k'},
+            'industries/other-industries/index.html': {'$120,000'},
+            'pricing/managed-it/index.html': {'$97–123k', '$120k'},
+            'blog/your-team-is-already-using-ai.html': {'$20', '$20–$200'},
+        }
+        for path in list(ROOT.rglob('*.html')) + [ROOT / 'llms.txt', ROOT / 'api/mcp.js']:
+            name = str(path.relative_to(ROOT))
+            content = path.read_text()
+            with self.subTest(page=name):
+                amounts = {value.rstrip('.,') for value in re.findall(r'\$\d[\d,.]*(?:[–-]\$?\d[\d,.]*)?k?', content)}
+                self.assertFalse(amounts - allowed.get(name, set()), amounts)
+                self.assertNotRegex(content.lower(), r'published (?:per-user |monthly )*(?:prices|pricing|rates)|rates are published')
+                if path.suffix == '.html':
+                    for data in schemas(soup(path)):
+                        def check_prices(obj):
+                            if isinstance(obj, dict):
+                                if 'price' in obj:
+                                    self.assertEqual(str(obj['price']), '0', 'Only explicitly free offers retain numeric schema prices')
+                                for value in obj.values():
+                                    check_prices(value)
+                            elif isinstance(obj, list):
+                                for value in obj:
+                                    check_prices(value)
+                        check_prices(data)
+
     def test_all_jsonld_parses(self):
         for path in ROOT.rglob('*.html'):
             with self.subTest(page=str(path.relative_to(ROOT))):
@@ -30,10 +60,8 @@ class SearchConsistency(unittest.TestCase):
         self.assertEqual(len(cards), 3)
         for card, offer, pricing_offer in zip(cards, home['hasOfferCatalog']['itemListElement'], service['hasOfferCatalog']['itemListElement']):
             name_el = card.select_one('.plan-name')
-            price_el = card.select_one('.amount')
-            assert name_el is not None and price_el is not None
+            assert name_el is not None
             name = name_el.get_text(strip=True)
-            price = price_el.get_text(strip=True).lstrip('$')
             section = llms.split(f'- **{name}**')[1].split('\n- **')[0]
             for li in card.select('.plan-features li'):
                 feature = li.get_text(' ', strip=True)
@@ -41,9 +69,8 @@ class SearchConsistency(unittest.TestCase):
                 self.assertIn(feature, pricing_offer['description'])
                 self.assertIn(feature, section)
             for obj in (offer, pricing_offer):
-                self.assertEqual(obj['price'], price)
-                self.assertEqual(obj['priceSpecification']['billingDuration'], 'P1M')
-                self.assertEqual(obj['priceSpecification']['unitText'], 'user')
+                self.assertNotIn('price', obj)
+                self.assertNotIn('priceSpecification', obj)
                 self.assertEqual(obj['url'], ORIGIN + '/pricing/managed-it/')
         self.assertNotIn('Expanded helpdesk hours', llms)
         self.assertNotIn('Unlimited remote and on-site support', llms)

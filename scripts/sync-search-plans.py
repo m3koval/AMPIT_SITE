@@ -21,18 +21,15 @@ for card in pricing.select('.plans-grid .plan'):
         if element is None:
             raise ValueError(f'Missing pricing element: {selector}')
         return element.get_text(' ', strip=True)
-    plans.append(dict(name=text('.plan-name'), price=text('.amount').lstrip('$'),
-                      fit=text('.per').split('·', 1)[1].strip(),
+    plans.append(dict(name=text('.plan-name'),
+                      fit=text('.per'),
                       features=[li.get_text(' ', strip=True) for li in card.select('.plan-features li')]))
 assert len(plans) == 3, 'Expected the existing three plans'
 
 def offers():
     return [{
         '@type': 'Offer', 'name': p['name'], 'url': URL,
-        'price': p['price'], 'priceCurrency': 'USD',
         'description': '; '.join(p['features']) + '. ' + HOURS,
-        'priceSpecification': {'@type': 'UnitPriceSpecification', 'price': p['price'],
-                               'priceCurrency': 'USD', 'billingDuration': 'P1M', 'unitText': 'user'},
         'itemOffered': {'@type': 'Service', 'name': p['name'] + ' Managed IT',
                         'serviceType': 'Managed IT Services', 'areaServed': ['Charlotte, NC', 'United States']}
     } for p in plans]
@@ -55,9 +52,9 @@ for name in ['index.html', 'pricing/managed-it/index.html']:
 
 name = 'llms.txt'
 original = (ROOT / name).read_text()
-lines = ['## Pricing', '', 'Published per-user monthly rates for standard covered services. Essential has a 5-user minimum. Standard managed IT agreements are 12 months.', '', HOURS, '', f'Current plan details: {URL}', '']
+lines = ['## Pricing', '', 'Clear, straightforward pricing. Support that fits your business. Contact us for a quote based on your team and support needs. Essential has a 5-user minimum. Standard managed IT agreements are 12 months.', '', HOURS, '', f'Current plan details: {URL}', '']
 for p in plans:
-    lines += [f'- **{p["name"]}** — ${p["price"]}/user/month ({p["fit"]})']
+    lines += [f'- **{p["name"]}** — {p["fit"]}']
     lines += ['  - ' + f for f in p['features']]
     lines += ['']
 updated = re.sub(r'## Pricing\n.*?(?=## Resources)', lambda _: '\n'.join(lines) + '\n', original, flags=re.S)

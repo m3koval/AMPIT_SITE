@@ -19,10 +19,11 @@ const ABOUT = {
   serves: 'Businesses in North Carolina and South Carolina, including law firms, CPA and tax firms, and other small offices.',
   services: ['Managed IT and help desk', 'Cybersecurity and email security', 'Microsoft 365 and Google Workspace setup and support', 'Backups', 'AI rules and setup for teams (ChatGPT, Microsoft Copilot, Gemini)', 'Working with your software vendors (practice, accounting and tax software) so you do not have to', 'One-time projects'],
   plans: [
-    { name: 'Essential', price: '$319 per user per month', note: '5-user minimum' },
-    { name: 'Better', price: '$445 per user per month', note: 'ideal for 10 to 40 users' },
-    { name: 'Best', price: '$499 per user per month', note: 'ideal for 15 to 50 users; includes a 1-hour emergency response SLA for covered urgent issues' }
+    { name: 'Essential', note: '5-user minimum' },
+    { name: 'Better', note: 'ideal for 10 to 40 users' },
+    { name: 'Best', note: 'ideal for 15 to 50 users; includes a 1-hour emergency response SLA for covered urgent issues' }
   ],
+  pricing: 'Clear, straightforward pricing. Support that fits your business.',
   included: ['Microsoft 365 or Google Workspace licensing is included in every plan', '24/7 automated monitoring of covered systems', 'Human support Monday to Friday, 7 AM to 6 PM ET', '12-month standard managed IT agreement'],
   freeFirstAutomation: 'Bring one task your team repeats. If AMP IT can automate it in under an hour, they build it for free. Microsoft 365 or Google Workspace only, one per business, 4 a month, built live on a screen share, no ongoing support included. The 15-minute call decides whether a task qualifies.',
   contact: { phone: '(980) 377-2733 (call or text)', website: SITE, book: SITE + '/assessment' }
@@ -39,7 +40,7 @@ const TOOLS = [
   {
     name: 'about_amp_it',
     title: 'About AMP IT',
-    description: 'Returns facts about AMP IT: services, plans and published pricing, what is included, support hours, the free first automation offer, and how to reach the team.',
+    description: 'Returns facts about AMP IT: services, plans and quote options, what is included, support hours, the free first automation offer, and how to reach the team.',
     inputSchema: { type: 'object', properties: {}, additionalProperties: false },
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false }
   },

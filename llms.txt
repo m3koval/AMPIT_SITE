@@ -6,7 +6,7 @@ AMP IT LLC is a Charlotte, NC-based managed service provider (MSP) offering all-
 
 ## What We Do
 
-- **Managed IT Services (MSP)** — 24/7 automated remote monitoring and management (RMM), automated patch management, endpoint protection, and proactive maintenance on published per-user monthly rates — all-inclusive, with no per-ticket charges or add-ons for standard services.
+- **Managed IT Services (MSP)** — 24/7 automated remote monitoring and management (RMM), automated patch management, endpoint protection, and proactive maintenance with a quote tailored to your team — all-inclusive, with no per-ticket charges or add-ons for standard services.
 - **Cybersecurity** — Threat monitoring, email security (anti-phishing, anti-spam), endpoint detection and response (EDR), dark web credential monitoring, vulnerability management, firewall management, and incident response.
 - **Cloud & Microsoft 365** — Setup, administration, and ongoing management of Microsoft 365, Teams, SharePoint, and Azure environments. Microsoft Partner.
 - **Google Workspace** — Google Workspace administration and support. Google Partner.
@@ -29,13 +29,13 @@ AMP IT is Charlotte-based and on-site-capable locally, with remote support avail
 
 ## Pricing
 
-Published per-user monthly rates for standard covered services. Essential has a 5-user minimum. Standard managed IT agreements are 12 months.
+Clear, straightforward pricing. Support that fits your business. Contact us for a quote based on your team and support needs. Essential has a 5-user minimum. Standard managed IT agreements are 12 months.
 
 Human support is available Monday–Friday, 7 AM–6 PM ET. Automated monitoring runs 24/7 for covered systems. Emergency coverage and response commitments depend on the selected plan and covered issue.
 
 Current plan details: https://www.ampitsolutions.com/pricing/managed-it/
 
-- **Essential** — $319/user/month (5 user minimum)
+- **Essential** — 5 user minimum
   - Remote monitoring & management — OS & software patching
   - 24/7 automated threat detection with managed response
   - Advanced email security & phishing protection
@@ -46,7 +46,7 @@ Current plan details: https://www.ampitsolutions.com/pricing/managed-it/
   - Monthly health report
   - Google Workspace & Microsoft 365 administration
 
-- **Better** — $445/user/month (Ideal 10–40 users)
+- **Better** — Ideal 10–40 users
   - Everything in Essential, plus:
   - Backup verification & restore testing (monthly)
   - Web & DNS content filtering
@@ -54,7 +54,7 @@ Current plan details: https://www.ampitsolutions.com/pricing/managed-it/
   - Proactive maintenance windows
   - Quarterly Business Reviews
 
-- **Best** — $499/user/month (Ideal 15–50 users)
+- **Best** — Ideal 15–50 users
   - Everything in Better, plus:
   - Virtual CIO — strategic IT planning & roadmapping
   - P1: 1-hr response / P2: 4-hr resolution SLA
