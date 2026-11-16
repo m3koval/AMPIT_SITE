@@ -67,6 +67,10 @@ Current plan details: https://www.ampitsolutions.com/pricing/managed-it/
 
 ## Resources
 
+- **Microsoft 365’s November Outage: Getting Back to Work Is More Than Signing In** (November 16, 2026): https://www.ampitsolutions.com/blog/microsoft-365-outage-november-2026-business-recovery
+- **Friday’s Ground Stop, Saturday’s Delays: Plan for the Recovery Tail** (November 16, 2026): https://www.ampitsolutions.com/blog/faa-ground-stop-november-2026-weekend-business-continuity
+- **Monday’s Bank Delays: Verify the Payment Before You Send It Again** (November 16, 2026): https://www.ampitsolutions.com/blog/bank-payment-delays-november-16-2026-business-checklist
+
 - **Blog / Field Notes:** https://www.ampitsolutions.com/blog/
 - **AI privilege and shadow AI risk article:** https://www.ampitsolutions.com/blog/your-team-is-already-using-ai
 - **How Much Does Managed IT Cost in Charlotte? Real 2026 Prices:** https://www.ampitsolutions.com/blog/managed-it-cost-charlotte
