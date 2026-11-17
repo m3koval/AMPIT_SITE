@@ -74,20 +74,20 @@ Current plan details: https://www.ampitsolutions.com/pricing/managed-it/
 - **Monday’s Bank Delays: Verify the Payment Before You Send It Again** (November 16, 2026): https://www.ampitsolutions.com/blog/bank-payment-delays-november-16-2026-business-checklist
 
 - **Blog / Field Notes:** https://www.ampitsolutions.com/blog/
-- **AI privilege and shadow AI risk article:** https://www.ampitsolutions.com/blog/your-team-is-already-using-ai
+- **AI Chats Can Create Privilege and Discovery Risks:** https://www.ampitsolutions.com/blog/your-team-is-already-using-ai
 - **Managed IT Pricing in Charlotte: What to Compare:** https://www.ampitsolutions.com/blog/managed-it-cost-charlotte
 - **In-House IT vs. Managed IT for a 10 to 20-Person Office:** https://www.ampitsolutions.com/blog/in-house-it-vs-managed-it
 - **QuickBooks Only Works for One Person? How to Fix Multi-User in a Small Office:** https://www.ampitsolutions.com/blog/quickbooks-multi-user-office-setup
 - **Does Your Tax or Accounting Firm Need a WISP? What the IRS and FTC Expect:** https://www.ampitsolutions.com/blog/wisp-for-tax-and-accounting-firms
-- **How a Small Business Should Start Using AI (Without Leaking Client Data):** https://www.ampitsolutions.com/blog/small-business-ai-start-safely
+- **How a Small Business Should Start Using AI While Reducing Client-Data Risk:** https://www.ampitsolutions.com/blog/small-business-ai-start-safely
 
-- **Microsoft 365 Security Basics Most Small Firms Still Miss:** https://www.ampitsolutions.com/blog/microsoft-365-security-basics-charlotte-firms
+- **Microsoft 365 Security Basics for Small Firms:** https://www.ampitsolutions.com/blog/microsoft-365-security-basics-charlotte-firms
 
-- **Cyber Insurance Requirements Are Getting Stricter. Here Is What To Prepare.:** https://www.ampitsolutions.com/blog/cyber-insurance-requirements-small-business
+- **Cyber Insurance Applications: Prepare Evidence, Not Assumptions:** https://www.ampitsolutions.com/blog/cyber-insurance-requirements-small-business
 
-- **Managed IT vs. Break-Fix: Why The Cheap Option Gets Expensive:** https://www.ampitsolutions.com/blog/predictable-managed-it-vs-break-fix
+- **Managed IT vs. Break-Fix: Compare Responsibilities and Evidence:** https://www.ampitsolutions.com/blog/predictable-managed-it-vs-break-fix
 
-- **Why Charlotte Businesses Need SPF, DKIM, and DMARC Before Their Email Can Be Trusted:** https://www.ampitsolutions.com/blog/charlotte-business-email-spf-dkim-dmarc
+- **SPF, DKIM, and DMARC Explained for Business Owners:** https://www.ampitsolutions.com/blog/charlotte-business-email-spf-dkim-dmarc
 
 - **AI Phishing Is Getting Better. Your Verification Habits Need to Get Better Too.:** https://www.ampitsolutions.com/blog/ai-phishing-business-verification-habits
 
